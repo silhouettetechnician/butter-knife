@@ -14,5 +14,11 @@ code {
 
 a{
   text-decoration: none;
-  color: unset;
+  color: black !important;
+  text-decoration: none !important;
+}
+a:hover{
+  text-decoration: none;
+  color: black !important;
+  text-decoration: none !important;
 }

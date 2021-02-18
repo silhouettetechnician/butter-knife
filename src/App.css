@@ -2,6 +2,35 @@
   text-align: center;
 }
 
+  .nav-menu-item{
+    font-size: 14px;
+    line-height: 1;
+    font-family: ProximaNova-Regular;
+    letter-spacing: 0.35px;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    vertical-align: baseline;
+    padding-bottom: 2px;
+    color: black;
+    text-transform: uppercase;
+    z-index: 5;
+  }
+    .nav-menu-item > a {
+    margin-bottom: 4px;
+    margin: 6px 16px 4px;
+    font-size: 0.928571rem;
+    font-family: ProximaNova-Regular,"Helvetica Neue",Verdana,Arial,sans-serif;;
+    font-weight: 300;
+    text-transform: uppercase;
+    line-height: 17px;
+  }
+  .nav-menu-item:active + .content{
+    /* display: block !important; */
+    /* color: blue; */
+    visibility: visible;
+    opacity: 1 !important;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -24,6 +53,7 @@
   color: white;
 }
 
+
 .App-link {
   color: #61dafb;
 }
@@ -39,15 +69,23 @@
 
 @font-face{
   font-family: bangers;
-  src: './fonts/Bangers.ttf'
+  src: url('./fonts/Bangers.ttf'), local('Bangers.ttf');
 }
 @font-face{
-  font-family: GraphikReg;
-  src: './fonts/Graphik-Regular.ttf'
+  font-family: graphikReg;
+  src: url('./fonts/Graphik-Regular.ttf');
 }
 @font-face{
-  font-family: GraphikMed;
-  src: './fonts/Graphik-Medium.ttf'
+  font-family: graphikMed;
+  src: url('./fonts/Graphik-Medium.ttf');
+}
+@font-face{
+  font-family: HeadingBold;
+  src: url('./fonts/HeadingBold.ttf');;
+}
+@font-face{
+  font-family: HeadingBlack;
+  src: url('./fonts/HeadingBlack.ttf');
 }
 
 @keyframes strike{
@@ -73,3 +111,18 @@
 .carousel .slide{
   background: unset;
 }
+
+.content{
+  /* visibility: hidden; */
+  height: 100vh; 
+   /* height: -webkit-calc(100% - 212px); */
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   width: 100%;
+   transition: .5s ease;
+   background-color: #008CBA;
+   opacity: 0;
+   }

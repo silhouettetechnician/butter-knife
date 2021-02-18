@@ -1,4 +1,31 @@
-import styled from '@emotion/styled'
+import React from 'react'
+import styled from "@emotion/styled/macro"
+// import {css} from "@emotion/core"
+// import styled from "@emotion/styled"
+
+// export const Container = styled.section`
+//         position: relative;
+//         -webkit-calc(100vh - 212px);
+//         height: calc(100vh - 212px);
+//         width: 100%;
+// `
+export const Content = styled.section`
+        // display: none;
+        // -webkit-calc(100% - 212px);
+        height: 100vh;
+        position: ${props => props.open ? 'fixed' : 'absolute'};
+        display: ${props => props.open ? 'block' : 'unset'};
+        top: 98px;
+        // bottom: 0;
+        left: 0;
+        // right: 0;
+        width: 100%;
+        transition: .5s ease;
+        background-color: #fff;
+        opacity: ${props => props.open ? '0.8' : '0'};
+        z-index: ${props => props.open ? '500' : '0'};
+
+`
 
 export const Header = styled.header`
         font-size: 14px;
@@ -32,33 +59,31 @@ export const Navigation = styled.nav`
         -webkit-box-pack: center;
         justify-content: center;
         height: 20px;
-        
 `
 export const NavMenuItem = styled.span`
         font-size: 14px;
         line-height: 1;
-        font-family: ProximaNova-Regular,"Helvetica Neue",Verdana,Arial,sans-serif;;
+        font-family: graphikMed;
+        font-weight: bold;
         letter-spacing: 0.35px;
         margin: 0px;
         padding: 0px;
         border: 0px;
+        text-decoration: none;
         vertical-align: baseline;
         padding-bottom: 2px;
         color: black;
         text-transform: uppercase;
         opacity: 1;
-    & > a {
         margin-bottom: 4px;
         margin: 6px 16px 4px;
         font-size: 0.928571rem;
-        font-family: ProximaNova-Regular,"Helvetica Neue",Verdana,Arial,sans-serif;;
-        font-weight: 300;
+        font-family: graphikMed;
+        font-weight: bold;
         text-transform: uppercase;
         line-height: 17px;
-        
-        &:hover{
-            color: grey;
-        }
+        z-index: 100;
+        cursor: pointer;
     }
 `
 export const CartContainer = styled.div`
@@ -101,11 +126,17 @@ export const LogoHolder = styled.div`
 `
 
 export const Heading1 = styled.h1`
-        font-family: ProximaNova-Regular,"Helvetica Neue",Verdana,Arial,sans-serif;;
-        font-size: 1.6rem;
-        font-weight: bolder;
+        font-size: 14px;
         text-align: center;
-        text-transform: uppercase;
+        line-height: 1;
+        font-family: ProximaNova-Regular,"Helvetica Neue",Verdana,Arial,sans-serif;
+        letter-spacing: 0.35px;
+        margin: 15px 0;
+        padding: 0px;
+        border: 0px;
+        vertical-align: baseline;
+        padding-bottom: 2px;
         color: black;
-        
+        text-transform: uppercase;
+        opacity: 1;     
 `

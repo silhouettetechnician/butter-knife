@@ -33,6 +33,8 @@ export const Header = styled.header`
         font-family: ProximaNova-Regular, "Helvetica Neue", Verdana, Arial, sans-serif;
         letter-spacing: 0.35px;
         margin: 0px;
+        margin-top: 25px;
+        margin-bottom: 25px;
         padding: 0px;
         border: 0px;
         vertical-align: baseline;
@@ -63,7 +65,7 @@ export const Navigation = styled.nav`
 export const NavMenuItem = styled.span`
         font-size: 14px;
         line-height: 1;
-        font-family: graphikMed;
+        font-family: graphikMed !important;
         font-weight: bold;
         letter-spacing: 0.35px;
         margin: 0px;
@@ -78,7 +80,6 @@ export const NavMenuItem = styled.span`
         margin-bottom: 4px;
         margin: 6px 16px 4px;
         font-size: 0.928571rem;
-        font-family: graphikMed;
         font-weight: bold;
         text-transform: uppercase;
         line-height: 17px;

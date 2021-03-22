@@ -12,7 +12,7 @@ export const routes = {
     // '/designers': () => <Brands />,
     '/designers/:name': ({name}) => <ProductsByDesigner name={unescape(name)} />,
     '/clothing': () => <Clothing />,
-    '/clothing/:name': ({name}) => <ProductsByItem name={unescape(name)} />,
+    '/clothing/:title': ({title}) => <ProductsByItem title={unescape(title)} />,
     '/shoes': () => <Shoes />,
     '/accessories': () => <Accessories />,
     // '/about': () => <AboutPage />,

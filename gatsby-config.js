@@ -1,5 +1,9 @@
-
+const dotenv = require("dotenv").config()
 module.exports = {
+  siteMetadata: {
+    title: "Butter Knife",
+    author: "Timothy Millward",
+  },
     plugins: [
       // ...otherPlugins,
    
@@ -31,7 +35,8 @@ module.exports = {
             "FIREBASE_STORAGE_BUCKET",
             "FIREBASE_MESSAGING_SENDER_ID",
             "FIREBASE_APP_ID",
-            "CONTENTFUL_ACCESS_TOKEN"
+            "CONTENTFUL_ACCESS_TOKEN",
+            "CONTENTFUL_SPACE_ID"
         ]
         },
       },
@@ -39,7 +44,6 @@ module.exports = {
             resolve: `gatsby-source-contentful`,
             options: {
               spaceId: process.env.CONTENTFUL_SPACE_ID,
-              // Learn about environment variables: https://gatsby.dev/env-vars
               accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
             },
           },
@@ -47,25 +51,16 @@ module.exports = {
             resolve: `gatsby-source-contentful`,
             options: {
               spaceId: process.env.CONTENTFUL_SPACE_ID,
-              // Learn about environment variables: https://gatsby.dev/env-vars
               accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
               host: `preview.contentful.com`,
             },
           },
-          module.exports = {
-            plugins: [
               {
                 resolve: `gatsby-source-contentful`,
                 options: {
                   spaceId: process.env.CONTENTFUL_SPACE_ID,
-                  // Learn about environment variables: https://gatsby.app/env-vars
                   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
                   downloadLocal: true,
                 },
               },
-            ],
-          }
-        ],
-      }
-
-  console.log(`Database url is :${process.env.DATABASE_URL}`)
+    ]}

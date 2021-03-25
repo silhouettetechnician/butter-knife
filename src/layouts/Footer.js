@@ -2,7 +2,7 @@ import StickyFooter from 'react-sticky-footer';
 import {LogoHolder} from '../components/StyledComponents'
 import {navigate} from 'hookrouter'
 import styled from '@emotion/styled'
-import React from 'react'
+import React, {useState} from 'react'
 
 const InnerHolder = styled.div`
     cursor: pointer;

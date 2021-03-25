@@ -26,6 +26,20 @@ module.exports = {
       //   }
       // },
       {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+          path: `${__dirname}/src/`,
+          name: `src`,
+        }
+      },
+      {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+          path: `${__dirname}/src/pages/`,
+          name: 'pages',
+        },
+      },
+      {
         resolve: `gatsby-plugin-env-variables`,
         options: {
           allowList: ["FIREBASE_API_KEY",
@@ -47,20 +61,20 @@ module.exports = {
               accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
             },
           },
-          {
-            resolve: `gatsby-source-contentful`,
-            options: {
-              spaceId: process.env.CONTENTFUL_SPACE_ID,
-              accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-              host: `preview.contentful.com`,
-            },
-          },
-              {
-                resolve: `gatsby-source-contentful`,
-                options: {
-                  spaceId: process.env.CONTENTFUL_SPACE_ID,
-                  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-                  downloadLocal: true,
-                },
-              },
+          // {
+          //   resolve: `gatsby-source-contentful`,
+          //   options: {
+          //     spaceId: process.env.CONTENTFUL_SPACE_ID,
+          //     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+          //     host: `preview.contentful.com`,
+          //   },
+          // },
+          //     {
+          //       resolve: `gatsby-source-contentful`,
+          //       options: {
+          //         spaceId: process.env.CONTENTFUL_SPACE_ID,
+          //         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+          //         downloadLocal: true,
+          //       },
+          //     },
     ]}

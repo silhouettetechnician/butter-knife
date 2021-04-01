@@ -1,5 +1,6 @@
 import React from 'react'
-import { A } from 'hookrouter'
+import { Link } from 'gatsby'
+import { graphql } from "gatsby"
 import { Heading1 } from '../components/StyledComponents';
 
 const designerList = [
@@ -22,13 +23,19 @@ const designerList = [
         name: 'Saint Laurent Paris'
     }
 ]
-const Brands = () => (
+const Brands = ({data}) => {
+    const {
+        allContentfulBrand: { nodes },
+      } = data
+      console.log(nodes, nodes)
+    return(
     <>
     <Heading1>Designers</Heading1>
-    {designerList.map((brand, i) => (
-        <A key={i} href={`/designers/${brand.name}`} name={brand.name} className='strike'>{brand.name}</A>
+    {nodes && nodes.map((brand, i) => (
+        <Link key={i} to={`/brands/${brand.companyName}`} name={brand.name} className='strike'>{brand.companyDescription}</Link>
     ))}
     </ >
 )
+    }
 
 export default Brands

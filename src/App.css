@@ -135,7 +135,9 @@ a:hover{
 .carousel .slide{
   background: unset;
 }
-
+.sticky-inner-wrapper{
+  z-index: 9999;
+}
 .content{
   /* visibility: hidden; */
   height: 100vh; 

@@ -33,26 +33,26 @@ export const Header = styled.header`
         font-family: ProximaNova-Regular, "Helvetica Neue", Verdana, Arial, sans-serif;
         letter-spacing: 0.35px;
         margin: 0px;
-        margin-top: 25px;
-        margin-bottom: 25px;
         padding: 0px;
         border: 0px;
         vertical-align: baseline;
         position: relative;
-        z-index: 30;
+        z-index: 9999;
+        background-color: #fff !important;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        height: 97px;
+        height: 150px;
         border-bottom: 1px solid rgb(242, 242, 242);
 `
 
 export const Navigation = styled.nav`
         font-size: 14px;
+        z-index: 9999;
         line-height: 1;
         font-family: ProximaNova-Regular, "Helvetica Neue", Verdana, Arial, sans-serif;
         letter-spacing: 0.35px;
-        margin: 0px;
+        margin: 50px;
         padding: 0px;
         border: 0px;
         vertical-align: baseline;

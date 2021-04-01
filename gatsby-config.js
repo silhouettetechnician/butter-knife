@@ -6,7 +6,7 @@ module.exports = {
   },
     plugins: [
       // ...otherPlugins,
-   
+      `gatsby-plugin-sass`,
      `gatsby-plugin-layout`,
     
       // {
@@ -25,6 +25,7 @@ module.exports = {
       //     }
       //   }
       // },
+      { resolve: `gatsby-transformer-remark` },
       {
         resolve: `gatsby-source-filesystem`,
         options: {
@@ -35,10 +36,18 @@ module.exports = {
       {
         resolve: `gatsby-source-filesystem`,
         options: {
+          path: `${__dirname}/src/templates/`,
+          name: 'templates',
+        },
+      },
+      {
+        resolve: `gatsby-source-filesystem`,
+        options: {
           path: `${__dirname}/src/pages/`,
           name: 'pages',
         },
       },
+      
       {
         resolve: `gatsby-plugin-env-variables`,
         options: {

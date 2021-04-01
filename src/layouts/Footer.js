@@ -11,16 +11,7 @@ const InnerHolder = styled.div`
     text-decoration-line: line-through;
     text-decoration-color: rgb(254 205 47);
 `
-const Footer = () => <StickyFooter
-    bottomThreshold={50}
-    normalStyles={{
-    borderTop: '1px solid grey',
-    padding: "2rem"
-    }}
-    stickyStyles={{
-    borderBottom: '1px solid grey',
-    padding: "2rem"
-    }}> 
+const Footer = () => 
     <LogoHolder>
         <InnerHolder onClick={() => navigate('/')}>
              BUTTER KNIFE 
@@ -29,6 +20,5 @@ const Footer = () => <StickyFooter
             </span>
         </InnerHolder>
     </LogoHolder>
-</StickyFooter>
 
 export default Footer

@@ -4,7 +4,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Link, graphql, StaticQuery } from 'gatsby'
 import styled from '@emotion/styled'
 import Sticky from 'react-stickynode';
-import { AppContainer, Content } from '../components/StyledComponents';
+import { AppContainer, DropDownBrands } from '../components/StyledComponents';
 import NavBar from './NavBar'
 import Footer from './Footer'
 import { designerList } from '../constannts/brand-names'
@@ -13,6 +13,7 @@ const ListItem = styled(Link)`
 width: 170px;
 text-align: center;
 font-family: graphikMed;
+color: black !important;
 line-height: 45px;
 cursor: pointer;
 font-weight: 600;
@@ -21,38 +22,65 @@ font-weight: 600;
 }
 `
 const Cross = styled.div`
-    position: absolute;
+    position: ${props => props.open ? 'none' : 'absolute'};
     top: 13px;
     right: 13px;
 `
-const Layout = ({  children }) => {
+const Layout = ({ data, children }) => {
     const [open, setOpen] = useState(false)
+    const [catOpen, setCatOpen] = useState(false)
     // const { allContentfulBrand: nodes } = data
-
-    // console.log(data, 'data layout')
+    const brandRender =
+        <StaticQuery
+            query={graphql`
+        {
+            allContentfulBrand {
+                nodes {
+                companyName {
+                    id
+                    companyName
+                }
+                }
+        
+            }}`}
+            render={data => {
+                const {
+                    nodes
+                } = data.allContentfulBrand
+                return nodes.map((brand, i) => {
+                    return open ? <DropDownBrands onMouseLeave={() => setOpen(!open)} open={open} setOpen={setOpen}><Cross><FontAwesomeIcon onClick={() => setOpen(!open)} color="black" size="lg" icon={faTimes} /></Cross><ListItem key={i} to={`/brands/${unescape(brand.companyName.companyName)}`} className='strike'>{brand.companyName.companyName}</ListItem></DropDownBrands> : <></>
+                }
+                )
+            }}
+        />
+    // const categoryRender =
+    //     <StaticQuery
+    //         query={graphql`
+    //     {
+    //         allContentfulProduct {
+    //             nodes {
+    //             type
+    //             }
+        
+    //         }}`}
+    //         render={data => {
+    //             const {
+    //                 nodes
+    //             } = data.allContentfulBrand
+    //             return nodes.map((brand, i) => {
+    //                 return open ? <DropDownBrands onMouseLeave={() => setCatOpen(!open)} catOpen={catOpen} setOpen={setCatOpen}><Cross><FontAwesomeIcon onClick={() => setOpen(!open)} color="black" size="lg" icon={faTimes} /></Cross><ListItem key={i} to={`/brands/${unescape(brand.companyName.companyName)}`} className='strike'>{brand.companyName.companyName}</ListItem></DropDownBrands> : <></>
+    //             }
+    //             )
+    //         }}
+    //     />
     return (
         <>
             <Sticky style={{ zIndex: '99 !important' }} enabled={true} bottomBoundary={1000}>
-                <NavBar open={open} setOpen={setOpen} />
+                <NavBar open={open} setOpen={setOpen} catOpen={catOpen} setCatOpen={setCatOpen} />
             </Sticky>
-
             <Flex justifyCenter column alignCenter height='100%'>
-                <Content open={open} setOpen={setOpen} onMouseOut={() => setOpen(false)}>
-                    <StaticQuery
-                        query={graphql`
-                        query brand {
-                              nodes {
-                                companyName {
-                                  id
-                                  companyName
-                                }
-                              }
-                        
-                          }`}
-                        render={data => {
-                            return data.map((brand, i) => <ListItem onMouseOver={() => setOpen(true)} to={`/brands/${unescape(brand.edges.node.companyName.companyName)}`} className='strike'>{brand.edges.node.companyName.companyName}</ListItem>)}}
-                    />
-                </Content>
+                {brandRender}
+                {/* {cate} */}
             </Flex>
             { children}
             <Footer />

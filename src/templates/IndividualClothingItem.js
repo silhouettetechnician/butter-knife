@@ -37,17 +37,17 @@ const IndividualClothingItem = ({ data }) => {
         productDescription: { productDescription },
         productName: { productName },
     } = data.contentfulProduct;
-    const gello = image.map(i => Object.values(i).map(({ src }) => src)).flat()
-    const items = gello.map((item, index) => <div data-src={item} alt={index} />)
+    const images = image.map(i => Object.values(i).map(({ src }) => src)).flat()
+    const imageRender = images.map((item, index) => <div key={index} data-src={item} alt={index} />)
     return (
         <Flex width='100%' justifyAround>
             <Flex width='40%' height='100vh'>
                 <AwesomeSlider style={{ width: '100%', height: '100%' }}>
-                    {items}
+                    {imageRender}
                 </AwesomeSlider>
             </Flex>
             <Flex column alignCenter width='45%' height='100vh' padding='1rem'>
-                <h2 style={{ fontFamily: 'bangers', marginTop: '1rem', fontSize: '3rem', /*textDecorationLine: 'line-through', textDecorationColor: 'rgb(254, 205, 47)'*/ }}>{productName}</h2><br />
+                <h2 style={{ fontFamily: 'bangers', marginTop: '1rem', fontSize: '3rem',/*textDecorationLine: 'line-through', textDecorationColor: 'rgb(254, 205, 47)'*/ }}>{productName}</h2><br />
                 <hr style={{
                     border: '0.1px solid rgba(254, 205, 47, 0.4)', width: '75%', marginTop: '1rem',
                     marginBottom: '3rem'

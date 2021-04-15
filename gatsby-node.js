@@ -12,24 +12,72 @@ exports.createPages = async ({ graphql, actions, boundActionCreators }) => {
     allContentfulProduct {
       nodes {
         id
+        colour
         price
         productDescription {
           productDescription
         }
-        productName {
+        productName{
           productName
+        }
+        brand {
+          companyName {
+            id
+            companyName
+          }
+          companyDescription {
+            id
+            companyDescription
+          }
+        }
+        categories {
+          title {
+            title
+          }
         }
         slug
       }
-    },
-    allContentfulBrand {
-      nodes {
-        companyName {
-          companyName
-        }
-      }
     }
-  }
+     allContentfulBrand{
+       nodes {
+        id
+        brandImages {
+          file {
+            url
+          }
+        }
+        caption
+         companyName {
+           companyName
+         }
+         companyDescription {
+           companyDescription
+         }
+         logo{
+          file{
+            url
+          }
+        }
+        product{
+          colour
+          slug
+          id
+          image {
+                fluid {
+                  src
+                }
+              }
+          productDescription {
+                productDescription
+              }
+          price
+          productName {
+                productName
+              }
+        }
+     }
+    }
+   }
       `)
   result && result.data.allContentfulProduct.nodes.forEach(({ id, slug }) => {
     createPage({
@@ -39,13 +87,28 @@ exports.createPages = async ({ graphql, actions, boundActionCreators }) => {
     })
   })
 
-  result && result.data.allContentfulBrand.nodes.forEach(({ node }) => {
-      createPage({
-        path: `/brands/${node.companyName}`,
-        component: brandTemplate,
-        context: {companyName: node.companyName}
-      })
+  const brandsFound = []
+  result && result.data.allContentfulBrand.nodes.forEach((node) => {
+    if (brandsFound.indexOf(node) === -1) {
+      brandsFound.push(node)
+    }
+  })
+  brandsFound.length > 0 && brandsFound.forEach((node) => {
+    // console.log(JSON.stringify(node, 'node gatsby.node'))
+    createPage({
+      path: `/brands/${node.companyName.companyName}`,
+      component: brandTemplate,
+      context: {
+        id: node.id,
+        companyName: node.companyName.companyName,
+        companyDescription: node.companyDescription.companyDescription,
+        logo: node.logo.file.url,
+        caption: node.caption,
+        brandImages: node.brandImages,
+        product: node.product,
+      }
     })
+  })
   return
 }
 
@@ -70,3 +133,4 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
     })
   }
 }
+

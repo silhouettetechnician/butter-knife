@@ -111,6 +111,18 @@ a:hover{
   font-family: HeadingBlack;
   src: url('./fonts/HeadingBlack.ttf');
 }
+@font-face{
+  font-family: CODE;
+  src: url('./fonts/CODE Bold.otf');
+}
+@font-face{
+  font-family: Berlin;
+  src: url('./fonts/Berlin.ttf');
+}
+@font-face{
+  font-family: BerlinBold;
+  src: url('./fonts/Berlin\ Bold.ttf');
+}
 
 @keyframes strike{
   0%     { transform-origin:  0% 50%;transform:scaleX(0); }

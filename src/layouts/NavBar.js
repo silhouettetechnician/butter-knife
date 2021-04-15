@@ -23,7 +23,10 @@ const Button = styled.button`
     width: auto;
     font-size: 1rem;
 `
-export const NavBar = ({ open, setOpen }) => {
+const Anchor = styled(Link)`
+    ...NavMenuItem;
+`
+export const NavBar = ({ open, setOpen, catOpen, setCatOpen }) => {
     const { isAuthenticated, logout, loginWithRedirect } = useAuth0();
     const Divider = () => "|"
     console.log(isAuthenticated, 'isAuthenticated')
@@ -36,11 +39,11 @@ export const NavBar = ({ open, setOpen }) => {
                 <LogoHolder><div onClick={() => navigate('/')} style={{ cursor: 'pointer', fontFamily: 'bangers', fontSize: '4rem', textDecorationLine: 'line-through', textDecorationColor: 'rgb(254, 205, 47)' }}> BUTTER KNIFE <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder>
                 <Navigation>
                     <NavMenuItem className='strike'><span>What's new</span></NavMenuItem><Divider />
-                    <NavMenuItem className='strike' onMouseOver={() => setOpen(true)}><span>Designers</span></NavMenuItem><Divider />
-                    <NavMenuItem className='strike'><Link to='/clothing'>Clothing</Link></NavMenuItem><Divider />
+                    <NavMenuItem className='strike' onClick={() => setOpen(!open)}><span>Designers</span></NavMenuItem><Divider />
+                    <NavMenuItem className='strike' onClick={() => setCatOpen(!catOpen)}><Link to='/clothing'>Clothing</Link></NavMenuItem><Divider />
                     <NavMenuItem className='strike'><Link to='/shoes'>Footwear</Link></NavMenuItem><Divider />
                     <NavMenuItem className='strike'><Link to='/accessories'>Accessories</Link></NavMenuItem><Divider />
-                    <NavMenuItem className='strike'><Link to='/community'>Community</Link></NavMenuItem>
+                    <NavMenuItem className='strike'><Link to='/mail-list'>Community</Link></NavMenuItem>
                     {isAuthenticated && <> <Divider /><NavMenuItem><Link className='strike' to='/account'>My Account</Link></NavMenuItem></>}
                 </Navigation>
                 <ButtonHolder>

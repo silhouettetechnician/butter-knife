@@ -9,13 +9,13 @@ import styled from "@emotion/styled/macro"
 //         height: calc(100vh - 212px);
 //         width: 100%;
 // `
-export const Content = styled.section`
+export const DropDownBrands = styled.section`
         // display: none;
         // -webkit-calc(100% - 212px);
-        height: 100vh;
+        height: calc(100vh -175px);
         position: ${props => props.open ? 'fixed' : 'absolute'};
         display: ${props => props.open ? 'block' : 'unset'};
-        top: 98px;
+        top: 175px;
         // bottom: 0;
         left: 0;
         // right: 0;
@@ -24,6 +24,9 @@ export const Content = styled.section`
         background-color: #fff;
         opacity: ${props => props.open ? '0.8' : '0'};
         z-index: ${props => props.open ? '500' : '0'};
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
 `
 
@@ -65,7 +68,7 @@ export const Navigation = styled.nav`
 export const NavMenuItem = styled.span`
         font-size: 14px;
         line-height: 1;
-        font-family: graphikMed !important;
+        font-family: Berlin !important;
         font-weight: bold;
         letter-spacing: 0.35px;
         margin: 0px;

@@ -30,6 +30,14 @@ plugins: [
     },
   },
   {
+    resolve: `gatsby-source-contentful`,
+    options: {
+      spaceId: process.env.CONTENTFUL_SPACE_ID,
+      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      environment: CONTENTFUL_ENVIRONMENT
+    },
+  },
+  {
     resolve: 'gatsby-plugin-snipcart',
     options: {
         //replace with own Snipcart API key
@@ -80,6 +88,7 @@ plugins: [
         "FIREBASE_APP_ID",
         "CONTENTFUL_ACCESS_TOKEN",
         "CONTENTFUL_SPACE_ID",
+        "CONTENTFUL_ENVIRONMENT",
         "GATSBY_STRIPE_PUBLISHABLE_KEY"
       ]
     },
@@ -92,13 +101,6 @@ plugins: [
 //         autopop: true,
 //     }
 // },
-  {
-    resolve: `gatsby-source-contentful`,
-    options: {
-      spaceId: process.env.CONTENTFUL_SPACE_ID,
-      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-    },
-  },
   {
     resolve: 'gatsby-plugin-mailchimp',
     options: {

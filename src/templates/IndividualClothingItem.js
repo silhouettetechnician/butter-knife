@@ -2,9 +2,12 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { graphql } from "gatsby"
 import Flex from '../styles/Flex'
+// import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 import Carousel from '../templates/Carousel'
+import Checkout from '../components/Checkout'
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css'
+
 
 const Button = styled.button`
     width: 100%;
@@ -23,25 +26,27 @@ const Button = styled.button`
     line-height: 18px;
     position: relative;
     cursor: pointer;
-        &:active{
+        &:focus{
             background: #A1A1A1;
         }
 `
 
-const IndividualClothingItem = ({ data }) => {
+const IndividualClothingItem = ({ data, redirectToCheckout }) => {
     const {
         slug,
         price,
         id,
         image,
+        size,
         productDescription: { productDescription },
         productName: { productName },
     } = data.contentfulProduct;
-    const images = image.map(i => Object.values(i).map(({ src }) => src)).flat()
+    const images = image.map(i => Object.values(i).map(({ url }) => url)).flat()
     const imageRender = images.map((item, index) => <div key={index} data-src={item} alt={index} />)
+console.log(size, 'size')
     return (
         <Flex width='100%' justifyAround>
-            <Flex width='40%' height='100vh'>
+            <Flex width='50%' height='100vh'>
                 <AwesomeSlider style={{ width: '100%', height: '100%' }}>
                     {imageRender}
                 </AwesomeSlider>
@@ -54,7 +59,22 @@ const IndividualClothingItem = ({ data }) => {
                 }} />
                 <div><p style={{ fontFamily: 'graphikMed', fontSize: '2.4rem' }}>{`£${price}`}</p></div>
                 <div><p style={{ fontFamily: 'graphikReg', fontSize: '1rem' }}>{productDescription}</p></div>
+
                 <Flex width='40%' noWrap><Button>S</Button><Button>M</Button><Button>L</Button></Flex>
+                {/* <button onClick={() => addItem(product)}>Add to cart</button> */}
+                {/* <Checkout/> */}
+                <button
+                    className="snipcart-add-item"
+                    data-item-id={productName}
+                    data-item-price={price}
+                    data-item-image={images[0]}
+                    data-item-url={slug}
+                    data-item-name={productName}
+                    data-item-custom1-name="Size"
+                    data-item-custom1-options="6|6.5|7|7.5|8|8.5|9"
+                >
+                    Add to cart
+                </button>
             </Flex>
         </Flex>
     )
@@ -68,8 +88,8 @@ query ($slug: String!){
         slug
         id
         image {
-          fluid {
-            src
+          file {
+            url
           }
         }
         productDescription {

@@ -15,7 +15,7 @@ export const DropDownBrands = styled.section`
         height: calc(100vh -175px);
         position: ${props => props.open ? 'fixed' : 'absolute'};
         display: ${props => props.open ? 'block' : 'unset'};
-        top: 175px;
+        top: 140px;
         // bottom: 0;
         left: 0;
         // right: 0;
@@ -44,8 +44,8 @@ export const Header = styled.header`
         background-color: #fff !important;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
-        height: 150px;
+        justify-content: space-evenly;
+        height: 130px;
         border-bottom: 1px solid rgb(242, 242, 242);
 `
 
@@ -55,7 +55,7 @@ export const Navigation = styled.nav`
         line-height: 1;
         font-family: ProximaNova-Regular, "Helvetica Neue", Verdana, Arial, sans-serif;
         letter-spacing: 0.35px;
-        margin: 50px;
+        margin: 20px;
         padding: 0px;
         border: 0px;
         vertical-align: baseline;
@@ -66,11 +66,11 @@ export const Navigation = styled.nav`
         height: 20px;
 `
 export const NavMenuItem = styled.span`
-        font-size: 14px;
+        // font-size: 14px;
         line-height: 1;
-        font-family: Berlin !important;
-        font-weight: bold;
-        letter-spacing: 0.35px;
+        font-family: BerlinBold !important;
+        // font-weight: bold;
+        // letter-spacing: 0.35px;
         margin: 0px;
         padding: 0px;
         border: 0px;

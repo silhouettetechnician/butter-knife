@@ -22,28 +22,30 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const CheckboxList = ({ colours, handleChange }) => {
+const CheckboxList = ({ data, handleChange, checkedInputs, setCheckedInputs, productList, setProductList, checked, setChecked, }) => {
     const classes = useStyles();
-    console.log(colours, 'colours list')
+    const handleInputChange = (event) => {
+        console.log(event, '[event.target.value]: event.target.checked')
+        setCheckedInputs({ ...checkedInputs, [event.target.value]: event.target.checked })
+      }
     return (
         <List className={classes.root}>
-            {colours && colours.map(color => {
+            {data && Object.entries(data).map(([color, value]) => {
                 const labelId = `checkbox-list-label-${color}`;
                 return (
                     <ListItem key={color} role={undefined} dense button /*onClick={handleToggle(color)}*/>
                         <ListItemIcon>
                             <Checkbox
                                 edge="start"
-                                // checked={checked} 
-                                onChange={(event) => handleChange(event, color)}
+                                // checked={checkedInputs[value]}
+                                value={color}
+                                onChange={(e) => handleInputChange(e)}
                                 tabIndex={-1}
                                 classes={{
                                     root: classes.root,
                                     checked: classes.checked
                                   }}
                                 disableRipple
-                                labelStyle={{color: 'rgb(254, 205, 47)'}}
-                                iconStyle={{color: 'rgb(254, 205, 47)'}}
                                 inputProps={{ 'aria-labelledby': labelId }}
                             />
                         </ListItemIcon>

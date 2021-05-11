@@ -113,6 +113,13 @@ exports.createPages = async ({ graphql, actions, boundActionCreators }) => {
 }
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+       fallback: {
+         "crypto": false
+       },
+     },
+   })
   if (stage === "build-html") {
     /*
      * During the build step, `auth0-js` will break because it relies on

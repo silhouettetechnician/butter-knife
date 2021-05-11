@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from './List'
 
-const FilterBar = ({colours, handleChange}) => {
-
+const FilterBar = ({ data,checkedInputs,setCheckedInputs, checked, handleInputChange, setChecked, handleSelectedExperts, brands, colors, colours, types, selectedExpertArr, colorsArray, setProductList, productList, activeFilter}) => {
+    console.log(colours, 'colours inn filter bar')
     return (
         <div style={{margin: '2%', width: '80%'}}>
             <Accordion expanded>
@@ -19,7 +19,7 @@ const FilterBar = ({colours, handleChange}) => {
                     <Typography>Colour</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                <List colours={colours} handleChange={handleChange}/>
+                <List data={colours} handleInputChange={handleInputChange} checkedInputs={checkedInputs} setCheckedInputs={setCheckedInputs} checked={checked} setChecked={setChecked} colors={colors} colorsArray={colorsArray} selectedExpertArr={selectedExpertArr} productList={productList} handleSelectedExperts={handleSelectedExperts} setProductList={setProductList} activeFilter={activeFilter}/>
                 </AccordionDetails>
             </Accordion>
             <Accordion expanded>
@@ -28,13 +28,10 @@ const FilterBar = ({colours, handleChange}) => {
                     aria-controls="panel2a-content"
                     id="panel2a-header"
                 >
-                    <Typography>Department</Typography>
+                    <Typography>Type</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-          </Typography>
+                <List data={types} colors={colors} colorsArray={colorsArray} handleInputChange={handleInputChange} checkedInputs={checkedInputs} setCheckedInputs={setCheckedInputs} productList={productList} handleSelectedExperts={handleSelectedExperts} setProductList={setProductList} activeFilter={activeFilter}/>
                 </AccordionDetails>
             </Accordion>
             <Accordion expanded>
@@ -43,8 +40,11 @@ const FilterBar = ({colours, handleChange}) => {
                     aria-controls="panel3a-content"
                     id="panel3a-header"
                 >
-                    <Typography>Colour</Typography>
+                    <Typography>Brand</Typography>
                 </AccordionSummary>
+                <AccordionDetails>
+                <List data={brands} handleInputChange={handleInputChange} checkedInputs={checkedInputs} setCheckedInputs={setCheckedInputs} selectedExpertArr={selectedExpertArr} productList={productList} handleSelectedExperts={handleSelectedExperts} setProductList={setProductList} activeFilter={activeFilter}/>
+                </AccordionDetails>
             </Accordion>
         </div>
     )

@@ -3,14 +3,22 @@ import ReactDOM from 'react-dom';
 import 'normalize.css'
 import './App.css'
 import App from './pages/index';
-import Client from 'shopify-buy';
 import * as serviceWorker from './serviceWorker';
-
+import { loadStripe } from '@stripe/stripe-js'
+import { CartProvider } from 'use-shopping-cart';
+const stripe = window.Stripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY);
 ReactDOM.render(
-  <React.StrictMode
->
+  <CartProvider
+    mode="checkout-session"
+    stripe={stripe}
+    billingAddressCollection={false}
+    successUrl={'stripe.com'}
+    cancelUrl={'http://localhost:3333'}
+    currency={'GBP'}
+  >
+    {/* <div hidden id="snipcart" data-api-key="M2ZlNTg3YjUtMjMwMi00ODkwLWE4YWQtMmQ5MWEwMTRkOWE3NjM3NTIyODkwMjY4NjUxMDgx"></div> */}
     <App />
-</React.StrictMode>,
+  </CartProvider>,
 
   document.getElementById('root')
 );

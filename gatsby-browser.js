@@ -2,7 +2,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 import "./src/App.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-alice-carousel/lib/alice-carousel.css";
-// import '@fortawesome/fontawesome-free/css/all.min.css'
+// import ""
+import "./src/knife.css"
 import 'react-sticky-header/styles.css';
 
 import React from 'react';

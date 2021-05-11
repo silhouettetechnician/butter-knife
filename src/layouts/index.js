@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import useMeta from '../hooks/useMeta'
 import { Link, graphql, StaticQuery } from 'gatsby'
 import styled from '@emotion/styled'
 import Sticky from 'react-stickynode';
@@ -29,7 +31,7 @@ const Cross = styled.div`
 const Layout = ({ data, children }) => {
     const [open, setOpen] = useState(false)
     const [catOpen, setCatOpen] = useState(false)
-    // const { allContentfulBrand: nodes } = data
+    const {title, description} = useMeta();
     const brandRender =
         <StaticQuery
             query={graphql`
@@ -43,12 +45,12 @@ const Layout = ({ data, children }) => {
                 }
         
             }}`}
-            render={data => {
+            render={(data, key) => {
                 const {
                     nodes
                 } = data.allContentfulBrand
                 return nodes.map((brand, i) => {
-                    return open ? <DropDownBrands onMouseLeave={() => setOpen(!open)} open={open} setOpen={setOpen}><Cross><FontAwesomeIcon onClick={() => setOpen(!open)} color="black" size="lg" icon={faTimes} /></Cross><ListItem key={i} to={`/brands/${unescape(brand.companyName.companyName)}`} className='strike'>{brand.companyName.companyName}</ListItem></DropDownBrands> : <></>
+                    return open ? <DropDownBrands key={i} onMouseLeave={() => setOpen(!open)} open={open} setOpen={setOpen}><Cross><FontAwesomeIcon onClick={() => setOpen(!open)} color="black" size="lg" icon={faTimes} /></Cross><ListItem key={i} to={`/brands/${unescape(brand.companyName.companyName)}`} className='strike'>{brand.companyName.companyName}</ListItem></DropDownBrands> : <></>
                 }
                 )
             }}
@@ -61,7 +63,7 @@ const Layout = ({ data, children }) => {
     //             nodes {
     //             type
     //             }
-        
+
     //         }}`}
     //         render={data => {
     //             const {
@@ -75,6 +77,13 @@ const Layout = ({ data, children }) => {
     //     />
     return (
         <>
+            <Helmet>
+                <html lang='en' />
+                <title>{title}</title>
+                <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.1.1/default/snipcart.css" />
+                <script async src="https://cdn.snipcart.com/themes/v3.1.1/default/snipcart.js"></script>
+                {/* <meta name={title} content='Suprabha Blog!' /> */}
+            </Helmet>
             <Sticky style={{ zIndex: '99 !important' }} enabled={true} bottomBoundary={1000}>
                 <NavBar open={open} setOpen={setOpen} catOpen={catOpen} setCatOpen={setCatOpen} />
             </Sticky>
@@ -82,8 +91,9 @@ const Layout = ({ data, children }) => {
                 {brandRender}
                 {/* {cate} */}
             </Flex>
-            { children}
-            <Footer />
+            {children}
+            {/* <Footer /> */}
+
         </>
     )
 }

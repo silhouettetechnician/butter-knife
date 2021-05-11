@@ -70,7 +70,7 @@
     "build": "gatsby build"
   },
   "engines": {
-    "node": "14"
+    "node": "12.18.0"
   },
   "eslintConfig": {
     "extends": "react-app"

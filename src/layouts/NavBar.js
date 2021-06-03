@@ -1,9 +1,24 @@
 
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import reduce from 'lodash/reduce'
 import styled from '@emotion/styled'
+import Player from '../components/Player'
 import { Navigation, Header, LogoHolder, NavMenuItem } from '../components/StyledComponents';
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, navigate } from "gatsby";
+import StoreContext from '../contexts/StoreContext'
+
+
+const CartCounter = styled.span`
+    background-color: white;
+    color: #663399;
+    border-radius: 20px;
+    padding: 0 10px;
+    font-size: 1.2rem;
+    float: right;
+    margin: -10px;
+    z-index: 20;
+`
 
 const ButtonHolder = styled.div`
     width: auto;
@@ -25,25 +40,37 @@ const Button = styled.button`
 const Anchor = styled(Link)`
     ...NavMenuItem;
 `
-export const NavBar = ({ open, setOpen, catOpen, setCatOpen, siteName }) => {
+const useQuantity = () => {
+    const {
+        store: { checkout },
+    } = useContext(StoreContext)
+    const items = checkout ? checkout.lineItems : []
+    const total = reduce(items, (acc, item) => acc + item.quantity, 0)
+    return [total !== 0, total]
+}
+export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen, siteName }) => {
     const { isAuthenticated, logout, loginWithRedirect } = useAuth0();
     const Divider = () => "|"
-    console.log(isAuthenticated, 'isAuthenticated')
+    const [hasItems, quantity] = useQuantity()
+    console.log(isOpen, 'isOpen in nav')
     return (
-
         // <div style={{ position: 'relative' }}>
         <>
-                <div style={{height:'10px', background: 'white'}}></div>
+            <div style={{ height: '10px', background: 'white' }}></div>
             <Header >
-                <LogoHolder><div onClick={() => navigate('/')} style={{ cursor: 'pointer', fontFamily: 'bangers', fontSize: '4rem', textDecorationLine: 'line-through', textDecorationColor: 'rgb(254, 205, 47)' }}> BUTTER KNIFE <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder>
+            <Player url='/music.mp3'/>
+                <LogoHolder><div onClick={() => navigate('/')} style={{ cursor: 'pointer', fontFamily: 'bangers', fontSize: '5rem', textDecorationLine: 'line-through', textDecorationColor: 'rgb(254, 205, 47)'}}> BUTTER KNIFE <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder>
                 <Navigation>
-                    <NavMenuItem className='strike'><span>What's new</span></NavMenuItem><Divider />
+                    <NavMenuItem className='strike'><Link to='/whats-new'>What's new</Link></NavMenuItem><Divider />
                     <NavMenuItem className='strike' onClick={() => setOpen(!open)}><span>Designers</span></NavMenuItem><Divider />
                     <NavMenuItem className='strike' onClick={() => setCatOpen(!catOpen)}><Link to='/clothing'>Clothing</Link></NavMenuItem><Divider />
-                    <NavMenuItem className='strike'><Link style={{fontFamily: 'BerlinBold'}}to='/shoes'>Footwear</Link></NavMenuItem><Divider />
-                    <NavMenuItem className='strike'><Link style={{fontFamily: 'BerlinBold'}}to='/accessories'>Accessories</Link></NavMenuItem><Divider />
+                    <NavMenuItem className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/shoes'>Footwear</Link></NavMenuItem><Divider />
+                    <NavMenuItem className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/accessories'>Accessories</Link></NavMenuItem><Divider />
                     {/* <NavMenuItem className='strike'><Link style={{fontFamily: 'BerlinBold'}}to='/vintage'>Vintage</Link></NavMenuItem><Divider /> */}
-                    <NavMenuItem className='strike'><Link style={{fontFamily: 'BerlinBold'}}to='/vintage'>Souvenirs</Link></NavMenuItem>
+                    <NavMenuItem className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/vintage'>Souvenirs</Link></NavMenuItem><Divider />
+                    <NavMenuItem className='strike' onClick={() => setIsOpen(true)}>{hasItems && <CartCounter>{quantity}</CartCounter>}
+                    Trolley <img src='/shopping-cart.svg' alt='cart' style={{width: '15px', paddingBottom: '5px'}}/>
+</NavMenuItem>
                     {isAuthenticated && <> <Divider /><NavMenuItem><Link className='strike' to='/account'>My Account</Link></NavMenuItem></>}
                 </Navigation>
                 <ButtonHolder>
@@ -59,7 +86,7 @@ export const NavBar = ({ open, setOpen, catOpen, setCatOpen, siteName }) => {
                 </ButtonHolder>
                 <div height='50px'></div>
             </Header>
-</>
+        </>
 
     )
 }

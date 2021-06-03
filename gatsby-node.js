@@ -1,111 +1,97 @@
+// const path = require(`path`)
+// const { createFilePath } = require(`gatsby-source-filesystem`)
+
 const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
-
-exports.createPages = async ({ graphql, actions, boundActionCreators }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-
-  const storeTemplate = path.resolve('./src/templates/IndividualClothingItem.js')
   const brandTemplate = path.resolve('./src/templates/IndividualBrand.js')
-
+  const storeTemplate = path.resolve('./src/templates/IndividualClothingItem.js')
+  // Query for all products in Shopify
   const result = await graphql(`
   {
-    allContentfulProduct {
-      nodes {
-        id
-        colour
-        price
-        productDescription {
-          productDescription
+    allShopifyProduct {
+      edges {
+        node {
+          id
+          handle
+          vendor
         }
-        productName{
-          productName
-        }
-        brand {
-          companyName {
-            id
-            companyName
-          }
-          companyDescription {
-            id
-            companyDescription
-          }
-        }
-        categories {
-          title {
-            title
-          }
-        }
-        slug
       }
     }
-     allContentfulBrand{
-       nodes {
-        id
-        brandImages {
-          file {
-            url
-          }
-        }
-        caption
-         companyName {
-           companyName
-         }
-         companyDescription {
-           companyDescription
-         }
-         logo{
-          file{
-            url
-          }
-        }
-        product{
-          colour
-          slug
-          id
-          image {
-                fluid {
-                  src
-                }
-              }
-          productDescription {
-                productDescription
-              }
-          price
-          productName {
-                productName
-              }
-        }
-     }
-    }
-   }
-      `)
-  result && result.data.allContentfulProduct.nodes.forEach(({ id, slug }) => {
+  }
+`)
+  // Iterate over all products and create a new page using a template
+  // The product "handle" is generated automatically by Shopify
+  result.data.allShopifyProduct.edges.forEach(({ node }) => {
     createPage({
-      path: `/clothing/${slug}`,
+      path: `/clothing/${node.handle}`,
       component: storeTemplate,
-      context: { id: id, slug: slug }
+      context: {
+        product: node,
+        handle: node.handle,
+        vendor: node.vendor,
+        tags: node.tags
+
+      },
     })
   })
 
+// exports.createPages = async ({ graphql, actions, boundActionCreators }) => {
+//   const { createPage } = actions
+
+//   const storeTemplate = path.resolve('./src/templates/IndividualClothingItem.js')
+//   const brandTemplate = path.resolve('./src/templates/IndividualBrand.js')
+
+  const brandShopify = await graphql(`
+  {
+    allShopifyProduct{
+      nodes {  
+    id
+    handle
+    description
+    shopifyId
+    title
+    vendor
+    variants {
+        id
+        title
+        shopifyId
+      }
+    images {
+        originalSrc
+      }
+    options {
+      values
+      name
+    }
+  }
+}
+   }
+      `)
+
+//   result && result.data.allContentfulProduct.nodes.forEach(({ id, slug }) => {
+//     createPage({
+//       path: `/clothing/${slug}`,
+//       component: storeTemplate,
+//       context: { id: id, slug: slug }
+//     })
+//   })
+
   const brandsFound = []
-  result && result.data.allContentfulBrand.nodes.forEach((node) => {
+  brandShopify && brandShopify.data.allShopifyProduct.nodes.forEach((node) => {
     if (brandsFound.indexOf(node) === -1) {
       brandsFound.push(node)
     }
   })
   brandsFound.length > 0 && brandsFound.forEach((node) => {
-    // console.log(JSON.stringify(node, 'node gatsby.node'))
+    console.log(JSON.stringify(node, 'node gatsby.node'))
     createPage({
-      path: `/brands/${node.companyName.companyName}`,
+      path: `/designers/${node.vendor}`,
       component: brandTemplate,
       context: {
-        id: node.id,
-        companyName: node.companyName.companyName,
-        companyDescription: node.companyDescription.companyDescription,
-        logo: node.logo.file.url,
-        caption: node.caption,
-        brandImages: node.brandImages,
-        product: node.product,
+        product: node,
+        handle: node.handle,
+        vendor: node.vendor
       }
     })
   })
@@ -141,3 +127,36 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   }
 }
 
+
+
+
+
+//     allContentfulProduct {
+//       nodes {
+//         id
+//         colour
+//         price
+//         productDescription {
+//           productDescription
+//         }
+//         productName{
+//           productName
+//         }
+//         brand {
+//           companyName {
+//             id
+//             companyName
+//           }
+//           companyDescription {
+//             id
+//             companyDescription
+//           }
+//         }
+//         categories {
+//           title {
+//             title
+//           }
+//         }
+//         slug
+//       }
+//     }

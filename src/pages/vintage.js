@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { graphql } from 'gatsby'
 // import * as styles from './EmailListForm.module.scss';
 
 const Vintage = () => {
-
+  
 
   return (
 
@@ -11,5 +12,5 @@ const Vintage = () => {
    </div>
   );
 };
-
 export default Vintage;
+

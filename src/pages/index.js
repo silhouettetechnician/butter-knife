@@ -40,7 +40,7 @@ const {
     return (
       <>
       {/* <DarkSwitch/> */}
-          <SEO title='Style' metaImage='/mainlogo.png'/>
+          <SEO metaImage='/mainlogo.png'/>
             <VideoWrapper>
             
             <Flex padding='10% 0 0 0' column justifyCenter alignCenter>
@@ -48,7 +48,7 @@ const {
             {/* <button className='raise'>shop now</button> */}
             <Link style={{zIndex: '999'}}to={`/brands/${unescape(companyName.companyName)}`}><button><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button></Link>
             </Flex>
-            <ReactPlayer className='react-player' width='100%' height='unset' playing url={brandImages[1].file.url} muted loop />
+            <ReactPlayer className='react-player' width='100vw' height='100vh' playing url={brandImages[1].file.url} muted loop />
             </VideoWrapper>
             {/* <Checkout/> */}
             </>

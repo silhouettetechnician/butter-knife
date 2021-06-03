@@ -11,7 +11,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: white;
 }
+/* body.dark{
+  color: white;
+  background-color: black;
+} */
 button {
   background: none;
   border: 4px solid white;
@@ -21,7 +26,7 @@ button {
   text-transform: uppercase !important;
   font-size: 1.5rem;
   font-family: CODE !important;
-  z-index: 9999;
+  /* z-index: 9999; */
   padding: 0.6rem 2rem;
 }
 .raise:hover, .raise:focus {
@@ -110,14 +115,19 @@ a:hover{
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg) ;
   }
 }
 .react-player{
-position: absolute;
+position: fixed;
+object-fit: cover;
 top: 0;
 left: 0;
 }
+/* .react-player > video{
+  width: unset !important;
+  height: unset !important;
+} */
 @font-face{
   font-family: bangers;
   src: url('./fonts/Bangers.ttf'), local('Bangers.ttf');
@@ -219,7 +229,26 @@ left: 0;
    background-color: #008CBA;
    opacity: 0;
    }
-
+   .ais-InstantSearch {
+    max-width: 960px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  .ais-RefinementList-checkbox{
+    margin-right: 5px;
+  }
+  .ais-Panel{
+    margin-top: 15px;
+  }
+  .left-panel {
+    float: left;
+    width: 250px;
+  }
+.Collapsible__trigger{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
    /* button{
     background: black;
     transition: 0.5s; 
@@ -279,3 +308,96 @@ left: 0;
   .snipcart-item-line__variants{
     padding-top: unset !important;
   }
+  .ais-RefinementList-item{
+    font-size: 0.9rem;
+  }
+  .ais-Hits-item, .ais-InfiniteHits-item, .ais-InfiniteResults-item, .ais-Results-item {
+    margin-top: unset !important; 
+    margin-left: unset !important; 
+    padding: unset !important;
+    width: unset !important;
+    border: unset !important;
+    box-shadow: unset !important;
+}
+.ais-Hits-list{
+  justify-content: space-around !important;
+}
+.ais-RefinementList-count{
+  display: none !important;
+}
+.ais-SearchBox{
+  margin: 10px;
+}
+.ais-Panel-header{
+  font-family: BerlinBold;
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: black;
+}
+.ais-RefinementList-labelText{
+  font-family: CODE;
+  text-transform: uppercase;
+  color: black;
+  font-size: 2rem;
+}
+.ais-Panel-header{
+  margin-bottom: .5rem;
+  padding-bottom: .5rem;
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 2px solid /*#FECE2E*/ black !important;
+}
+.ais-Panel{
+  margin-bottom: 35px !important;
+}
+
+.dark-button {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -3px;
+}
+.dark-button:before, .dark-button:after {
+  box-sizing: border-box;
+}
+.dark-button label {
+  position: relative;
+  display: block;
+  width: 45px;
+  height: 25px;
+  border-radius: 100px;
+  background-color: #252525;
+  overflow: hidden;
+  cursor: pointer;
+}
+.dark-button label:before, .dark-button label:after {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: 0.5s ease;
+}
+.dark-button label:before {
+  background-color: #f16e65;
+}
+.dark-button label:after {
+  background-color: #252525;
+  left: -58px;
+  transform: scale(0.00001);
+}
+.dark-button input[type=checkbox] {
+  display: none;
+}
+.dark-button input[type=checkbox]:checked + label:before {
+  background-color: #01dbc6;
+  transform: translateX(20px);
+}
+.dark-button input[type=checkbox]:checked + label:after {
+  transform: translateX(75px) scale(1);
+}

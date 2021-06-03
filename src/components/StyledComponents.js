@@ -29,8 +29,8 @@ export const DropDownBrands = styled.section`
         align-items: center;
 
 `
-
 export const Header = styled.header`
+// ${console.log(dark, 'dark in styled')}
         font-size: 14px;
         line-height: 1;
         font-family: ProximaNova-Regular, "Helvetica Neue", Verdana, Arial, sans-serif;
@@ -41,11 +41,11 @@ export const Header = styled.header`
         vertical-align: baseline;
         position: relative;
         z-index: 9999;
-        background-color: #fff !important;
+        background-color: #fff;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        height: 130px;
+        height: 150px;
         border-bottom: 1px solid rgb(242, 242, 242);
 `
 
@@ -55,7 +55,7 @@ export const Navigation = styled.nav`
         line-height: 1;
         font-family: ProximaNova-Regular, "Helvetica Neue", Verdana, Arial, sans-serif;
         letter-spacing: 0.35px;
-        margin: 20px;
+        margin: 25px;
         padding: 0px;
         border: 0px;
         vertical-align: baseline;
@@ -63,6 +63,7 @@ export const Navigation = styled.nav`
         display: flex;
         -webkit-box-pack: center;
         justify-content: center;
+        align-items: baseline;
         height: 20px;
 `
 export const NavMenuItem = styled.span`
@@ -117,7 +118,7 @@ export const LogoHolder = styled.div`
         line-height: 1;
         font-family: ProximaNova-Regular, "Helvetica Neue", Verdana, Arial, sans-serif;
         letter-spacing: 0.35px;
-        margin: 0px;
+        margin-bottom: 10px;
         padding: 0px;
         border: 0px;
         vertical-align: baseline;
@@ -130,10 +131,10 @@ export const LogoHolder = styled.div`
 `
 
 export const Heading1 = styled.h1`
-        font-size: 14px;
+        font-size: 1.5rem;
         text-align: center;
         line-height: 1;
-        font-family: ProximaNova-Regular,"Helvetica Neue",Verdana,Arial,sans-serif;
+        font-family: BerlinXBold;
         letter-spacing: 0.35px;
         margin: 15px 0;
         padding: 0px;

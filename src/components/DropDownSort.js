@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import Select from '@material-ui/core/Select';
+import MenuItem from "@material-ui/core/MenuItem";
 
 export const StyledSelect = styled(Select)`
     width: 10rem;
@@ -15,35 +16,38 @@ export const StyledSelect = styled(Select)`
         border: 2px solid rgb(254,205,47) !important;
     }
 `
-export const StyledOption = styled.option`
+export const StyledOption = styled(MenuItem)`
     text-transform: uppercase;
     font-family: CODE;
 `
-export const Dropdown = ({val, setVal}) => {
+export const Dropdown = ({val, setVal, data}) => {
 
     const handleChange = (event) => {
         // const name = event.target.name;
+        console.log(event.target.value, 'e.target')
         setVal(event.target.value);
-        // console.log(val, 'value')
+        console.log(val, 'value in handle change')
     };
 
+console.log(data, 'data')
     return (
         <StyledSelect
-            outline
-            native
-            placeholder='SORT BY'
+            // native
+            // multiple
+            placeholder='Choose Size'
             inputProps={{
-                name: 'age',
+                name: 'size',
             }}
             value={val}
             onChange={handleChange}
             style={{ margin: '2% !important' }}
-        >
-            <StyledOption aria-label="Sort by" value="" />
-            <StyledOption value={10}>Newest</StyledOption>
-            <StyledOption value={20}>Price (High)</StyledOption>
-            <StyledOption value={30}>Price (Low)</StyledOption>
-        </StyledSelect>
+            >
+            {data && data.map(({title, id}) => (
+            <StyledOption key={title} value={id}>
+              {title}
+            </StyledOption>
+          ))}
+            </StyledSelect>
     )
 }
 

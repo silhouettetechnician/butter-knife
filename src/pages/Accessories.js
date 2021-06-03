@@ -5,54 +5,69 @@ import { Link } from "gatsby"
 import ClothingItem from '../templates/ClothingItem'
 import { navigate, A, useRouteMatch } from 'hookrouter';
 import Flex from '../styles/Flex';
+import ProductHitsWithFilter from '../templates/ProductHitsWithFilter'
 
-const Clothing = ({ data }) => {
+const Accessories = ({ data }) => {
     // firebase.initializeApp()
     // const [data, setData] = useState([])
     // const [loading, setLoading] = useState(false)
-    const {
-        allContentfulProduct: { nodes: categories },
-      } = data
-    console.log(categories,'categories')
+    // const {
+    //   allShopifyCollection: { nodes: products },
+    //   } = data
+    //   const productClothingObject = products.find(i => i.title === 'Accessories')
+    //   const clothingByCollection = productClothingObject.products
+    // console.log(clothingByCollection,'clothingByCollection')
     return (
         <>
-        <div style={{height: '50px'}}></div>
-        <Flex margin='20px 0 0 0' justifyAround>
-            {/* <ClipLoader size={160} color='FECE2E' loading={loading}/>  */}
-             {categories && categories.map((i, id) => {
-                return <Link key={id} to={`/clothing/${i.slug}`}><ClothingItem data={categories} key={id} title={i.productName.productName} description={i.productDescription.productDescription} src={i.image[0].fluid.src} price={i.price}/></Link>
-            })}
-        </Flex>
+         <ProductHitsWithFilter indexName='PRODUCTS_accessories' pageHeading='Accessories' />
         </>
     )
 }
 
-export default Clothing
+export default Accessories
 
-export const query = graphql`
-{
-    allContentfulProduct(filter: {categories: {elemMatch: {title: {title: {eq: "Accessories"}}}}}) {
-      nodes {
-        slug
-        id
-        image {
-          fluid {
-            src
-          }
-        }
-        productDescription {
-          productDescription
-        }
-        categories {
-          title {
-            title
-          }
-        }
-        price
-        productName {
-          productName
-        }
-      }
-    }
-  }
-`
+// export const query = graphql`
+// {
+//   allShopifyCollection(filter: {title: {eq: "Accessories"}}) {
+//     nodes {
+//       handle
+//       description
+//       id
+//       title
+//       products {
+//         shopifyId
+//         priceRange {
+//           maxVariantPrice {
+//             amount
+//           }
+//           minVariantPrice {
+//             amount
+//           }
+//         }
+//         description
+//         handle
+//         id
+//         images {
+//           originalSrc
+//           id
+//           localFile {
+//             url
+//           }
+//         }
+//         productType
+//         title
+//         vendor
+//         variants {
+//           title
+//           product {
+//             options {
+//               values
+//               name
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+// `

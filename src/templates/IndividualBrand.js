@@ -34,35 +34,36 @@ const BrandCaption = styled.p`
     color: white;
     `
 
-const IndividualBrand = ({ pageContext }) => {
+const IndividualBrand = ({ pageContext, vendor }) => {
   const {
     id,
     slug,
     companyName,
+    // vendor,
     companyDescription,
     caption,
     logo,
     brandImages,
     product
   } = pageContext;
-  const [ data, setData ] = useState(pageContext)
+  const [data, setData] = useState(pageContext)
   console.log(data, 'data')
   // console.log(data, 'data')
   return (
     <Flex width='100%'>
-        <Flex style={{width:'100%'}}>
-        <div style={{position: 'absolute',  background: 'rgba(0,0,0,0.4)', top: '32%', left: '8%'}}>
-        <BrandHeading color='white'>{data.companyName}</BrandHeading>
-        <BrandCaption>{data.caption}</BrandCaption>
+      <Flex style={{ width: '100%' }}>
+        <div style={{ position: 'absolute', background: 'rgba(0,0,0,0.4)', top: '32%', left: '8%' }}>
+          <BrandHeading color='white'>{data.companyName}</BrandHeading>
+          <BrandCaption>{data.caption}</BrandCaption>
         </div>
-          <LogoImage src={data.brandImages[0].file.url} />
-        </Flex>
-      <Flex width='30%'><FilterBar data={data}/></Flex>
-        <Flex justifyCenter alignCenter width='70%'>
+        {/* <LogoImage src={data.brandImages[0].file.url} /> */}
+      </Flex>
+      <Flex width='30%'><FilterBar data={data} /></Flex>
+      <Flex justifyCenter alignCenter width='70%'>
         {/* <div style={{background: 'rgba(0,0,0,0.4)'}}> */}
         <BrandHeading align='left' color='black'>{data.companyName}</BrandHeading>
-        <div style={{color: 'black', fontFamily: 'CODE'}}>{data.companyDescription}</div>
-        {data.product && data.product.map(i => <Link key={id} to={`/clothing/${i.slug}`}><ClothingItem data={data.product} key={i.slug} title={i.productName.productName} description={i.productDescription.productDescription} src={i.image[0].fluid.src} price={i.price}/></Link>)}
+        <div style={{ color: 'black', fontFamily: 'CODE' }}>{data.companyDescription}</div>
+        {data.product && data.product.map((i, index) => <Link key={index} to={`/clothing/${i.handle}`}><ClothingItem data={data.product} key={i.handle} title={i.title} description={i.description} src={i.image[0].fluid.src} price={i.price} /></Link>)}
         {/* </div> */}
       </Flex>
     </Flex>
@@ -71,41 +72,26 @@ const IndividualBrand = ({ pageContext }) => {
 export default IndividualBrand
 
 export const pageQuery = graphql`
-query MyQuery($id: String!) {
-  contentfulBrand(id: {eq: $id}){
-  id
-  caption
-  brandImages {
-    file {
-      url
-    }
-  }
-  companyDescription {
-    companyDescription
-  }
-  companyName {
-    companyName
-  }
-  product{
-    slug
+query MyQuery($vendor: String!) {
+  allShopifyProduct(filter: {vendor: {eq: $vendor}}){
+      nodes {  
     id
-    colour
-    image {
-          fluid {
-            src
-          }
-        }
-    productDescription {
-          productDescription
-        }
-    price
-    productName {
-          productName
-        }
-  }
-  logo{
-    file{
-      url
+    handle
+    description
+    shopifyId
+    title
+    vendor
+    variants {
+        id
+        title
+        shopifyId
+      }
+    images {
+        originalSrc
+      }
+    options {
+      values
+      name
     }
   }
 }

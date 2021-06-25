@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import Notifications, {notify} from 'react-notify-toast';
 import useMeta from '../hooks/useMeta'
+import _ from 'lodash'
 import ContextProvider from '../hocs/withContextProvider'
 import { Link, graphql, StaticQuery } from 'gatsby'
 import styled from '@emotion/styled'
@@ -43,79 +45,34 @@ const Layout = ({ data, children }) => {
     const [products, setProducts] = useState([])
     const [shop, setShop] = useState({})
 
-    // const client = Client.buildClient({
-    //     storefrontAccessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
-    //     domain: `butter-knife-concession-store.myshopify.com`,
-    //   })
-
-    // useEffect(() => {
-    //     client.checkout.create().then(checkout => {
-    //       // Do something with the checkout
-    //       setCheckout({ checkout })
-    //     })
-    //   },[])
-    //   const addVariantToCart = (async (variantId, quantity) => {
-    //     setIsCartOpen(true)
-    //     setCartRequest(true)
-    //     if (variantId.indexOf("Shopify__ProductVariant__") !== -1)
-    //       variantId = variantId.split("Shopify__ProductVariant__")[1]
-    
-    //     const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }]
-    //     console.log(checkout, 'checkout')
-    //     const checkoutId = checkout.id
-    
-    //     const checkout = await client.checkout
-    //           .addLineItems(checkoutId, lineItemsToAdd)
-    //       console.log(checkout, 'checkout')
-    //       setCheckout(checkout)
-    //       setCartRequest(false)
-    //   })
     const brandRender =
         <StaticQuery
             query={graphql`
         {
-            allShopifyProduct {
+            allShopifyCollection(sort: { fields: [title] }) {
                 nodes {
-                vendor
+                title
+                handle
                 }
         
             }}`}
             render={(data, key) => {
                 const {
                     nodes
-                } = data.allShopifyProduct
-                return nodes.map((brand, i) => {
-                    return open ? <DropDownBrands key={i} onMouseLeave={() => setOpen(!open)} open={open} setOpen={setOpen}><Cross><FontAwesomeIcon onClick={() => setOpen(!open)} color="black" size="lg" icon={faTimes} /></Cross><ListItem key={i} to={`/designers/${unescape(brand.vendor)}`} className='strike'>{brand.vendor}</ListItem></DropDownBrands> : <></>
+                } = data.allShopifyCollection
+                return open ? <DropDownBrands onMouseLeave={() => setOpen(!open)} open={open} setOpen={setOpen}><Cross><FontAwesomeIcon onClick={() => setOpen(!open)} color="black" size="lg" icon={faTimes} /></Cross>
+                {_.uniqBy(nodes, 'title').filter(i => i.handle !== 'frontpage' && i.handle !== 'clothing' && i.handle !== 'accessories').map((brand, i) => {
+                    return <ListItem key={i} to={`/designers/${brand.handle}`} className='strike'>{brand.title}</ListItem>})
                 }
-                )
+                </DropDownBrands> : <></>
             }}
         />
-    // const categoryRender =
-    //     <StaticQuery
-    //         query={graphql`
-    //     {
-    //         allContentfulProduct {
-    //             nodes {
-    //             type
-    //             }
-
-    //         }}`}
-    //         render={data => {
-    //             const {
-    //                 nodes
-    //             } = data.allContentfulBrand
-    //             return nodes.map((brand, i) => {
-    //                 return open ? <DropDownBrands onMouseLeave={() => setCatOpen(!open)} catOpen={catOpen} setOpen={setCatOpen}><Cross><FontAwesomeIcon onClick={() => setOpen(!open)} color="black" size="lg" icon={faTimes} /></Cross><ListItem key={i} to={`/brands/${unescape(brand.companyName.companyName)}`} className='strike'>{brand.companyName.companyName}</ListItem></DropDownBrands> : <></>
-    //             }
-    //             )
-    //         }}
-    //     />
     return (
         <ContextProvider>
+        <Notifications/>
             <Helmet>
                 <html lang='en' />
                 <title>{title}</title>
-                <script src="https://unpkg.com/react-pose/dist/react-pose.js"></script>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
                 {/* <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.1.1/default/snipcart.css" /> */}
                 {/* <script async src="https://cdn.snipcart.com/themes/v3.1.1/default/snipcart.js"></script> */}

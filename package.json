@@ -31,7 +31,7 @@
     "dotenv": "^8.2.0",
     "framer-motion": "^4.1.17",
     "gatsby": "^3.5.0",
-    "gatsby-cli": "^3.4.0",
+    "gatsby-cli": "^3.6.0",
     "gatsby-image": "^3.2.0",
     "gatsby-mdx": "^0.6.2-ci.371",
     "gatsby-plugin-algolia": "^0.20.0",
@@ -43,6 +43,7 @@
     "gatsby-plugin-image": "^1.2.1",
     "gatsby-plugin-layout": "^2.0.0",
     "gatsby-plugin-mailchimp": "^5.2.2",
+    "gatsby-plugin-manifest": "^3.7.1",
     "gatsby-plugin-react-helmet": "^4.4.0",
     "gatsby-plugin-sass": "^4.2.0",
     "gatsby-plugin-sharp": "^3.2.1",
@@ -69,21 +70,27 @@
     "react-collapsible": "^2.8.3",
     "react-darkreader": "^1.5.5",
     "react-dom": "^16.14.0",
+    "react-dropdown": "^1.9.2",
     "react-helmet": "^6.1.0",
     "react-instantsearch-dom": "^6.11.0",
+    "react-notify-toast": "^0.5.1",
     "react-player": "^2.9.0",
     "react-pose": "^4.0.10",
     "react-responsive-carousel": "^3.2.13",
     "react-scripts": "^4.0.3",
+    "react-select": "^4.3.1",
     "react-spinners": "^0.10.4",
     "react-sticky": "^6.0.3",
     "react-sticky-footer": "0.1.0-rc3",
     "react-sticky-header": "^0.2.0",
     "react-stickynode": "^3.0.5",
+    "react-toast-notifications": "^2.4.4",
+    "react-use-audio-player": "^1.2.4",
     "shopify-buy": "^2.11.0",
     "stripe": "^8.137.0",
     "style-loader": "^1.3.0",
     "use-shopping-cart": "^2.4.3",
+    "use-sound": "^4.0.0",
     "use-stripe-cart": "^1.2.1"
   },
   "browser": {
@@ -91,7 +98,8 @@
   },
   "scripts": {
     "dev": "gatsby develop -p 3333 -o",
-    "build": "gatsby build"
+    "build": "gatsby build",
+    "gatsby": "gatsby"
   },
   "eslintConfig": {
     "extends": "react-app"

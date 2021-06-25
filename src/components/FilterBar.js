@@ -1,70 +1,86 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Collapsible from 'react-collapsible';
+import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from './List'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton';
 
-const FilterBar = ({ data,checkedInputs,setCheckedInputs, checked, handleInputChange, setChecked, handleSelectedExperts, brands, colors, colours, types, selectedExpertArr, colorsArray, setProductList, productList, activeFilter}) => {
-    console.log(colours, 'colours inn filter bar')
-    // const triggerArrow = 
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '&$checked': {
+            color: 'rgb(254, 205, 47)',
+        },
+        // textDecoration: 'underline',
+        width: '100%',
+        maxWidth: 360,
+    },
+    checked: {}
+
+}));
+
+const FilterBar = ({ data, checkboxes, checkboxesToFilter, handleInputChange, brands, colors, colours, types, selectedExpertArr, colorsArray, setProductList, productList }) => {
+    const classes = useStyles();
     return (
-        <div style={{margin: '2%', width: '80%'}}>
-<Accordion expanded>
-    <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-    >
-        <Typography>Colour</Typography>
-    </AccordionSummary>
-    <AccordionDetails>
-    <List data={colours} handleInputChange={handleInputChange} checkedInputs={checkedInputs} setCheckedInputs={setCheckedInputs} checked={checked} setChecked={setChecked} colors={colors} colorsArray={colorsArray} selectedExpertArr={selectedExpertArr} productList={productList} handleSelectedExperts={handleSelectedExperts} setProductList={setProductList} activeFilter={activeFilter}/>
-    </AccordionDetails>
-</Accordion>
-<Accordion expanded>
-    <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel2a-content"
-        id="panel2a-header"
-    >
-        <Typography>Type</Typography>
-    </AccordionSummary>
-    <AccordionDetails>
-    <List data={types} colors={colors} colorsArray={colorsArray} handleInputChange={handleInputChange} checkedInputs={checkedInputs} setCheckedInputs={setCheckedInputs} productList={productList} handleSelectedExperts={handleSelectedExperts} setProductList={setProductList} activeFilter={activeFilter}/>
-    </AccordionDetails>
-</Accordion>
-<Accordion expanded>
-    <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel3a-content"
-        id="panel3a-header"
-    >
-        <Typography>Brand</Typography>
-    </AccordionSummary>
-    <AccordionDetails>
-    <List data={brands} handleInputChange={handleInputChange} checkedInputs={checkedInputs} setCheckedInputs={setCheckedInputs} selectedExpertArr={selectedExpertArr} productList={productList} handleSelectedExperts={handleSelectedExperts} setProductList={setProductList} activeFilter={activeFilter}/>
-    </AccordionDetails>
-</Accordion> 
-</div>
+        <div className={classes.root} style={{ margin: '2%', width: '75%' }}>
+            {Object.entries(checkboxesToFilter).map(([key, val]) => 
+            <Accordion expanded>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+                <Typography className='filterLabel'>{key}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    {val.map(i => {
+                        const labelId = `checkbox-list-label-${i}`;
+                        return <ListItem key={i} role={undefined} /*onClick={handleToggle(color)}*/>
+                            <ListItemIcon>
+                                <Checkbox
+                                    // edge="start"
+                                    // checked={checkedInputs[value]}
+                                    value={i}
+                                    onChange={handleInputChange}
+                                    tabIndex={-1}
+                                    classes={{
+                                        root: classes.root,
+                                        checked: classes.checked
+                                    }}
+                                    disableRipple
+                                    inputProps={{ 'aria-labelledby': labelId }}
+                                />
+                            </ListItemIcon>
+                            <ListItemText id={labelId} primary={`${i}`} />
+                            <ListItemSecondaryAction>
+                                <IconButton edge="end" aria-label="comments">
+                                </IconButton>
+                            </ListItemSecondaryAction>
+                        </ListItem>
+                    })}
+                    {/* // <List data={checkboxes} checkedInputs={checkedInputs} setCheckedInputs={setCheckedInputs} checked={checked} setChecked={setChecked} selectedExpertArr={selectedExpertArr} productList={productList} handleSelectedExperts={handleSelectedExperts} setProductList={setProductList} activeFilter={activeFilter} /> */}
+                </AccordionDetails>
+            </Accordion>)}
+        </div>
     )
 }
 
 export default FilterBar
 
-        {/* <Collapsible trigger={['Colour', <FontAwesomeIcon icon={faChevronDown}/>]} triggerWhenOpen={['Colour', <FontAwesomeIcon icon={faChevronUp}/>]} >
-      <p>
-        This is the collapsible content. It can be any element or React
-        component you like.
-      </p>
-      <p>
-        It can even be another Collapsible component. Check out the next
-        section!
-      </p>
-        </Collapsible>
-     */}
-    {/* ) */}
+// console.log(checkedInputs, 'checkediNPUTS')
+// const handleChange = (text) => (event) => {
+//     setActiveFilter((prev) => ({
+//         ...prev,
+//         [text]: event.target.checked,
+//     }));
+// };
+// console.log(activeFilter, 'activeFilter')

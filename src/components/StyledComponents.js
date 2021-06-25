@@ -15,7 +15,7 @@ export const DropDownBrands = styled.section`
         height: calc(100vh -175px);
         position: ${props => props.open ? 'fixed' : 'absolute'};
         display: ${props => props.open ? 'block' : 'unset'};
-        top: 140px;
+        top: 170px;
         // bottom: 0;
         left: 0;
         // right: 0;
@@ -23,30 +23,30 @@ export const DropDownBrands = styled.section`
         transition: .5s ease;
         background-color: #fff;
         opacity: ${props => props.open ? '0.8' : '0'};
-        z-index: ${props => props.open ? '500' : '0'};
+        z-index: ${props => props.open ? '888888' : '0'};
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
 
 `
 export const Header = styled.header`
-// ${console.log(dark, 'dark in styled')}
         font-size: 14px;
         line-height: 1;
         font-family: ProximaNova-Regular, "Helvetica Neue", Verdana, Arial, sans-serif;
         letter-spacing: 0.35px;
-        margin: 0px;
+        margin-bottom: 10px;
         padding: 0px;
         border: 0px;
         vertical-align: baseline;
         position: relative;
         z-index: 9999;
-        background-color: #fff;
+        background-color: #FCFCFC;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        height: 150px;
-        border-bottom: 1px solid rgb(242, 242, 242);
+        height: 180px;
+        // border-bottom: 1px solid rgb(242, 242, 242);
 `
 
 export const Navigation = styled.nav`
@@ -58,7 +58,7 @@ export const Navigation = styled.nav`
         margin: 25px;
         padding: 0px;
         border: 0px;
-        vertical-align: baseline;
+        // vertical-align: baseline;
         position: relative;
         display: flex;
         -webkit-box-pack: center;
@@ -76,7 +76,7 @@ export const NavMenuItem = styled.span`
         padding: 0px;
         border: 0px;
         text-decoration: none;
-        vertical-align: baseline;
+        // vertical-align: baseline;
         padding-bottom: 2px;
         color: black;
         text-transform: uppercase;
@@ -144,4 +144,16 @@ export const Heading1 = styled.h1`
         color: black;
         text-transform: uppercase;
         opacity: 1;     
+`
+
+export const Footer = styled.footer`
+        display: flex;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 80px;
+        background: white;
+        z-index: 999999;
+        align-items: center;
+        justify-content: center; 
 `

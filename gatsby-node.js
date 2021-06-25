@@ -1,5 +1,5 @@
 // const path = require(`path`)
-// const { createFilePath } = require(`gatsby-source-filesystem`)
+const { createFilePath } = require(`gatsby-source-filesystem`)
 
 const path = require(`path`)
 exports.createPages = async ({ graphql, actions }) => {
@@ -35,77 +35,124 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+  // exports.createPages = async ({ graphql, actions, boundActionCreators }) => {
+  //   const { createPage } = actions
 
-// exports.createPages = async ({ graphql, actions, boundActionCreators }) => {
-//   const { createPage } = actions
+  //   const storeTemplate = path.resolve('./src/templates/IndividualClothingItem.js')
+  //   const brandTemplate = path.resolve('./src/templates/IndividualBrand.js')
 
-//   const storeTemplate = path.resolve('./src/templates/IndividualClothingItem.js')
-//   const brandTemplate = path.resolve('./src/templates/IndividualBrand.js')
-
-  const brandShopify = await graphql(`
-  {
-    allShopifyProduct{
-      nodes {  
-    id
-    handle
-    description
-    shopifyId
-    title
-    vendor
-    variants {
+const resultBrand = await graphql(`
+{
+  allShopifyCollection {
+    nodes {
+      id
+      title
+      handle
+      shopifyId
+      description
+      products {
+        description
+        handle
         id
+        images {
+          originalSrc
+        }
+        internal {
+          type
+        }
+        productType
         title
-        shopifyId
+        vendor
+        priceRange {
+          minVariantPrice {
+            amount
+          }
+        }
+        createdAt
       }
-    images {
-        originalSrc
+      image {
+        src
       }
-    options {
-      values
-      name
     }
   }
 }
-   }
-      `)
+`)
 
-//   result && result.data.allContentfulProduct.nodes.forEach(({ id, slug }) => {
-//     createPage({
-//       path: `/clothing/${slug}`,
-//       component: storeTemplate,
-//       context: { id: id, slug: slug }
-//     })
-//   })
-
+  // result && result.data.allContentfulProduct.nodes.forEach(({ id, slug }) => {
+  //   createPage({
+  //     path: `/clothing/${slug}`,
+  //     component: storeTemplate,
+  //     context: { id: id, slug: slug }
+  //   })
+  // })
   const brandsFound = []
-  brandShopify && brandShopify.data.allShopifyProduct.nodes.forEach((node) => {
+  resultBrand && resultBrand.data.allShopifyCollection.nodes.forEach((node) => {
     if (brandsFound.indexOf(node) === -1) {
       brandsFound.push(node)
     }
   })
   brandsFound.length > 0 && brandsFound.forEach((node) => {
-    console.log(JSON.stringify(node, 'node gatsby.node'))
+    
     createPage({
-      path: `/designers/${node.vendor}`,
+      path: `/designers/${node.handle}`,
       component: brandTemplate,
       context: {
-        product: node,
+        id: node.id,
+        title: node.title,
         handle: node.handle,
-        vendor: node.vendor
+        description: node.description,
+        products: node.products,
+        // logo: node.logo.file.url,
+        // caption: node.caption,
+        brandImage: node.image.src,
+        images: node.products.images,
+        // product: node.product,
       }
     })
   })
   return
+
 }
+
+
+
+
+
+
+
+
+
+
+
+  // const brandsFound = []
+  // resultBrand && resultBrand.data.allContentfulProduct.nodes.forEach((node) => {
+  //   if (brandsFound.indexOf(node) === -1) {
+  //     brandsFound.push(node)
+  //   }
+  // })
+  // brandsFound.length > 0 && brandsFound.forEach((node) => {
+  //   console.log(JSON.stringify(node, 'node gatsby.node'))
+  //   createPage({
+  //     path: `/designers/${node.companyName.companyName}`,
+  //     component: brandTemplate,
+  //     context: {
+  //       product: node,
+  //       handle: node.product.slug,
+  //       vendor: node.companyName.companyName
+  //     }
+  //   })
+  // })
+  // return
+// }
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   actions.setWebpackConfig({
     resolve: {
-       fallback: {
-         "crypto": false
-       },
-     },
-   })
+      fallback: {
+        "crypto": false
+      },
+    },
+  })
   if (stage === "build-html") {
     /*
      * During the build step, `auth0-js` will break because it relies on

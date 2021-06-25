@@ -9,11 +9,11 @@ const ClothingItem = ({ src, title, price, description, onClick, edge }) => <Car
         
         <Card.Body>
             <Card.Title style={{textTransform: 'uppercase', textAlign: 'center', fontSize: '20px'}}>{title}</Card.Title>
-            <Card.Text style={{ fontSize: '18px', fontWeight: 'bold', textAlign: 'center' }}>£{price}</Card.Text>
+            <Card.Text style={{ fontSize: '25px', fontWeight: 'bold', textAlign: 'center' }}>£{price}</Card.Text>
             <hr />
-            <Card.Text style={{ color: 'grey', fontSize: '12px' }}>
+            {/* <Card.Text style={{ color: 'grey', fontSize: '12px' }}>
                {description}
-        </Card.Text>
+        </Card.Text> */}
         </Card.Body>
     </Card>
 

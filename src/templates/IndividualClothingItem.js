@@ -8,7 +8,7 @@ import Flex from '../styles/Flex'
 import DropDownSort from '../components/DropDownSort'
 import Carousel from '../templates/Carousel'
 import Checkout from '../components/Checkout'
-import Client from 'shopify-buy'
+import {notify} from 'react-notify-toast'
 import AwesomeSlider from 'react-awesome-slider';
 import {
     Index,
@@ -118,8 +118,10 @@ const IndividualClothingItem = ({ data, hit }) => {
 
     const handleAddToCart = () => {
         addVariantToCart(val, quantity)
+        notify.show(`Added ${val} to trolley`);
         console.log(productVariant.shopifyId)
     }
+
     const searchClient = algoliasearch(
         'K8SF9T86WY',
         'b88108260d8ff9427171d1937d70e6d8'
@@ -145,7 +147,7 @@ const IndividualClothingItem = ({ data, hit }) => {
                     border: '0.1px solid rgba(254, 205, 47, 0.4)', width: '75%', marginTop: '1rem',
                     marginBottom: '3rem'
                 }} />
-                {/* <div><p style={{ fontFamily: 'graphikMed', fontSize: '2.4rem' }}>{`£${price}`}</p></div> */}
+                <div><p style={{ fontFamily: 'graphikMed', fontSize: '2.4rem' }}>{`£${Math.round(minVariantPrice.amount)}`}</p></div>
                 <div><p style={{ fontFamily: 'graphikReg', fontSize: '1rem' }}>{description}</p></div>
 
                 {/* <Flex width='40%' noWrap><Button>S</Button><Button>M</Button><Button>L</Button></Flex> */}
@@ -158,7 +160,6 @@ const IndividualClothingItem = ({ data, hit }) => {
                 {/* <Checkout/> */}
             </Flex>
         </Flex>
-
     )
 }
 

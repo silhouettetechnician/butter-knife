@@ -9,12 +9,13 @@ import { Link, navigate } from "gatsby";
 import Flex from '../styles/Flex'
 import { graphql } from "gatsby"
 import ReactPlayer from 'react-player'
-import { loadStripe } from '@stripe/stripe-js';
+import HomeVideo from '../assets/MASKSANDSWEATSSAM.mp4'
 
 // const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
 
 const VideoWrapper = styled.div`
   position: relative;
+  height: unset;
 `
 
 const App = ({ data }) => {
@@ -26,29 +27,28 @@ const App = ({ data }) => {
     background: unset;
     margin: 0 auto;
 `
+console.log(data, 'data in homepage')
 const {
   contentfulBrand: { companyName: companyName, brandImages },
 } = data
     // console.log(companyName.companyName, ' index')
-    console.log(brandImages, 'nodes index')
-    console.log(data, 'data')
-    // console.log(node.file[1].file.url,'file[1].file.url')
-    // const {hello} = data.nodes[1].file
+    console.log(brandImages[1].file.url, 'brandImages')
     const test = '../static/mainlogo.png'
-    console.log(process.env.GATSBY_SNIPCART_TEST_KEY, 'process.env.GATSBY_SNIPCART_TEST_KEY')
+    const video = '../static/MASKSANDSWEATSSAM.mp4'
+    // console.log(process.env.GATSBY_SNIPCART_TEST_KEY, 'process.env.GATSBY_SNIPCART_TEST_KEY')
 
     return (
       <>
       {/* <DarkSwitch/> */}
-          <SEO metaImage='/mainlogo.png'/>
+          <SEO title='BUTTERKNIFE' description='Fashion. Footwear. Luxury' metaImage='/mainlogo.png'/>
             <VideoWrapper>
             
             <Flex padding='10% 0 0 0' column justifyCenter alignCenter>
             <h1 style={{zIndex: '999', position: 'relative', color: 'white', fontSize: '4rem', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase'}}>INTRODUCING NOM</h1>
             {/* <button className='raise'>shop now</button> */}
-            <Link style={{zIndex: '999'}}to={`/brands/${unescape(companyName.companyName)}`}><button><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button></Link>
+            <Link style={{zIndex: '999'}}to={`/designers/nom`}><button><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button></Link>
             </Flex>
-            <ReactPlayer className='react-player' width='100vw' height='100vh' playing url={brandImages[1].file.url} muted loop />
+            <ReactPlayer className='react-player' width='100vw' height='100vh' playing url={HomeVideo} muted loop />
             </VideoWrapper>
             {/* <Checkout/> */}
             </>

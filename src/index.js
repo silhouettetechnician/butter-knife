@@ -8,6 +8,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { CartProvider } from 'use-shopping-cart';
 const stripe = window.Stripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY);
 ReactDOM.render(
+  
   <CartProvider
     mode="checkout-session"
     stripe={stripe}
@@ -17,8 +18,10 @@ ReactDOM.render(
     currency={'GBP'}
   >
     {/* <div hidden id="snipcart" data-api-key="M2ZlNTg3YjUtMjMwMi00ODkwLWE4YWQtMmQ5MWEwMTRkOWE3NjM3NTIyODkwMjY4NjUxMDgx"></div> */}
+    
     <App />
-  </CartProvider>,
+  </CartProvider>
+,
 
   document.getElementById('root')
 );

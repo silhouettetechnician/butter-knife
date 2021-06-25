@@ -20,15 +20,14 @@ const myQuery = `{
 const queries = [
   {
     query: myQuery,
-    transformer: ({ data }) => data.pages.edges, // optional
-    indexName: 'PRODUCTS', // overrides main index name, optional
+    transformer: ({ data }) => data.pages.edges, // optional, // overrides main index name, optional
     /*matchFields: ['slug', 'modified', 'Vendor', 'Tags', 'Option2 Value'],*/ // Array<String> overrides main match fields, optional
   },
 ];
 module.exports = {
   siteMetadata: {
-    title: "Butter Knife",
-    description: "Brands. Style. Fashion.",
+    title: "BUTTERKNIFE",
+    description: "Fashion. Footwear. Luxury",
     author: "Timothy Millward",
     keywords: ['clothing', 'concession', 'menswear', 'butter', 'knife', 'butterknife'],
     siteUrl: "https://butterknife.co.uk",
@@ -46,13 +45,32 @@ plugins: [
   `gatsby-transformer-sharp`,
   'gatsby-plugin-react-helmet',
 
+  // {
+  //   resolve: `gatsby-source-stripe`,
+  //   options: {
+  //     objects: ["Price"],
+  //     secretKey: process.env.STRIPE_SECRET_KEY,
+  //     downloadFiles: true,
+  //   },
+  // },
   {
-    resolve: `gatsby-source-stripe`,
+    resolve: `gatsby-source-contentful`,
     options: {
-      objects: ["Price"],
-      secretKey: process.env.STRIPE_SECRET_KEY,
-      downloadFiles: true,
+      spaceId: process.env.CONTENTFUL_SPACE_ID,
+      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
     },
+  },
+  {
+    resolve: `gatsby-plugin-manifest`,
+    options: {
+      name: `BUTTER KNIFE`,
+      short_name: `BUTTER KNIFE`,
+      start_url: `/`,
+      // background_color: `#663399`,
+      // theme_color: `#663399`,
+      display: `minimal-ui`,
+      icon: `src/images/favicon-32x32.png`, // This path is relative to the root of the site.
+    }
   },
   {
     resolve: `gatsby-source-shopify`,
@@ -61,13 +79,6 @@ plugins: [
       shopName: process.env.GATSBY_SHOP_NAME,
       // The storefront access token
       accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
-    },
-  },
-  {
-    resolve: `gatsby-source-contentful`,
-    options: {
-      spaceId: process.env.CONTENTFUL_SPACE_ID,
-      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
     },
   },
   {

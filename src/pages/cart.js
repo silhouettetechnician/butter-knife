@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import Cart from '../cart/index'
-import posed from 'react-pose';
 
 export const Container = styled.div`
   margin: 0 auto;

@@ -39,9 +39,13 @@ code {
     monospace;
 }
 .MuiTypography-root{
-  font-family: CODE !important;
+  font-family: BerlinBold !important;
   /* text-transform: uppercase; */
-  text-decoration: underline;
+  /* text-decoration: underline; */
+}
+.MuiListItem-root{
+  padding-top: unset;
+  padding-bottom: unset
 }
 a{
   text-decoration: none;
@@ -119,15 +123,15 @@ a:hover{
   }
 }
 .react-player{
-position: fixed;
-object-fit: cover;
-top: 0;
-left: 0;
+  position: fixed;
+  object-fit: cover;
+  top: 0;
+  left: 0;
 }
-/* .react-player > video{
-  width: unset !important;
+.react-player > video{
+  /* width: unset !important; */
   height: unset !important;
-} */
+}
 @font-face{
   font-family: bangers;
   src: url('./fonts/Bangers.ttf'), local('Bangers.ttf');
@@ -207,6 +211,7 @@ left: 0;
 }
 .MuiListItem-container{
   margin: 0 !important;
+  list-style: none;
   height: 20%;
 }
 .carousel .slide{
@@ -400,4 +405,14 @@ left: 0;
 }
 .dark-button input[type=checkbox]:checked + label:after {
   transform: translateX(75px) scale(1);
+}
+
+.MuiAccordionDetails-root{
+  flex-direction: column !important;
+}
+.filterLabel{
+  font-family: bangers !important;
+  font-size: 2.2rem !important;
+  text-decoration-line: line-through;
+  text-decoration-color: rgb(254, 205, 47);
 }

@@ -7,7 +7,6 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
-import { LocalConvenienceStoreOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,24 +21,36 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const CheckboxList = ({ data, handleChange, checkedInputs, setCheckedInputs, productList, setProductList, checked, setChecked, }) => {
+const CheckboxList = ({ data, productList, setProductList, checked, setChecked, }) => {
     const classes = useStyles();
-    const handleInputChange = (event) => {
-        console.log(event, '[event.target.value]: event.target.checked')
-        setCheckedInputs({ ...checkedInputs, [event.target.value]: event.target.checked })
-      }
+    // const [checkedInputs, setCheckedInputs] = useState([])
+    
+    // const handleInputChange = (event) => {
+    //     setCheckedInputs({ ...checkedInputs, [event.target.value]: event.target.checked })
+    //   }
+    //   console.log(checkedInputs, 'checkediNPUTS')
+
+    const [activeFilter, setActiveFilter] = useState([])
+      const handleChange = (text) => (event) => {
+        setActiveFilter((prev) => ({
+          ...prev,
+          [text]: event.target.checked,
+        }));
+    };
+    // console.log(activeFilter, 'activeFilter')
+
     return (
         <List className={classes.root}>
-            {data && Object.entries(data).map(([color, value]) => {
-                const labelId = `checkbox-list-label-${color}`;
+            {data && data.map(node => {
+                const labelId = `checkbox-list-label-${node}`;
                 return (
-                    <ListItem key={color} role={undefined} dense button /*onClick={handleToggle(color)}*/>
+                    <ListItem key={node} role={undefined} dense button /*onClick={handleToggle(color)}*/>
                         <ListItemIcon>
                             <Checkbox
                                 edge="start"
                                 // checked={checkedInputs[value]}
-                                value={color}
-                                onChange={(e) => handleInputChange(e)}
+                                value={node}
+                                onChange={handleChange(node)}
                                 tabIndex={-1}
                                 classes={{
                                     root: classes.root,
@@ -49,7 +60,7 @@ const CheckboxList = ({ data, handleChange, checkedInputs, setCheckedInputs, pro
                                 inputProps={{ 'aria-labelledby': labelId }}
                             />
                         </ListItemIcon>
-                        <ListItemText id={labelId} primary={`${color}`} />
+                        <ListItemText id={labelId} primary={`${node}`} />
                         <ListItemSecondaryAction>
                             <IconButton edge="end" aria-label="comments">
                             </IconButton>

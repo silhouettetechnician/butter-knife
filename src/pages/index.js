@@ -40,7 +40,7 @@ const {
     return (
       <>
       {/* <DarkSwitch/> */}
-          <SEO title='BUTTERKNIFE' description='Fashion. Footwear. Luxury' metaImage='/mainlogo.png'/>
+          <SEO title='Butterknife' description='Fashion. Footwear. Luxury' metaImage='/mainlogo.png'/>
             <VideoWrapper>
             
             <Flex padding='10% 0 0 0' column justifyCenter alignCenter>

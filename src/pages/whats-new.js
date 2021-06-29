@@ -14,33 +14,41 @@ const productNodes = allShopifyProduct.edges.map(edge => {
   }
 })
 const [ newIn, setNewIn ]  = useState(productNodes)
-console.log(newIn, 'newIn')
 const productCheckboxes = _.uniqBy(newIn, 'productType').map(node => node.productType)
 const coloursCheckboxes = _.uniq(newIn.map(i => i.variants.map(variant => variant.selectedOptions[1].value)).map(color => _.uniq(color)).flat())
 const vendorCheckboxes = _.uniqBy(newIn, 'vendor').map(node => node.vendor)
 const checkboxesToFilter = { 'Type': productCheckboxes, 'Colour': coloursCheckboxes, 'Brand': vendorCheckboxes }
+const [checkedInputs, setCheckedInputs] = useState({ 'Type': [], 'Colour': [], 'Brand': [] })
 
-const [checkedInputs, setCheckedInputs] = useState([])
-
-const handleInputChange = (event) => {
-  setCheckedInputs({ ...checkedInputs, [event.target.value]: event.target.checked })
+const handleInputChange = (e, key) => {
+  if (e.target.checked) {
+    return setCheckedInputs({ ...checkedInputs, [key]: [...checkedInputs[key], e.target.value] })
+  }
+  return setCheckedInputs({ ...checkedInputs, [key]: checkedInputs[key].filter(item => item !== e.target.value) })
 }
 
-const renderItems = () => {
-let hasNoFilters = Object.keys(checkedInputs).length < 1 || 
-  Object.keys(checkedInputs).every(value =>checkedInputs[value] === false)
-if(hasNoFilters){
-  return newIn.map((i,id) => <Link key={id} to={`/clothing/${i.handle}`}><ClothingItem data={newIn} key={id} title={i.title} description={i.description} src={i.images[0].originalSrc} price={Math.round(i.priceRange.maxVariantPrice.amount)} /></Link>)
-}
-else{
-  let filters = Object.keys(checkedInputs).filter(i => checkedInputs[i] === true)
-  return newIn.map((i,id) => {
-    let validItem = filters.find(itemID=>itemID === i.productType || itemID === i.vendor || itemID === i.variants[0].selectedOptions[1].value)
-    if(!validItem) return
-    return <Link key={id} to={`/clothing/${i.handle}`}><ClothingItem data={newIn} key={id} title={i.title} description={i.description} src={i.images[0].originalSrc} price={Math.round(i.priceRange.maxVariantPrice.amount)} /></Link>
+const getItems = () => {
+  return newIn.filter((product, i) => {
+    const type = product && product.productType
+    const colour = product && product.variants[0].selectedOptions[1].value
+    const brand = product && product.vendor
+    const checkedTypes = checkedInputs['Type'].find(t => t === type)
+    const checkedColours = checkedInputs['Colour'].find(t => t === colour)
+    const checkedBrands = checkedInputs['Brand'].find(t => t === brand)
+    const isTypes = checkedInputs['Type'].length >= 1 ? checkedTypes : true
+    const isColours = checkedInputs['Colour'].length >= 1 ? checkedColours : true
+    const isBrands = checkedInputs['Brand'].length >= 1 ? checkedBrands : true
+    return isTypes && isColours && isBrands
   })
 }
-} 
+
+const Product = (i) => {
+  const { product } = i
+  return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={product} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRange && Math.round(product.priceRange.maxVariantPrice.amount)} />
+  </Link>
+}
+
+const filteredItems = getItems()
 return(
     <>
     <div style={{ height: '50px' }}></div>
@@ -53,7 +61,7 @@ return(
         {/* {newIn && newIn.edges.map((i, id) => {
           return <Link key={id} to={`/clothing/${i.node.handle}`}><ClothingItem data={newIn} key={id} title={i.node.title} description={i.node.description} src={i.node.images[0].originalSrc} price={Math.round(i.node.priceRange.maxVariantPrice.amount)} /></Link>
         })} */}
-        {renderItems()}
+       {filteredItems && filteredItems.map(product => <Product product={product} />)}
       </Flex>
     </Flex>
     </>

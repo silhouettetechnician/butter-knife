@@ -50,7 +50,7 @@ const FilterBar = ({ data, checkboxes, checkboxesToFilter, handleInputChange, br
                                     // edge="start"
                                     // checked={checkedInputs[value]}
                                     value={i}
-                                    onChange={handleInputChange}
+                                    onChange={(e) => handleInputChange(e, key)}
                                     tabIndex={-1}
                                     classes={{
                                         root: classes.root,

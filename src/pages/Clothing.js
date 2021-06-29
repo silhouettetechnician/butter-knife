@@ -16,7 +16,6 @@ const Clothing = ({ data }) => {
       ...edge.node
     }
   })
-  const [productList, setProductList] = useState(productNodes)
   const options = [
     {
       value: 'featured',
@@ -31,66 +30,52 @@ const Clothing = ({ data }) => {
       label: 'Price high'
     },
   ]
-  const [priceSort, setPriceSort] = useState(options[0])
+
+  const [priceSort, setPriceSort] = useState('')
+  const [search, setSearch] = useState('')
+  const [productList, setProductList] = useState(productNodes)
   const productCheckboxes = _.uniqBy(productList, 'productType').map(node => node.productType)
   const coloursCheckboxes = _.uniq(productList.map(i => i.variants.map(variant => variant.selectedOptions[1].value)).map(color => _.uniq(color)).flat())
   const vendorCheckboxes = _.uniqBy(productList, 'vendor').map(node => node.vendor)
   const checkboxesToFilter = { 'Type': productCheckboxes, 'Colour': coloursCheckboxes, 'Brand': vendorCheckboxes }
-  const [checkedInputs, setCheckedInputs] = useState([])
-  console.log(productCheckboxes, 'productCheckboxes')
-  console.log(coloursCheckboxes, 'coloursCheckboxes')
-  console.log(vendorCheckboxes, 'vendorCheckboxes')
-  // useEffect(() => {
-  //   if(priceSort.value === 'price low') {
-  //     const acsending = productList.sort((a,b) => a.priceRange.maxVariantPrice.amount + b.priceRange.maxVariantPrice.amount)
-  //     setProductList(acsending)
-  //   }
-  //   if(priceSort.value === 'price high') {
-  //     const descending = productList.sort((a,b) => a.priceRange.maxVariantPrice.amount - b.priceRange.maxVariantPrice.amount)
-  //     setProductList(descending)
-  //   }
-  // }, [priceSort, setPriceSort])
+  const [checkedInputs, setCheckedInputs] = useState({ 'Type': [], 'Colour': [], 'Brand': [] })
 
-  // const onSelect = selectedOption => {
-  //   if (selectedOption.value === 'price low') {
-  //     const acsending = productList.sort((a, b) => a.priceRange.maxVariantPrice.amount + b.priceRange.maxVariantPrice.amount)
-  //     setProductList(acsending)
-  //   }
-  //   if (selectedOption.value === 'price high') {
-  //     const descending = productList.sort((a, b) => a.priceRange.maxVariantPrice.amount - b.priceRange.maxVariantPrice.amount)
-  //     setProductList(descending)
-  //   }
-  // }
-
-  const handleInputChange = (event) => {
-    setCheckedInputs({ ...checkedInputs, [event.target.value]: event.target.checked })
+  const handleInputChange = (e, key) => {
+    if (e.target.checked) {
+      return setCheckedInputs({ ...checkedInputs, [key]: [...checkedInputs[key], e.target.value] })
+    }
+    return setCheckedInputs({ ...checkedInputs, [key]: checkedInputs[key].filter(item => item !== e.target.value) })
   }
 
-  const renderItems = () => {
-    let hasNoFilters = Object.keys(checkedInputs).length < 1 ||
-      Object.keys(checkedInputs).every(value => checkedInputs[value] === false)
-    if (hasNoFilters) {
+  const getItems = () => {
+    return productList.filter((product, i) => {
       if(priceSort.value === 'price low') {
-        return productList.sort((a,b) => b.priceRange.maxVariantPrice.amount - a.priceRange.maxVariantPrice.amount).map((i, id) => <Link key={id} to={`/clothing/${i.handle}`}><ClothingItem data={productList} key={id} title={i.title} description={i.description} src={i.images[0].originalSrc} price={Math.round(i.priceRange.maxVariantPrice.amount)} /></Link>)
+        return productList.sort((a,b) => b.priceRange.maxVariantPrice.amount - a.priceRange.maxVariantPrice.amount)
       }
       if(priceSort.value === 'price high') {
-        return productList.sort((a,b) => a.priceRange.maxVariantPrice.amount - b.priceRange.maxVariantPrice.amount).map((i, id) => <Link key={id} to={`/clothing/${i.handle}`}><ClothingItem data={productList} key={id} title={i.title} description={i.description} src={i.images[0].originalSrc} price={Math.round(i.priceRange.maxVariantPrice.amount)} /></Link>)
+        return productList.sort((a,b) => a.priceRange.maxVariantPrice.amount - b.priceRange.maxVariantPrice.amount)
       }
-      return productList.map((i, id) => <Link key={id} to={`/clothing/${i.handle}`}><ClothingItem data={productList} key={id} title={i.title} description={i.description} src={i.images[0].originalSrc} price={Math.round(i.priceRange.maxVariantPrice.amount)} /></Link>)
-    }
-
-    else {
-      let filters = Object.keys(checkedInputs).filter(i => checkedInputs[i] === true)
-      console.log(filters, 'filters')
-      return productList.map((i, id) => {
-        let validItem = filters.includes(itemID => itemID === i.productType || itemID === i.vendor || itemID === i.variants[0].selectedOptions[1].value)
-        if (!validItem) return
-        
-        return <Link key={id} to={`/clothing/${i.handle}`}><ClothingItem data={productList} key={id} title={i.title} description={i.description} src={i.images[0].originalSrc} price={Math.round(i.priceRange.maxVariantPrice.amount)} /></Link>
-      })
-    }
+      const type = product && product.productType
+      const colour = product && product.variants[0].selectedOptions[1].value
+      const brand = product && product.vendor
+      const checkedTypes = checkedInputs['Type'].find(t => t === type)
+      const checkedColours = checkedInputs['Colour'].find(t => t === colour)
+      const checkedBrands = checkedInputs['Brand'].find(t => t === brand)
+      const isTypes = checkedInputs['Type'].length >= 1 ? checkedTypes : true
+      const isColours = checkedInputs['Colour'].length >= 1 ? checkedColours : true
+      const isBrands = checkedInputs['Brand'].length >= 1 ? checkedBrands : true
+      return isTypes && isColours && isBrands
+    })
   }
 
+  const Product = (i) => {
+    const { product } = i
+    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={productList} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRange && Math.round(product.priceRange.maxVariantPrice.amount)} />
+    </Link>
+  }
+
+  const filteredItems = getItems()
+ 
   return (
     <>
       <div style={{ height: '50px' }}></div>
@@ -100,7 +85,8 @@ const Clothing = ({ data }) => {
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
         </Flex>
         <Flex width='75%' margin='20px 0 0 0' justifyAround>
-          {renderItems()}
+          {filteredItems.map(product => <Product product={product} />)}
+          
         </Flex>
       </Flex>
     </>
@@ -167,3 +153,13 @@ export const query = graphql`
 // }
 
 // export default Clothing
+
+// if(priceSort.value === 'price low') {
+//   return productList.sort((a,b) => b.priceRange.maxVariantPrice.amount - a.priceRange.maxVariantPrice.amount).map((i, id) => <Link key={id} to={`/clothing/${i.handle}`}><ClothingItem data={productList} key={id} title={i.title} description={i.description} src={i.images[0].originalSrc} price={Math.round(i.priceRange.maxVariantPrice.amount)} /></Link>)
+// }
+// if(priceSort.value === 'price high') {
+//   return productList.sort((a,b) => a.priceRange.maxVariantPrice.amount - b.priceRange.maxVariantPrice.amount).map((i, id) => <Link key={id} to={`/clothing/${i.handle}`}><ClothingItem data={productList} key={id} title={i.title} description={i.description} src={i.images[0].originalSrc} price={Math.round(i.priceRange.maxVariantPrice.amount)} /></Link>)
+// }
+
+
+

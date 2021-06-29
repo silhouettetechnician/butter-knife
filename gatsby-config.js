@@ -26,7 +26,7 @@ const queries = [
 ];
 module.exports = {
   siteMetadata: {
-    title: "BUTTERKNIFE",
+    title: "Butterknife",
     description: "Fashion. Footwear. Luxury",
     author: "Timothy Millward",
     keywords: ['clothing', 'concession', 'menswear', 'butter', 'knife', 'butterknife'],

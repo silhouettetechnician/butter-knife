@@ -69,6 +69,7 @@ const Layout = ({ data, children }) => {
         />
     return (
         <ContextProvider>
+            <div style={{position: 'relative'}}>
         <Notifications/>
             <Helmet>
                 <html lang='en' />
@@ -86,8 +87,11 @@ const Layout = ({ data, children }) => {
                 {children}
                 {/* {React.cloneElement(children, {addVariantToCart: addVariantToCart})} */}
             </Flex>
-            {/* <Footer />                                                                                                                                                                                                   */}
+            {
+                window.location.pathname !== '/' && <Footer />
+            }                                                                                                                                                                                                  
             <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
+        </div>
         </ContextProvider>
     )
 }

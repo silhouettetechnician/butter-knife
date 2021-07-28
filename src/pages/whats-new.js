@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { graphql, Link } from 'gatsby'
 import Flex from '../styles/Flex'
 import FilterBar from '../components/FilterBar'
+import { PageHeading } from '../components/StyledComponents'
 import _ from 'lodash'
 import ClothingItem from '../templates/ClothingItem'
 
@@ -51,7 +52,7 @@ const Product = (i) => {
 const filteredItems = getItems()
 return(
     <>
-    <div style={{ height: '50px' }}></div>
+    <PageHeading>What's new</PageHeading>
     <Flex width='100%' margin='20px 0 0 0' justifyAround>
       {/* <ClipLoader size={160} color='FECE2E' loading={loading}/>  */}
       <Flex width='20%' justifyCenter>

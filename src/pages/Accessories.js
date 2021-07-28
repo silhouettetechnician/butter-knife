@@ -3,6 +3,7 @@ import { graphql, Link } from 'gatsby'
 import Flex from '../styles/Flex'
 import ClothingItem from '../templates/ClothingItem'
 import FilterBar from '../components/FilterBar'
+import { PageHeading } from '../components/StyledComponents'
 import _ from 'lodash'
 
 const Accessories = ({ data }) => {
@@ -51,7 +52,7 @@ const Product = (i) => {
 const filteredItems = getItems()
 return(
     <>
-    <div style={{ height: '50px' }}></div>
+    <PageHeading>Accessories</PageHeading>
     <Flex width='100%' margin='20px 0 0 0' justifyAround>
       <Flex width='20%' justifyCenter>
         <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />

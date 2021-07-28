@@ -416,3 +416,13 @@ a:hover{
   text-decoration-line: line-through;
   text-decoration-color: rgb(254, 205, 47);
 }
+.react-slider img{
+  border: unset !important;;
+}
+.react-slider__container > button {
+  background: unset !important;
+}
+.react-slider__container button:before{
+  border: thin solid #999 !important;
+  border-width: 0 4px 4px 0 !important;
+}

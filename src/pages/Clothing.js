@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { graphql } from "gatsby"
 import { Link } from "gatsby"
+import { PageHeading } from '../components/StyledComponents'
 import ClothingItem from '../templates/ClothingItem'
 import FilterBar from '../components/FilterBar'
 import Select from "react-select";
@@ -78,8 +79,8 @@ const Clothing = ({ data }) => {
  
   return (
     <>
-      <div style={{ height: '50px' }}></div>
-      <Select style={{width: '400px'}} options={options} onChange={(values) => setPriceSort(values)} value={priceSort} />
+      <PageHeading>Clothing</PageHeading>
+      {/* <Select style={{width: '400px'}} options={options} onChange={(values) => setPriceSort(values)} value={priceSort} /> */}
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
         <Flex width='20%' justifyCenter>
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />

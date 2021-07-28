@@ -148,12 +148,17 @@ export const Heading1 = styled.h1`
 
 export const Footer = styled.footer`
         display: flex;
-        position: absolute;
+        // position: absolute;
         bottom: 0;
         width: 100%;
-        height: 80px;
+        height: 180px;
         background: white;
         z-index: 999999;
         align-items: center;
-        justify-content: center; 
+        justify-content: space-around; 
+`
+
+export const PageHeading = styled.h1`
+        font-family: bangers;
+        font-size: 1.6rem;
 `

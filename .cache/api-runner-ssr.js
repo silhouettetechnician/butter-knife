@@ -1,30 +1,30 @@
 var plugins = [{
       name: 'gatsby-plugin-layout',
-      plugin: require('/Users/sarah/Documents/butter-knife/node_modules/gatsby-plugin-layout/gatsby-ssr'),
+      plugin: require('/Users/silhouettetechnician/Documents/butter-knife/node_modules/gatsby-plugin-layout/gatsby-ssr'),
       options: {"plugins":[]},
     },{
       name: 'gatsby-plugin-dark-mode',
-      plugin: require('/Users/sarah/Documents/butter-knife/node_modules/gatsby-plugin-dark-mode/gatsby-ssr'),
+      plugin: require('/Users/silhouettetechnician/Documents/butter-knife/node_modules/gatsby-plugin-dark-mode/gatsby-ssr'),
       options: {"plugins":[]},
     },{
       name: 'gatsby-plugin-fontawesome-css',
-      plugin: require('/Users/sarah/Documents/butter-knife/node_modules/gatsby-plugin-fontawesome-css/gatsby-ssr'),
+      plugin: require('/Users/silhouettetechnician/Documents/butter-knife/node_modules/gatsby-plugin-fontawesome-css/gatsby-ssr'),
       options: {"plugins":[]},
     },{
       name: 'gatsby-plugin-image',
-      plugin: require('/Users/sarah/Documents/butter-knife/node_modules/gatsby-plugin-image/gatsby-ssr'),
+      plugin: require('/Users/silhouettetechnician/Documents/butter-knife/node_modules/gatsby-plugin-image/gatsby-ssr'),
       options: {"plugins":[]},
     },{
       name: 'gatsby-plugin-react-helmet',
-      plugin: require('/Users/sarah/Documents/butter-knife/node_modules/gatsby-plugin-react-helmet/gatsby-ssr'),
+      plugin: require('/Users/silhouettetechnician/Documents/butter-knife/node_modules/gatsby-plugin-react-helmet/gatsby-ssr'),
       options: {"plugins":[]},
     },{
       name: 'gatsby-plugin-manifest',
-      plugin: require('/Users/sarah/Documents/butter-knife/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
+      plugin: require('/Users/silhouettetechnician/Documents/butter-knife/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
       options: {"plugins":[],"name":"BUTTER KNIFE","short_name":"BUTTER KNIFE","start_url":"/","display":"minimal-ui","icon":"src/images/favicon-32x32.png","legacy":true,"theme_color_in_head":true,"cache_busting_mode":"query","crossOrigin":"anonymous","include_favicon":true,"cacheDigest":"77d455abdc481d26ea067de687fb5a50"},
     },{
       name: 'gatsby-plugin-snipcart',
-      plugin: require('/Users/sarah/Documents/butter-knife/node_modules/gatsby-plugin-snipcart/gatsby-ssr'),
+      plugin: require('/Users/silhouettetechnician/Documents/butter-knife/node_modules/gatsby-plugin-snipcart/gatsby-ssr'),
       options: {"plugins":[],"autopop":true},
     }]
 // During bootstrap, we write requires at top of this file which looks like:

@@ -62,7 +62,7 @@ export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }
             <Header >
                 <Flex>
                 <AudioPlayerProvider>
-                    <Player file='/REALOG.mp3' />
+                    <Player file='/realog.mp3' />
                     <ButtonHolder>
                     {isAuthenticated ?
                         <Button onClick={() => logout({ returnTo: window.location.origin })} className='strike'>

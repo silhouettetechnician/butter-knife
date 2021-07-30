@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from "react";
-import useSound from 'use-sound';
+import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
-// import SlavicAudio from '../assets/music/Slavic_LOFI.mp3'
-// import ToykoAudio from '../assets/music/Toyko_LOFI.mp3'
-// import DavidRenderBobbin from '/David_Render_Bobbin.mp3'
 import { useAudioPlayer } from "react-use-audio-player"
 
 const Player = ({ file }) => {
@@ -29,37 +25,3 @@ const Player = ({ file }) => {
 }
 
 export default Player
-// const useAudio = url => {
-//     const [audio] = useState(new Audio(url));
-//     const [playing, setPlaying] = useState(false);
-
-//     const toggle = () => setPlaying(!playing);
-
-//     useEffect(() => {
-//         playing ? audio.play() : audio.pause();
-//     },
-//         [playing]
-//     );
-
-//     useEffect(() => {
-//         audio.addEventListener('ended', () => setPlaying(false));
-//         return () => {
-//             audio.removeEventListener('ended', () => setPlaying(false));
-//         };
-//     }, []);
-
-//     return [playing, toggle];
-// };
-
-// const Player = ({ url }) => {
-//     const [playing, toggle] = useAudio(url);
-
-//     return (
-//         <div>
-//         <button style={{fontSize: '1.2rem'}}onClick={toggle}>{playing ? "Pause" : "Play"}</button>
-//       </div>
-
-//     )
-// }
-
-// export default Player

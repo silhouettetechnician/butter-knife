@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
           },
         width: '100%',
         maxWidth: 360,
-        // backgroundColor: theme.palette.background.paper,
     },
     checked: {}
 
@@ -23,13 +22,6 @@ const useStyles = makeStyles((theme) => ({
 
 const CheckboxList = ({ data, productList, setProductList, checked, setChecked, }) => {
     const classes = useStyles();
-    // const [checkedInputs, setCheckedInputs] = useState([])
-    
-    // const handleInputChange = (event) => {
-    //     setCheckedInputs({ ...checkedInputs, [event.target.value]: event.target.checked })
-    //   }
-    //   console.log(checkedInputs, 'checkediNPUTS')
-
     const [activeFilter, setActiveFilter] = useState([])
       const handleChange = (text) => (event) => {
         setActiveFilter((prev) => ({
@@ -37,18 +29,16 @@ const CheckboxList = ({ data, productList, setProductList, checked, setChecked, 
           [text]: event.target.checked,
         }));
     };
-    // console.log(activeFilter, 'activeFilter')
 
     return (
         <List className={classes.root}>
             {data && data.map(node => {
                 const labelId = `checkbox-list-label-${node}`;
                 return (
-                    <ListItem key={node} role={undefined} dense button /*onClick={handleToggle(color)}*/>
+                    <ListItem key={node} role={undefined} dense button >
                         <ListItemIcon>
                             <Checkbox
                                 edge="start"
-                                // checked={checkedInputs[value]}
                                 value={node}
                                 onChange={handleChange(node)}
                                 tabIndex={-1}

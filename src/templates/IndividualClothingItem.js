@@ -10,6 +10,7 @@ import Flex from '../styles/Flex'
 import VariantSelector from '../components/VariantSelector'
 import { notify } from 'react-notify-toast'
 import 'react-awesome-slider/dist/styles.css'
+import toast, { Toaster } from 'react-hot-toast';
 
 const IndividualClothingItem = ({ data, hit }) => {
     const {
@@ -21,7 +22,6 @@ const IndividualClothingItem = ({ data, hit }) => {
         variants: [initialVariant],
         priceRange: { minVariantPrice },
     } = data.shopifyProduct    
-
     const [val, setVal] = useState('')
     const [selectedOptions, setSelectedOptions] = useState({})
     const [variant, setVariant] = useState({ ...initialVariant })
@@ -82,9 +82,8 @@ console.log(client, 'client')
         setVariant({ ...selectedVariant })
       }
 
-    const handleAddToCart = () => {
-        addVariantToCart(productVariant.shopifyId, quantity)
-        notify.show(`Added ${val} to trolley`);
+    const handleAddToCart = async() => {
+        await addVariantToCart(productVariant.shopifyId, quantity)
     }
 
     console.log(variant, 'variant')
@@ -96,6 +95,7 @@ console.log(client, 'client')
 
     return (
         <Flex width='100%' justifyAround>
+          <Toaster position='top-right'/>
             <Flex justifyCenter width='60%' height='100vh'>
                 <SliderImage data={imagesMap}
                     width="1000px"

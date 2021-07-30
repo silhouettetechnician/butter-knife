@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import React, { useState, useEffect, useRef } from 'react'
 import Client from 'shopify-buy'
+import toast, { Toaster } from 'react-hot-toast';
 
 import Context from '../contexts/StoreContext'
 
@@ -78,6 +79,7 @@ const ContextProvider = ({ children }) => {
         addVariantToCart: async (variantId, quantity) => {
           if (variantId === '' || !quantity) {
             console.error('Both a size and quantity are required.')
+            toast.error('Successfully added item to trolley');
             return
           }
 
@@ -97,6 +99,7 @@ const ContextProvider = ({ children }) => {
               updateStore(prevState => {
                 return { ...prevState, checkout, adding: false }
               })
+              toast.success('Successfully added item to trolley');
             })
         },
         removeLineItem: (client, checkoutID, lineItemID) => {

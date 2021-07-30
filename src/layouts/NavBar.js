@@ -9,6 +9,7 @@ import { Navigation, Header, LogoHolder, NavMenuItem } from '../components/Style
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, navigate } from "gatsby";
 import StoreContext from '../contexts/StoreContext'
+import { login, isAuthenticated } from '../utils/auth'
 import Trolley from '../assets/shopping-cart.svg'
 // import DavidRenderBobbin from '/David_Render_Bobbin.mp3'
 
@@ -52,7 +53,7 @@ const useQuantity = () => {
     return [total !== 0, total]
 }
 export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }) => {
-    const { isAuthenticated, logout, loginWithRedirect } = useAuth0();
+    const { logout, loginWithRedirect } = useAuth0();
     const Divider = () => "|"
     const [hasItems, quantity] = useQuantity()
     console.log(isOpen, 'isOpen in nav')
@@ -69,7 +70,7 @@ export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }
                             LOGOUT
                     </Button>
                         :
-                        <Button onClick={() => loginWithRedirect()} className='strike'>
+                        <Button onClick={() => !isAuthenticated && login()} className='strike'>
                             LOGIN/REGISTER
                     </Button>
                     }

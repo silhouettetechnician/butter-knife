@@ -1,38 +1,15 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react'
+import isEqual from "lodash/isEqual";
 import SliderImage from 'react-zoom-slider';
 import styled from '@emotion/styled'
-import algoliasearch from 'algoliasearch/lite';
 import { graphql } from "gatsby"
 import find from 'lodash/find'
 import StoreContext from '../contexts/StoreContext'
 import ImageGallery from 'react-image-gallery';
 import Flex from '../styles/Flex'
-import DropDownSort from '../components/DropDownSort'
+import VariantSelector from '../components/VariantSelector'
 import { notify } from 'react-notify-toast'
 import 'react-awesome-slider/dist/styles.css'
-
-
-// const Button = styled.button`
-//     width: 100%;
-//     height: 41px;
-//     border: 1px solid hsla(0,0%,79.6%,.5);
-//     border-radius: 2px;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     margin: 0 8px 16px 0;
-//     color: #111;
-//     font-family: Georgia;
-//     font-size: 14px;
-//     font-weight: 400;
-//     letter-spacing: .14px;
-//     line-height: 18px;
-//     position: relative;
-//     cursor: pointer;
-//         &:focus{
-//             background: #A1A1A1;
-//         }
-// `
 
 const IndividualClothingItem = ({ data, hit }) => {
     const {
@@ -43,20 +20,24 @@ const IndividualClothingItem = ({ data, hit }) => {
         images,
         variants: [initialVariant],
         priceRange: { minVariantPrice },
-    } = data.shopifyProduct
-    const [val, setVal] = useState('Choose size')
+    } = data.shopifyProduct    
+
+    const [val, setVal] = useState('')
+    const [selectedOptions, setSelectedOptions] = useState({})
     const [variant, setVariant] = useState({ ...initialVariant })
+    const product = data.shopifyProduct
     const [quantity, setQuantity] = useState(1)
     const {
         addVariantToCart,
         store: { client, adding },
     } = useContext(StoreContext)
-    
+console.log(client, 'client')
+
     const productVariant =
-        client.product.helpers.variantForOptions(data.shopifyProduct, variant) || variant
+    client.product.helpers.variantForOptions(product, variant) ||
+    variant
 
     const [available, setAvailable] = useState(productVariant.availableForSale)
-
     const checkAvailability = useCallback(
         productId => {
             client.product.fetch(productId).then(fetchedProduct => {
@@ -74,43 +55,44 @@ const IndividualClothingItem = ({ data, hit }) => {
 
     useEffect(() => {
         checkAvailability(data.shopifyProduct.shopifyId)
-    }, [productVariant, checkAvailability, data.shopifyProduct.shopifyId])
+        
+    }, [productVariant, checkAvailability, data.shopifyProduct.shopifyId, variant])
 
-    const handleQuantityChange = ({ target }) => {
+    useEffect(() => {
+        checkAvailability(product.shopifyId)
+      }, [productVariant, checkAvailability, product.shopifyId])
+    
+      const handleQuantityChange = ({ target }) => {
         setQuantity(target.value)
-    }
-
-    const handleOptionChange = (optionIndex, { target }) => {
+      }
+    
+      const handleOptionChange = (optionIndex, { target }) => {
         const { value } = target
         const currentOptions = [...variant.selectedOptions]
-
+    
         currentOptions[optionIndex] = {
-            ...currentOptions[optionIndex],
-            value,
+          ...currentOptions[optionIndex],
+          value,
         }
-
+    
         const selectedVariant = find(variants, ({ selectedOptions }) =>
-            isEqual(currentOptions, selectedOptions)
+          isEqual(currentOptions, selectedOptions)
         )
-
+    
         setVariant({ ...selectedVariant })
-    }
+      }
 
     const handleAddToCart = () => {
-        addVariantToCart(val, quantity)
+        addVariantToCart(productVariant.shopifyId, quantity)
         notify.show(`Added ${val} to trolley`);
-        console.log(productVariant.shopifyId)
     }
 
-    const searchClient = algoliasearch(
-        'K8SF9T86WY',
-        'b88108260d8ff9427171d1937d70e6d8'
-    );
+    console.log(variant, 'variant')
+    console.log(options, 'options')
 
     const imagesMap = images.map((i, index) => ({ image: i.originalSrc, text: i.originalSrc }))
     const imageRender = imagesMap.map((item, index) => <ImageGallery key={index} data-src={item} alt={index} />)
     const sizes = variants.map(variant => ({ title: variant.title, id: variant.shopifyId, }))
-
 
     return (
         <Flex width='100%' justifyAround>
@@ -128,11 +110,22 @@ const IndividualClothingItem = ({ data, hit }) => {
                 }} />
                 <div><p style={{ fontFamily: 'graphikMed', fontSize: '2.4rem' }}>{`£${Math.round(minVariantPrice.amount)}`}</p></div>
                 <div><p style={{ fontFamily: 'graphikReg', fontSize: '1rem' }}>{description}</p></div>
-                <DropDownSort data={sizes} val={val} setVal={setVal} />
+                {/* <DropDownSort data={options} val={val} variant={variant} handleOptionChange={handleOptionChange} setVal={setVal} /> */}
+                
+                {options.map((options, index) => (
+                      <div className="column">
+                        <VariantSelector
+                          key={options.id.toString()}
+                          onChange={(e) => handleOptionChange(index, e)}
+                          options={options}
+                          fullWidth={options.length > 1}
+                        />
+                      </div>
+                    ))}
                 <button
                     type="submit"
                     onClick={handleAddToCart}
-                >Add to trolley</button>
+                >Add to trolley</button> 
             </Flex>
         </Flex>
     )
@@ -149,15 +142,23 @@ query ClothinItemQuery($handle: String!){
     shopifyId
     title
     vendor
+    shopifyId
+    options {
+      id
+      name
+      values
+    }
     variants {
-        id
-        title
-        shopifyId
-        selectedOptions {
-            name
-            value
-          }
+      id
+      title
+      price
+      availableForSale
+      shopifyId
+      selectedOptions {
+        name
+        value
       }
+    }
     images {
         originalSrc
       }
@@ -171,10 +172,6 @@ query ClothinItemQuery($handle: String!){
           currencyCode
         }
       }
-    options {
-      values
-      name
-    }
     }
 }
 

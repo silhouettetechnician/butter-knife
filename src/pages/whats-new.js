@@ -3,6 +3,7 @@ import { graphql, Link } from 'gatsby'
 import Flex from '../styles/Flex'
 import FilterBar from '../components/FilterBar'
 import { PageHeading } from '../components/StyledComponents'
+import DropDown from '../components/DropDownSort'
 import _ from 'lodash'
 import ClothingItem from '../templates/ClothingItem'
 
@@ -14,6 +15,7 @@ const productNodes = allShopifyProduct.edges.map(edge => {
     ...edge.node
   }
 })
+const [priceSort, setPriceSort] = useState('')
 const [ newIn, setNewIn ]  = useState(productNodes)
 const productCheckboxes = _.uniqBy(newIn, 'productType').map(node => node.productType)
 const coloursCheckboxes = _.uniq(newIn.map(i => i.variants.map(variant => variant.selectedOptions[1].value)).map(color => _.uniq(color)).flat())
@@ -54,15 +56,12 @@ return(
     <>
     <PageHeading>What's new</PageHeading>
     <Flex width='100%' margin='20px 0 0 0' justifyAround>
-      {/* <ClipLoader size={160} color='FECE2E' loading={loading}/>  */}
+      <DropDown priceSort={priceSort} setPriceSort={setPriceSort}/> 
       <Flex width='20%' justifyCenter>
       <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange}/>
       </Flex>
       <Flex width='75%' margin='20px 0 0 0' justifyAround>
-        {/* {newIn && newIn.edges.map((i, id) => {
-          return <Link key={id} to={`/clothing/${i.node.handle}`}><ClothingItem data={newIn} key={id} title={i.node.title} description={i.node.description} src={i.node.images[0].originalSrc} price={Math.round(i.node.priceRange.maxVariantPrice.amount)} /></Link>
-        })} */}
-       {filteredItems && filteredItems.map(product => <Product product={product} />)}
+       {filteredItems && filteredItems.sort((a,b) => priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
       </Flex>
     </Flex>
     </>

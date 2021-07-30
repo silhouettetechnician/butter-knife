@@ -4,6 +4,7 @@ import Flex from '../styles/Flex'
 import ClothingItem from '../templates/ClothingItem'
 import FilterBar from '../components/FilterBar'
 import { PageHeading } from '../components/StyledComponents'
+import DropDown from '../components/DropDownSort'
 import _ from 'lodash'
 
 const Accessories = ({ data }) => {
@@ -14,6 +15,7 @@ const productNodes = allShopifyProduct.edges.map(edge => {
     ...edge.node
   }
 })
+const [priceSort, setPriceSort] = useState('')
 const [ accessories, setAccessories ]  = useState(productNodes)
 const productCheckboxes = _.uniqBy(accessories, 'productType').map(node => node.productType)
 const coloursCheckboxes = _.uniq(accessories.map(i => i.variants.map(variant => variant.selectedOptions[1].value)).map(color => _.uniq(color)).flat())
@@ -54,6 +56,7 @@ return(
     <>
     <PageHeading>Accessories</PageHeading>
     <Flex width='100%' margin='20px 0 0 0' justifyAround>
+    <DropDown priceSort={priceSort} setPriceSort={setPriceSort}/> 
       <Flex width='20%' justifyCenter>
         <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
       </Flex>
@@ -61,7 +64,7 @@ return(
         {/* {accessories && accessories.edges.map((i, id) => {
           return <Link key={id} to={`/clothing/${i.node.handle}`}><ClothingItem data={accessories} key={id} title={i.node.title} description={i.node.description} src={i.node.images[0].originalSrc} price={Math.round(i.node.priceRange.maxVariantPrice.amount)} /></Link>
         })} */}
-        {filteredItems && filteredItems.map(product => <Product product={product} />)}
+        {filteredItems && filteredItems.sort((a,b) => priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
       </Flex>
     </Flex>
     </>

@@ -91,11 +91,9 @@ const ContextProvider = ({ children }) => {
           const lineItemsToUpdate = [
             { variantId, quantity: parseInt(quantity, 10) },
           ]
-          console.log(checkout, 'checkout')
           return client.checkout
             .addLineItems(checkoutId, lineItemsToUpdate)
             .then(checkout => {
-              
               updateStore(prevState => {
                 return { ...prevState, checkout, adding: false }
               })

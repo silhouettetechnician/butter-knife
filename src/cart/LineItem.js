@@ -69,7 +69,7 @@ const LineItem = props => {
           </Flex>
         </Flex>
       </Link>
-      <button className='strike' onClick={handleRemove}>Remove</button>
+      <button style={{fontSize: '1.5rem !important'}}className='strike' onClick={handleRemove}>Remove</button>
     </Wrapper>
   )
 }

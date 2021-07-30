@@ -9,7 +9,7 @@ import { LogoHolder } from '../components/StyledComponents'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const Wrapper = styled(Flex)`
-max-width: 600px;
+max-width: 800px;
 width: 100%;
 height: 600px;
 position: fixed;
@@ -45,14 +45,8 @@ const Cart = ({ isOpen, setIsOpen }) => {
   console.log(checkout, 'checkout')
   return (
     <Wrapper justifyAround column alignCenter noWrap isOpen={isOpen} setIsOpen={setIsOpen}>
-      <LogoHolder><div onClick={() => navigate('/')} style={{ cursor: 'pointer', fontFamily: 'bangers', fontSize: '2.5rem', textDecorationLine: 'line-through', textDecorationColor: 'rgb(254, 205, 47)' }}> SHOPPING TROLLEY <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder><FontAwesomeIcon style={{ position: 'absolute', top: '0', left: '0', margin: '3px', cursor: 'pointer' }} onClick={() => setIsOpen(false)} icon={faTimes} size='lg' />
-      <div style={{ overflow: 'auto', margin: '20px' }}>{checkout.lineItems.length !== 0 ? lineItems : 'Trolley Empty :('}</div>
-      {/* <h2>Subtotal</h2>
-      <p>$ {checkout.subtotalPrice}</p>
-      <br />
-      <h2>Taxes</h2>
-      <p>$ {checkout.totalTax}</p>*/}
-      {/* <br /> */}
+      <LogoHolder><div onClick={() => navigate('/')} style={{ cursor: 'pointer', fontFamily: 'bangers', fontSize: '2.5rem', textDecorationLine: 'line-through', textDecorationColor: 'rgb(254, 205, 47)' }}> SHOPPING TROLLEY <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder><FontAwesomeIcon style={{ position: 'absolute', top: '0', left: '0', margin: '20px', cursor: 'pointer' }} onClick={() => setIsOpen(false)} icon={faTimes} size='2x' />
+      <div style={{ overflow: 'auto', margin: '20px', width: '80%' }}>{checkout.lineItems.length !== 0 ? lineItems : 'Trolley Empty :('}</div>
       <div>
         <CartHeading>Total: <p>£ {checkout.totalPrice}</p></CartHeading>
       </div>

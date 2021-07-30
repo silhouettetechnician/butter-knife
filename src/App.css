@@ -426,3 +426,9 @@ a:hover{
   border: thin solid #999 !important;
   border-width: 0 4px 4px 0 !important;
 }
+
+.css-2b097c-container{
+  width: 200px;
+  font-family: CODE;
+  text-transform: uppercase;
+}

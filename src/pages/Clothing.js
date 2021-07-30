@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import { PageHeading } from '../components/StyledComponents'
 import ClothingItem from '../templates/ClothingItem'
 import FilterBar from '../components/FilterBar'
-import Select from "react-select";
+import DropDown from '../components/DropDownSort'
 import Flex from '../styles/Flex';
 import _ from 'lodash'
 
@@ -17,20 +17,6 @@ const Clothing = ({ data }) => {
       ...edge.node
     }
   })
-  const options = [
-    {
-      value: 'featured',
-      label: 'Featured'
-    },
-    {
-      value: 'price low',
-      label: 'Price low'
-    },
-    {
-      value: 'price high',
-      label: 'Price high'
-    },
-  ]
 
   const [priceSort, setPriceSort] = useState('')
   const [search, setSearch] = useState('')
@@ -47,15 +33,8 @@ const Clothing = ({ data }) => {
     }
     return setCheckedInputs({ ...checkedInputs, [key]: checkedInputs[key].filter(item => item !== e.target.value) })
   }
-
   const getItems = () => {
     return productList.filter((product, i) => {
-      if(priceSort.value === 'price low') {
-        return productList.sort((a,b) => b.priceRange.maxVariantPrice.amount - a.priceRange.maxVariantPrice.amount)
-      }
-      if(priceSort.value === 'price high') {
-        return productList.sort((a,b) => a.priceRange.maxVariantPrice.amount - b.priceRange.maxVariantPrice.amount)
-      }
       const type = product && product.productType
       const colour = product && product.variants[0].selectedOptions[1].value
       const brand = product && product.vendor
@@ -80,13 +59,13 @@ const Clothing = ({ data }) => {
   return (
     <>
       <PageHeading>Clothing</PageHeading>
-      {/* <Select style={{width: '400px'}} options={options} onChange={(values) => setPriceSort(values)} value={priceSort} /> */}
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
+      <DropDown priceSort={priceSort} setPriceSort={setPriceSort}/>
         <Flex width='20%' justifyCenter>
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
         </Flex>
         <Flex width='75%' margin='20px 0 0 0' justifyAround>
-          {filteredItems.map(product => <Product product={product} />)}
+          {filteredItems && filteredItems.sort((a,b) => priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
           
         </Flex>
       </Flex>

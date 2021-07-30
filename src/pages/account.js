@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import Flex from '../styles/Flex'
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
+import AccountTab from '../components/AccountTab'
 
 const Banner = styled(Flex)`
  padding: 10px 0px; 
@@ -18,11 +19,8 @@ const Account = () => {
             <h4>My Account</h4>
             <p>{user.nickname}</p>
         </Banner>
+        <AccountTab/>
             <hr/>
-      {/* <ul>
-        <li>Name: </li>
-        <li>E-mail: {user.email}</li>
-      </ul> */}
       </>
     )
 }

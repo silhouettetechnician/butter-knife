@@ -10,9 +10,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CenteredTabs() {
+const CenteredTabs = ({value, setValue}) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -34,3 +33,5 @@ export default function CenteredTabs() {
     </Paper>
   );
 }
+
+export default CenteredTabs

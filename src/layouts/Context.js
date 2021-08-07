@@ -41,7 +41,7 @@ const ContextProviderComponent = () => {
         })
     }
 
-        return <Provider value={{set, store}}>{children}</Provider>
+        return <Provider set={set} store={store}>{children}</Provider>
 }
 
 export { Consumer as default, ContextProviderComponent }

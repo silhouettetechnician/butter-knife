@@ -19,9 +19,10 @@ const ContextProvider = ({ children }) => {
     adding: false,
     checkout: { lineItems: [] },
     products: [],
+    customerAccessToken: '',
     shop: {},
   }
-
+  // customerAccessToken: getLocalStorageFromKey('customerAccessToken'),
   const [store, updateStore] = useState(initialStoreState)
   const isRemoved = useRef(false)
 
@@ -42,7 +43,6 @@ const ContextProvider = ({ children }) => {
           return { ...prevState, checkout }
         })
       }
-
       const createNewCheckout = () => store.client.checkout.create()
       const fetchCheckout = id => store.client.checkout.fetch(id)
 

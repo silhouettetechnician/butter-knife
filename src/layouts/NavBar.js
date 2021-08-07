@@ -5,12 +5,13 @@ import reduce from 'lodash/reduce'
 import Flex from '../styles/Flex'
 import styled from '@emotion/styled'
 import Player from '../components/Player'
+import Logout from '../components/Logout'
 import { Navigation, Header, LogoHolder, NavMenuItem } from '../components/StyledComponents';
-import { useAuth0 } from "@auth0/auth0-react";
 import { Link, navigate } from "gatsby";
+import AuthWrapper from './AuthWrapper'
 import StoreContext from '../contexts/StoreContext'
-import { login, isAuthenticated } from '../utils/auth'
 import Trolley from '../assets/shopping-cart.svg'
+// import Logout from '../components/Logout';
 // import DavidRenderBobbin from '/David_Render_Bobbin.mp3'
 
 const CartCounter = styled.span`
@@ -53,26 +54,27 @@ const useQuantity = () => {
     return [total !== 0, total]
 }
 export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }) => {
-    const { logout, loginWithRedirect } = useAuth0();
     const Divider = () => "|"
     const [hasItems, quantity] = useQuantity()
-    console.log(isOpen, 'isOpen in nav')
+
     return (
         // <div style={{ position: 'relative' }}>
-        <>
-            <Header >
+        <AuthWrapper>
+             {({isAuthenticated}) => {
+                 console.log(isAuthenticated, 'auth in bac')
+            return <Header >
                 <Flex>
                 <AudioPlayerProvider>
                     <Player file='/realog.mp3' />
                     <ButtonHolder>
                     {isAuthenticated ?
-                        <Button onClick={() => logout({ returnTo: window.location.origin })} className='strike'>
-                            LOGOUT
+                        <Button  className='strike'>
+                            <Logout/>
                     </Button>
                         :
-                        <Button onClick={() => !isAuthenticated && login()} className='strike'>
+                    <Link to='/account/login' className='strike'>
                             LOGIN/REGISTER
-                    </Button>
+                    </Link>
                     }
                 </ButtonHolder>
                 </AudioPlayerProvider>
@@ -89,12 +91,13 @@ export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }
                     <NavMenuItem className='strike' onClick={() => setIsOpen(!open)}>{hasItems && <CartCounter>{quantity}</CartCounter>}
                     Trolley <img src={Trolley} alt='cart' style={{ width: '15px', paddingBottom: '5px' }} />
                     </NavMenuItem>
-                    {isAuthenticated && <> <Divider /><NavMenuItem><Link className='strike' to='/account'>My Account</Link></NavMenuItem></>}
+                    {isAuthenticated && <> <Divider /><NavMenuItem><Link className='strike' to={isAuthenticated && '/account'}>My Account</Link></NavMenuItem></>}
                 </Navigation>
             
                 <div height='50px'></div>
             </Header>
-        </>
+             }}
+        </AuthWrapper>
 
     )
 }

@@ -7,6 +7,7 @@ import useMeta from '../hooks/useMeta'
 import _ from 'lodash'
 import ContextProvider from '../hocs/withContextProvider'
 import { Link, graphql, StaticQuery } from 'gatsby'
+import ContextConsumer from '../layouts/Context'
 import styled from '@emotion/styled'
 import Sticky from 'react-stickynode';
 import Cart from '../cart/index'
@@ -69,7 +70,9 @@ const Layout = ({ data, children }) => {
         />
     return (
         <ContextProvider>
-            <div style={{position: 'relative'}}>
+        <ContextConsumer>
+        {({ set }) => {
+            return <div style={{position: 'relative'}}>
         <Notifications/>
             <Helmet>
                 <html lang='en' />
@@ -92,6 +95,8 @@ const Layout = ({ data, children }) => {
             }                                                                                                                                                                                                  
             <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
+        }}
+        </ContextConsumer>
         </ContextProvider>
     )
 }

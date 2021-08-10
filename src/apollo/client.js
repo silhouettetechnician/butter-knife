@@ -1,10 +1,10 @@
-
 import fetch from 'isomorphic-fetch';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 
 export const client = new ApolloClient({
-  uri: `https://butter-knife-concession-store.myshopify.com/api/2020-10/graphql.json`,
-  fetch: fetch,
-
-  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: 'https://butter-knife-concession-store.myshopify.com/api/2020-10/graphql.json',
+    fetch,
+  }),
+  cache: new InMemoryCache()
 });

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.4.5",
+    "@apollo/client": "^3.4.7",
+    "@apollo/react-components": "^4.0.0",
     "@auth0/auth0-react": "^1.4.0",
     "@auth0/auth0-spa-js": "^1.14.0",
     "@contentful/rich-text-react-renderer": "^14.1.2",

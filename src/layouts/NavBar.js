@@ -9,10 +9,8 @@ import Logout from '../components/Logout'
 import { Navigation, Header, LogoHolder, NavMenuItem } from '../components/StyledComponents';
 import { Link, navigate } from "gatsby";
 import AuthWrapper from './AuthWrapper'
-import StoreContext from '../contexts/StoreContext'
+import StoreContext from '../contexts/Context'
 import Trolley from '../assets/shopping-cart.svg'
-// import Logout from '../components/Logout';
-// import DavidRenderBobbin from '/David_Render_Bobbin.mp3'
 
 const CartCounter = styled.span`
     background-color: white;
@@ -46,9 +44,8 @@ const Anchor = styled(Link)`
     ...NavMenuItem;
 `
 const useQuantity = () => {
-    const {
-        store: { checkout },
-    } = useContext(StoreContext)
+    const context = useContext(StoreContext)
+    const { checkout } = context.store       
     const items = checkout ? checkout.lineItems : []
     const total = reduce(items, (acc, item) => acc + item.quantity, 0)
     return [total !== 0, total]
@@ -56,28 +53,30 @@ const useQuantity = () => {
 export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }) => {
     const Divider = () => "|"
     const [hasItems, quantity] = useQuantity()
-
+    const context = useContext(StoreContext)
+    console.log(context, 'context')
+    const { customerAccessToken } = context.customerAccessToken;
+    console.log(customerAccessToken, 'customerAccessToken')
+    const isAuthenticated = customerAccessToken && customerAccessToken.expiresAt && customerAccessToken.expiresAt > new Date().toISOString() && true
+    console.log(isAuthenticated, 'isAuthenticated')
     return (
-        // <div style={{ position: 'relative' }}>
-        <AuthWrapper>
-             {({isAuthenticated}) => {
-                 console.log(isAuthenticated, 'auth in bac')
-            return <Header >
+        <div style={{ position: 'relative' }}>
+            <Header >
                 <Flex>
-                <AudioPlayerProvider>
-                    <Player file='/realog.mp3' />
-                    <ButtonHolder>
-                    {isAuthenticated ?
-                        <Button  className='strike'>
-                            <Logout/>
-                    </Button>
-                        :
-                    <Link to='/account/login' className='strike'>
-                            LOGIN/REGISTER
-                    </Link>
-                    }
-                </ButtonHolder>
-                </AudioPlayerProvider>
+                    <AudioPlayerProvider>
+                        <Player file='/realog.mp3' />
+                        <ButtonHolder>
+                            {isAuthenticated ?
+                                <Button className='strike'>
+                                    <Logout />
+                                </Button>
+                                :
+                                <Link to='/account/login' className='strike'>
+                                    LOGIN/REGISTER
+                                </Link>
+                            }
+                        </ButtonHolder>
+                    </AudioPlayerProvider>
                 </Flex>
                 <LogoHolder><div onClick={() => navigate('/')} style={{ cursor: 'pointer', fontFamily: 'bangers', fontSize: '5rem', textDecorationLine: 'line-through', textDecorationColor: 'rgb(254, 205, 47)' }}> BUTTER KNIFE <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder>
                 <Navigation>
@@ -89,16 +88,13 @@ export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }
                     {/* <NavMenuItem className='strike'><Link style={{fontFamily: 'BerlinBold'}}to='/vintage'>Vintage</Link></NavMenuItem><Divider /> */}
                     <NavMenuItem className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/vintage'>Souvenirs</Link></NavMenuItem><Divider />
                     <NavMenuItem className='strike' onClick={() => setIsOpen(!open)}>{hasItems && <CartCounter>{quantity}</CartCounter>}
-                    Trolley <img src={Trolley} alt='cart' style={{ width: '15px', paddingBottom: '5px' }} />
+                        Trolley <img src={Trolley} alt='cart' style={{ width: '15px', paddingBottom: '5px' }} />
                     </NavMenuItem>
                     {isAuthenticated && <> <Divider /><NavMenuItem><Link className='strike' to={isAuthenticated && '/account'}>My Account</Link></NavMenuItem></>}
                 </Navigation>
-            
                 <div height='50px'></div>
             </Header>
-             }}
-        </AuthWrapper>
-
+        </div>
     )
 }
 

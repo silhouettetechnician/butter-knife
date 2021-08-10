@@ -1,23 +1,22 @@
+import React,{ useContext} from 'react';
+import { navigate } from 'gatsby'
+import StoreContext from "../contexts/Context"
 
-import React from 'react'
-import ContextConsumer from './Context'
-import PropTypes from 'prop-types';
+const Layout = ({children}) => {
+    const { customerAccessToken } = useContext(StoreContext);
+    let isAuthenticated = false
+    customerAccessToken != null &&
+        (isAuthenticated = customerAccessToken && customerAccessToken.expiresAt && customerAccessToken.expiresAt > new Date().toISOString() && true )
+    console.log(isAuthenticated, 'authenticated in layout')
+    return (
+        <>
+        {
+            (!isAuthenticated)
+                ? (typeof window !== 'undefined') ? navigate(`/account/login`) : null
+                : children
+        }
+        </>
+    );
+};
 
-const AuthWrapper = ({children}) => {
-
-        return (
-            <ContextConsumer>
-                {({ store }) => {
-                    const isAuthenticated = store.customerAccessToken && store.customerAccessToken.expiresAt && store.customerAccessToken.expiresAt > new Date().toISOString() ? true : false
-                    return (children({
-                            isAuthenticated,
-                        }))
-                }}
-            </ContextConsumer>
-        )
-}
-
-export default AuthWrapper
-AuthWrapper.propTypes = {
-    children: PropTypes.func.isRequired,
-}
+export default Layout;

@@ -3,8 +3,8 @@ import { Formik, ErrorMessage } from 'formik'
 import gql from 'graphql-tag';
 import { Mutation } from '@apollo/client/react/components'
 import { Link, navigate } from 'gatsby'
-import ContextConsumer from '../layouts/Context'
-import AccountLayout from '../layouts/AccountLayout'
+import ContextConsumer from '../contexts/Context'
+// import AuthWrapper from '../layouts/AuthWrapper'
 
 const CUSTOMER_LOGOUT = gql`
 mutation customerAccessTokenDelete($customerAccessToken: String!) {
@@ -20,9 +20,7 @@ mutation customerAccessTokenDelete($customerAccessToken: String!) {
 `
 
 const Logout = () => (
-    <ContextConsumer>
-        {({ set, store }) => {
-            return (
+    <>
             <Mutation
                 mutation={CUSTOMER_LOGOUT}
                 onCompleted={data => {
@@ -58,8 +56,7 @@ const Logout = () => (
                 }}
             </Mutation>
             )
-        }}
-    </ContextConsumer>
+    </>
 )
 
 export default Logout

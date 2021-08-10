@@ -3,7 +3,7 @@ import { Formik, ErrorMessage } from 'formik'
 import gql from 'graphql-tag';
 import { Mutation } from '@apollo/client/react/components'
 import PasswordInput from '../../components/PasswordInput'
-import ContextConsumer from '../../layouts/Context'
+import GuestLayout from '../../layouts/GuestLayout'
 import * as Yup from 'yup'
 import { Link, navigate } from "gatsby";
 

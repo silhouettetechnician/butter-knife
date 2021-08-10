@@ -1,27 +1,42 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { Formik, ErrorMessage } from 'formik'
 import gql from 'graphql-tag';
 import { Mutation } from '@apollo/client/react/components'
 import PasswordInput from '../../components/PasswordInput'
-import ContextConsumer from '../../layouts/Context'
+import StoreContext from '../../contexts/Context'
+import AccountAuthWrapper from '../../layouts/AccountAuthWrapper'
 import * as Yup from 'yup'
 import { Link, navigate } from "gatsby";
 
- 
+
 const CUSTOMER_LOGIN = gql`
 mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
-    customerAccessTokenCreate(input: $input) {
-        customerAccessToken {
-            accessToken
-            expiresAt
-        }
-        customerUserErrors {
-            field
-            message
-        }
+  customerAccessTokenCreate(input: $input) {
+    customerAccessToken {
+      accessToken
+      expiresAt
     }
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
 }
 `
+
+const CUSTOMER_PASSWORD_RESET = gql`
+mutation customerRecover($email: String!) {
+  customerRecover(email: $email) {
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
+}
+`
+
 const FormSchema = Yup.object().shape({
     email: Yup.string()
         .email('Invalid email address')
@@ -30,92 +45,157 @@ const FormSchema = Yup.object().shape({
         .required('Password is Required'),
 })
 
-const login = () => {
-
+const LoginForm = () => {
+    const { setValue } = useContext(StoreContext);
+    const [passwordForgot, setPasswordForgot] = useState(false);
+  
+    const [email, setEmail] = useState("");
+    const [emailReset, setEmailReset] = useState("");
+  
+    const [messsageInfo, setMessageInfo] = useState("");
+  
+  
+    const [password, setPassword] = useState(null);
+    const handleCustomerAccessToken = (value) => {
+      setValue(value)
+    }
+  
     return (
-        <ContextConsumer>
-        {({ set }) => {
-            return <>
-                <h1>Log In</h1>
-                <Mutation mutation={CUSTOMER_LOGIN}>
-                    {(customerLogin, { loading }) => {
+      <>
+        {passwordForgot ?
+          <section className="hero is-dark is-fullheight-with-navbar">
+            <div className="hero-body">
+              <div className="container">
+                <div className="columns is-centered">
+                  <div className="column is-4 is-centered">
+                    <h2 className=" title has-text-centered">RESET YOUR PASSWORD</h2>
+                    <p>We will send you an email to reset your password.</p>
+                    <Mutation mutation={CUSTOMER_PASSWORD_RESET}>
+                      {(customerRecover) => {
                         return (
-                            <Formik
-                                initialValues={{
-                                    form: '',
-                                    email: '',
-                                    password: '',
-                                }}
-                                validationSchema={FormSchema}
-                                onSubmit={
-                                    (values, actions) => {
-                                        customerLogin({
-                                            variables: {
-                                                input: {
-                                                    "email": values.email,
-                                                    "password": values.password,
-                                                }
-                                            }
-                                        }).then((res) => {
-                                            if (res.data.customerAccessTokenCreate.customerAccessToken) {
-                                                set({
-                                                    customerAccessToken: res.data.customerAccessTokenCreate.customerAccessToken,
-                                                })
-                                                navigate('/account')
-                                            } else {
-                                                const errors = parseErrors(res.data.customerAccessTokenCreate.customerUserErrors)
-                                                actions.setErrors(errors)
-                                                console.log(errors, 'errors')
-                                            }
-                                        })
-                                    }
-                                }
-                                render={({
-                                    handleSubmit,
-                                    handleChange,
-                                    handleBlur,
-                                    isSubmitting,
-                                    values,
-                                    errors,
-                                    touched
-                                }) => (
-                                    <form onSubmit={handleSubmit}>
-                                        <ErrorMessage name="form" />
-                                        <ul>
-                                            <li>
-                                                <label htmlFor="loginEmail">Email</label>
-                                                <input id="loginEmail" type="email" name="email" value={values.email} onChange={handleChange} required="" /*ref={this.firstInput}*/ />
-                                                <ErrorMessage component="div" name="email" />
-                                            </li>
-                                            <li>
-                                                <label htmlFor="loginPassword">Password</label>
-                                                <PasswordInput id="loginPassword" name="password" value={values.password} onChange={handleChange} required="" />
-                                                <ErrorMessage component="div" name="password" />
-                                            </li>
-                                        </ul>
-                                        {
-                                            (loading)
-                                                ? <button disabled="disabled">Logging In</button>
-                                                : <button disabled={
-                                                    isSubmitting ||
-                                                    !!(errors.email && touched.email) ||
-                                                    !!(errors.password && touched.password)
-                                                    }>Log In</button>
-                                        }
-                                    </form>
-                                )}
-                            />
+                          <>
+                            <div className="field">
+                              <label className="label has-text-white" htmlFor="loginEmail">Email</label>
+                              <div className="control">
+                                <input className="input" type="email" id="loginEmail" onChange={(e) => setEmailReset(e.target.value)} />
+                              </div>
+                            </div>
+                            <div className="field">
+                              <div className="control has-text-centered">
+                                <button
+                                  className="button"
+                                  onClick={() => {
+                                    customerRecover({
+                                      variables: {
+                                        "email": emailReset,
+                                      }
+                                    }).then(() => {
+                                      setMessageInfo("We've sent you an email with a link to update your password.")
+                                      setPasswordForgot(false)
+                                    })
+                                  }}
+                                >SUBMIT</button>
+                              </div>
+                              <div className="field">
+                                <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => () => setPasswordForgot(!passwordForgot)}>
+                                  <p>Cancel</p>
+                                </div>
+                              </div>
+                            </div>
+  
+                          </>
                         )
-                    }}
-                </Mutation>
-                <Link to={`/account/forgotpassword`}>Forgot Password</Link>
-                <br />
-                <Link to={`/account/register`}>Sign Up</Link>
-            </>
-        }}
-    </ContextConsumer>
-    )
-
-}
-
-export default login
+                      }}
+                    </Mutation>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          :
+          <section className="hero is-dark is-fullheight-with-navbar">
+            <div className="hero-body">
+              <div className="container">
+                <div className="columns is-centered">
+                  <div className="column is-4 is-centered">
+                    {messsageInfo &&
+                      <div class="notification is-success">
+                        {messsageInfo}
+                      </div>
+                    }
+                    <h2 className=" title has-text-centered">Login</h2>
+                    <Mutation mutation={CUSTOMER_LOGIN}>
+                      {(customerLogin) => {
+                        return (
+                          <>
+                            <div className="field">
+                              <label className="label has-text-white" htmlFor="loginEmail">Email</label>
+                              <div className="control">
+                                <input className="input" type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
+                              </div>
+                            </div>
+                            <div className="field">
+                              <label className="label has-text-white" htmlFor="loginPassword">Password</label>
+                              <div className="control">
+                                <input className="input" type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
+                              </div>
+                            </div>
+                            <div className="field">
+                              <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
+                                <p>Forgot your password? </p>
+                              </div>
+                            </div>
+                            <div className="field">
+                              <div className="control has-text-centered">
+                                <button
+                                  className="button"
+                                  onClick={() => {
+                                    customerLogin({
+                                      variables: {
+                                        "input": {
+                                          "email": email,
+                                          "password": password,
+                                        }
+                                      }
+                                    }).then((result) => {
+                                      handleCustomerAccessToken(result.data.customerAccessTokenCreate.customerAccessToken)
+                                    }).catch((err) => {
+                                      alert(err)
+                                    })
+                                  }}
+                                >SIGN IN</button>
+                              </div>
+                            </div>
+                            <div className="field">
+                              <div className="control has-text-centered">
+                                <a href="/../account/register">
+                                  <p className="has-text-white">Create account</p>
+                                </a>
+                              </div>
+                            </div>
+                          </>
+                        )
+                      }}
+                    </Mutation>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        }
+      </>
+    );
+  };
+  
+  const Login = () => {
+    return (
+      <>
+        {/* <SEO title="Login" /> */}
+        <AccountAuthWrapper log={false}>
+          <LoginForm />
+        </AccountAuthWrapper>
+      </>
+    );
+  };
+  
+  export default Login;  

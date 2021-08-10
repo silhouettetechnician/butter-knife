@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import Notifications, {notify} from 'react-notify-toast';
+import Notifications, { notify } from 'react-notify-toast';
 import useMeta from '../hooks/useMeta'
 import _ from 'lodash'
-import ContextProvider from '../hocs/withContextProvider'
+import Provider from '../contexts/Provider'
 import { Link, graphql, StaticQuery } from 'gatsby'
-import ContextConsumer from '../layouts/Context'
 import styled from '@emotion/styled'
 import Sticky from 'react-stickynode';
+import { wrapRootApollo } from '../apollo/provider'
 import Cart from '../cart/index'
 import { AppContainer, DropDownBrands } from '../components/StyledComponents';
 import NavBar from './NavBar'
@@ -39,10 +39,10 @@ const Layout = ({ data, children }) => {
     const [open, setOpen] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const [catOpen, setCatOpen] = useState(false)
-    const {title, description} = useMeta();
+    const { title, description } = useMeta();
     const [isCartOpen, setIsCartOpen] = useState(false)
     const [cartRequest, setCartRequest] = useState(false)
-    const [checkout, setCheckout] = useState({lineItems: []})
+    const [checkout, setCheckout] = useState({ lineItems: [] })
     const [products, setProducts] = useState([])
     const [shop, setShop] = useState({})
 
@@ -62,22 +62,22 @@ const Layout = ({ data, children }) => {
                     nodes
                 } = data.allShopifyCollection
                 return open ? <DropDownBrands onMouseLeave={() => setOpen(!open)} open={open} setOpen={setOpen}><Cross><FontAwesomeIcon onClick={() => setOpen(!open)} color="black" size="lg" icon={faTimes} /></Cross>
-                {_.uniqBy(nodes, 'title').filter(i => i.handle !== 'frontpage' && i.handle !== 'clothing' && i.handle !== 'accessories').map((brand, i) => {
-                    return <ListItem key={i} to={`/designers/${brand.handle}`} className='strike'>{brand.title}</ListItem>})
-                }
+                    {_.uniqBy(nodes, 'title').filter(i => i.handle !== 'frontpage' && i.handle !== 'clothing' && i.handle !== 'accessories').map((brand, i) => {
+                        return <ListItem key={i} to={`/designers/${brand.handle}`} className='strike'>{brand.title}</ListItem>
+                    })
+                    }
                 </DropDownBrands> : <></>
             }}
         />
     return (
-        <ContextProvider>
-        <ContextConsumer>
-        {({ set }) => {
-            return <div style={{position: 'relative'}}>
-        <Notifications/>
+        <wrapRootApollo>
+        <Provider>
+        <div style={{ position: 'relative' }}>
+            <Notifications />
             <Helmet>
                 <html lang='en' />
                 <title>{title}</title>
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css" />
                 {/* <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.1.1/default/snipcart.css" /> */}
                 {/* <script async src="https://cdn.snipcart.com/themes/v3.1.1/default/snipcart.js"></script> */}
                 {/* <meta name={title} content='Suprabha Blog!' /> */}
@@ -92,13 +92,13 @@ const Layout = ({ data, children }) => {
             </Flex>
             {
                 window.location.pathname !== '/' && <Footer />
-            }                                                                                                                                                                                                  
+            }
             <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
-        }}
-        </ContextConsumer>
-        </ContextProvider>
+        </Provider>
+        </wrapRootApollo>
     )
+
 }
 
 export default Layout

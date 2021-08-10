@@ -86,10 +86,6 @@ plugins: [
     options: {
       shopName: process.env.GATSBY_SHOP_NAME,
       accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
-      // Optionally set the API version you want to use. For a list of available API versions,
-      // see: https://shopify.dev/concepts/about-apis/versioning/release-notes
-      // Defaults to unspecified/oldest stable
-      apiVersion: "2020-07",
     },
   },
   {

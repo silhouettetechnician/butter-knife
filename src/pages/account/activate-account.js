@@ -5,7 +5,7 @@ import { Mutation } from '@apollo/client/react/components'
 import { Link, navigate } from 'gatsby'
 import { Formik, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import ContextConsumer from '../../layouts/Context'
+import ContextConsumer from '../../contexts/Context'
 import PasswordInput from '../../components/PasswordInput'
 
 const CUSTOMER_ACTIVATE = gql`

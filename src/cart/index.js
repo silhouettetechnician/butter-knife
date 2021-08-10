@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Flex from '../styles/Flex'
 import styled from '@emotion/styled'
-import StoreContext from '../contexts/StoreContext'
+import StoreContext from '../contexts/Context'
 import LineItem from './LineItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { motion } from "framer-motion"
@@ -32,10 +32,8 @@ font-size: 1.5rem;
 
 const Cart = ({ isOpen, setIsOpen }) => {
 
-  const {
-    store: { checkout },
-  } = useContext(StoreContext)
-
+  const context = useContext(StoreContext)
+  const { checkout } = context.store
   const handleCheckout = () => {
     window.open(checkout.webUrl)
   }

@@ -10,7 +10,6 @@ const client = Client.buildClient(
     storefrontAccessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
     domain: `${process.env.GATSBY_SHOP_NAME}.myshopify.com`,
   },
-  fetch
 )
 
 const ContextProvider = ({ children }) => {
@@ -19,7 +18,7 @@ const ContextProvider = ({ children }) => {
     adding: false,
     checkout: { lineItems: [] },
     products: [],
-    customerAccessToken: '',
+    // customerAccessToken: '',
     shop: {},
   }
   // customerAccessToken: getLocalStorageFromKey('customerAccessToken'),

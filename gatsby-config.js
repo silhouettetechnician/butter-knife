@@ -1,3 +1,4 @@
+
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
@@ -81,13 +82,13 @@ plugins: [
       accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
     },
   },
-  {
-    resolve: `gatsby-plugin-apollo-shopify`,
-    options: {
-      shopName: process.env.GATSBY_SHOP_NAME,
-      accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
-    },
-  },
+  // {
+  //   resolve: `gatsby-plugin-apollo-shopify`,
+  //   options: {
+  //     shopName: process.env.GATSBY_SHOP_NAME,
+  //     accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
+  //   },
+  // },
   {
     resolve: 'gatsby-plugin-snipcart',
     options: {
@@ -96,6 +97,15 @@ plugins: [
         autopop: true,
     }
 },
+// {
+//   resolve: 'gatsby-plugin-apollo',
+//   options: {
+//     uri: `https://${process.env.GATSBY_SHOP_NAME}/api/2021-04/graphql`,
+//     headers: { 'Content-Type': 'application/graphql',
+//     'Accept': 'application/json'
+//   }
+//   }
+// },
 {
   resolve: `gatsby-source-graphql`,
   options: {
@@ -104,6 +114,8 @@ plugins: [
     url: `https://${process.env.GATSBY_SHOP_NAME}.myshopify.com/api/graphql`,
     headers: {
       'X-Shopify-Storefront-Access-Token': process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
+      // 'Content-Type': 'application/graphql',
+      // 'Accept': 'application/json'
     },
   },
 },
@@ -187,26 +199,26 @@ plugins: [
   //       },
   //     },
   
-   {
-      // This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
-      resolve: `gatsby-plugin-algolia`,
-      options: {
-        appId: process.env.GATSBY_ALGOLIA_APP_ID,
-        // Use Admin API key without GATSBY_ prefix, so that the key isn't exposed in the application
-        // Tip: use Search API key with GATSBY_ prefix to access the service from within components
-        apiKey: process.env.ALGOLIA_ADMIN_KEY,
-        indexName: process.env.ALGOLIA_INDEX_NAME, // for all queries
-        queries,
-        chunkSize: 10000, // default: 1000
-        settings: {
-          // optional, any index settings
-          // Note: by supplying settings, you will overwrite all existing settings on the index
-        },
-        enablePartialUpdates: true, // default: false
-        concurrentQueries: false, // default: true
-        skipIndexing: true, // default: false, useful for e.g. preview deploys or local development
-        continueOnFailure: false // default: false, don't fail the build if algolia indexing fails
-      },
-    },
 ]
 }
+/*{
+   // This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
+   resolve: `gatsby-plugin-algolia`,
+   options: {
+     appId: process.env.GATSBY_ALGOLIA_APP_ID,
+     // Use Admin API key without GATSBY_ prefix, so that the key isn't exposed in the application
+     // Tip: use Search API key with GATSBY_ prefix to access the service from within components
+     apiKey: process.env.ALGOLIA_ADMIN_KEY,
+     indexName: process.env.ALGOLIA_INDEX_NAME, // for all queries
+     queries,
+     chunkSize: 10000, // default: 1000
+     settings: {
+       // optional, any index settings
+       // Note: by supplying settings, you will overwrite all existing settings on the index
+     },
+     enablePartialUpdates: true, // default: false
+     concurrentQueries: false, // default: true
+     skipIndexing: true, // default: false, useful for e.g. preview deploys or local development
+     continueOnFailure: false // default: false, don't fail the build if algolia indexing fails
+   },
+ },*/

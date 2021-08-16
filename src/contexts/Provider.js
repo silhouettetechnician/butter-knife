@@ -7,6 +7,7 @@ const Provider = ({ children }) => {
     const [store, updateStore] = useState(defaultStoreContext)
     const getlocalStorage = (value) => {
         try {
+            console.log(value, 'value')
             return JSON.parse(localStorage.getItem(value))
         } catch (e) {
             return ''
@@ -122,6 +123,7 @@ const Provider = ({ children }) => {
                     })
                 },
                 setValue: value => {
+                    console.log(value, 'value')
                     isBrowser && localStorage.setItem('customerAccessToken', JSON.stringify(value))
                     updateStore(state => {
                         return { ...state, customerAccessToken: value }

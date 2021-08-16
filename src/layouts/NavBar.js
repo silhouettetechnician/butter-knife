@@ -5,7 +5,7 @@ import reduce from 'lodash/reduce'
 import Flex from '../styles/Flex'
 import styled from '@emotion/styled'
 import Player from '../components/Player'
-import Logout from '../components/Logout'
+import Logout from '../pages/account/logout'
 import { Navigation, Header, LogoHolder, NavMenuItem } from '../components/StyledComponents';
 import { Link, navigate } from "gatsby";
 import AuthWrapper from './AuthWrapper'
@@ -45,7 +45,7 @@ const Anchor = styled(Link)`
 `
 const useQuantity = () => {
     const context = useContext(StoreContext)
-    const { checkout } = context.store       
+    const { checkout } = context
     const items = checkout ? checkout.lineItems : []
     const total = reduce(items, (acc, item) => acc + item.quantity, 0)
     return [total !== 0, total]
@@ -54,11 +54,10 @@ export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }
     const Divider = () => "|"
     const [hasItems, quantity] = useQuantity()
     const context = useContext(StoreContext)
-    console.log(context, 'context')
-    const { customerAccessToken } = context.customerAccessToken;
-    console.log(customerAccessToken, 'customerAccessToken')
-    const isAuthenticated = customerAccessToken && customerAccessToken.expiresAt && customerAccessToken.expiresAt > new Date().toISOString() && true
-    console.log(isAuthenticated, 'isAuthenticated')
+    const { customerAccessToken } = context
+    let isAuthenticated = false
+    customerAccessToken != null &&
+        (isAuthenticated = customerAccessToken && customerAccessToken.expiresAt && customerAccessToken.expiresAt > new Date().toISOString() && true )
     return (
         <div style={{ position: 'relative' }}>
             <Header >
@@ -66,15 +65,13 @@ export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }
                     <AudioPlayerProvider>
                         <Player file='/realog.mp3' />
                         <ButtonHolder>
-                            {isAuthenticated ?
-                                <Button className='strike'>
-                                    <Logout />
-                                </Button>
-                                :
-                                <Link to='/account/login' className='strike'>
-                                    LOGIN/REGISTER
-                                </Link>
-                            }
+                            <Button className='strike'>
+                                <Logout />
+                            </Button>
+                            :
+                            <Link to='/account/login' className='strike'>
+                                LOGIN/REGISTER
+                            </Link>
                         </ButtonHolder>
                     </AudioPlayerProvider>
                 </Flex>
@@ -90,7 +87,7 @@ export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }
                     <NavMenuItem className='strike' onClick={() => setIsOpen(!open)}>{hasItems && <CartCounter>{quantity}</CartCounter>}
                         Trolley <img src={Trolley} alt='cart' style={{ width: '15px', paddingBottom: '5px' }} />
                     </NavMenuItem>
-                    {isAuthenticated && <> <Divider /><NavMenuItem><Link className='strike' to={isAuthenticated && '/account'}>My Account</Link></NavMenuItem></>}
+                   { isAuthenticated && <> <Divider /><NavMenuItem><Link className='strike' to='/account'>My Account</Link></NavMenuItem></>}
                 </Navigation>
                 <div height='50px'></div>
             </Header>

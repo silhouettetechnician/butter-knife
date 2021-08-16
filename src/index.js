@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import 'normalize.css'
 import './App.css'
 import App from './pages/index';
+import Provider from './contexts/Provider'
 import * as serviceWorker from './serviceWorker';
-import {wrapRootElement} from './apollo/provider'
+
+
 ReactDOM.render(
-    <wrapRootElement>
-          <App />
-          </wrapRootElement>
+    <App />
   ,
 
   document.getElementById('root')

@@ -4,7 +4,7 @@ import SliderImage from 'react-zoom-slider';
 import styled from '@emotion/styled'
 import { graphql } from "gatsby"
 import find from 'lodash/find'
-import StoreContext from '../contexts/StoreContext'
+import StoreContext from '../contexts/Context'
 import ImageGallery from 'react-image-gallery';
 import Flex from '../styles/Flex'
 import VariantSelector from '../components/VariantSelector'
@@ -29,7 +29,7 @@ const IndividualClothingItem = ({ data, hit }) => {
     const [quantity, setQuantity] = useState(1)
     const {
         addVariantToCart,
-        store: { client, adding },
+        client, adding,
     } = useContext(StoreContext)
 console.log(client, 'client')
 

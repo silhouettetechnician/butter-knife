@@ -1,13 +1,9 @@
-import React, { useCallback, useContext, useState } from "react";
-import { Formik, ErrorMessage } from 'formik'
-import gql from 'graphql-tag';
-import { Mutation } from '@apollo/client/react/components'
-import PasswordInput from '../../components/PasswordInput'
+import React, { useState, useContext, useEffect } from 'react';
+// import SEO from "../../components/seo"
+// import gql from 'graphql-tag';
+import { useMutation, gql   } from '@apollo/client';
 import StoreContext from '../../contexts/Context'
-import AccountAuthWrapper from '../../layouts/AccountAuthWrapper'
-import * as Yup from 'yup'
-import { Link, navigate } from "gatsby";
-
+import AccountAuthWrapper from "../../layouts/AccountAuthWrapper"
 
 const CUSTOMER_LOGIN = gql`
 mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
@@ -24,7 +20,6 @@ mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
   }
 }
 `
-
 const CUSTOMER_PASSWORD_RESET = gql`
 mutation customerRecover($email: String!) {
   customerRecover(email: $email) {
@@ -36,166 +31,154 @@ mutation customerRecover($email: String!) {
   }
 }
 `
-
-const FormSchema = Yup.object().shape({
-    email: Yup.string()
-        .email('Invalid email address')
-        .required('Email is Required'),
-    password: Yup.string()
-        .required('Password is Required'),
-})
-
 const LoginForm = () => {
-    const { setValue } = useContext(StoreContext);
-    const [passwordForgot, setPasswordForgot] = useState(false);
+  const { setValue } = useContext(StoreContext);
+  const { customerAccessToken } = useContext(StoreContext);
+  const [passwordForgot, setPasswordForgot] = useState(false);
+  const [customerLogin] = useMutation(CUSTOMER_LOGIN)
+  const [email, setEmail] = useState("");
+  const [emailReset, setEmailReset] = useState("");
+
+  const [messsageInfo, setMessageInfo] = useState("");
+
+
+  const [password, setPassword] = useState(null);
+  const handleCustomerAccessToken = (value) => {
+    setValue(value)
+  }
   
-    const [email, setEmail] = useState("");
-    const [emailReset, setEmailReset] = useState("");
-  
-    const [messsageInfo, setMessageInfo] = useState("");
-  
-  
-    const [password, setPassword] = useState(null);
-    const handleCustomerAccessToken = (value) => {
-      setValue(value)
+  const handleLogin = res => {
+    customerLogin({
+    variables: {
+      "input": {
+        "email": email,
+        "password": password,
+      }
     }
-  
-    return (
-      <>
-        {passwordForgot ?
-          <section className="hero is-dark is-fullheight-with-navbar">
-            <div className="hero-body">
-              <div className="container">
-                <div className="columns is-centered">
-                  <div className="column is-4 is-centered">
-                    <h2 className=" title has-text-centered">RESET YOUR PASSWORD</h2>
-                    <p>We will send you an email to reset your password.</p>
-                    <Mutation mutation={CUSTOMER_PASSWORD_RESET}>
-                      {(customerRecover) => {
-                        return (
-                          <>
-                            <div className="field">
-                              <label className="label has-text-white" htmlFor="loginEmail">Email</label>
-                              <div className="control">
-                                <input className="input" type="email" id="loginEmail" onChange={(e) => setEmailReset(e.target.value)} />
-                              </div>
+  }).then(res => {
+    handleCustomerAccessToken(res.data.customerAccessTokenCreate.customerAccessToken)
+  })
+}
+
+  return (
+    <>
+      {/* {passwordForgot ?
+        <section className="hero is-dark is-fullheight-with-navbar">
+          <div className="hero-body">
+            <div className="container">
+              <div className="columns is-centered">
+                <div className="column is-4 is-centered">
+                  <h2 className=" title has-text-centered">RESET YOUR PASSWORD</h2>
+                  <p>We will send you an email to reset your password.</p>
+                  <Mutation mutation={CUSTOMER_PASSWORD_RESET}>
+                    {(customerRecover) => {
+                      return (
+                        <>
+                          <div className="field">
+                            <label className="label has-text-white" htmlFor="loginEmail">Email</label>
+                            <div className="control">
+                              <input className="input" type="email" id="loginEmail" onChange={(e) => setEmailReset(e.target.value)} />
+                            </div>
+                          </div>
+                          <div className="field">
+                            <div className="control has-text-centered">
+                              <button
+                                className="button"
+                                onClick={() => {
+                                  customerRecover({
+                                    variables: {
+                                      "email": emailReset,
+                                    }
+                                  }).then(() => {
+                                    setMessageInfo("We've sent you an email with a link to update your password.")
+                                    setPasswordForgot(false)
+                                  })
+                                }}
+                              >SUBMIT</button>
                             </div>
                             <div className="field">
-                              <div className="control has-text-centered">
-                                <button
-                                  className="button"
-                                  onClick={() => {
-                                    customerRecover({
-                                      variables: {
-                                        "email": emailReset,
-                                      }
-                                    }).then(() => {
-                                      setMessageInfo("We've sent you an email with a link to update your password.")
-                                      setPasswordForgot(false)
-                                    })
-                                  }}
-                                >SUBMIT</button>
-                              </div>
-                              <div className="field">
-                                <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => () => setPasswordForgot(!passwordForgot)}>
-                                  <p>Cancel</p>
-                                </div>
+                              <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => () => setPasswordForgot(!passwordForgot)}>
+                                <p>Cancel</p>
                               </div>
                             </div>
-  
-                          </>
-                        )
-                      }}
-                    </Mutation>
-                  </div>
+                          </div>
+
+                        </>
+                      )
+                    }}
+                  </Mutation>
                 </div>
               </div>
             </div>
-          </section>
-          :
-          <section className="hero is-dark is-fullheight-with-navbar">
-            <div className="hero-body">
-              <div className="container">
-                <div className="columns is-centered">
-                  <div className="column is-4 is-centered">
-                    {messsageInfo &&
-                      <div class="notification is-success">
-                        {messsageInfo}
-                      </div>
-                    }
-                    <h2 className=" title has-text-centered">Login</h2>
-                    <Mutation mutation={CUSTOMER_LOGIN}>
-                      {(customerLogin) => {
-                        return (
-                          <>
-                            <div className="field">
-                              <label className="label has-text-white" htmlFor="loginEmail">Email</label>
-                              <div className="control">
-                                <input className="input" type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
-                              </div>
+          </div>
+        </section>
+        : */}
+        <section className="hero is-dark is-fullheight-with-navbar">
+          <div className="hero-body">
+            <div className="container">
+              <div className="columns is-centered">
+                <div className="column is-4 is-centered">
+                  {messsageInfo &&
+                    <div class="notification is-success">
+                      {messsageInfo}
+                    </div>
+                  }
+                  <h2 className=" title has-text-centered">Login</h2>
+                        <>
+                          <div className="field">
+                            <label className="label has-text-white" htmlFor="loginEmail">Email</label>
+                            <div className="control">
+                              <input className="input" type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
                             </div>
-                            <div className="field">
-                              <label className="label has-text-white" htmlFor="loginPassword">Password</label>
-                              <div className="control">
-                                <input className="input" type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
-                              </div>
+                          </div>
+                          <div className="field">
+                            <label className="label has-text-white" htmlFor="loginPassword">Password</label>
+                            <div className="control">
+                              <input className="input" type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
                             </div>
-                            <div className="field">
-                              <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
-                                <p>Forgot your password? </p>
-                              </div>
+                          </div>
+                          <div className="field">
+                            <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
+                              <p>Forgot your password? </p>
                             </div>
-                            <div className="field">
-                              <div className="control has-text-centered">
-                                <button
-                                  className="button"
-                                  onClick={() => {
-                                    customerLogin({
-                                      variables: {
-                                        "input": {
-                                          "email": email,
-                                          "password": password,
-                                        }
-                                      }
-                                    }).then((result) => {
-                                      handleCustomerAccessToken(result.data.customerAccessTokenCreate.customerAccessToken)
-                                    }).catch((err) => {
-                                      alert(err)
-                                    })
-                                  }}
-                                >SIGN IN</button>
-                              </div>
+                          </div>
+                          <div className="field">
+                            <div className="control has-text-centered">
+                              <button
+                                className="button"
+                                onClick={handleLogin}
+                              >SIGN IN</button>
                             </div>
-                            <div className="field">
-                              <div className="control has-text-centered">
-                                <a href="/../account/register">
-                                  <p className="has-text-white">Create account</p>
-                                </a>
-                              </div>
+                          </div>
+                          <div className="field">
+                            <div className="control has-text-centered">
+                              <a href="/../account/register">
+                                <p className="has-text-white">Create account</p>
+                              </a>
                             </div>
-                          </>
-                        )
-                      }}
-                    </Mutation>
-                  </div>
+                          </div>
+                        </>
                 </div>
               </div>
             </div>
-          </section>
-        }
-      </>
-    );
-  };
-  
-  const Login = () => {
-    return (
-      <>
-        {/* <SEO title="Login" /> */}
-        <AccountAuthWrapper log={false}>
-          <LoginForm />
-        </AccountAuthWrapper>
-      </>
-    );
-  };
-  
-  export default Login;  
+          </div>
+        </section>
+      {/* } */}
+    </>
+  );
+};
+
+
+const Login = () => {
+  return (
+    <>
+      {/* <SEO title="Login" /> */}
+      <AccountAuthWrapper log={false}>
+        <LoginForm />
+      </AccountAuthWrapper>
+    </>
+  );
+};
+
+export default Login;
+

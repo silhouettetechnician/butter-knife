@@ -9,13 +9,10 @@ import Provider from '../contexts/Provider'
 import { Link, graphql, StaticQuery } from 'gatsby'
 import styled from '@emotion/styled'
 import Sticky from 'react-stickynode';
-import { wrapRootApollo } from '../apollo/provider'
 import Cart from '../cart/index'
 import { AppContainer, DropDownBrands } from '../components/StyledComponents';
 import NavBar from './NavBar'
 import Footer from './Footer'
-import Client from "shopify-buy"
-// import { designerList } from '../constannts/brand-names'
 import Flex from '../styles/Flex'
 
 const ListItem = styled(Link)`
@@ -70,7 +67,6 @@ const Layout = ({ data, children }) => {
             }}
         />
     return (
-        <wrapRootApollo>
         <Provider>
         <div style={{ position: 'relative' }}>
             <Notifications />
@@ -96,7 +92,6 @@ const Layout = ({ data, children }) => {
             <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
         </Provider>
-        </wrapRootApollo>
     )
 
 }

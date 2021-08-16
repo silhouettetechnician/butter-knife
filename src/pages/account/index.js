@@ -1,46 +1,66 @@
-import React, { useContext, useState } from 'react'
-import styled from '@emotion/styled'
-import Flex from '../../styles/Flex'
-import AccountTab from '../../components/AccountTab'
-import AuthWrapper from '../../layouts/AuthWrapper'
-import ContextConsumer from '../../contexts/Context'
-import gql from "graphql-tag"
-import { useQuery } from '@apollo/client';
+import React, { useContext } from 'react';
+import { Query } from '@apollo/react-components'
+import gql from 'graphql-tag'
+import StoreContext from '../../contexts/Context'
+import AuthWrapper from "../../layouts/AuthWrapper"
+import Logout from "./logout"
+import OrdersList from "./orders-list"
+import DefaultAddress from "./default-address"
 
-const Banner = styled(Flex)`
- padding: 10px 0px; 
- align-items: center;
- flex-direction: column;
-// `
 
 const CUSTOMER_INFO = gql`
 query($customerAccessToken: String!) {
     customer(customerAccessToken: $customerAccessToken) {
-        firstName
-        lastName
         email
+        firstName
         phone
         defaultAddress {
             firstName
             lastName
             address1
-            address2
             city
-            provinceCode
             zip
             country
         }
-        createdAt
-        acceptsMarketing
-        orders(first: 1, reverse: true) {
+        orders(first: 10) {
             edges {
                 node {
-                    id
                     name
-                    orderNumber
-                    statusUrl
                     totalPrice
-                    customerUrl
+                    processedAt
+                    statusUrl
+                    currencyCode
+                    lineItems(first: 10) {
+                        edges {
+                            node {
+                                title
+                                quantity
+                            }
+                        }
+                    }
+                    shippingAddress {
+                        address1
+                        city
+                        lastName
+                        firstName
+                        zip
+                        country
+                    }
+                    subtotalPrice
+                    totalPrice
+                }
+            }
+        }
+        addresses(first: 10) {
+            edges {
+                node {
+                    address1
+                    city
+                    lastName
+                    firstName
+                    country
+                    name
+                    zip
                 }
             }
         }
@@ -48,83 +68,47 @@ query($customerAccessToken: String!) {
 }
 `
 const Account = () => {
-    const [value, setValue] = useState(0);
-    const { customerAccessToken } = useContext(ContextConsumer);
-    const { loading, error, data } = useQuery(CUSTOMER_INFO, {
-        variables: { customerAccessToken: customerAccessToken.accessToken },
-    })
-    const { firstName, email, phone, orders } = data.customer;
-    let greeting = `Welcome back!`
-    greeting = (firstName) ? `Welcome back ${firstName}!` : greeting
+    const { customerAccessToken } = useContext(StoreContext);
     return (
         <AuthWrapper>
-            <h1>Account Dashboard</h1>
-                    {error && <div>Error :(</div>}
-                    {loading && 
+            <Query
+                query={CUSTOMER_INFO}
+                variables={{
+                    customerAccessToken: customerAccessToken.accessToken
+                }}
+            >
+                {({ loading, error, data }) => {
+                    console.log(error, 'error')
+                    if (loading) return <div>Fetching</div>
+                    if (error) return <div>Error</div>
+                    const { defaultAddress, orders, addresses } = data.customer
+                    console.log(orders, 'orders')
+                    return (
                         <>
-                            <p>{greeting}</p>
+                            <h1 className="title has-text-centered">My Account</h1>
+                            {/* <Logout /> */}
+                            <section className="hero is-medium">
+                                <div className="hero-body">
+                                    <div className="container">
+                                        <div className="container">
+                                            <div className="columns is-centered">
+                                                <OrdersList orders={orders} />
+                                                <DefaultAddress 
+                                                    defaultAddress={defaultAddress} 
+                                                    addressesSize={addresses.edges.length}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
 
-                            <h2>Account Info</h2>
-                            <div>
-                                <h3>Email</h3>
-                                <p></p>
-                            </div>
-                            {
-                                phone
-                                    ? (
-                                        <div>
-                                            <h3>Phone</h3>
-                                            <p></p>
-                                        </div>
-                                    )
-                                    : ''
-                            }
-                            <div>
-                                <h3>Order History</h3>
-                                <p></p>
-                            </div>
-                        </>}
-                        <>
-                            <p>{greeting}</p>
-                            <AccountTab value={value} setValue={setValue} />
-                            {value === 0 ?
-                                <Banner>
-                                    <h4>My Account</h4>
-                                    <p>{user.nickname}</p>
-                                </Banner> :
-                                value === 1 ?
-                                    <div>hello 2</div> :
-                                    value === 2 ?
-                                        <div>hello 3</div> : null
-                            }
-                            <h2>Account Info</h2>
-                            <div>
-                                <h3>Email</h3>
-                                <p>{email}</p>
-                            </div>
-                            {
-                                phone
-                                    ? (
-                                        <div>
-                                            <h3>Phone</h3>
-                                            <p>{phone}</p>
-                                        </div>
-                                    )
-                                    : ''
-                            }
-                            <div>
-                                <h3>Order History</h3>
-                                {
-                                    orders.length
-                                        ? 'TOOD: SHOW ORDERS'
-                                        : <p>You haven't placed any orders yet.</p>
-                                }
-                            </div>
                         </>
                     )
-            )
+                }}
+            </Query>
         </AuthWrapper>
-    )
-}
+    );
+};
 
-export default Account
+export default Account;

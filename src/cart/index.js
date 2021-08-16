@@ -34,6 +34,7 @@ const Cart = ({ isOpen, setIsOpen }) => {
 
   const context = useContext(StoreContext)
   const { checkout } = context.store
+
   const handleCheckout = () => {
     window.open(checkout.webUrl)
   }

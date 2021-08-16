@@ -160,5 +160,9 @@ export const Footer = styled.footer`
 
 export const PageHeading = styled.h1`
         font-family: bangers;
-        font-size: 1.6rem;
+        font-size: 2.3rem;
+        text-align: center;
+`
+export const LoginInput = styled.input`
+        width: 70%;
 `

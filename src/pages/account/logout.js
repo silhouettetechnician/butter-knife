@@ -29,7 +29,8 @@ const Logout = () => {
                 "customerAccessToken": customerAccessToken.accessToken,
             }
         }).then(data => {
-            if (data.customerAccessTokenDelete.userErrors.length) return
+            console.log(data,'data')
+            // if (data.customerAccessTokenDelete.userErrors.length) return
             setValue({
                 customerAccessToken: ''
             })

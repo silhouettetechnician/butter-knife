@@ -1,5 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { PageHeading, LoginInput } from '../../components/StyledComponents'
+import Flex from '../../styles/Flex'
 // import SEO from "../../components/seo"
+
 // import gql from 'graphql-tag';
 import { useMutation, gql   } from '@apollo/client';
 import StoreContext from '../../contexts/Context'
@@ -62,7 +65,7 @@ const LoginForm = () => {
 
   return (
     <>
-      {/* {passwordForgot ?
+      {passwordForgot ?
         <section className="hero is-dark is-fullheight-with-navbar">
           <div className="hero-body">
             <div className="container">
@@ -112,29 +115,26 @@ const LoginForm = () => {
             </div>
           </div>
         </section>
-        : */}
-        <section className="hero is-dark is-fullheight-with-navbar">
-          <div className="hero-body">
-            <div className="container">
-              <div className="columns is-centered">
-                <div className="column is-4 is-centered">
+        :
+        <Flex style={{height: 'calc(100vh - 359px)'}}>
+                <div style={{marginTop: '30%', width: '400px', textAlign: 'center', padding: '10%', border: '2px solid black'}}>
                   {messsageInfo &&
                     <div class="notification is-success">
                       {messsageInfo}
                     </div>
                   }
-                  <h2 className=" title has-text-centered">Login</h2>
+                  <PageHeading>Login</PageHeading>
                         <>
                           <div className="field">
                             <label className="label has-text-white" htmlFor="loginEmail">Email</label>
                             <div className="control">
-                              <input className="input" type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
+                              <LoginInput type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
                             </div>
                           </div>
                           <div className="field">
                             <label className="label has-text-white" htmlFor="loginPassword">Password</label>
                             <div className="control">
-                              <input className="input" type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
+                              <LoginInput type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
                             </div>
                           </div>
                           <div className="field">
@@ -159,11 +159,8 @@ const LoginForm = () => {
                           </div>
                         </>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      {/* } */}
+        </Flex>
+        } 
     </>
   );
 };

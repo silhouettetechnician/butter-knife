@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { PageHeading, LoginInput } from '../../components/StyledComponents'
+import { PageHeading, LoginInput, AuthFormBox } from '../../components/StyledComponents'
 import Flex from '../../styles/Flex'
 // import SEO from "../../components/seo"
-
+import loginImg from '../../assets/loginI.jpg'
 // import gql from 'graphql-tag';
-import { useMutation, gql   } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 import StoreContext from '../../contexts/Context'
 import AccountAuthWrapper from "../../layouts/AccountAuthWrapper"
 
@@ -39,6 +39,7 @@ const LoginForm = () => {
   const { customerAccessToken } = useContext(StoreContext);
   const [passwordForgot, setPasswordForgot] = useState(false);
   const [customerLogin] = useMutation(CUSTOMER_LOGIN)
+  const [forgotPassword] = useMutation(CUSTOMER_PASSWORD_RESET)
   const [email, setEmail] = useState("");
   const [emailReset, setEmailReset] = useState("");
 
@@ -49,119 +50,105 @@ const LoginForm = () => {
   const handleCustomerAccessToken = (value) => {
     setValue(value)
   }
-  
+
   const handleLogin = res => {
     customerLogin({
-    variables: {
-      "input": {
-        "email": email,
-        "password": password,
+      variables: {
+        "input": {
+          "email": email,
+          "password": password,
+        }
       }
-    }
-  }).then(res => {
-    handleCustomerAccessToken(res.data.customerAccessTokenCreate.customerAccessToken)
-  })
-}
+    }).then(res => {
+      handleCustomerAccessToken(res.data.customerAccessTokenCreate.customerAccessToken)
+    })
+  }
+  const handleResetPassword = res => {
+    forgotPassword({
+      variables: {
+        "email": emailReset,
+      }
+    }).then(() => {
+      setMessageInfo("We've sent you an email with a link to update your password.")
+      setPasswordForgot(false)
+    })
+  }
 
   return (
-    <>
+    <Flex justifyCenter >
+      <img src={loginImg} style={{ width: '100%', height: 'calc(100vh - 359px)', filter: 'blur(5px)', position: 'fixed' }} />
       {passwordForgot ?
-        <section className="hero is-dark is-fullheight-with-navbar">
-          <div className="hero-body">
-            <div className="container">
-              <div className="columns is-centered">
-                <div className="column is-4 is-centered">
-                  <h2 className=" title has-text-centered">RESET YOUR PASSWORD</h2>
-                  <p>We will send you an email to reset your password.</p>
-                  <Mutation mutation={CUSTOMER_PASSWORD_RESET}>
-                    {(customerRecover) => {
-                      return (
-                        <>
-                          <div className="field">
-                            <label className="label has-text-white" htmlFor="loginEmail">Email</label>
-                            <div className="control">
-                              <input className="input" type="email" id="loginEmail" onChange={(e) => setEmailReset(e.target.value)} />
-                            </div>
-                          </div>
-                          <div className="field">
-                            <div className="control has-text-centered">
-                              <button
-                                className="button"
-                                onClick={() => {
-                                  customerRecover({
-                                    variables: {
-                                      "email": emailReset,
-                                    }
-                                  }).then(() => {
-                                    setMessageInfo("We've sent you an email with a link to update your password.")
-                                    setPasswordForgot(false)
-                                  })
-                                }}
-                              >SUBMIT</button>
-                            </div>
-                            <div className="field">
-                              <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => () => setPasswordForgot(!passwordForgot)}>
-                                <p>Cancel</p>
-                              </div>
-                            </div>
-                          </div>
-
-                        </>
-                      )
-                    }}
-                  </Mutation>
-                </div>
+        <Flex style={{ height: 'calc(100vh - 359px)', zIndex: '9999', position: 'absolute' }}>
+          <AuthFormBox>
+          <PageHeading>RESET YOUR PASSWORD</PageHeading>
+          <p style={{fontFamily: 'CODE', marginTop: '1rem'}}>We will send you an email to reset your password.</p>
+          <div className="field">
+            <div className="control">
+              <LoginInput placeholder="email" type="email" id="loginEmail" onChange={(e) => setEmailReset(e.target.value)} />
+            </div>
+          </div>
+          <div className="field">
+            <div className="control has-text-centered">
+              <button
+                style={{marginBottom: '1rem'}}
+                className="button"
+                onClick={handleResetPassword}
+              >SUBMIT</button>
+            </div>
+            <div className="field">
+              <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => () => setPasswordForgot(!passwordForgot)}>
+                <p style={{fontFamily: 'CODE'}}>Cancel</p>
               </div>
             </div>
           </div>
-        </section>
-        :
-        <Flex style={{height: 'calc(100vh - 359px)'}}>
-                <div style={{marginTop: '30%', width: '400px', textAlign: 'center', padding: '10%', border: '2px solid black'}}>
-                  {messsageInfo &&
-                    <div class="notification is-success">
-                      {messsageInfo}
-                    </div>
-                  }
-                  <PageHeading>Login</PageHeading>
-                        <>
-                          <div className="field">
-                            <label className="label has-text-white" htmlFor="loginEmail">Email</label>
-                            <div className="control">
-                              <LoginInput type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
-                            </div>
-                          </div>
-                          <div className="field">
-                            <label className="label has-text-white" htmlFor="loginPassword">Password</label>
-                            <div className="control">
-                              <LoginInput type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
-                            </div>
-                          </div>
-                          <div className="field">
-                            <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
-                              <p>Forgot your password? </p>
-                            </div>
-                          </div>
-                          <div className="field">
-                            <div className="control has-text-centered">
-                              <button
-                                className="button"
-                                onClick={handleLogin}
-                              >SIGN IN</button>
-                            </div>
-                          </div>
-                          <div className="field">
-                            <div className="control has-text-centered">
-                              <a href="/../account/register">
-                                <p className="has-text-white">Create account</p>
-                              </a>
-                            </div>
-                          </div>
-                        </>
-                </div>
+          </AuthFormBox>
         </Flex>
-        } 
-    </>
+        :
+        <Flex style={{ height: 'calc(100vh - 359px)', zIndex: '9999', position: 'absolute' }}>
+          <AuthFormBox>
+            {messsageInfo &&
+              <div class="notification is-success">
+                {messsageInfo}
+              </div>
+            }
+            <PageHeading>Login</PageHeading>
+            <>
+              <div className="field">
+                <div className="control">
+                  <LoginInput placeholder='email' type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
+                </div>
+              </div>
+              <div className="field">
+                <div className="control">
+                  <LoginInput placeholder='password' type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
+                </div>
+              </div>
+              <div className="field">
+                <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
+                  <p style={{fontFamily: 'CODE'}}>Forgot your password? </p>
+                </div>
+              </div>
+              <div className="field">
+                <div className="control has-text-centered">
+                  <button
+                    style={{marginBottom: '1rem'}}
+                    className="button"
+                    onClick={handleLogin}
+                  >SIGN IN</button>
+                </div>
+              </div>
+              <div className="field">
+                <div className="control has-text-centered">
+                  <a href="/../account/register">
+                    <p className="has-text-white">Create account</p>
+                  </a>
+                </div>
+              </div>
+            </>
+          </AuthFormBox>
+        </Flex>
+      }
+    </Flex>
   );
 };
 

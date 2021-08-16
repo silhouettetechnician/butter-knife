@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 const DefaultAddress = ({defaultAddress, addressesSize}) => {
     return (
         <div className="column has-text-centered">
-            <h3 className="subtitle has-text-centered has-text-weight-semibold">ACCOUNT DETAILS</h3>
+            <h3 style={{fontFamily: 'bangers'}}>ACCOUNT DETAILS</h3>
             {
                 defaultAddress != null && (
                     <div className="has-text-left">

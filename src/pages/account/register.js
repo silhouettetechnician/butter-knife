@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Formik, ErrorMessage } from 'formik'
 import gql from 'graphql-tag';
+import loginImg from '../../assets/loginImg.jpg'
+import { AuthFormBox, PageHeading, LoginInput } from '../../components/StyledComponents'
 import { Mutation } from '@apollo/client/react/components'
 import PasswordInput from '../../components/PasswordInput'
+import Flex from '../../styles/Flex'
 import AccountAuthWrapper from '../../layouts/AccountAuthWrapper'
-import * as Yup from 'yup'
 import { Link, navigate } from "gatsby";
 
 const CUSTOMER_REGISTER = gql`
@@ -25,71 +26,67 @@ mutation customerCreate($input: CustomerCreateInput!) {
 
 const RegisterForm = () => {
 
-    const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
-    return (<>
-      <section className="hero is-dark is-fullheight-with-navbar">
-      <div className="hero-body">
-        <div className="container">
-          <div className="columns is-centered">
-            <div className="column is-4 is-centered">
-              <h2 className=" title has-text-centered">Create</h2>
-              <Mutation mutation={CUSTOMER_REGISTER}>
-                {(customerLogin) => {
-                  return (
-                    <>
-                      <div className="field">
-                        <label className="label has-text-white" htmlFor="loginEmail">Email</label>
-                        <div className="control">
-                          <input className="input" type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
-                        </div>
-                      </div>
-                      <div className="field">
-                        <label className="label has-text-white" htmlFor="loginPassword">Password</label>
-                        <div className="control">
-                          <input className="input" type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
-                        </div>
-                      </div>
-                      <div className="field">
-                        <div className="control has-text-centered">
-                          <button
-                            className="button"
-                            onClick={() => {
-                              customerLogin({
-                                variables: {
-                                  "input": {
-                                    "email": email,
-                                    "password": password,
-                                  }
-                                }
-                              }).then((result) => {
-                                navigate(`/account/login`)
-                              })
-                            }}
-                          >CREATE</button>
-                        </div>
-                      </div>
-                    </>
-                  )
-                }}
-              </Mutation>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <Link to={`/account/login`}>Login</Link>
-</>
-    )
+  return (
+    <Flex justifyCenter >
+    <img src={loginImg} style={{ width: '100%', height: 'calc(100vh - 359px)', filter: 'blur(5px)', position: 'fixed' }} />
+    <Flex style={{ height: 'calc(100vh - 359px)', zIndex: '9999', position: 'absolute' }}>
+    <AuthFormBox>
+      <PageHeading>Create Account</PageHeading>
+      <Mutation mutation={CUSTOMER_REGISTER}>
+        {(customerLogin) => {
+          return (
+            <>
+              <div className="field">
+                <div className="control">
+                  <LoginInput placeholder="email" type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
+                </div>
+              </div>
+              <div className="field">
+                
+                <div className="control">
+                  <LoginInput placeholder="password" type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
+                </div>
+              </div>
+              <div className="field">
+                <div className="control has-text-centered">
+                  <button
+                    style={{marginBottom: '1rem'}}
+                    className="button"
+                    onClick={() => {
+                      customerLogin({
+                        variables: {
+                          "input": {
+                            "email": email,
+                            "password": password,
+                          }
+                        }
+                      }).then((result) => {
+                        navigate(`/account/login`)
+                      })
+                    }}
+                  >CREATE</button>
+                </div>
+              </div>
+            </>
+          )
+        }}
+      </Mutation>
+      <Link to={`/account/login`}>Login</Link>
+    </AuthFormBox>
+    </Flex>
+    </Flex>
+  )
 }
 
 const Register = () => {
-    return(
-        <AccountAuthWrapper>
-            <RegisterForm/>
-        </AccountAuthWrapper>
-    )
+  return (
+    <AccountAuthWrapper>
+      <RegisterForm />
+    </AccountAuthWrapper>
+  )
 }
 
 export default Register;

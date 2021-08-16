@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Query } from '@apollo/react-components'
 import gql from 'graphql-tag'
+import { PageHeading } from '../../components/StyledComponents'
 import StoreContext from '../../contexts/Context'
 import AuthWrapper from "../../layouts/AuthWrapper"
 import Logout from "./logout"
@@ -85,7 +86,7 @@ const Account = () => {
                     console.log(orders, 'orders')
                     return (
                         <>
-                            <h1 className="title has-text-centered">My Account</h1>
+                            <PageHeading>My Account</PageHeading>
                             {/* <Logout /> */}
                             <section className="hero is-medium">
                                 <div className="hero-body">

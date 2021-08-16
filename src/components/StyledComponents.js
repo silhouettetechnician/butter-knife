@@ -148,7 +148,7 @@ export const Heading1 = styled.h1`
 
 export const Footer = styled.footer`
         display: flex;
-        // position: absolute;
+        position: fixed;
         bottom: 0;
         width: 100%;
         height: 180px;
@@ -165,4 +165,23 @@ export const PageHeading = styled.h1`
 `
 export const LoginInput = styled.input`
         width: 70%;
+        height: 50px;
+        background: transparent;
+        border: 5px solid white;
+        margin: 25px;
+        font-family: CODE;
+        color: black;
+        &::placeholder {
+                font-family: CODE;
+                color: black;
+        }
+`
+export const AuthFormBox = styled.div`
+        background: rgba(255, 255, 255, 0.6);
+        margin-top: 30%;
+        width: 500px;
+        text-align: center;
+        padding: 10%;
+        border: 0.1px solid rgba(0,0,0,0.4);
+        border-radius: 2%;
 `

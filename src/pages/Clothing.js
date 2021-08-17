@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { graphql } from "gatsby"
 import { Link } from "gatsby"
 import { PageHeading } from '../components/StyledComponents'
 import ClothingItem from '../templates/ClothingItem'
+import StoreContext from '../contexts/Context'
 import FilterBar from '../components/FilterBar'
 import DropDown from '../components/DropDownSort'
+import Context from '../contexts/StoreContext'
 import Flex from '../styles/Flex';
 import _ from 'lodash'
 
@@ -17,7 +19,12 @@ const Clothing = ({ data }) => {
       ...edge.node
     }
   })
-
+  const context = useContext(StoreContext)
+  const {
+    addVariantToCart,
+    client, adding,
+  } = context
+  const {state} = useContext(Context)
   const [priceSort, setPriceSort] = useState('')
   const [search, setSearch] = useState('')
   const [productList, setProductList] = useState(productNodes)
@@ -55,18 +62,18 @@ const Clothing = ({ data }) => {
   }
 
   const filteredItems = getItems()
- 
+
   return (
     <>
-      <PageHeading>Clothing</PageHeading>
+      <PageHeading isDark={state.isDark}>Clothing</PageHeading>
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
-      <DropDown priceSort={priceSort} setPriceSort={setPriceSort}/>
+        <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
         <Flex width='20%' justifyCenter>
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
         </Flex>
         <Flex width='75%' margin='20px 0 0 0' justifyAround>
-          {filteredItems && filteredItems.sort((a,b) => priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
-          
+          {filteredItems && filteredItems.sort((a, b) => priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
+
         </Flex>
       </Flex>
     </>

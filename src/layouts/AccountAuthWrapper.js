@@ -4,8 +4,9 @@ import StoreContext from "../contexts/Context"
 
 
 const AccountAuthWrapper = (props, log) => {
-    const { customerAccessToken } = useContext(StoreContext);
+    const { customerAccessToken, client } = useContext(StoreContext);
     console.log(customerAccessToken, 'customerAccessToken')
+    console.log(client, 'client')
     const isAuthenticated = customerAccessToken && customerAccessToken.expiresAt && customerAccessToken.expiresAt > new Date().toISOString() ? true : false
     console.log(isAuthenticated, 'isAuthenticated')
 

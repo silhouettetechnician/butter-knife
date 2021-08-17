@@ -80,14 +80,13 @@ const Account = () => {
             >
                 {({ loading, error, data }) => {
                     console.log(error, 'error')
-                    if (loading) return <div>Fetching</div>
-                    if (error) return <div>Error</div>
+                    if (loading) return <div style={{fontFamily: 'bangers'}}>Fetching</div>
+                    if (error) return <div style={{fontFamily: 'bangers'}}>Error</div>
                     const { defaultAddress, orders, addresses } = data.customer
                     console.log(orders, 'orders')
                     return (
                         <>
                             <PageHeading>My Account</PageHeading>
-                            {/* <Logout /> */}
                             <section className="hero is-medium">
                                 <div className="hero-body">
                                     <div className="container">

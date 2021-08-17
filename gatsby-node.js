@@ -5,7 +5,7 @@ const path = require(`path`)
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const brandTemplate = path.resolve('./src/templates/IndividualBrand.js')
-  const storeTemplate = path.resolve('./src/components/IndividualClothingItem.js')
+  const storeTemplate = path.resolve('./src/layouts/IndividualClothingItem.js')
   // Query for all products in Shopify
   const result = await graphql(`
   {

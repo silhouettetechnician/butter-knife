@@ -41,7 +41,8 @@ export const Header = styled.header`
         vertical-align: baseline;
         position: relative;
         z-index: 9999;
-        background-color: #FCFCFC;
+        color: ${props => props.isDark ? 'white' : 'black'};
+        background-color: ${props => props.isDark ? '#1D1D1D' : '#FCFCFC'};
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -78,7 +79,7 @@ export const NavMenuItem = styled.span`
         text-decoration: none;
         // vertical-align: baseline;
         padding-bottom: 2px;
-        color: black;
+        color: ${props => props.isDark ? 'white !important' : 'black !important'};
         text-transform: uppercase;
         opacity: 1;
         margin-bottom: 4px;
@@ -89,7 +90,9 @@ export const NavMenuItem = styled.span`
         line-height: 17px;
         z-index: 100;
         cursor: pointer;
-    }
+        & > a{
+        color: ${props => props.isDark ? 'white !important' : 'black !important'};
+        }
 `
 export const CartContainer = styled.div`
         position: relative;
@@ -152,7 +155,7 @@ export const Footer = styled.footer`
         bottom: 0;
         width: 100%;
         height: 180px;
-        background: white;
+        background: ${props => props.isDark ? '#212121' : 'white'};
         z-index: 999999;
         align-items: center;
         justify-content: space-around; 
@@ -162,6 +165,7 @@ export const PageHeading = styled.h1`
         font-family: bangers;
         font-size: 2.3rem;
         text-align: center;
+        color: ${props => props.isDark ? 'white' : 'black'}
 `
 export const LoginInput = styled.input`
         width: 70%;

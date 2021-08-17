@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import gql from 'graphql-tag';
 import loginImg from '../../assets/loginImg.jpg'
 import { AuthFormBox, PageHeading, LoginInput } from '../../components/StyledComponents'
 import { Mutation } from '@apollo/client/react/components'
 import PasswordInput from '../../components/PasswordInput'
 import Flex from '../../styles/Flex'
+import StoreContext from '../../contexts/StoreContext'
 import AccountAuthWrapper from '../../layouts/AccountAuthWrapper'
 import { Link, navigate } from "gatsby";
 
@@ -28,7 +29,7 @@ const RegisterForm = () => {
 
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-
+  const {state} = useContext(StoreContext)
   return (
     <Flex justifyCenter >
     <img src={loginImg} style={{ width: '100%', height: 'calc(100vh - 359px)', filter: 'blur(45px)', position: 'fixed' }} />

@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { graphql, Link } from 'gatsby'
 import Flex from '../styles/Flex'
 import ClothingItem from '../templates/ClothingItem'
 import FilterBar from '../components/FilterBar'
 import { PageHeading } from '../components/StyledComponents'
 import DropDown from '../components/DropDownSort'
+import StoreContext from '../contexts/StoreContext'
 import _ from 'lodash'
 
 const Accessories = ({ data }) => {
@@ -22,7 +23,7 @@ const coloursCheckboxes = _.uniq(accessories.map(i => i.variants.map(variant => 
 const vendorCheckboxes = _.uniqBy(accessories, 'vendor').map(node => node.vendor)
 const checkboxesToFilter = { 'Type': productCheckboxes, 'Colour': coloursCheckboxes, 'Brand': vendorCheckboxes }
 const [checkedInputs, setCheckedInputs] = useState({ 'Type': [], 'Colour': [], 'Brand': [] })
-
+const {state} = useContext(StoreContext)
 const handleInputChange = (e, key) => {
   if (e.target.checked) {
     return setCheckedInputs({ ...checkedInputs, [key]: [...checkedInputs[key], e.target.value] })
@@ -54,7 +55,7 @@ const Product = (i) => {
 const filteredItems = getItems()
 return(
     <>
-    <PageHeading>Accessories</PageHeading>
+    <PageHeading isDark={state.isDark}>Accessories</PageHeading>
     <Flex width='100%' margin='20px 0 0 0' justifyAround>
     <DropDown priceSort={priceSort} setPriceSort={setPriceSort}/> 
       <Flex width='20%' justifyCenter>

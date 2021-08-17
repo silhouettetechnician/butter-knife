@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -10,6 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
+import StoreContext from '../contexts/StoreContext'
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
         },
         width: '100%',
         maxWidth: 360,
+        
     },
     checked: {}
 
@@ -27,23 +29,25 @@ const useStyles = makeStyles((theme) => ({
 
 const FilterBar = ({  checkboxesToFilter, handleInputChange}) => {
     const classes = useStyles();
+    const {state} = useContext(StoreContext)
     return (
         <div className={classes.root} style={{ margin: '2%', width: '75%' }}>
             {Object.entries(checkboxesToFilter).map(([key, val]) => 
-            <Accordion expanded>
+            <Accordion style={{backgroundColor: `${state.isDark ? '#212121' : 'white'}`}} expanded>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                <Typography className='filterLabel'>{key}</Typography>
+                <Typography style={{color: `${state.isDark ? 'white' : 'black'}`}} className='filterLabel'>{key}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     {val.map(i => {
                         const labelId = `checkbox-list-label-${i}`;
-                        return <ListItem key={i} role={undefined}>
+                        return <ListItem style={{color: `${state.isDark ? 'white' : 'black'}`}} key={i} role={undefined}>
                             <ListItemIcon>
                                 <Checkbox
+                                    style={{color: `${state.isDark ? 'white' : 'black'}`}}
                                     value={i}
                                     onChange={(e) => handleInputChange(e, key)}
                                     tabIndex={-1}

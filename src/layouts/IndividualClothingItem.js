@@ -7,7 +7,7 @@ import find from 'lodash/find'
 import StoreContext from '../contexts/Context'
 import ImageGallery from 'react-image-gallery';
 import Flex from '../styles/Flex'
-import VariantSelector from './VariantSelector'
+import VariantSelector from '../components/VariantSelector'
 import Provider from '../contexts/Provider'
 import 'react-awesome-slider/dist/styles.css'
 import toast, { Toaster } from 'react-hot-toast';
@@ -22,25 +22,21 @@ const IndividualClothingItem = ({ data, hit }) => {
         variants: [initialVariant],
         priceRange: { minVariantPrice },
     } = data.shopifyProduct    
-    console.log(StoreContext, 'context')
     const [val, setVal] = useState('')
     const [selectedOptions, setSelectedOptions] = useState({})
     const [variant, setVariant] = useState({ ...initialVariant })
     const product = data.shopifyProduct
+
     const [quantity, setQuantity] = useState(1)
-    const {
-        addVariantToCart,
-        client, adding,
-    } = useContext(StoreContext)
-console.log(client, 'client')
+
     const productVariant =
-    client.product.helpers.variantForOptions(product, variant) ||
+    client && client.product.helpers.variantForOptions(product, variant) ||
     variant
 
     const [available, setAvailable] = useState(productVariant.availableForSale)
     const checkAvailability = useCallback(
         productId => {
-            client.product.fetch(productId).then(fetchedProduct => {
+          client && client.product.fetch(productId).then(fetchedProduct => {
                 // this checks the currently selected variant for availability
                 const result = fetchedProduct.variants.filter(
                     variant => variant.id === productVariant.shopifyId

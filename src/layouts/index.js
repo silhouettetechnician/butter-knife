@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { Helmet } from 'react-helmet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +14,9 @@ import { AppContainer, DropDownBrands } from '../components/StyledComponents';
 import NavBar from './NavBar'
 import Footer from './Footer'
 import Flex from '../styles/Flex'
+import Context from '../contexts/StoreContext'
+import { Global, css } from '@emotion/core'
+import { useTheme, ThemeProvider, withTheme } from '@emotion/react'
 
 const ListItem = styled(Link)`
 width: 170px;
@@ -42,6 +45,8 @@ const Layout = ({ data, children }) => {
     const [checkout, setCheckout] = useState({ lineItems: [] })
     const [products, setProducts] = useState([])
     const [shop, setShop] = useState({})
+    const {state} = useContext(Context)
+    const theme = useTheme()
 
     const brandRender =
         <StaticQuery
@@ -68,6 +73,13 @@ const Layout = ({ data, children }) => {
         />
     return (
         <Provider>
+            <Global styles={
+                css`
+                    body {
+                        background-color: ${state.isDark ? theme.dark.background : theme.light.background}
+                    }
+                `
+            }/>
         <div style={{ position: 'relative' }}>
             <Notifications />
             <Helmet>

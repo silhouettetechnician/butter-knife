@@ -31,7 +31,7 @@ const RegisterForm = () => {
 
   return (
     <Flex justifyCenter >
-    <img src={loginImg} style={{ width: '100%', height: 'calc(100vh - 359px)', filter: 'blur(5px)', position: 'fixed' }} />
+    <img src={loginImg} style={{ width: '100%', height: 'calc(100vh - 359px)', filter: 'blur(45px)', position: 'fixed' }} />
     <Flex style={{ height: 'calc(100vh - 359px)', zIndex: '9999', position: 'absolute' }}>
     <AuthFormBox>
       <PageHeading>Create Account</PageHeading>

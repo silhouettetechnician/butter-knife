@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { PageHeading, LoginInput, AuthFormBox } from '../../components/StyledComponents'
 import Flex from '../../styles/Flex'
 // import SEO from "../../components/seo"
-import loginImg from '../../assets/loginI.jpg'
+import loginImg from '../../assets/loginImg.jpg'
 // import gql from 'graphql-tag';
 import { useMutation, gql } from '@apollo/client';
 import StoreContext from '../../contexts/Context'
@@ -76,7 +76,7 @@ const LoginForm = () => {
 
   return (
     <Flex justifyCenter >
-      <img src={loginImg} style={{ width: '100%', height: 'calc(100vh - 359px)', filter: 'blur(5px)', position: 'fixed' }} />
+      <img src={loginImg} style={{ width: '100%', height: 'calc(100vh - 359px)', filter: 'blur(45px)', position: 'fixed' }} />
       {passwordForgot ?
         <Flex style={{ height: 'calc(100vh - 359px)', zIndex: '9999', position: 'absolute' }}>
           <AuthFormBox>

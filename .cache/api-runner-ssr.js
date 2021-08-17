@@ -26,6 +26,10 @@ var plugins = [{
       name: 'gatsby-plugin-snipcart',
       plugin: require('/Users/silhouettetechnician/Documents/butter-knife/node_modules/gatsby-plugin-snipcart/gatsby-ssr'),
       options: {"plugins":[],"autopop":true},
+    },{
+      name: 'default-site-plugin',
+      plugin: require('/Users/silhouettetechnician/Documents/butter-knife/gatsby-ssr'),
+      options: {"plugins":[]},
     }]
 /* global plugins */
 // During bootstrap, we write requires at top of this file which looks like:

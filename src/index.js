@@ -3,22 +3,13 @@ import ReactDOM from 'react-dom';
 import 'normalize.css'
 import './App.css'
 import App from './pages/index';
+import Provider from './contexts/Provider'
 import * as serviceWorker from './serviceWorker';
-import { CartProvider } from 'use-shopping-cart';
-const stripe = window.Stripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY);
+
+
 ReactDOM.render(
-  
-  <CartProvider
-    mode="checkout-session"
-    stripe={stripe}
-    billingAddressCollection={false}
-    successUrl={'stripe.com'}
-    cancelUrl={'http://localhost:3333'}
-    currency={'GBP'}
-  >
     <App />
-  </CartProvider>
-,
+  ,
 
   document.getElementById('root')
 );

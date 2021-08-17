@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Flex from '../styles/Flex'
 import styled from '@emotion/styled'
-import StoreContext from '../contexts/StoreContext'
+import StoreContext from '../contexts/Context'
 import LineItem from './LineItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { motion } from "framer-motion"
@@ -32,9 +32,8 @@ font-size: 1.5rem;
 
 const Cart = ({ isOpen, setIsOpen }) => {
 
-  const {
-    store: { checkout },
-  } = useContext(StoreContext)
+  const context = useContext(StoreContext)
+  const { checkout } = context.store
 
   const handleCheckout = () => {
     window.open(checkout.webUrl)
@@ -42,7 +41,6 @@ const Cart = ({ isOpen, setIsOpen }) => {
   const lineItems = checkout.lineItems.map(item => (
     <LineItem key={item.id.toString()} item={item} />
   ))
-  console.log(checkout, 'checkout')
   return (
     <Wrapper justifyAround column alignCenter noWrap isOpen={isOpen} setIsOpen={setIsOpen}>
       <LogoHolder><div onClick={() => navigate('/')} style={{ cursor: 'pointer', fontFamily: 'bangers', fontSize: '2.5rem', textDecorationLine: 'line-through', textDecorationColor: 'rgb(254, 205, 47)' }}> SHOPPING TROLLEY <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder><FontAwesomeIcon style={{ position: 'absolute', top: '0', left: '0', margin: '20px', cursor: 'pointer' }} onClick={() => setIsOpen(false)} icon={faTimes} size='2x' />

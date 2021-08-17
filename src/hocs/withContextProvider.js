@@ -10,7 +10,6 @@ const client = Client.buildClient(
     storefrontAccessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
     domain: `${process.env.GATSBY_SHOP_NAME}.myshopify.com`,
   },
-  fetch
 )
 
 const ContextProvider = ({ children }) => {
@@ -19,9 +18,10 @@ const ContextProvider = ({ children }) => {
     adding: false,
     checkout: { lineItems: [] },
     products: [],
+    // customerAccessToken: '',
     shop: {},
   }
-
+  // customerAccessToken: getLocalStorageFromKey('customerAccessToken'),
   const [store, updateStore] = useState(initialStoreState)
   const isRemoved = useRef(false)
 
@@ -42,7 +42,6 @@ const ContextProvider = ({ children }) => {
           return { ...prevState, checkout }
         })
       }
-
       const createNewCheckout = () => store.client.checkout.create()
       const fetchCheckout = id => store.client.checkout.fetch(id)
 

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 // import gql from 'graphql-tag';
+import Zoom from 'react-img-zoom'
 import { Link, navigate } from 'gatsby'
 import { useMutation, gql } from '@apollo/client';
 import StoreContext from '../../contexts/Context'
@@ -17,8 +18,7 @@ const CUSTOMER_LOGOUT = gql`
 }
 `
 
-
-const Logout = () => {
+const Logout = ({isDark}) => {
     const { setValue, customerAccessToken } = useContext(StoreContext);
     const [handleLogout] = useMutation(CUSTOMER_LOGOUT)
 
@@ -45,7 +45,7 @@ const Logout = () => {
         >
             <p
                 className="has-text-centered has-text-underlined has-text-black"
-                style={{ textDecoration: "underline" }}
+                style={{ textDecoration: "underline", color: `${isDark ? 'white' : 'black'}` }}
             >
                 Log out
             </p>

@@ -90,6 +90,7 @@
     "react-helmet": "^6.1.0",
     "react-hot-toast": "^2.0.0",
     "react-image-gallery": "^1.2.5",
+    "react-img-zoom": "^0.1.0",
     "react-instantsearch-dom": "^6.11.0",
     "react-notify-toast": "^0.5.1",
     "react-player": "^2.9.0",

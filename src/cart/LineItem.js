@@ -18,10 +18,12 @@ export const LineHeading = styled.h4`
   font-family: BerlinXBold;
   text-transform: uppercase;
   font-size: 1rem;
+  color: ${props => props.isDark ? 'white' : 'black'};
 `
 export const Subtitle = styled.h4`
 font-family: graphikReg;
 font-size: 0.7rem;
+color: ${props => props.isDark ? 'white' : 'black'};
 `
 
 const LineItem = props => {
@@ -50,18 +52,18 @@ const LineItem = props => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper style={{color: `${props.isDark ? 'white' : 'black'}`}}>
       {console.log(item)}
       <Link style={{ cursor: 'pointer' }} to={`/clothing/${item.variant.product.handle}/`}>
         <Flex alignCenter>
           {variantImage}
           <Flex column>
-          <LineHeading>
+          <LineHeading isDark={props.isDark}>
             {item.title}
             {`  `}
             {item.variant.title === !'Default Title' ? item.variant.title : ''}
           </LineHeading>
-          <Subtitle>
+          <Subtitle isDark={props.isDark}>
             {selectedOptions}<br />
             {`Quantity: ${item.quantity}`}<br/>
             {`Price: ${item.variant.price}`}
@@ -69,7 +71,7 @@ const LineItem = props => {
           </Flex>
         </Flex>
       </Link>
-      <button style={{fontSize: '1.5rem !important'}}className='strike' onClick={handleRemove}>Remove</button>
+      <button style={{fontSize: '1.5rem !important', border: 'unset', color: `${props.isDark ? 'white': 'black'}`}}className='strike' onClick={handleRemove}>Remove</button>
     </Wrapper>
   )
 }

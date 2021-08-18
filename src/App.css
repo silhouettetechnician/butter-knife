@@ -448,6 +448,7 @@ a:hover {
   width: 200px;
   font-family: CODE;
   text-transform: uppercase;
+  margin-right: 20px;
 }
 
 .customModal {
@@ -456,4 +457,9 @@ a:hover {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.carousel-root{
+  width: 100%;
+  /* background-size: cover; */
 }

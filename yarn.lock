@@ -19701,6 +19701,11 @@ react-image-gallery@^1.2.5:
   resolved "https://registry.yarnpkg.com/react-image-gallery/-/react-image-gallery-1.2.7.tgz#2dfb83c52f32828a5340ca565f91bca58241fcfe"
   integrity sha512-ts7yMWykvZhslGMuvVAUk7a1dJIx9QtIwK6Clv8dOGxPsJid92FRrLvXbZDvkYcUyj48sHalnBhqU6mZNCB2jg==
 
+react-img-zoom@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-img-zoom/-/react-img-zoom-0.1.0.tgz#a74799324e925b54299cf2c63b2ea6c9fa00e20a"
+  integrity sha512-TkoDAKJQWuZX3w7+8loHUH/1aT2nNdCPSz2RR8t1Ckp86mrZ728Afm5oOyc7a3bnCJsUK1suaDvXBjpvwJEnrg==
+
 react-input-autosize@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-3.0.0.tgz#6b5898c790d4478d69420b55441fcc31d5c50a85"

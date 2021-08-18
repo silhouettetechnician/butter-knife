@@ -68,12 +68,12 @@ export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }
             <Header isDark={state.isDark}>
                 <AudioPlayerProvider>
                     <Flex justifyBetween>
-                        <button style={{padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}`}}onClick={() => dispatch({type: 'TOGGLE_DARK_MODE'})}>{state.isDark ? 'switch on' : 'switch off'}</button>
+                        <button style={{padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}`}}onClick={() => dispatch({type: 'TOGGLE_DARK_MODE'})}>{state.isDark ? 'lights on' : 'lights off'}</button>
                         <Player isDark={state.isDark} file='/realog.mp3' />
                         <ButtonHolder>
                             {isAuthenticated ?
                                 <div style={{padding: '15px'}}>
-                                    <Logout />
+                                    <Logout isDark={state.isDark}/>
                                 </div>
                                 :
                                 <Link to='/account/login' className='strike'>

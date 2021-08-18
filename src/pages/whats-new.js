@@ -54,9 +54,13 @@ const WhatsNew = ({ data }) => {
   const filteredItems = getItems()
   return (
     <>
-      <PageHeading isDark={state.isDark}>What's new</PageHeading>
+      <Flex justifyEnd width='100%'>
+        <Flex justifyBetween width='54%'>
+          <PageHeading isDark={state.isDark}>What's new</PageHeading>
+          <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
+        </Flex>
+      </Flex>
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
-        <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
         <Flex width='20%' justifyCenter>
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
         </Flex>

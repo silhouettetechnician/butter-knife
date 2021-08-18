@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import Flex from '../styles/Flex'
 import styled from '@emotion/styled'
 import StoreContext from '../contexts/Context'
+import Context from '../contexts/StoreContext'
 import LineItem from './LineItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { motion } from "framer-motion"
@@ -18,7 +19,8 @@ box-shadow: 0 0 5px 0 rgba(102, 102, 102, 0.5);
 top: 67px;
 right: 0;
 z-index: 99999;
-background-color: #fff;
+color: ${props => props.isDark ? 'white' : 'black'};
+background-color: ${props => props.isDark ? '#1D1D1D' : 'white'};
 transform: ${({ isOpen }) => isOpen ? 'translateX(0)' : 'translateX(100%)'};
 transition: transform 0.6s ease-in-out !important;  
 `
@@ -34,21 +36,22 @@ const Cart = ({ isOpen, setIsOpen }) => {
 
   const context = useContext(StoreContext)
   const { checkout } = context.store
-console.log(checkout, 'checkout in store')
+  const { state } = useContext(Context)
   const handleCheckout = () => {
     window.open(checkout.webUrl)
   }
   const lineItems = checkout.lineItems.map(item => (
-    <LineItem key={item.id.toString()} item={item} />
+    <LineItem isDark={state.isDark} key={item.id.toString()} item={item} />
   ))
   return (
-    <Wrapper justifyAround column alignCenter noWrap isOpen={isOpen} setIsOpen={setIsOpen}>
-      <LogoHolder><div onClick={() => navigate('/')} style={{ cursor: 'pointer', fontFamily: 'bangers', fontSize: '2.5rem', textDecorationLine: 'line-through', textDecorationColor: 'rgb(254, 205, 47)' }}> SHOPPING TROLLEY <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder><FontAwesomeIcon style={{ position: 'absolute', top: '0', left: '0', margin: '20px', cursor: 'pointer' }} onClick={() => setIsOpen(false)} icon={faTimes} size='2x' />
+    <Wrapper isDark={state.isDark} justifyAround column alignCenter noWrap isOpen={isOpen} setIsOpen={setIsOpen}>
+      <LogoHolder><div onClick={() => navigate('/')} style={{ color: `${state.isDark ? 'white' : 'black'}`, cursor: 'pointer', fontFamily: 'bangers', fontSize: '2.5rem', textDecorationLine: 'line-through', textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}` }}> SHOPPING TROLLEY <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder><FontAwesomeIcon style={{ color: `${state.isDark ? 'white' : 'black'}`, position: 'absolute', top: '0', left: '0', margin: '20px', cursor: 'pointer' }} onClick={() => setIsOpen(false)} icon={faTimes} size='2x' />
       <div style={{ overflow: 'auto', margin: '20px', width: '80%' }}>{checkout.lineItems.length !== 0 ? lineItems : 'Trolley Empty :('}</div>
       <div>
         <CartHeading>Total: <p>£ {checkout.totalPrice}</p></CartHeading>
       </div>
       <button
+        style={{ border: 'unset', color: `${state.isDark ? 'white' : '#000'} ` }}
         onClick={handleCheckout}
         disabled={checkout.lineItems.length === 0}
       >

@@ -5,11 +5,24 @@ import { PageHeading } from '../components/StyledComponents'
 import ClothingItem from '../templates/ClothingItem'
 import StoreContext from '../contexts/Context'
 import FilterBar from '../components/FilterBar'
-import DropDown from '../components/DropDownSort'
+import VariantSelector from '../components/VariantSelector'
 import Context from '../contexts/StoreContext'
 import Flex from '../styles/Flex';
 import _ from 'lodash'
-
+const options = [
+  {
+    value: 'featured',
+    label: 'Featured'
+  },
+  {
+    value: 'price low',
+    label: 'Price low'
+  },
+  {
+    value: 'price high',
+    label: 'Price high'
+  },
+]
 const Clothing = ({ data }) => {
   const {
     allShopifyProduct
@@ -66,15 +79,18 @@ const Clothing = ({ data }) => {
 
   return (
     <>
+      <Flex justifyEnd width='100%'>
+        <Flex justifyBetween width='54%'>
       <PageHeading isDark={state.isDark}>Clothing</PageHeading>
+        <VariantSelector onChange={(values) => setPriceSort(values)} options={options} value={priceSort} setPriceSort={setPriceSort} />
+        </Flex>
+        </Flex>
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
-        <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
         <Flex width='20%' justifyCenter>
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
         </Flex>
         <Flex width='75%' margin='20px 0 0 0' justifyAround>
           {filteredItems && filteredItems.sort((a, b) => priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
-
         </Flex>
       </Flex>
     </>

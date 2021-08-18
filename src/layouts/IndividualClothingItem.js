@@ -26,17 +26,17 @@ const IndividualClothingItem = ({ data, hit }) => {
     const [selectedOptions, setSelectedOptions] = useState({})
     const [variant, setVariant] = useState({ ...initialVariant })
     const product = data.shopifyProduct
-
+    const context = useContext(StoreContext)
     const [quantity, setQuantity] = useState(1)
-
+    const { store, addVariantToCart } = context
     const productVariant =
-    client && client.product.helpers.variantForOptions(product, variant) ||
+    store.client.product.helpers.variantForOptions(product, variant) ||
     variant
-
+    console.log(store, 'store')
     const [available, setAvailable] = useState(productVariant.availableForSale)
     const checkAvailability = useCallback(
         productId => {
-          client && client.product.fetch(productId).then(fetchedProduct => {
+          store.client && store.client.product.fetch(productId).then(fetchedProduct => {
                 // this checks the currently selected variant for availability
                 const result = fetchedProduct.variants.filter(
                     variant => variant.id === productVariant.shopifyId
@@ -46,7 +46,7 @@ const IndividualClothingItem = ({ data, hit }) => {
                 }
             })
         },
-        [client.product, productVariant.shopifyId]
+        [store.client.product, productVariant.shopifyId]
     )
 
     useEffect(() => {
@@ -82,8 +82,6 @@ const IndividualClothingItem = ({ data, hit }) => {
         await addVariantToCart(productVariant.shopifyId, quantity)
     }
 
-    console.log(variant, 'variant')
-    console.log(options, 'options')
 
     const imagesMap = images.map((i, index) => ({ image: i.originalSrc, text: i.originalSrc }))
     const imageRender = imagesMap.map((item, index) => <ImageGallery key={index} data-src={item} alt={index} />)

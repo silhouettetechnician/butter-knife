@@ -39,7 +39,7 @@ const FilterBar = ({  checkboxesToFilter, handleInputChange}) => {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                <Typography style={{color: `${state.isDark ? 'white' : 'black'}`}} className='filterLabel'>{key}</Typography>
+                <Typography style={{color: `${state.isDark ? 'white' : 'black'}`, textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}`}} className='filterLabel'>{key}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     {val.map(i => {

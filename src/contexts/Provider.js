@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { navigate } from "gatsby"
 import StoreContext, { defaultStoreContext } from './Context'
+import toast, { Toaster } from 'react-hot-toast';
 const isBrowser = typeof window !== 'undefined'
 
 const Provider = ({ children }) => {
@@ -60,6 +61,7 @@ const Provider = ({ children }) => {
                     updateStore(state => {
                         return { ...state, adding: true }
                     })
+                    toast.success('Successfully added to trolley')
                     const { checkout, client } = store
                     const checkoutId = checkout.id
                     const lineItemsToUpdate = [
@@ -68,6 +70,7 @@ const Provider = ({ children }) => {
                     return client.checkout
                         .addLineItems(checkoutId, lineItemsToUpdate)
                         .then(checkout => {
+                            console.log(checkout)
                             updateStore(state => {
                                 return { ...state, checkout, adding: true }
                             })

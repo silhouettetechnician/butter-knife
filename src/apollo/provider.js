@@ -4,7 +4,8 @@ import { ApolloProvider } from '@apollo/client';
 import client from './client';
 import GlobalStateProvider from '../hocs/GlobalStateProvider';
 import { useTheme, ThemeProvider, withTheme } from '@emotion/react'
+import Provider from '../contexts/Provider'
 import {theme} from '../theme/theme'
 export const wrapRootElement = ({ element }) => (
-  <GlobalStateProvider><ThemeProvider theme={theme}><ApolloProvider client={client}>{element}</ApolloProvider></ThemeProvider></GlobalStateProvider>
+  <Provider><ApolloProvider client={client}><GlobalStateProvider><ThemeProvider theme={theme}>{element}</ThemeProvider></GlobalStateProvider></ApolloProvider></Provider>
 );

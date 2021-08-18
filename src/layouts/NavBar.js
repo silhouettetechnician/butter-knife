@@ -47,7 +47,7 @@ const Anchor = styled(Link)`
 `
 const useQuantity = () => {
     const context = useContext(StoreContext)
-    const { checkout } = context
+    const { checkout } = context.store
     const items = checkout ? checkout.lineItems : []
     const total = reduce(items, (acc, item) => acc + item.quantity, 0)
     return [total !== 0, total]
@@ -96,7 +96,7 @@ export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }
                     {/* <NavMenuItem className='strike'><Link style={{fontFamily: 'BerlinBold'}}to='/vintage'>Vintage</Link></NavMenuItem><Divider /> */}
                     <NavMenuItem isDark={state.isDark}className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/vintage'>Souvenirs</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark}className='strike' onClick={() => setIsOpen(!open)}>{hasItems && <CartCounter>{quantity}</CartCounter>}
-                        Trolley <img src={Trolley} alt='cart' style={{ width: '15px', paddingBottom: '5px' }} />
+                        Trolley <img src={Trolley} alt='cart' style={{ color: `${state.isDark ? 'white' : 'black'}`, width: '15px', paddingBottom: '5px' }} />
                     </NavMenuItem>
                     {isAuthenticated && <> <Divider /><NavMenuItem isDark={state.isDark}><Link className='strike' to='/account'>My Account</Link></NavMenuItem></>}
                 </Navigation>

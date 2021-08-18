@@ -76,9 +76,9 @@ const LoginForm = () => {
 
   return (
     <Flex justifyCenter >
-      <img src={loginImg} style={{ width: '100%', height: 'calc(100vh - 359px)', filter: 'blur(45px)', position: 'fixed' }} />
+      <img src={loginImg} style={{ width: '100%', filter: 'blur(45px)' }} />
       {passwordForgot ?
-        <Flex style={{ height: 'calc(100vh - 359px)', zIndex: '9999', position: 'absolute' }}>
+        <Flex style={{ height: 'calc(100vh - 359px)', position: 'absolute' }}>
           <AuthFormBox>
           <PageHeading>RESET YOUR PASSWORD</PageHeading>
           <p style={{fontFamily: 'CODE', marginTop: '1rem'}}>We will send you an email to reset your password.</p>

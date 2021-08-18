@@ -24,6 +24,7 @@ const Clothing = ({ data }) => {
     addVariantToCart,
     client, adding,
   } = context
+  console.log(client, 'client in clothing')
   const {state} = useContext(Context)
   const [priceSort, setPriceSort] = useState('')
   const [search, setSearch] = useState('')

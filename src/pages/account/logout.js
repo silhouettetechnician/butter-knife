@@ -34,7 +34,7 @@ const Logout = () => {
             setValue({
                 customerAccessToken: ''
             })
-            navigate('/account/login')
+            navigate('/whats-new')
         })
     }
     return (

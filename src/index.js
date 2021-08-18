@@ -8,9 +8,9 @@ import * as serviceWorker from './serviceWorker';
 
 
 ReactDOM.render(
-  <Provider>
+  // <Provider>
     <App />
-    </Provider>
+    {/* </Provider> */}
   ,
 
   document.getElementById('root')

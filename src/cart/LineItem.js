@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import Flex from '../styles/Flex'
 
 
-import StoreContext from '../contexts/StoreContext'
+import StoreContext from '../contexts/Context'
 
 export const Wrapper = styled.div`
   display: flex;

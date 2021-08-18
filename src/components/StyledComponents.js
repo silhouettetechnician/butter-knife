@@ -1,14 +1,5 @@
 import React from 'react'
 import styled from "@emotion/styled/macro"
-// import {css} from "@emotion/core"
-// import styled from "@emotion/styled"
-
-// export const Container = styled.section`
-//         position: relative;
-//         -webkit-calc(100vh - 212px);
-//         height: calc(100vh - 212px);
-//         width: 100%;
-// `
 export const DropDownBrands = styled.section`
         // display: none;
         // -webkit-calc(100% - 212px);
@@ -151,11 +142,11 @@ export const Heading1 = styled.h1`
 
 export const Footer = styled.footer`
         display: flex;
-        position: fixed;
-        bottom: 0;
+        // position: fixed;
+        // bottom: 0;
         width: 100%;
         height: 180px;
-        background: ${props => props.isDark ? '#212121' : 'white'};
+        background: ${props => props.isDark ? '#1D1D1D' : 'white'};
         z-index: 999999;
         align-items: center;
         justify-content: space-around; 
@@ -182,7 +173,7 @@ export const LoginInput = styled.input`
 `
 export const AuthFormBox = styled.div`
         background: rgba(255, 255, 255, 0.6);
-        margin-top: 30%;
+        margin-top: 12%;
         width: 500px;
         text-align: center;
         padding: 10%;

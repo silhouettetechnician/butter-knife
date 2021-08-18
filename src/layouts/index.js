@@ -80,7 +80,7 @@ const Layout = ({ data, children }) => {
                     }
                 `
             }/>
-        <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative', minHeight: '100vh' }}>
             <Notifications />
             <Helmet>
                 <html lang='en' />
@@ -98,10 +98,10 @@ const Layout = ({ data, children }) => {
                 {children}
                 {/* {React.cloneElement(children, {addVariantToCart: addVariantToCart})} */}
             </Flex>
+            <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
             {
                 window.location.pathname !== '/' && <Footer />
             }
-            <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
         </Provider>
     )

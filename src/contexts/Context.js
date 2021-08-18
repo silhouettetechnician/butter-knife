@@ -5,7 +5,7 @@ const client = Client.buildClient({
   storefrontAccessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
   domain: `${process.env.GATSBY_SHOP_NAME}.myshopify.com`,
 })
-
+console.log(client, 'client')
 export const defaultStoreContext = {
   client,
   adding: true,

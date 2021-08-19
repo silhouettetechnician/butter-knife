@@ -60,7 +60,7 @@ const LoginForm = () => {
     setValue(value)
   }
 
-  const handleLogin = res => {
+  const handleLogin = actions => {
     customerLogin({
       variables: {
         "input": {
@@ -69,11 +69,15 @@ const LoginForm = () => {
         }
       }
     }).then(res => {
-      handleCustomerAccessToken(res.data.customerAccessTokenCreate.customerAccessToken)
-    }).catch(err =>{
-      parseErrors(err.data.customerAccessTokenCreate.customerUserErrors)
-    })
-  }
+      if(res.data.customerAccessTokenCreate.customerAccessToken){
+        handleCustomerAccessToken(res.data.customerAccessTokenCreate.customerAccessToken)
+      }
+      else{
+        const errors = parseErrors(res.data.customerAccessTokenCreate.customerUserErrors)
+        actions.setErrors(errors)
+      }
+  })}
+
   const handleResetPassword = res => {
     forgotPassword({
       variables: {
@@ -101,7 +105,7 @@ const LoginForm = () => {
               validationSchema={FormSchema}
               onSubmit={
                 (values, actions) => {
-                  handleLogin()
+                  handleLogin(actions)
                   }
                     }
               render={({

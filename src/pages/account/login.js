@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { PageHeading, LoginInput, AuthFormBox } from '../../components/StyledComponents'
 import Flex from '../../styles/Flex'
+import { Formik, ErrorMessage } from 'formik'
 // import SEO from "../../components/seo"
+import { parseErrors } from '../../utils/formErrors'
 import loginImg from '../../assets/loginImg.jpg'
-// import gql from 'graphql-tag';
+import * as Yup from 'yup'
 import { useMutation, gql } from '@apollo/client';
 import StoreContext from '../../contexts/Context'
 import AccountAuthWrapper from "../../layouts/AccountAuthWrapper"
@@ -45,6 +47,13 @@ const LoginForm = () => {
 
   const [messsageInfo, setMessageInfo] = useState("");
 
+  const FormSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Invalid email address')
+      .required('Email is Required'),
+    password: Yup.string()
+      .required('Password is Required'),
+  })
 
   const [password, setPassword] = useState(null);
   const handleCustomerAccessToken = (value) => {
@@ -61,6 +70,8 @@ const LoginForm = () => {
       }
     }).then(res => {
       handleCustomerAccessToken(res.data.customerAccessTokenCreate.customerAccessToken)
+    }).catch(err =>{
+      parseErrors(err.data.customerAccessTokenCreate.customerUserErrors)
     })
   }
   const handleResetPassword = res => {
@@ -80,89 +91,104 @@ const LoginForm = () => {
       {passwordForgot ?
         <Flex style={{ height: 'calc(100vh - 359px)', position: 'absolute' }}>
           <AuthFormBox>
-          <PageHeading>RESET YOUR PASSWORD</PageHeading>
-          <p style={{fontFamily: 'CODE', marginTop: '1rem'}}>We will send you an email to reset your password.</p>
-          <div className="field">
-            <div className="control">
-              <LoginInput placeholder="email" type="email" id="loginEmail" onChange={(e) => setEmailReset(e.target.value)} />
-            </div>
-          </div>
-          <div className="field">
-            <div className="control has-text-centered">
+            <PageHeading>RESET YOUR PASSWORD</PageHeading>
+            <p style={{ fontFamily: 'CODE', marginTop: '1rem' }}>We will send you an email to reset your password.</p>
+            <Formik
+              initialValues={{
+                email: '',
+                password: '',
+              }}
+              validationSchema={FormSchema}
+              onSubmit={
+                (values, actions) => {
+                  handleLogin()
+                  }
+                    }
+              render={({
+                handleSubmit,
+                handleChange,
+                handleBlur,
+                isSubmitting,
+                values,
+                errors,
+                touched
+              })  => (
+                <>
+              <LoginInput placeholder="email" name="email" type="email" id="loginEmail" onChange={(e) => setEmailReset(e.target.value)} />
+              <ErrorMessage component="input" name="email" />
               <button
                 style={{marginBottom: '1rem'}}
                 className="button"
                 onClick={handleResetPassword}
               >SUBMIT</button>
-            </div>
-            <div className="field">
               <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => () => setPasswordForgot(!passwordForgot)}>
                 <p style={{fontFamily: 'CODE'}}>Cancel</p>
               </div>
-            </div>
-          </div>
+              </>
+              )}>
+              </Formik>
           </AuthFormBox>
         </Flex>
-        :
-        <Flex style={{ height: 'calc(100vh - 359px)', zIndex: '9999', position: 'absolute' }}>
-          <AuthFormBox>
-            {messsageInfo &&
-              <div class="notification is-success">
-                {messsageInfo}
-              </div>
-            }
-            <PageHeading>Login</PageHeading>
-            <>
-              <div className="field">
-                <div className="control">
-                  <LoginInput placeholder='email' type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
+          :
+          <Flex style={{ height: 'calc(100vh - 359px)', zIndex: '9999', position: 'absolute' }}>
+            <AuthFormBox>
+              {messsageInfo &&
+                <div class="notification is-success">
+                  {messsageInfo}
                 </div>
-              </div>
-              <div className="field">
-                <div className="control">
-                  <LoginInput placeholder='password' type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
+              }
+              <PageHeading>Login</PageHeading>
+              <>
+                <div className="field">
+                  <div className="control">
+                    <LoginInput placeholder='email' type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
+                  </div>
                 </div>
-              </div>
-              <div className="field">
-                <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
-                  <p style={{fontFamily: 'CODE'}}>Forgot your password? </p>
+                <div className="field">
+                  <div className="control">
+                    <LoginInput placeholder='password' type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
+                  </div>
                 </div>
-              </div>
-              <div className="field">
-                <div className="control has-text-centered">
-                  <button
-                    style={{marginBottom: '1rem'}}
-                    className="button"
-                    onClick={handleLogin}
-                  >SIGN IN</button>
+                <div className="field">
+                  <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
+                    <p style={{ fontFamily: 'CODE' }}>Forgot your password? </p>
+                  </div>
                 </div>
-              </div>
-              <div className="field">
-                <div className="control has-text-centered">
-                  <a href="/../account/register">
-                    <p className="has-text-white">Create account</p>
-                  </a>
+                <div className="field">
+                  <div className="control has-text-centered">
+                    <button
+                      style={{ marginBottom: '1rem' }}
+                      className="button"
+                      onClick={handleLogin}
+                    >SIGN IN</button>
+                  </div>
                 </div>
-              </div>
-            </>
-          </AuthFormBox>
-        </Flex>
+                <div className="field">
+                  <div className="control has-text-centered">
+                    <a href="/../account/register">
+                      <p className="has-text-white">Create account</p>
+                    </a>
+                  </div>
+                </div>
+              </>
+            </AuthFormBox>
+          </Flex>
       }
-    </Flex>
+        </Flex>
   );
 };
 
 
 const Login = () => {
   return (
-    <>
-      {/* <SEO title="Login" /> */}
-      <AccountAuthWrapper log={false}>
-        <LoginForm />
-      </AccountAuthWrapper>
-    </>
-  );
+      <>
+        {/* <SEO title="Login" /> */}
+        <AccountAuthWrapper log={false}>
+          <LoginForm />
+        </AccountAuthWrapper>
+      </>
+      );
 };
 
-export default Login;
+      export default Login;
 

@@ -5,25 +5,12 @@ import { PageHeading } from '../components/StyledComponents'
 import ClothingItem from '../templates/ClothingItem'
 import StoreContext from '../contexts/Context'
 import FilterBar from '../components/FilterBar'
-import VariantSelector from '../components/VariantSelector'
+import DropDown from '../components/DropDownSort'
 import Context from '../contexts/StoreContext'
 import Flex from '../styles/Flex';
 import _ from 'lodash'
-const options = [
-  {
-    value: 'featured',
-    label: 'Featured'
-  },
-  {
-    value: 'price low',
-    label: 'Price low'
-  },
-  {
-    value: 'price high',
-    label: 'Price high'
-  },
-]
-const Clothing = ({ data }) => {
+
+const Mens = ({ data }) => {
   const {
     allShopifyProduct
   } = data
@@ -37,7 +24,6 @@ const Clothing = ({ data }) => {
     addVariantToCart,
     client, adding,
   } = context
-  console.log(client, 'client in clothing')
   const {state} = useContext(Context)
   const [priceSort, setPriceSort] = useState('')
   const [search, setSearch] = useState('')
@@ -79,11 +65,10 @@ const Clothing = ({ data }) => {
 
   return (
     <>
-      <Flex justifyEnd width='100%'>
-        <Flex justifyBetween width='54%'>
-      <PageHeading isDark={state.isDark}>Clothing</PageHeading>
-        <VariantSelector onChange={(values) => setPriceSort(values)} options={options} value={priceSort} setPriceSort={setPriceSort} />
-        </Flex>
+      <Flex justifyCenter width='100%'>
+      <PageHeading isDark={state.isDark}>Mens</PageHeading>
+    <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
+    
         </Flex>
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
         <Flex width='20%' justifyCenter>
@@ -97,11 +82,11 @@ const Clothing = ({ data }) => {
   )
 }
 
-export default Clothing
+export default Mens
 
 export const query = graphql`
 {
-  allShopifyProduct(filter: {tags: {eq: "Clothing"}}) {
+  allShopifyProduct(filter: {tags: {eq: "Mens"}}) {
     edges {
       node {
         id

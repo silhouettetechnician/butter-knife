@@ -65,12 +65,13 @@ const IndividualClothingItem = ({ data, hit }) => {
     setQuantity(target.value)
   }
 
-  const handleOptionChange = (optionIndex, item) => {
+  const handleOptionChange = (optionIndex, { target }) => {
+    const { value } = target
     const currentOptions = [...variant.selectedOptions]
 
     currentOptions[optionIndex] = {
       ...currentOptions[optionIndex],
-      item,
+      value,
     }
 
     const selectedVariant = find(variants, ({ selectedOptions }) =>
@@ -92,17 +93,20 @@ const IndividualClothingItem = ({ data, hit }) => {
   return (
     <Flex width='100%' justifyAround>
       <Toaster position='top-right' />
-      <Flex justifyCenter width='50%' height='100vh'>
+      <Flex justifyCenter width='40%' height='auto'>
         <Carousel showThumbs={true}>
-        {imagesMap.map(i => (
-          <Zoom
-            style={{backgroundSize: 'cover !important'}}
-            img={i.image}
-            zoomScale={3}
-            width={900}
-            height={600}
-          />
-        ))}
+          {imagesMap.map(i => (
+            <img 
+              src={i.image}
+              alt={i.image}/>
+            // <Zoom
+            //   // style={{ backgroundSize: 'contain !important' }}
+            //   img={i.image}
+            //   zoomScale={3}
+            //   width={700}
+            //   height={600}
+            // />
+          ))}
         </Carousel>
         {/* <SliderImage data={imagesMap}
           width="1000px"
@@ -128,11 +132,9 @@ const IndividualClothingItem = ({ data, hit }) => {
           return <div className="column">
             <VariantSelector
               key={options.id.toString()}
-              // onChange={(values) => setVal(values)}
-              onChange={(values) => { setVal(values); handleOptionChange(index, val) }}
+              onChange={(e) => handleOptionChange(index, e)}
+              options={options}
               fullWidth={options.length > 1}
-              value={val}
-              options={dataOptions}
             />
           </div>
         })}

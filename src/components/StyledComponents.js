@@ -1,4 +1,5 @@
 import React from 'react'
+import { Field } from 'formik';
 import styled from "@emotion/styled/macro"
 export const DropDownBrands = styled.section`
         // display: none;
@@ -158,7 +159,7 @@ export const PageHeading = styled.h1`
         text-align: center;
         color: ${props => props.isDark ? 'white' : 'black'}
 `
-export const LoginInput = styled.input`
+export const LoginInput = styled(Field)`
         width: 70%;
         height: 50px;
         background: transparent;
@@ -171,7 +172,7 @@ export const LoginInput = styled.input`
                 color: black;
         }
 `
-export const AuthFormBox = styled.div`
+export const AuthFormBox = styled.form`
         background: rgba(255, 255, 255, 0.6);
         margin-top: 12%;
         width: 500px;

@@ -460,6 +460,6 @@ a:hover {
 }
 
 .carousel-root{
-  width: 100%;
-  /* background-size: cover; */
+  /* width: 100%; */
+  background-size: cover;
 }

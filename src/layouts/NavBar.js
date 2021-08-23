@@ -90,7 +90,8 @@ export const NavBar = ({ open, setOpen, isOpen, setIsOpen, catOpen, setCatOpen }
                 <Navigation>
                     <NavMenuItem isDark={state.isDark}className='strike'><Link to='/whats-new'>What's new</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark}className='strike' onClick={() => setOpen(!open)}><span>Designers</span></NavMenuItem><Divider />
-                    <NavMenuItem isDark={state.isDark}className='strike' onClick={() => setCatOpen(!catOpen)}><Link to='/clothing'>Clothing</Link></NavMenuItem><Divider />
+                    <NavMenuItem isDark={state.isDark}className='strike' onClick={() => setCatOpen(!catOpen)}><Link to='/mens'>Mens</Link></NavMenuItem><Divider />
+                    <NavMenuItem isDark={state.isDark}className='strike' onClick={() => setCatOpen(!catOpen)}><Link to='/womens'>Womens</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark}className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/footwear'>Footwear</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark}className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/accessories'>Accessories</Link></NavMenuItem><Divider />
                     {/* <NavMenuItem className='strike'><Link style={{fontFamily: 'BerlinBold'}}to='/vintage'>Vintage</Link></NavMenuItem><Divider /> */}

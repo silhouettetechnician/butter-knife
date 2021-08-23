@@ -57,7 +57,7 @@
     "gatsby-plugin-sass": "^4.2.0",
     "gatsby-plugin-sharp": "^3.2.1",
     "gatsby-plugin-snipcart": "^1.1.2",
-    "gatsby-source-contentful": "^5.1.2",
+    "gatsby-source-contentful": "^5.12.0",
     "gatsby-source-filesystem": "^3.2.0",
     "gatsby-source-graphql": "^3.11.0",
     "gatsby-source-shopify": "^4.5.0",

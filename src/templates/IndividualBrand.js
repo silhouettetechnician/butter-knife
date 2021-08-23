@@ -28,7 +28,7 @@ const BrandHeading = styled.p`
     `
 const BrandCaption = styled.p`
     font-family: BerlinBold;
-    font-size: 0.7rem;
+    font-size: 1rem;
     letter-spacing: 1px;
     text-transform: uppercase;
     text-align: center;
@@ -52,7 +52,7 @@ const IndividualBrand = ({ pageContext, vendor }) => {
   return (
     <Flex width='100%'>
       <Flex style={{ width: '100%' }}>
-        <div style={{ padding: '15px', width:'600px', position: 'absolute', background: 'rgba(0,0,0,0.4)', top: '32%', left: '8%' }}>
+        <div style={{ padding: '15px', width:'600px', position: 'absolute', background: 'rgba(0,0,0,0.4)', top: '10%', left: '8%' }}>
           <BrandHeading color='white'>{data.title}</BrandHeading>
           <BrandCaption>{data.description}</BrandCaption>
         </div>

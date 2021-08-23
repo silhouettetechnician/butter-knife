@@ -46,14 +46,6 @@ plugins: [
   `gatsby-transformer-sharp`,
   'gatsby-plugin-react-helmet',
 
-  // {
-  //   resolve: `gatsby-source-stripe`,
-  //   options: {
-  //     objects: ["Price"],
-  //     secretKey: process.env.STRIPE_SECRET_KEY,
-  //     downloadFiles: true,
-  //   },
-  // },
   {
     resolve: `gatsby-source-contentful`,
     options: {

@@ -1,21 +1,38 @@
 import React from 'react' /* eslint-disable */
-import DropDown from '../components/DropDownSort'
-const VariantSelector = ({ key, onChange, options, value, name, disabled, placeholder }) => {
-  if (options.name === 'Title') return null
-  console.log(options, options)
-  return (
-    <>
-      <DropDown
-        style={{ marginRight: '10px !important' }}
-        onChange={onChange}
-        value={value}
-        name={name}
-        key={options.id}
-        disabled={disabled}
-        data={options}
-      />
 
-    </>
+const VariantSelector = ({ key, onChange, options, disabled, placeholder }) => {
+  if (options.name === 'Title') return null
+
+  return (
+    <div className="field ">
+      <label className="label has-text-white">{options.name} </label>
+
+      <div className="control">
+        <div className="select is-fullwidth">
+          <select
+            onBlur={onChange}
+            name={options.name}
+            key={options.id}
+            disabled={disabled}
+          >
+            {placeholder && (
+              <option value="" selected disabled hidden>
+                {placeholder}
+              </option>
+            )}
+            {options.values.map((value, index) => (
+              <option
+                key={`${options.name}-${value}`}
+                value={value}
+                className="is-medium"
+              >
+                {`${value}`}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </div>
   )
 }
 

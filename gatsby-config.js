@@ -3,6 +3,7 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+
 const myQuery = `{
   pages: {
   allShopifyProduct {

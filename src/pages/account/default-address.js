@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from "gatsby"
 
-const DefaultAddress = ({defaultAddress, addressesSize}) => {
+const DefaultAddress = ({ defaultAddress, addressesSize, isDark }) => {
     return (
         <div className="column has-text-centered">
-            <h3 style={{fontFamily: 'bangers'}}>ACCOUNT DETAILS</h3>
+            <h3 style={{ fontFamily: 'bangers' }}>ACCOUNT DETAILS</h3>
             {
                 defaultAddress != null && (
-                    <div className="has-text-left">
+                    <div style={{ fontFamily: 'CODE' }} className="has-text-left">
                         <p className="has-text-grey">{defaultAddress.firstName} {defaultAddress.lastName}</p>
                         <p className="has-text-grey">{defaultAddress.address1}</p>
                         <p className="has-text-grey">{defaultAddress.zip}, {defaultAddress.city}</p>
@@ -16,8 +16,9 @@ const DefaultAddress = ({defaultAddress, addressesSize}) => {
                 )
             }
             <br />
-            <Link to="account/addresses">
+            <Link to="/account/addresses">
                 <button
+                    style={{ border: 'unset', color: `${isDark ? 'white' : 'black'}` }}
                     className="button is-dark"
                 >
                     View Addresses ({addressesSize})

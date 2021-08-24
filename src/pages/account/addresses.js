@@ -38,7 +38,7 @@ const Addresses = () => {
     const { customerAccessToken } = useContext(StoreContext);
 
     return (
-        <Layout>
+        <AuthWrapper>
             <Query
                 query={CUSTOMER_ADDRESS}
                 variables={{
@@ -83,7 +83,7 @@ const Addresses = () => {
                     )
                 }}
             </Query>
-        </Layout>
+        </AuthWrapper>
     );
 };
 

@@ -3,8 +3,8 @@ import { Query } from '@apollo/react-components'
 import gql from 'graphql-tag'
 import { PageHeading } from '../../components/StyledComponents'
 import StoreContext from '../../contexts/Context'
+import Context from '../../contexts/StoreContext'
 import AuthWrapper from "../../layouts/AuthWrapper"
-import Logout from "./logout"
 import OrdersList from "./orders-list"
 import DefaultAddress from "./default-address"
 
@@ -70,6 +70,7 @@ query($customerAccessToken: String!) {
 `
 const Account = () => {
     const { customerAccessToken } = useContext(StoreContext);
+    const { state } = useContext(Context);
     return (
         <AuthWrapper>
             <Query
@@ -79,22 +80,21 @@ const Account = () => {
                 }}
             >
                 {({ loading, error, data }) => {
-                    console.log(error, 'error')
-                    if (loading) return <div style={{fontFamily: 'bangers'}}>Fetching</div>
-                    if (error) return <div style={{fontFamily: 'bangers'}}>Error</div>
+                    if (loading) return <div style={{ fontFamily: 'bangers' }}>Fetching</div>
+                    if (error) return <div style={{ fontFamily: 'bangers' }}>Error</div>
                     const { defaultAddress, orders, addresses } = data.customer
-                    console.log(orders, 'orders')
                     return (
                         <>
-                            <PageHeading>My Account</PageHeading>
+                            <PageHeading isDark={state.isDark}>My Account</PageHeading>
                             <section className="hero is-medium">
                                 <div className="hero-body">
                                     <div className="container">
                                         <div className="container">
-                                            <div className="columns is-centered">
-                                                <OrdersList orders={orders} />
-                                                <DefaultAddress 
-                                                    defaultAddress={defaultAddress} 
+                                            <div style={{ color: `${state.isDark ? 'white' : 'black'}` }} className="columns is-centered">
+                                                <OrdersList isDark={state.isDark} orders={orders} />
+                                                <DefaultAddress
+                                                    isDark={state.isDark}
+                                                    defaultAddress={defaultAddress}
                                                     addressesSize={addresses.edges.length}
                                                 />
                                             </div>
@@ -102,7 +102,6 @@ const Account = () => {
                                     </div>
                                 </div>
                             </section>
-
                         </>
                     )
                 }}

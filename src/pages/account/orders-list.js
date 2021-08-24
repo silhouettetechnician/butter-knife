@@ -3,7 +3,7 @@ import Order from './order';
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 
-const OrdersList = ({ orders }) => {
+const OrdersList = ({ orders, isDark }) => {
     const [selectedOrder, setSelectedOrder] = useState([]);
     const [onClickOrder, setOnClickOrder] = useState(false);
     useEffect(() => {
@@ -20,7 +20,7 @@ const OrdersList = ({ orders }) => {
                     )
                         :
                         (
-                            <table className="table is-bordered" style={{ margin: "auto" }}>
+                            <table className="table is-bordered" style={{ margin: "auto", color: `${isDark ? 'white' : 'black'}` }}>
                                 <thead>
                                     <tr>
                                         <th>Order</th>
@@ -30,11 +30,11 @@ const OrdersList = ({ orders }) => {
                                         <th>Total</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody style={{fontFamily: 'CODE'}}>
                                     {
                                         orders.edges.map(order =>
                                             <tr key={order.node.id}>
-                                                <td><button className="button is-dark" onClick={() => { setSelectedOrder(order); setOnClickOrder(!onClickOrder) }}>{order.node.name}</button></td>
+                                                <td><button style={{border: 'unset', color: `${isDark ? 'white' : 'black'}`}} className="button is-dark" onClick={() => { setSelectedOrder(order); setOnClickOrder(!onClickOrder) }}>{order.node.name}</button></td>
                                                 <td>{new Date(order.node.processedAt).toLocaleDateString()}</td>
                                                 <td>Soon</td>
                                                 <td>Soon</td>

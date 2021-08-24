@@ -4,9 +4,9 @@ import React from 'react';
 const Order = ({ order }) => {
     console.log(order.node, 'order')
     return (
-        <div className="columns">
+        <div style={{fontFamily: 'bangers'}} className="columns">
             <div className="column">
-                <table className="table" style={{ margin: "auto" }}>
+                <table style={{fontFamily: 'CODE'}} className="table" style={{ margin: "auto" }}>
                     <thead>
                         <tr>
                             <th>PRODUCT</th>
@@ -16,7 +16,7 @@ const Order = ({ order }) => {
                             <th><p className="has-text-weight-semibold">TOTAL</p></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style={{fontFamily: 'CODE'}}>
                         {
                             order.node.lineItems &&
                             order.node.lineItems.edges.map(lineItem =>
@@ -49,13 +49,13 @@ const Order = ({ order }) => {
             </div>
             <div className="column">
                 <h3 className="subtitle has-text-centered has-text-weight-semibold">Shipping Address</h3>
-                <div className="has-text-left">
+                <div style={{fontFamily: 'CODE !important'}} className="has-text-left">
                 {order.node.shippingAddress &&
                 <>
-                    <p className="has-text-grey">{order.node.shippingAddress.firstName} {order.node.shippingAddress.lastName}</p>
-                    <p className="has-text-grey">{order.node.shippingAddress.address1}</p>
-                    <p className="has-text-grey">{order.node.shippingAddress.zip}, {order.node.shippingAddress.city}</p>
-                    <p className="has-text-grey">{order.node.shippingAddress.country}</p>
+                    <p style={{fontFamily: 'CODE !important'}} >{order.node.shippingAddress.firstName} {order.node.shippingAddress.lastName}</p>
+                    <p style={{fontFamily: 'CODE !important'}} >{order.node.shippingAddress.address1}</p>
+                    <p style={{fontFamily: 'CODE !important'}} >{order.node.shippingAddress.zip}, {order.node.shippingAddress.city}</p>
+                    <p style={{fontFamily: 'CODE !important'}} >{order.node.shippingAddress.country}</p>
                 </>
                 }
                 </div>

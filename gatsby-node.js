@@ -149,12 +149,21 @@ exports.createPages = async ({ graphql, actions }) => {
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   actions.setWebpackConfig({
+    module: {
+      rules: [
+        {
+          test: /gatsby-starter-default/,
+          use: 'null-loader'
+        }
+      ]
+    },
     resolve: {
       fallback: {
         "crypto": false
       },
     },
   })
+
   // if (stage === "build-html") {
   //   /*
   //    * During the build step, `auth0-js` will break because it relies on

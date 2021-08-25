@@ -160,12 +160,12 @@ export const PageHeading = styled.h1`
         color: ${props => props.isDark ? 'white' : 'black'}
 `
 export const LoginInput = styled(Field)`
-        width: 70%;
+        width: ${props => props.width || '70%'};
         height: 50px;
         background: transparent;
         border: 5px solid white;
-        margin: 25px;
-        font-family: CODE;
+        margin: 3%;
+        // font-family: CODE;
         color: black;
         &::placeholder {
                 font-family: CODE;

@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
-import { graphql } from "gatsby"
-import Img from "gatsby-image"
 import ClothingItem from './ClothingItem'
 import styled from '@emotion/styled'
 import Flex from '../styles/Flex'
-import FilterBar from '../components/FilterBar'
 import { Link } from "gatsby"
 
 const LogoImage = styled.img`
@@ -47,12 +44,11 @@ const IndividualBrand = ({ pageContext, vendor }) => {
     brandImage
   } = pageContext;
   const [data, setData] = useState(pageContext)
-  console.log(data, 'data')
-  // console.log(data, 'data')
+  
   return (
     <Flex width='100%'>
       <Flex style={{ width: '100%' }}>
-        <div style={{ padding: '15px', width:'600px', position: 'absolute', background: 'rgba(0,0,0,0.4)', top: '10%', left: '8%' }}>
+        <div style={{ padding: '15px', width:'600px', position: 'absolute', background: 'rgba(0,0,0,0.75)', top: '10%', left: '8%' }}>
           <BrandHeading color='white'>{data.title}</BrandHeading>
           <BrandCaption>{data.description}</BrandCaption>
         </div>

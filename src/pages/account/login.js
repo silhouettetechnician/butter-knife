@@ -3,6 +3,7 @@ import { PageHeading, LoginInput, AuthFormBox } from '../../components/StyledCom
 import Flex from '../../styles/Flex'
 import { Formik, ErrorMessage, Form } from 'formik'
 import toast, { Toaster } from 'react-hot-toast';
+import PasswordInput from '../../components/PasswordInput'
 // import SEO from "../../components/seo"
 import { parseErrors } from '../../utils/formErrors'
 import loginImg from '../../assets/loginImg.jpg'
@@ -37,25 +38,23 @@ mutation customerRecover($email: String!) {
   }
 }
 `
+const FormSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is Required'),
+  password: Yup.string()
+    .required('Password is Required'),
+})
+
 const LoginForm = () => {
   const { setValue } = useContext(StoreContext);
   const { customerAccessToken } = useContext(StoreContext);
   const [passwordForgot, setPasswordForgot] = useState(false);
   const [customerLogin] = useMutation(CUSTOMER_LOGIN)
   const [forgotPassword] = useMutation(CUSTOMER_PASSWORD_RESET)
-  const [email, setEmail] = useState("");
-  const [emailReset, setEmailReset] = useState("");
-
+  // const [email, setEmail] = useState("");
+  // const [emailReset, setEmailReset] = useState("");
   const [messsageInfo, setMessageInfo] = useState("");
-
-  const FormSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is Required'),
-    password: Yup.string()
-      .required('Password is Required'),
-  })
-
   const [password, setPassword] = useState(null);
   const handleCustomerAccessToken = (value) => {
     setValue(value)
@@ -150,7 +149,7 @@ const LoginForm = () => {
                   <PageHeading>Login</PageHeading>
                   <div className="field">
                     <div className="control">
-                      <LoginInput value={props.values.email} name='email' placeholder='EMAIL' type="email" id="loginEmail" onChange={props.handleChange} />
+                      <LoginInput value={props.values.email} name='email' placeholder='EMAIL' type="email" id="loginEmail" onChange={props.handleChange} {...props}/>
                       {props.touched.email && props.errors.email && (
                         <p
                           className='error'
@@ -163,21 +162,11 @@ const LoginForm = () => {
                   </div>
                   <div className="field">
                     <div className="control">
-                      <LoginInput value={props.values.password} name='password' placeholder='PASSWORD' type="password" id="loginPassword" onChange={props.handleChange} />
-                      {props.touched.password && props.errors.password && (
-                        <p
-                          className='error'
-                          style={{ color: 'red', fontSize: '0.75rem' }}
-                        >
-                          {props.errors.password}
-                        </p>
-                      )}
+                      {/* <LoginInput htmlFor='loginPassword' value={props.values.password} name='password' placeholder='PASSWORD' type="password" id="loginPassword" onChange={props.handleChange} /> */}
+                      <PasswordInput id="loginPassword" placeholder='password' name="password" value={props.values.password} onChange={props.handleChange} {...props}/>
                     </div>
                   </div>
                   <div className="field">
-                    <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
-                      <p style={{ fontFamily: 'CODE' }}>Forgot your password? </p>
-                    </div>
                   </div>
                   <div className="field">
                     <div className="control has-text-centered">
@@ -189,6 +178,9 @@ const LoginForm = () => {
                       >SIGN IN</button>
                     </div>
                   </div>
+                    <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
+                      <p style={{ fontFamily: 'CODE' }}>Forgot your password? </p>
+                    </div>
                   <div className="field">
                     <div className="control has-text-centered">
                       <a href="/../account/register">

@@ -1,0 +1,465 @@
+.App {
+  text-align: center;
+}
+hr {
+  margin-top: unset;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: white;
+}
+/* body.dark{
+  color: white;
+  background-color: black;
+} */
+button {
+  background: none;
+  border: 4px solid white;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  text-transform: uppercase !important;
+  font-size: 1.5rem;
+  font-family: CODE !important;
+  /* z-index: 9999; */
+  padding: 0.6rem 2rem;
+}
+.raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em adjust-hue(#fece2e, 45deg);
+  transform: translateY(-0.25em);
+}
+/* adjust-hue($color, 45deg) */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.MuiTypography-root {
+  font-family: BerlinBold !important;
+  /* text-transform: uppercase; */
+  /* text-decoration: underline; */
+}
+.MuiListItem-root {
+  padding-top: unset;
+  padding-bottom: unset;
+}
+a {
+  text-decoration: none;
+  font-family: CODE !important;
+  color: black !important;
+  text-decoration: none !important;
+}
+a:hover {
+  text-decoration: none;
+  color: black !important;
+  text-decoration: none !important;
+}
+.nav-menu-item {
+  font-size: 14px;
+  line-height: 1;
+  font-family: CODE !important;
+  letter-spacing: 0.35px;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  vertical-align: baseline;
+  padding-bottom: 2px;
+  color: black;
+  /* text-transform: uppercase; */
+  z-index: 5;
+}
+.nav-menu-item > a {
+  margin-bottom: 4px;
+  margin: 6px 16px 4px;
+  font-size: 0.928571rem;
+  font-family: CODE, "Helvetica Neue", Verdana, Arial, sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 17px;
+}
+.nav-menu-item:active + .content {
+  /* display: block !important; */
+  /* color: blue; */
+  visibility: visible;
+  opacity: 1 !important;
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.react-player {
+  position: fixed;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+}
+.react-player > video {
+  /* width: unset !important; */
+  height: unset !important;
+}
+@font-face {
+  font-family: bangers;
+  src: url("./fonts/Bangers.ttf"), local("Bangers.ttf");
+}
+@font-face {
+  font-family: graphikReg;
+  src: url("./fonts/Graphik-Regular.ttf");
+}
+@font-face {
+  font-family: graphikMed;
+  src: url("./fonts/Graphik-Medium.ttf");
+}
+/* DELETE TOO TECHY */
+@font-face {
+  font-family: HeadingBold;
+  src: url("./fonts/HeadingBold.ttf");
+}
+@font-face {
+  font-family: HeadingBlack;
+  src: url("./fonts/HeadingBlack.ttf");
+}
+@font-face {
+  font-family: CODE;
+  src: url("./fonts/CODE Bold.otf");
+}
+@font-face {
+  font-family: Berlin;
+  src: url("./fonts/Berlin.ttf");
+}
+@font-face {
+  font-family: BerlinBold;
+  src: url("./fonts/Berlin\ Bold.ttf");
+}
+@font-face {
+  font-family: BerlinXBold;
+  src: url("./fonts/Berlin\ X-Bold.ttf");
+}
+@font-face {
+  font-family: Righteous;
+  src: url("./fonts/Righteous-Regular.ttf");
+}
+@font-face {
+  font-family: Milan;
+  src: url("./fonts/milanbold.ttf");
+}
+@font-face {
+  font-family: BW;
+  src: url("./fonts/BwGlennSansDEMO-ExtraBoldItalic.otf");
+}
+
+@keyframes strike {
+  0% {
+    transform-origin: 0% 50%;
+    transform: scaleX(0);
+  }
+  50% {
+    transform-origin: 0% 50%;
+    transform: scaleX(1);
+  }
+  50.01% {
+    transform-origin: 100% 50%;
+    transform: scaleX(1);
+  }
+  100% {
+    transform-origin: 100% 50%;
+    transform: scaleX(0);
+  }
+}
+.strike {
+  position: relative;
+}
+.strike:hover:after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgb(254, 205, 47);
+  animation: strike 0.75s ease-in-out forwards;
+}
+.MuiTypography-body1 {
+  font-family: Berlin X-Bold;
+  text-decoration-thickness: 3px;
+  text-decoration-color: rgb(254, 205, 47);
+}
+.MuiTypography-body2 {
+  text-decoration: unset !important;
+}
+.MuiListItem-container {
+  margin: 0 !important;
+  list-style: none;
+  height: 20%;
+}
+.carousel .slide {
+  background: unset;
+}
+.sticky-inner-wrapper {
+  z-index: 9999;
+}
+.content {
+  /* visibility: hidden; */
+  height: 100vh;
+  /* height: -webkit-calc(100% - 212px); */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  transition: 0.5s ease;
+  background-color: #008cba;
+  opacity: 0;
+}
+.ais-InstantSearch {
+  max-width: 960px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.ais-RefinementList-checkbox {
+  margin-right: 5px;
+}
+.ais-Panel {
+  margin-top: 15px;
+}
+.left-panel {
+  float: left;
+  width: 250px;
+}
+.Collapsible__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* button{
+    background: black;
+    transition: 0.5s; 
+    position:relative;
+    margin: 2%;
+    color: white; 
+    font-family: Berlin; 
+    text-align: center;
+    text-transform: uppercase; 
+    border: 2px solid white; 
+    font-size: 1rem;
+    width: 30%; 
+    height: 40px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  button:hover {
+    border: 2px solid rgba(0,160,80,0);
+    color: #FECE2E;
+  }
+  
+  button::before, button::after {
+    width: 100%;
+    height:100%;
+    z-index: 3;
+    content:'';
+    position: absolute;
+    top:0;
+    left:0;
+    box-sizing: border-box;
+    -webkit-transform: scale(0);
+    transition: 0.5s;
+  }
+
+  .foo::before {
+    border-bottom: 3px solid #FECE2E;
+    border-left: 3px solid #FECE2E;
+    -webkit-transform-origin: 0 100%;
+  }
+  
+  .foo::after {
+    border-top: 3px solid #FECE2E;
+    border-right: 3px solid #FECE2E;
+    -webkit-transform-origin: 100% 0%;
+  } */
+
+.snipcart-modal__container {
+  z-index: 99999 !important;
+}
+
+.snipcart-item-line__header {
+  align-items: flex-start;
+  /* justify-content: ; */
+}
+
+.snipcart-item-line__variants {
+  padding-top: unset !important;
+}
+.ais-RefinementList-item {
+  font-size: 0.9rem;
+}
+.ais-Hits-item,
+.ais-InfiniteHits-item,
+.ais-InfiniteResults-item,
+.ais-Results-item {
+  margin-top: unset !important;
+  margin-left: unset !important;
+  padding: unset !important;
+  width: unset !important;
+  border: unset !important;
+  box-shadow: unset !important;
+}
+.ais-Hits-list {
+  justify-content: space-around !important;
+}
+.ais-RefinementList-count {
+  display: none !important;
+}
+.ais-SearchBox {
+  margin: 10px;
+}
+.ais-Panel-header {
+  font-family: BerlinBold;
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: black;
+}
+.ais-RefinementList-labelText {
+  font-family: CODE;
+  text-transform: uppercase;
+  color: black;
+  font-size: 2rem;
+}
+.ais-Panel-header {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 2px solid /*#FECE2E*/ black !important;
+}
+.ais-Panel {
+  margin-bottom: 35px !important;
+}
+
+.dark-button {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -3px;
+}
+.dark-button:before,
+.dark-button:after {
+  box-sizing: border-box;
+}
+.dark-button label {
+  position: relative;
+  display: block;
+  width: 45px;
+  height: 25px;
+  border-radius: 100px;
+  background-color: #252525;
+  overflow: hidden;
+  cursor: pointer;
+}
+.dark-button label:before,
+.dark-button label:after {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: 0.5s ease;
+}
+.dark-button label:before {
+  background-color: #f16e65;
+}
+.dark-button label:after {
+  background-color: #252525;
+  left: -58px;
+  transform: scale(0.00001);
+}
+.dark-button input[type="checkbox"] {
+  display: none;
+}
+.dark-button input[type="checkbox"]:checked + label:before {
+  background-color: #01dbc6;
+  transform: translateX(20px);
+}
+.dark-button input[type="checkbox"]:checked + label:after {
+  transform: translateX(75px) scale(1);
+}
+
+.MuiAccordionDetails-root {
+  flex-direction: column !important;
+}
+.filterLabel {
+  font-family: bangers !important;
+  font-size: 2.2rem !important;
+  text-decoration-line: line-through;
+  text-decoration-color: rgb(254, 205, 47);
+}
+.react-slider img {
+  border: unset !important;
+}
+.react-slider__container > button {
+  background: unset !important;
+}
+.react-slider__container button:before {
+  border: thin solid #999 !important;
+  border-width: 0 4px 4px 0 !important;
+}
+
+.css-2b097c-container {
+  width: 200px;
+  font-family: CODE;
+  text-transform: uppercase;
+  margin-right: 20px;
+}
+
+.customModal {
+  position: absolute;
+  top: 30%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.carousel-root{
+  /* width: 100%; */
+  background-size: cover;
+}

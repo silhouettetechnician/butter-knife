@@ -34,7 +34,7 @@ const {
             <h1 style={{zIndex: '999', position: 'relative', color: 'white', fontSize: '4rem', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase'}}>INTRODUCING NOM</h1>
             <Link style={{zIndex: '999'}}to={`/designers/nom`}><button><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button></Link>
             </Flex>
-            <ReactPlayer className='react-player' width='100vw' height='100vh' playing url={HomeVideo} muted loop />
+            {/* <ReactPlayer className='react-player' width='100vw' height='100vh' playing url={HomeVideo} muted loop /> */}
             </VideoWrapper>
             </>
     );

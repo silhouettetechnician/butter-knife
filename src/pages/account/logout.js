@@ -32,7 +32,7 @@ const Logout = ({isDark}) => {
             setValue({
                 customerAccessToken: ''
             })
-            navigate('/whats-new')
+            navigate('/')
         })
     }
     return (

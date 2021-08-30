@@ -11,6 +11,12 @@ import { Link } from "gatsby";
 import mastercard from '../assets/mastercard.png'
 import StoreContext from '../contexts/StoreContext'
 
+const FooterMobile = styled(Flex)`
+    width: 33%;
+    @media (max-width: 800px){
+        width: 50%;
+    }
+`
 const TermsBox = styled.ul`
     display: flex;
     align-items: space-between;
@@ -22,11 +28,14 @@ const TermsBox = styled.ul`
 const InnerHolder = styled.div`
     cursor: pointer;
     font-family: bangers;
-    font-size: 4vw;
+    font-size: 5vw;
     display: flex;
     text-decoration-line: line-through;
     text-decoration-color: ${props => props.isDark ? '#0131D2' : 'rgb(254, 205, 47)'};
     color: ${props => props.isDark ? 'white' : 'black'};
+    @media (max-width: 800px) {
+        margin: 15px;
+    }
 `
 const imageStyle = {
     width: '50px',
@@ -51,12 +60,12 @@ const FooterNew = () => {
             </TermsBox>
         </LogoHolder>
         </div>
-        <Flex justifyCenter alignCenter width='33%'>
+        <FooterMobile justifyCenter alignCenter >
             <img style={imageStyle} src={visa} alt='visa' />
             <img style={imageStyle} src={mastercard} alt='mastercard' />
             <img style={imageStyle} src={paypal} alt='paypal' />
             <img style={imageStyle} src={amex} alt='amex' />
-        </Flex>
+        </FooterMobile>
         <Flex id='content-desktop' style={{padding: '40px', color: `${state.isDark ? 'white' : 'black'}`}}justifyCenter alignCenter width='33%'>
             <p>Copyright © 2021 Butterknife Ltd | All rights reserved | Butterknife Ltd is a company registered in England and Wales with registration number 13373396.</p>
         </Flex>

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { graphql, Link } from 'gatsby'
 import Flex from '../styles/Flex'
-import { PageHeading } from '../components/StyledComponents'
+import { PageHeading, ContainerFlex, ContainerFlexHide } from '../components/StyledComponents'
 import ClothingItem from '../templates/ClothingItem'
 import FilterBar from '../components/FilterBar'
 import DropDown from '../components/DropDownSort'
@@ -63,12 +63,12 @@ const Footwear = ({ data }) => {
         </Flex>
       </Flex>
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
-        <Flex width='20%' justifyCenter>
+        <ContainerFlexHide width='20%' justifyCenter>
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
-        </Flex>
-        <Flex width='75%' margin='20px 0 0 0' justifyAround>
+        </ContainerFlexHide>
+        <ContainerFlex justifyAround>
           {filteredItems && filteredItems.sort((a, b) => priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
-        </Flex>
+        </ContainerFlex>
       </Flex>
     </>
   )

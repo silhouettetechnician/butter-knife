@@ -3,7 +3,7 @@ import { graphql, Link } from 'gatsby'
 import Flex from '../styles/Flex'
 import ClothingItem from '../templates/ClothingItem'
 import FilterBar from '../components/FilterBar'
-import { PageHeading } from '../components/StyledComponents'
+import { PageHeading, ContainerFlex, ContainerFlexHide } from '../components/StyledComponents'
 import DropDown from '../components/DropDownSort'
 import StoreContext from '../contexts/StoreContext'
 import _ from 'lodash'
@@ -58,15 +58,15 @@ return(
     <PageHeading isDark={state.isDark}>Accessories</PageHeading>
     <Flex width='100%' margin='20px 0 0 0' justifyAround>
     <DropDown priceSort={priceSort} setPriceSort={setPriceSort}/> 
-      <Flex width='20%' justifyCenter>
+      <ContainerFlexHide width='20%' justifyCenter>
         <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
-      </Flex>
-      <Flex width='75%' margin='20px 0 0 0' justifyAround>
+      </ContainerFlexHide>
+      <ContainerFlex justifyAround>
         {/* {accessories && accessories.edges.map((i, id) => {
           return <Link key={id} to={`/clothing/${i.node.handle}`}><ClothingItem data={accessories} key={id} title={i.node.title} description={i.node.description} src={i.node.images[0].originalSrc} price={Math.round(i.node.priceRange.maxVariantPrice.amount)} /></Link>
         })} */}
         {filteredItems && filteredItems.sort((a,b) => priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
-      </Flex>
+      </ContainerFlex>
     </Flex>
     </>
 )

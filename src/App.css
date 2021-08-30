@@ -463,6 +463,9 @@ a:hover {
   /* width: 100%; */
   background-size: cover;
 }
+.MuiAccordionDetails-root{
+  padding: unset !important;
+}
 
 #content-desktop {display: block;}
 #content-mobile {display: none;}

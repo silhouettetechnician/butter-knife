@@ -156,6 +156,7 @@ export const LogoHolder = styled.div`
         // width: 33%;
         align-items: flex-start;
         height: 50px;
+        
 
 `
 

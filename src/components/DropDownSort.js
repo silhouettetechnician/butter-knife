@@ -20,7 +20,7 @@ export const Dropdown = ({ priceSort, setPriceSort }) => {
       ]
 
     return (
-        <Flex width='100%' padding='0 100px' justifyEnd><Select width='200px' options={options} onChange={(values) => setPriceSort(values)} value={priceSort} /></Flex>
+        <><Select width='200px' options={options} onChange={(values) => setPriceSort(values)} value={priceSort} /></>
     )
 }
 

@@ -463,3 +463,13 @@ a:hover {
   /* width: 100%; */
   background-size: cover;
 }
+
+#content-desktop {display: block;}
+#content-mobile {display: none;}
+
+@media screen and (max-width: 800px) {
+
+#content-desktop {display: none;}
+#content-mobile {display: block;}
+
+}

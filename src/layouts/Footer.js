@@ -22,7 +22,7 @@ const TermsBox = styled.ul`
 const InnerHolder = styled.div`
     cursor: pointer;
     font-family: bangers;
-    font-size: 4rem;
+    font-size: 4vw;
     display: flex;
     text-decoration-line: line-through;
     text-decoration-color: ${props => props.isDark ? '#0131D2' : 'rgb(254, 205, 47)'};
@@ -57,7 +57,7 @@ const FooterNew = () => {
             <img style={imageStyle} src={paypal} alt='paypal' />
             <img style={imageStyle} src={amex} alt='amex' />
         </Flex>
-        <Flex style={{padding: '40px', color: `${state.isDark ? 'white' : 'black'}`}}justifyCenter alignCenter width='33%'>
+        <Flex id='content-desktop' style={{padding: '40px', color: `${state.isDark ? 'white' : 'black'}`}}justifyCenter alignCenter width='33%'>
             <p>Copyright © 2021 Butterknife Ltd | All rights reserved | Butterknife Ltd is a company registered in England and Wales with registration number 13373396.</p>
         </Flex>
     </Footer>

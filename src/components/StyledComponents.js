@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field } from 'formik';
+import Flex from '../styles/Flex'
 import styled from "@emotion/styled/macro"
 export const DropDownBrands = styled.section`
         // display: none;
@@ -58,6 +59,9 @@ export const Navigation = styled.nav`
         justify-content: center;
         align-items: baseline;
         height: 20px;
+        @media (max-width: 800px) {
+                display: none;
+              }
 `
 export const NavMenuItem = styled.span`
         // font-size: 14px;
@@ -77,6 +81,34 @@ export const NavMenuItem = styled.span`
         margin-bottom: 4px;
         margin: 6px 16px 4px;
         font-size: 0.928571rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        line-height: 17px;
+        z-index: 100;
+        cursor: pointer;
+        & > a{
+        color: ${props => props.isDark ? 'white !important' : 'black !important'};
+        }
+`
+export const MobileNavMenuItem = styled.div`
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        font-family: BerlinBold !important;
+        border-radius: 6px;
+        border-bottom: 1px solid rgba(0, 0, 1, 0.06);
+        text-decoration: none;
+        // vertical-align: baseline;
+        padding-bottom: 2px;
+        color: ${props => props.isDark ? 'white !important' : 'black !important'};
+        text-transform: uppercase;
+        opacity: 1;
+        margin-bottom: 4px;
+        margin: 6px 16px 4px;
+        font-size: 1.2em;
         font-weight: bold;
         text-transform: uppercase;
         line-height: 17px;
@@ -121,8 +153,10 @@ export const LogoHolder = styled.div`
         -webkit-box-pack: center;
         justify-content: center;
         display: flex;
+        // width: 33%;
         align-items: flex-start;
         height: 50px;
+
 `
 
 export const Heading1 = styled.h1`
@@ -151,11 +185,13 @@ export const Footer = styled.footer`
         z-index: 999999;
         align-items: center;
         justify-content: space-around; 
+        // @media (max-width: 800px) {
+        //       }
 `
 
 export const PageHeading = styled.h1`
         font-family: bangers;
-        font-size: 2.3rem;
+        font-size: ${props => props.width || '2.3rem'};
         text-align: center;
         color: ${props => props.isDark ? 'white' : 'black'}
 `
@@ -180,4 +216,43 @@ export const AuthFormBox = styled.form`
         padding: 10%;
         border: 0.1px solid rgba(0,0,0,0.4);
         border-radius: 2%;
+`
+
+export const MobileNavigation = styled.nav`
+        max-width: 300px;
+        width: 100%;
+        height: 600px;
+        position: fixed;
+        border-radius: 6px;
+        box-shadow: 0 0 5px 0 rgba(102, 102, 102, 0.5);
+        top: 67px;
+        left: 0;
+        z-index: 99999;
+        color: ${props => props.isDark ? 'white' : 'black'};
+        background-color: ${props => props.isDark ? '#1D1D1D' : 'white'};
+        // display: ${({ openBurger }) => openBurger ? 'flex' : 'none'};
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space
+        transform: ${({ openBurger }) => openBurger ? 'translateX(-40px)' : 'translateX(-100%)'};
+        transition: transform 0.6s ease-in-out !important;  
+        @media (min-width: 800px) {
+                display: none;
+              }
+
+`
+export const ContainerFlex = styled(Flex)`
+  width: 70%;
+  margin: 20px 0 0 0;
+@media (max-width: 800px) {
+  width: 100%;
+}
+`
+
+export const ContainerFlexHide = styled(Flex)`
+width: ${props => props.width};
+@media (max-width: 800px) {
+  display: none;
+}
 `

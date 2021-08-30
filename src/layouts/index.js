@@ -44,10 +44,12 @@ const Layout = ({ data, children }) => {
     const { title, description } = useMeta();
     const [isCartOpen, setIsCartOpen] = useState(false)
     const [cartRequest, setCartRequest] = useState(false)
+    const [openBurger, setOpenBurger] = useState(false)
+    const closeMobileNav = () => setOpenBurger(!openBurger)
     const [checkout, setCheckout] = useState({ lineItems: [] })
     const [products, setProducts] = useState([])
     const [shop, setShop] = useState({})
-    const {state} = useContext(Context)
+    const { state } = useContext(Context)
     const theme = useTheme()
 
     const brandRender =
@@ -81,32 +83,33 @@ const Layout = ({ data, children }) => {
                         background-color: ${state.isDark ? theme.dark.background : theme.light.background}
                     }
                 `
-            }/>
-        <div style={{ position: 'relative', minHeight: '100vh' }}>
-            <Notifications />
-            <Helmet>
-                <html lang='en' />
-                <title>{title}</title>
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css" />
-                {/* <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.1.1/default/snipcart.css" /> */}
-                {/* <script async src="https://cdn.snipcart.com/themes/v3.1.1/default/snipcart.js"></script> */}
-                {/* <meta name={title} content='Suprabha Blog!' /> */}
-            </Helmet>
-            <Sticky style={{ zIndex: '99 !important' }} enabled={true} bottomBoundary={1000}>
-                <NavBar isOpen={isOpen} setIsOpen={setIsOpen} open={open} setOpen={setOpen} catOpen={catOpen} setCatOpen={setCatOpen} />
-            </Sticky>
-            <Flex justifyCenter column alignCenter height='100%'>
-                {brandRender}
-                {children}
-                {/* {React.cloneElement(children, {addVariantToCart: addVariantToCart})} */}
-            </Flex>
-            <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
-            {/* FIX */}
-            <Footer />
-            {/* {
+            } />
+            <div style={{ position: 'relative', minHeight: '100vh' }}>
+                <Notifications />
+                <Helmet>
+                    <html lang='en' />
+                    <title>{title}</title>
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css" />
+                    {/* <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.1.1/default/snipcart.css" /> */}
+                    {/* <script async src="https://cdn.snipcart.com/themes/v3.1.1/default/snipcart.js"></script> */}
+                    {/* <meta name={title} content='Suprabha Blog!' /> */}
+                </Helmet>
+                <Sticky style={{ zIndex: '99 !important' }} enabled={true} bottomBoundary={1000}>
+                    <NavBar closeMobileNav={closeMobileNav} openBurger={openBurger} setOpenBurger={setOpenBurger} isOpen={isOpen} setIsOpen={setIsOpen} open={open} setOpen={setOpen} catOpen={catOpen} setCatOpen={setCatOpen} />
+                </Sticky>
+                {/* <div></div> */}
+                <Flex width='100%' justifyCenter column alignCenter >
+                    {brandRender}
+                    {children}
+                    {/* {React.cloneElement(children, {addVariantToCart: addVariantToCart})} */}
+                </Flex>
+                <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
+                {/* FIX */}
+                <Footer />
+                {/* {
                 window.location.pathname !== '/' && <Footer />
             } */}
-        </div>
+            </div>
         </>
     )
 

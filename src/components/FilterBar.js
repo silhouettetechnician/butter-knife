@@ -31,7 +31,7 @@ const FilterBar = ({  checkboxesToFilter, handleInputChange}) => {
     const classes = useStyles();
     const {state} = useContext(StoreContext)
     return (
-        <div className={classes.root} style={{ margin: '2%', width: '75%' }}>
+        <div id='content-desktop' className={classes.root} style={{ margin: '2%', width: '75%' }}>
             {Object.entries(checkboxesToFilter).map(([key, val]) => 
             <Accordion style={{backgroundColor: `${state.isDark ? '#212121' : 'white'}`}} expanded>
                 <AccordionSummary

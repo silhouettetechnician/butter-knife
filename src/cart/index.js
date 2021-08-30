@@ -11,7 +11,7 @@ import { LogoHolder } from '../components/StyledComponents'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const Wrapper = styled(Flex)`
-max-width: 800px;
+max-width: 600px;
 width: 100%;
 height: 600px;
 position: fixed;
@@ -22,7 +22,7 @@ right: 0;
 z-index: 99999;
 color: ${props => props.isDark ? 'white' : 'black'};
 background-color: ${props => props.isDark ? '#1D1D1D' : 'white'};
-transform: ${({ isOpen }) => isOpen ? 'translateX(0)' : 'translateX(100%)'};
+transform: ${({ isOpen }) => isOpen ? 'translateX(-10px)' : 'translateX(100%)'};
 transition: transform 0.6s ease-in-out !important;  
 `
 const CartHeading = styled.h2`

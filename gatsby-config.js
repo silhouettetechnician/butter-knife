@@ -47,6 +47,7 @@ plugins: [
   'gatsby-plugin-react-helmet',
   `gatsby-plugin-css`,
   `gatsby-plugin-postcss`,
+  `gatsby-plugin-emotion`,
 
   {
     resolve: `gatsby-source-contentful`,

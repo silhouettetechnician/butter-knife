@@ -1,7 +1,8 @@
 import React from 'react'
 import { Field } from 'formik';
 import Flex from '../styles/Flex'
-import styled from "@emotion/styled/macro"
+import styled from "@emotion/styled"
+
 export const DropDownBrands = styled.section`
         // display: none;
         // -webkit-calc(100% - 212px);
@@ -212,7 +213,7 @@ export const LoginInput = styled(Field)`
 export const AuthFormBox = styled.form`
         background: rgba(255, 255, 255, 0.6);
         margin-top: 12%;
-        width: 500px;
+        width: 400px;
         text-align: center;
         padding: 10%;
         border: 0.1px solid rgba(0,0,0,0.4);

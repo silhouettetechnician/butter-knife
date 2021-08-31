@@ -95,7 +95,7 @@ const LoginForm = () => {
       <Toaster position='top-right' />
       <img src={loginImg} style={{ width: '100%', filter: 'blur(45px)' }} />
       {passwordForgot ?
-        <Flex style={{ height: 'calc(100vh - 359px)', position: 'absolute' }}>
+        <Flex justifyCenter style={{position: 'absolute', width: '100%' }}>
         <Formik
           initialValues={{
             email: '',

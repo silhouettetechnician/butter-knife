@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 // import PropTypes from 'prop-types'
 
 export const Flex = styled.div`

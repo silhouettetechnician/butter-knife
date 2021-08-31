@@ -38,6 +38,7 @@ module.exports = {
 },
 plugins: [
   // ...otherPlugins,
+  `gatsby-plugin-emotion`,
   `gatsby-plugin-layout`,
   'gatsby-plugin-dark-mode',
   `gatsby-plugin-fontawesome-css`,
@@ -47,7 +48,6 @@ plugins: [
   'gatsby-plugin-react-helmet',
   `gatsby-plugin-css`,
   `gatsby-plugin-postcss`,
-  `gatsby-plugin-emotion`,
 
   {
     resolve: `gatsby-source-contentful`,

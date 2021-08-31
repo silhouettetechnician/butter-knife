@@ -41,6 +41,7 @@
     "gatsby-plugin-apollo": "^3.0.2",
     "gatsby-plugin-apollo-shopify": "^1.1.0",
     "gatsby-plugin-catch-links": "^3.1.0",
+    "gatsby-plugin-css": "^2.1.0",
     "gatsby-plugin-dark-mode": "^1.1.2",
     "gatsby-plugin-emotion": "^6.11.0",
     "gatsby-plugin-env-variables": "^2.0.0",

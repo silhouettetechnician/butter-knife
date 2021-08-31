@@ -54,10 +54,13 @@ const Product = (i) => {
 
 const filteredItems = getItems()
 return(
-    <>
+  <>
+    <Flex justifyBetween width='100%'>
+      <div width='170px'></div>
     <PageHeading isDark={state.isDark}>Accessories</PageHeading>
-    <Flex width='100%' margin='20px 0 0 0' justifyAround>
     <DropDown priceSort={priceSort} setPriceSort={setPriceSort}/> 
+    </Flex>
+    <Flex width='100%' margin='20px 0 0 0' justifyAround>
       <ContainerFlexHide width='20%' justifyCenter>
         <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
       </ContainerFlexHide>

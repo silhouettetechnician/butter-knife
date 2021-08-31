@@ -134,52 +134,52 @@ a:hover {
 }
 @font-face {
   font-family: bangers;
-  src: url("./fonts/Bangers.ttf"), local("Bangers.ttf");
+  src: url("../fonts/Bangers.ttf"), local("Bangers.ttf");
 }
 @font-face {
   font-family: graphikReg;
-  src: url("./fonts/Graphik-Regular.ttf");
+  src: url("../fonts/Graphik-Regular.ttf");
 }
 @font-face {
   font-family: graphikMed;
-  src: url("./fonts/Graphik-Medium.ttf");
+  src: url("../fonts/Graphik-Medium.ttf");
 }
 /* DELETE TOO TECHY */
 @font-face {
   font-family: HeadingBold;
-  src: url("./fonts/HeadingBold.ttf");
+  src: url("../fonts/HeadingBold.ttf");
 }
 @font-face {
   font-family: HeadingBlack;
-  src: url("./fonts/HeadingBlack.ttf");
+  src: url("../fonts/HeadingBlack.ttf");
 }
 @font-face {
   font-family: CODE;
-  src: url("./fonts/CODE Bold.otf");
+  src: url("../fonts/CODE Bold.otf");
 }
 @font-face {
   font-family: Berlin;
-  src: url("./fonts/Berlin.ttf");
+  src: url("../fonts/Berlin.ttf");
 }
 @font-face {
   font-family: BerlinBold;
-  src: url("./fonts/Berlin\ Bold.ttf");
+  src: url("../fonts/Berlin\ Bold.ttf");
 }
 @font-face {
   font-family: BerlinXBold;
-  src: url("./fonts/Berlin\ X-Bold.ttf");
+  src: url("../fonts/Berlin\ X-Bold.ttf");
 }
 @font-face {
   font-family: Righteous;
-  src: url("./fonts/Righteous-Regular.ttf");
+  src: url("../fonts/Righteous-Regular.ttf");
 }
 @font-face {
   font-family: Milan;
-  src: url("./fonts/milanbold.ttf");
+  src: url("../fonts/milanbold.ttf");
 }
 @font-face {
   font-family: BW;
-  src: url("./fonts/BwGlennSansDEMO-ExtraBoldItalic.otf");
+  src: url("../fonts/BwGlennSansDEMO-ExtraBoldItalic.otf");
 }
 
 @keyframes strike {
@@ -476,3 +476,188 @@ a:hover {
 #content-mobile {display: block;}
 
 }
+
+/* BURGER */
+/*!
+ * Hamburgers
+ * @description Tasty CSS-animated hamburgers
+ * @author Jonathan Suh @jonsuh
+ * @site https://jonsuh.com/hamburgers
+ * @link https://github.com/jonsuh/hamburgers
+ */
+ .hamburger {
+  padding: 15px 15px;
+  display: inline-block;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible; }
+  .hamburger:hover {
+    opacity: 0.7; }
+  .hamburger.is-active:hover {
+    opacity: 0.7; }
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after {
+    background-color: #000; }
+
+.hamburger-box {
+  width: 40px;
+  height: 24px;
+  display: inline-block;
+  position: relative; }
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -2px; }
+  .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    width: 40px;
+    height: 4px;
+    background-color: #000;
+    border-radius: 4px;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease; }
+  .hamburger-inner::before, .hamburger-inner::after {
+    content: "";
+    display: block; }
+  .hamburger-inner::before {
+    top: -10px; }
+  .hamburger-inner::after {
+    bottom: -10px; }
+
+/*
+   * Slider
+   */
+.hamburger--slider .hamburger-inner {
+  top: 2px; }
+  .hamburger--slider .hamburger-inner::before {
+    top: 10px;
+    transition-property: transform, opacity;
+    transition-timing-function: ease;
+    transition-duration: 0.15s; }
+  .hamburger--slider .hamburger-inner::after {
+    top: 20px; }
+
+.hamburger--slider.is-active .hamburger-inner {
+  transform: translate3d(0, 10px, 0) rotate(45deg); }
+  .hamburger--slider.is-active .hamburger-inner::before {
+    transform: rotate(-45deg) translate3d(-5.71429px, -6px, 0);
+    opacity: 0; }
+  .hamburger--slider.is-active .hamburger-inner::after {
+    transform: translate3d(0, -20px, 0) rotate(-90deg); }
+
+/*Knife.css (v2) | MIT LICENSE | © Shadow Scientist (https://github.com/Shadow-Scientist)*/
+
+/* Now the fun begins! */
+
+.knife{
+	display:inline-block;
+	position:relative; /*position should be absolute or relative*/
+	/* transform:translate(-50%,-50%); placing @ center of the page*/
+	white-space:nowrap;
+	font-size:0px;
+	overflow:visible;
+	text-decoration:none;
+}
+.knife:hover{
+    cursor: pointer;
+}
+
+.knife::before, .knife::after{
+	content:attr(text); /*grab the text to cut*/
+	left:0px;
+	font-family: BerlinXBold;
+	font-size:2rem;
+	font-weight:600;
+	color:white;
+	display:block;
+	width:100%;
+	text-decoration:none;
+	transition:all ease 0.2s;
+	transition-delay:0.125s;
+	line-height:2rem;
+	box-shadow:0 0 0 1px rgba(0,0,0,0); /*Firefox antialiasing hack*/
+}
+
+.knife::before{
+	position:relative;
+	top:0px;
+	clip-path:inset(0% -1% calc(50% - 0.5px) -1%);
+	/*-1% because skew doesn't affects the box-size and clipped edges are sharp!*/
+}
+
+.knife::after{
+	position:absolute;
+	bottom:0px;
+	clip-path:inset(50% -1% 0% -1%);
+	/*Same as above*/
+}
+
+.knife > div{
+	position:absolute;
+	left:50%;
+	top:50%;
+	width:0%;
+	height:6px;
+	background:#FECE2E;
+	display:block;
+	transform:translate(-50%,-50%);
+	z-index:10;
+	border-radius:10px;
+	transition:all cubic-bezier(1,0,0,1) 0.4s;
+	box-shadow:0 0 0 1px rgba(0,0,0,0); /*Firefox antialiasing hack, again!*/
+}
+
+.knife:hover::before{
+	color:#FECE2E;
+	transform:skew(13deg) translateX(10px); /*translateX--> 10px better*/
+	clip-path:inset(0% -1% calc(50% + 6px) -1%);
+	/*Slicing effect: clip-path handles all that*/
+}
+
+.knife:hover::after{
+	color:#FECE2E;
+	transform:skewX(13deg) translateX(-10px); /*same reason*/
+}
+
+.knife:hover > div{
+	width:calc(100% + 60px);
+	transition-timing-function:cubic-bezier(.18,.89,.32,1.28);
+	background:white;
+}
+
+
+/* -knife-float class 
+   added June 3rd, 2020
+ */
+
+.knife.-knife-float{
+	transition-timing-function:cubic-bezier(0.16, 1.08, 0.38, 0.98);
+	/* --expansion:0px; */
+}
+
+.knife.-knife-float > div{
+	transform:translateY(-50%);
+	left:0px;
+}
+
+.knife.-knife-float::before, .knife.-knife-float::after{
+	transform:none;
+}
+
+.knife.-knife-float:hover::before{
+	top:calc(6px * -3);
+	clip-path:inset(0% -1% 50% -1%);
+	opacity:0.7;
+}
+

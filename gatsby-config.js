@@ -46,6 +46,7 @@ plugins: [
   `gatsby-plugin-sharp`,
   `gatsby-transformer-sharp`,
   'gatsby-plugin-react-helmet',
+  `gatsby-plugin-css`,
 
   {
     resolve: `gatsby-source-contentful`,

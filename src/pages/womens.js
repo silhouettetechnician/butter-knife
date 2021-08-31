@@ -65,7 +65,8 @@ const Womens = ({ data }) => {
 
   return (
     <>
-      <Flex justifyCenter width='100%'>
+      <Flex justifyBetween width='100%'>
+      <div width='170px'></div>
       <PageHeading isDark={state.isDark}>Womens</PageHeading>
     <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
     

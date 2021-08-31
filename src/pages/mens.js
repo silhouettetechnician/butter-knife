@@ -65,10 +65,10 @@ const Mens = ({ data }) => {
 
   return (
     <>
-      <Flex justifyCenter width='100%'>
+      <Flex justifyBetween width='100%'>
+      <div width='170px'></div>
       <PageHeading isDark={state.isDark}>Mens</PageHeading>
     <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
-    
         </Flex>
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
         <ContainerFlexHide width='20%' justifyCenter>

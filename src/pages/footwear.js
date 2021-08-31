@@ -56,11 +56,10 @@ const Footwear = ({ data }) => {
 
   return (
     <>
-      <Flex justifyEnd width='100%'>
-      <Flex justifyBetween width='54%'>
+      <Flex justifyBetween width='100%'>
+      <div width='170px'></div>
         <PageHeading isDark={state.isDark}>Footwear</PageHeading>
         <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
-        </Flex>
       </Flex>
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
         <ContainerFlexHide width='20%' justifyCenter>

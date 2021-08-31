@@ -38,7 +38,6 @@ module.exports = {
 },
 plugins: [
   // ...otherPlugins,
-  `gatsby-plugin-sass`,
   `gatsby-plugin-layout`,
   'gatsby-plugin-dark-mode',
   `gatsby-plugin-fontawesome-css`,

@@ -90,8 +90,14 @@ const LoginForm = () => {
     })
   }
 
-  return (
-    <Flex justifyCenter >
+  // const Container = styled.div`
+  // min-height: 100%;
+  // height: auto !important;
+  // height: 100%;
+  // margin: 0 auto -100px;
+  // position: relative;
+  // `
+  return  <Flex justifyCenter >
       <Toaster position='top-right' />
       <img src={loginImg} style={{ width: '100%', filter: 'blur(45px)' }} />
       {passwordForgot ?
@@ -126,7 +132,7 @@ const LoginForm = () => {
         </Formik>
           </Flex>
         :
-        <Flex style={{ height: 'calc(100vh - 359px)', position: 'absolute' }}>
+        <Flex justifyCenter style={{position: 'absolute', width: '100%' }}>
           <Formik
             initialValues={{
               email: '',
@@ -138,8 +144,8 @@ const LoginForm = () => {
             }
             }>
             {props => (
-              <Form onSubmit={props.handleSubmit}>
-                <AuthFormBox >
+              // <Form onSubmit={props.handleSubmit}>
+                <AuthFormBox onSubmit={props.handleSubmit}>
                   {messsageInfo &&
                     <div class="notification is-success">
                       {messsageInfo}
@@ -188,13 +194,11 @@ const LoginForm = () => {
                     </div>
                   </div>
                 </AuthFormBox>
-              </Form>
             )}
           </Formik>
         </Flex>
       }
     </Flex>
-  );
 };
 
 
@@ -206,7 +210,7 @@ const Login = () => {
         <LoginForm />
       </AccountAuthWrapper>
     </>
-  );
+  )
 };
 
 export default Login;

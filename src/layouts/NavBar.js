@@ -1,6 +1,8 @@
 
 import React, { useContext, useState } from 'react';
 import { AudioPlayerProvider } from "react-use-audio-player"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import reduce from 'lodash/reduce'
 import Flex from '../styles/Flex'
 import styled from '@emotion/styled'
@@ -82,6 +84,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                                 <span className="hamburger-inner"></span>
                             </span>
                         </BurgerButton>
+                        <FontAwesomeIcon style={{ cursor: 'pointer', fontSize: '40px', margin: '12px' }} onClick={() => setIsOpen(!isOpen)} id='content-mobile' icon={faShoppingCart}></FontAwesomeIcon>
                     </Flex>
                 </AudioPlayerProvider>
                 <LogoHolder isDark={state.isDark}><div onClick={() => navigate('/')} style={{ cursor: 'pointer', fontFamily: 'bangers', fontSize: '5rem', color: `${state.isDark ? 'white' : 'black'}`, textDecorationLine: 'line-through', textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}` }}> BUTTER KNIFE <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder>

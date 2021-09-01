@@ -212,12 +212,17 @@ export const LoginInput = styled(Field)`
 `
 export const AuthFormBox = styled.form`
         background: rgba(255, 255, 255, 0.6);
-        margin-top: 12%;
-        width: 400px;
+        margin-top: 5%;
+        max-width: 600px;
         text-align: center;
-        padding: 10%;
+        padding: 5%;
         border: 0.1px solid rgba(0,0,0,0.4);
         border-radius: 2%;
+        z-index: 99999;
+        @media (max-width: 800px) {
+                margin-top: unset;
+                padding: 5%;
+              }
 `
 
 export const MobileNavigation = styled.nav`

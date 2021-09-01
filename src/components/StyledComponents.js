@@ -218,7 +218,7 @@ export const AuthFormBox = styled.form`
         padding: 5%;
         border: 0.1px solid rgba(0,0,0,0.4);
         border-radius: 2%;
-        z-index: 99999;
+        z-index: 8888;
         @media (max-width: 800px) {
                 margin-top: unset;
                 padding: 5%;

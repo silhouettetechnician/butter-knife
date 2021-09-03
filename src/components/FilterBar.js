@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FilterBar = ({  checkboxesToFilter, handleInputChange}) => {
+    console.log(checkboxesToFilter, 'checkboxesToFilter')
     const classes = useStyles();
     const {state} = useContext(StoreContext)
     return (
@@ -42,7 +43,7 @@ const FilterBar = ({  checkboxesToFilter, handleInputChange}) => {
                 <Typography style={{color: `${state.isDark ? 'white' : 'black'}`, textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}`}} className='filterLabel'>{key}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    {val.map(i => {
+                    {val.sort().map(i => {
                         const labelId = `checkbox-list-label-${i}`;
                         return <ListItem style={{color: `${state.isDark ? 'white' : 'black'}`}} key={i} role={undefined}>
                             <ListItemIcon>

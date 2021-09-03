@@ -48,7 +48,7 @@ const Footwear = ({ data }) => {
 
   const Product = (i) => {
     const { product } = i
-    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={footwear} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRange && Math.round(product.priceRange.maxVariantPrice.amount)} />
+    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={footwear} vendor={product.vendor}  title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRange && Math.round(product.priceRange.maxVariantPrice.amount)} />
     </Link>
   }
 

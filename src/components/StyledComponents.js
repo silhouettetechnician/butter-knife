@@ -29,7 +29,7 @@ export const Header = styled.header`
         line-height: 1;
         font-family: ProximaNova-Regular, "Helvetica Neue", Verdana, Arial, sans-serif;
         letter-spacing: 0.35px;
-        margin-bottom: 10px;
+        // margin-bottom: 10px;
         padding: 0px;
         border: 0px;
         vertical-align: baseline;
@@ -159,6 +159,20 @@ export const LogoHolder = styled.div`
         height: 50px;
         
 
+`
+export const DescriptionFlex = styled(Flex)`
+    flex-direction: column;
+    @media (max-width: 800px){
+      width: 100%;
+    }
+`
+export const TitleAndFilter = styled(Flex)`
+    flex-direction: row;
+    @media (max-width: 800px){
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+    }
 `
 
 export const Heading1 = styled.h1`

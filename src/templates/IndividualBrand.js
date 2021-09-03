@@ -48,7 +48,7 @@ const IndividualBrand = ({ pageContext, vendor }) => {
   return (
     <Flex width='100%'>
       <Flex style={{ width: '100%' }}>
-        <div style={{ padding: '15px', width:'600px', position: 'absolute', background: 'rgba(0,0,0,0.75)', top: '200px', }}>
+        <div style={{ margin: '15px', padding: '15px', maxWidth:'600px', position: 'absolute', background: 'rgba(0,0,0,0.75)', top: '200px', }}>
           <BrandHeading color='white'>{data.title}</BrandHeading>
           <BrandCaption>{data.description}</BrandCaption>
         </div>

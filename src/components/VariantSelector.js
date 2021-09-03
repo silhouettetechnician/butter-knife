@@ -1,14 +1,19 @@
 import React from 'react' /* eslint-disable */
+import styled from '@emotion/styled'
+import Flex from '../styles/Flex'
 
+const Label = styled.label`
+font-size: 1rem;
+font-family: CODE !important;
+margin-right: 1%;
+`
 const VariantSelector = ({ key, onChange, options, disabled, placeholder }) => {
   if (options.name === 'Title') return null
 
   return (
-    <div className="field ">
-      <label className="label has-text-white">{options.name} </label>
-
-      <div className="control">
-        <div className="select is-fullwidth">
+    <Flex justifyBetween width='100%'>
+      <Label className="label has-text-white">{options.name} </Label>
+        <Flex>
           <select
             onBlur={onChange}
             name={options.name}
@@ -30,9 +35,8 @@ const VariantSelector = ({ key, onChange, options, disabled, placeholder }) => {
               </option>
             ))}
           </select>
-        </div>
-      </div>
-    </div>
+        </Flex>
+    </Flex>
   )
 }
 

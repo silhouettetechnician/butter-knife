@@ -46,7 +46,7 @@ const Cart = ({ isOpen, setIsOpen }) => {
   ))
   return (
     <Wrapper isDark={state.isDark} justifyAround column alignCenter noWrap isOpen={isOpen} setIsOpen={setIsOpen}>
-      <LogoHolder><div onClick={() => navigate('/')} style={{ color: `${state.isDark ? 'white' : 'black'}`, cursor: 'pointer', fontFamily: 'bangers', fontSize: '2.5rem', textDecorationLine: 'line-through', textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}` }}> SHOPPING TROLLEY <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder><FontAwesomeIcon style={{ color: `${state.isDark ? 'white' : 'black'}`, position: 'absolute', top: '0', left: '0', margin: '20px', cursor: 'pointer' }} onClick={() => setIsOpen(false)} icon={faTimes} size='2x' />
+      <LogoHolder><div onClick={() => navigate('/')} style={{ color: `${state.isDark ? 'white' : 'black'}`, cursor: 'pointer', fontFamily: 'bangers', fontSize: '2.5rem', textDecorationLine: 'line-through', textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}`, padding: '15px' }}> SHOPPING TROLLEY <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder><FontAwesomeIcon style={{ color: `${state.isDark ? 'white' : 'black'}`, position: 'absolute', top: '0', left: '0', margin: '20px', cursor: 'pointer' }} onClick={() => setIsOpen(false)} icon={faTimes} size='2x' />
       <div style={{ overflow: 'auto', margin: '20px', width: '80%' }}>{checkout.lineItems.length !== 0 ? lineItems : 'Trolley Empty :('}</div>
       <div>
         <CartHeading>Total: <p>£ {checkout.totalPrice}</p></CartHeading>

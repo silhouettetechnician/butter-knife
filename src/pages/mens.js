@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { graphql } from "gatsby"
 import { Link } from "gatsby"
-import { PageHeading, ContainerFlex, ContainerFlexHide } from '../components/StyledComponents'
+import { PageHeading, ContainerFlex, ContainerFlexHide, TitleAndFilter} from '../components/StyledComponents'
 import ClothingItem from '../templates/ClothingItem'
 import StoreContext from '../contexts/Context'
 import FilterBar from '../components/FilterBar'
@@ -57,7 +57,7 @@ const Mens = ({ data }) => {
 
   const Product = (i) => {
     const { product } = i
-    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={productList} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRange && Math.round(product.priceRange.maxVariantPrice.amount)} />
+    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem vendor={product.vendor} data={productList} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRange && Math.round(product.priceRange.maxVariantPrice.amount)} />
     </Link>
   }
 
@@ -65,11 +65,11 @@ const Mens = ({ data }) => {
 
   return (
     <>
-      <Flex justifyBetween width='100%'>
-      <div width='170px'></div>
+      <TitleAndFilter justifyBetween width='100%'>
+      <div id='content-desktop' style={{width: '190px'}}></div>
       <PageHeading isDark={state.isDark}>Mens</PageHeading>
     <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
-        </Flex>
+        </TitleAndFilter>
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
         <ContainerFlexHide width='20%' justifyCenter>
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />

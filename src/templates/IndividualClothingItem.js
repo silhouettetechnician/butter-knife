@@ -1,24 +1,50 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react'
 import isEqual from "lodash/isEqual";
-import SliderImage from 'react-zoom-slider';
+import ReactSlick from 'react-slick';
 import DropDown from '../components/DropDownSort'
-import ReactImageZoom from 'react-image-zoom';
+import Zoom from 'react-medium-image-zoom'
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { graphql } from "gatsby"
 import find from 'lodash/find'
+import { DescriptionFlex } from '../components/StyledComponents'
 import StoreContext from '../contexts/Context'
 import Context from '../contexts/StoreContext'
 import ImageGallery from 'react-image-gallery';
 import Flex from '../styles/Flex'
 import VariantSelector from '../components/VariantSelector'
 import { Carousel } from 'react-responsive-carousel';
-import 'react-awesome-slider/dist/styles.css'
+import styled from '@emotion/styled'
 import toast, { Toaster } from 'react-hot-toast';
 
-const IndividualClothingItem = ({ data, hit }) => {
+const ArrowStyles = {
+  position: 'absolute',
+  zIndex: 2,
+  top: 'calc(50% - 15px)',
+  width: 50,
+  height: 50,
+  cursor: 'pointer',
+}
+const ImageFlex = styled(Flex)`
+@media (max-width: 800px){
+  width: 100%;
+}
+`
+const WrapperResponsive = styled(Flex)`
+    flex-direction: row;
+@media (max-width: 800px){
+  flex-direction: column;
+  margin: 10px;
+  width: 100%;
+}
+`
+
+const IndividualClothingItem = ({ data, hit, ...props }) => {
   const {
     options,
     title,
     description,
+    vendor,
     variants,
     images,
     variants: [initialVariant],
@@ -80,8 +106,8 @@ const IndividualClothingItem = ({ data, hit }) => {
     setVariant({ ...selectedVariant })
   }
 
-  const handleAddToCart =  () => {
-     addVariantToCart(productVariant.shopifyId, quantity)
+  const handleAddToCart = () => {
+    addVariantToCart(productVariant.shopifyId, quantity)
   }
 
 
@@ -90,36 +116,22 @@ const IndividualClothingItem = ({ data, hit }) => {
   const sizes = variants.map(variant => ({ title: variant.title, id: variant.shopifyId, }))
 
   return (
-    <Flex width='100%' justifyAround>
+    <WrapperResponsive width='100%' justifyEvenly>
       <Toaster position='top-right' />
-      <Flex justifyCenter width='40%' height='auto'>
-        <Carousel showThumbs={false}>
-          {imagesMap.map(i => (
-            <ReactImageZoom 
-              img={i.image}
-              // width={700}
-              width={700}
-              // height={250}
-              height={600}
-              />
-            // <Zoom
-            //   // style={{ backgroundSize: 'contain !important' }}
-            //   img={i.image}
-            //   zoomScale={3}
-            //   width={700}
-            //   height={600}
-            // />
+      <ImageFlex justifyCenter width='55%'>
+        <Carousel
+        renderArrowPrev={(onClickHandler, hasPrev, label) => hasPrev && <FontAwesomeIcon style={{...ArrowStyles, left: 15, color: 'rgb(254, 205, 47)'}} onClick={onClickHandler} icon={faAngleLeft}/>}
+        renderArrowNext={(onClickHandler, hasNext, label) => hasNext && <FontAwesomeIcon style={{...ArrowStyles, right: 15, color: 'rgb(254, 205, 47)'}} onClick={onClickHandler} icon={faAngleRight}/>} 
+        >
+          {imagesMap.map(image => (
+            <img src={image.image} />
           ))}
         </Carousel>
-        {/* <SliderImage data={imagesMap}
-          width="1000px"
-          showDescription={false}
-          direction="right" showPlayButton={false} items={imagesMap} /> */}
-      </Flex>
-      <Flex column alignCenter width='35%' height='100vh' padding='1rem'>
+      </ImageFlex>
+      <DescriptionFlex column alignCenter width='35%' height='100%' padding='1rem'>
         <h2 style={{ fontFamily: 'bangers', marginTop: '1rem', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '3rem',/*textDecorationLine: 'line-through', textDecorationColor: 'rgb(254, 205, 47)'*/ }}>{title}</h2><br />
         <hr style={{
-          border: '0.1px solid rgba(254, 205, 47, 0.4)', width: '75%', marginTop: '1rem',
+          border: !state.isDark ? '0.1px solid rgba(254, 205, 47, 0.4)' : '0.1px solid rgb(1, 49, 210)', width: '75%', marginTop: '1rem',
           marginBottom: '3rem'
         }} />
         <div><p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'graphikMed', fontSize: '2.4rem' }}>{`£${Math.round(minVariantPrice.amount)}`}</p></div>
@@ -131,23 +143,22 @@ const IndividualClothingItem = ({ data, hit }) => {
             value: i,
             label: i
           }))
-          return <div className="column">
+          return (
             <VariantSelector
               key={options.id.toString()}
               onChange={(e) => handleOptionChange(index, e)}
               options={options}
               fullWidth={options.length > 1}
             />
-          </div>
+          )
         })}
         <button
           style={{ border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }}
           type="submit"
           onClick={handleAddToCart}
-        >Add to trolley</button>
-      </Flex>
-    </Flex>
-
+        >+ Add to trolley</button>
+      </DescriptionFlex>
+    </WrapperResponsive>
   )
 }
 

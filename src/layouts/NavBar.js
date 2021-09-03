@@ -16,6 +16,17 @@ import Context from '../contexts/StoreContext'
 import Trolley from '../assets/shopping-cart.svg'
 import { useTheme, ThemeProvider, withTheme } from '@emotion/react'
 
+const ResponsiveLogoHolder = styled.div`
+cursor: pointer;
+font-family: bangers;
+font-size: 5rem;
+color: ${props => props.isDark ? 'white' : 'black'};
+text-decoration-line: line-through;
+text-decoration-color: ${props => props.isDark ? '#0131D2' : 'rgb(254, 205, 47)'};
+@media (max-width: 800px) {
+    font-size: 4rem;
+}
+`
 const CartCounter = styled.span`
     background-color: white;
     color: #663399;
@@ -87,7 +98,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                         <FontAwesomeIcon style={{ cursor: 'pointer', fontSize: '40px', margin: '12px' }} onClick={() => setIsOpen(!isOpen)} id='content-mobile' icon={faShoppingCart}></FontAwesomeIcon>
                     </Flex>
                 </AudioPlayerProvider>
-                <LogoHolder isDark={state.isDark}><div onClick={() => navigate('/')} style={{ cursor: 'pointer', fontFamily: 'bangers', fontSize: '5rem', color: `${state.isDark ? 'white' : 'black'}`, textDecorationLine: 'line-through', textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}` }}> BUTTER KNIFE <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></div></LogoHolder>
+                <LogoHolder isDark={state.isDark}><ResponsiveLogoHolder isDark={state.isDark} onClick={() => navigate('/')}> BUTTER KNIFE <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></ResponsiveLogoHolder></LogoHolder>
                {openBurger && <MobileNavigation openBurger={openBurger}>
                 <PageHeading width='2.6rem'style={{textDecorationLine: 'line-through', textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}`, margin: '40px 0'}} isDark={state.isDark}>Menu</PageHeading>
                 <>
@@ -97,14 +108,14 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                     <MobileNavMenuItem isDark={state.isDark} className='strike' ><Link onClick={() => closeMobileNav()} to='/womens'>Womens</Link></MobileNavMenuItem>
                     <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/footwear'>Footwear</Link></MobileNavMenuItem>
                     </>
-                    <ButtonHolder onClick={() => closeMobileNav()} style={{position: 'absolute', bottom: '10px'}}>
+                    <ButtonHolder style={{position: 'absolute', bottom: '10px'}}>
                             {isAuthenticated ?
                                 <div style={{ padding: '15px' }}>
                                     <Logout isDark={state.isDark} />
                                 </div>
                                 :
                                 <Link to='/account/login' className='strike'>
-                                    <div style={{ padding: '15px', color: `${state.isDark ? 'white' : 'black'}` }}>
+                                    <div onClick={() => closeMobileNav()}  style={{ padding: '15px', color: `${state.isDark ? 'white' : 'black'}` }}>
                                         LOGIN/REGISTER
                                     </div>
                                 </Link>

@@ -20,6 +20,7 @@ const FooterMobile = styled(Flex)`
 const TermsBox = styled.ul`
     display: flex;
     align-items: space-between;
+    padding-left: 5px;
     & > li{
         list-style: none;
         margin: 0 2px;
@@ -37,14 +38,23 @@ const InnerHolder = styled.div`
         margin: 15px;
     }
 `
+const LogoHolderResponsive = styled.div`
+    width:33%;
+    display: flex;
+    justifyContent: center;
+    @media (max-width: 800px) {
+        width: 50%;
+    }
+
+`
 const imageStyle = {
-    width: '50px',
+    width: '5vw',
     margin: '2%'
 }
 const FooterNew = () => {
     const {state} = useContext(StoreContext)
    return <Footer isDark={state.isDark}>
-        <div style={{width:'33%', display: 'flex', justifyContent: 'center'}}>
+        <LogoHolderResponsive>
         <LogoHolder  style={{ flexDirection: 'column' }}>
             <InnerHolder isDark={state.isDark} onClick={() => navigate('/')}>
                 BUTTER KNIFE
@@ -59,7 +69,7 @@ const FooterNew = () => {
                 <li><Link className='strike' style={{color: `${state.isDark ? 'white !important' : 'black !important'}`}}to='/contact'>Contact</Link></li>
             </TermsBox>
         </LogoHolder>
-        </div>
+        </LogoHolderResponsive>
         <FooterMobile justifyCenter alignCenter >
             <img style={imageStyle} src={visa} alt='visa' />
             <img style={imageStyle} src={mastercard} alt='mastercard' />

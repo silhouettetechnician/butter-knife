@@ -12,7 +12,7 @@ const VariantSelector = ({ key, onChange, options, disabled, placeholder }) => {
 
   return (
     <Flex justifyBetween width='100%'>
-      <Label className="label has-text-white">{options.name} </Label>
+      <Label className="label has-text-white">{options.name}: </Label>
         <Flex>
           <select
             onBlur={onChange}

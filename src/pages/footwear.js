@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { graphql, Link } from 'gatsby'
 import Flex from '../styles/Flex'
-import { PageHeading, ContainerFlex, ContainerFlexHide } from '../components/StyledComponents'
+import { PageHeading, ContainerFlex, TitleAndFilter, ContainerFlexHide } from '../components/StyledComponents'
 import ClothingItem from '../templates/ClothingItem'
 import FilterBar from '../components/FilterBar'
 import DropDown from '../components/DropDownSort'
@@ -56,11 +56,11 @@ const Footwear = ({ data }) => {
 
   return (
     <>
-      <Flex justifyBetween width='100%'>
-      <div width='170px'></div>
+      <TitleAndFilter justifyBetween width='100%'>
+      <div id='content-desktop' style={{width: '190px'}}></div>
         <PageHeading isDark={state.isDark}>Footwear</PageHeading>
         <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
-      </Flex>
+      </TitleAndFilter>
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
         <ContainerFlexHide width='20%' justifyCenter>
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />

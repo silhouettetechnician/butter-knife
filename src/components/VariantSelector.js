@@ -6,13 +6,14 @@ const Label = styled.label`
 font-size: 1rem;
 font-family: CODE !important;
 margin-right: 1%;
+color: ${props => props.isDark ? 'white' : 'black'}
 `
-const VariantSelector = ({ key, onChange, options, disabled, placeholder }) => {
+const VariantSelector = ({ key, onChange, options, disabled, placeholder,isDark }) => {
   if (options.name === 'Title') return null
 
   return (
     <Flex justifyBetween width='100%'>
-      <Label className="label has-text-white">{options.name}: </Label>
+      <Label isDark={isDark} className="label has-text-white">{options.name}: </Label>
         <Flex>
           <select
             onBlur={onChange}

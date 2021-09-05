@@ -28,7 +28,6 @@ text-decoration-color: ${props => props.isDark ? '#0131D2' : 'rgb(254, 205, 47)'
 }
 `
 const CartCounter = styled.span`
-    background-color: white;
     color: #663399;
     border-radius: 20px;
     padding: 0 10px;
@@ -48,6 +47,15 @@ const ButtonHolder = styled.div`
 `
 const BurgerButton = styled.button`
     display: none;
+    & > span > span {
+        background-color: ${props => props.isDark ? 'white !important' : 'black !important' };
+        &:before{
+            background-color: ${props => props.isDark ? 'white !important' : 'black !important' };
+        }
+        &:after{
+            background-color: ${props => props.isDark ? 'white !important' : 'black !important' };
+        }
+    }
 `
 const Anchor = styled(Link)`
     ...NavMenuItem;
@@ -90,16 +98,17 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                                 </Link>
                             }
                         </ButtonHolder>
-                        <BurgerButton onClick={() => setOpenBurger(!openBurger)} id='content-mobile' className={`hamburger hamburger--slider ${openBurger && 'is-active'}`} type="button">
+                        <BurgerButton isDark={state.isDark} onClick={() => setOpenBurger(!openBurger)} id='content-mobile' className={`hamburger hamburger--slider ${openBurger && 'is-active'}`} type="button">
                             <span className="hamburger-box">
-                                <span className="hamburger-inner"></span>
+                                <span style={{backgroundColor: `${state.isDark ? 'white !important' : 'black !important'}`}} className="hamburger-inner"></span>
                             </span>
                         </BurgerButton>
                         <FontAwesomeIcon style={{ cursor: 'pointer', fontSize: '40px', margin: '12px' }} onClick={() => setIsOpen(!isOpen)} id='content-mobile' icon={faShoppingCart}></FontAwesomeIcon>
                     </Flex>
                 </AudioPlayerProvider>
                 <LogoHolder isDark={state.isDark}><ResponsiveLogoHolder isDark={state.isDark} onClick={() => navigate('/')}> BUTTER KNIFE <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></ResponsiveLogoHolder></LogoHolder>
-               {openBurger && <MobileNavigation openBurger={openBurger}>
+               {openBurger && <MobileNavigation isDark={state.isDark} openBurger={openBurger}>
+               <button style={{ padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
                 <PageHeading width='2.6rem'style={{textDecorationLine: 'line-through', textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}`, margin: '40px 0'}} isDark={state.isDark}>Menu</PageHeading>
                 <>
                 <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link to='/whats-new'>What's new</Link></MobileNavMenuItem>

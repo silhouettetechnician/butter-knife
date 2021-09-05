@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { graphql, Link } from 'gatsby'
 import Flex from '../styles/Flex'
 import FilterBar from '../components/FilterBar'
-import { PageHeading, ContainerFlex, ContainerFlexHide } from '../components/StyledComponents'
+import { PageHeading, ContainerFlex, TitleAndFilter, ContainerFlexHide } from '../components/StyledComponents'
 import DropDown from '../components/DropDownSort'
 import _ from 'lodash'
 import ClothingItem from '../templates/ClothingItem'
@@ -54,11 +54,11 @@ const WhatsNew = ({ data }) => {
   const filteredItems = getItems()
   return (
     <>
-      <Flex justifyBetween width='100%'>
-          <div width='170px'></div>
+      <TitleAndFilter justifyBetween width='100%'>
+      <div id='content-desktop' style={{width: '190px'}}></div>
           <PageHeading isDark={state.isDark}>What's new</PageHeading>
           <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
-      </Flex>
+      </TitleAndFilter>
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
         <ContainerFlexHide width='20%' justifyCenter>
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />

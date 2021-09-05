@@ -193,10 +193,10 @@ export const Heading1 = styled.h1`
 
 export const Footer = styled.footer`
         display: flex;
-        // position: fixed;
-        // bottom: 0;
+        // position: absolute;
+        bottom: 0;
         width: 100%;
-        height: 180px;
+        height: 130px;
         background: ${props => props.isDark ? '#1D1D1D' : 'white'};
         z-index: 999999;
         align-items: center;

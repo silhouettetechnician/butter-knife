@@ -45,8 +45,11 @@ const LogoHolderResponsive = styled.div`
     @media (max-width: 800px) {
         width: 50%;
     }
-
 `
+const StyledLink = styled(Link)`
+    color: ${props => props.isDark ? 'white !important' : 'black !important'};
+`
+
 const imageStyle = {
     width: '5vw',
     margin: '2%'
@@ -63,10 +66,10 @@ const FooterNew = () => {
                 </span>
             </InnerHolder>
             <TermsBox>
-                <li><Link className='strike' style={{color: `${state.isDark ? 'white !important' : 'black !important'}`}}to='/terms'>Terms</Link></li>
-                <li><Link className='strike' style={{color: `${state.isDark ? 'white !important' : 'black !important'}`}}to='/privacy'>Privacy</Link></li>
-                <li><Link className='strike' style={{color: `${state.isDark ? 'white !important' : 'black !important'}`}}to='/about'>About</Link></li>
-                <li><Link className='strike' style={{color: `${state.isDark ? 'white !important' : 'black !important'}`}}to='/contact'>Contact</Link></li>
+                <li><StyledLink isDark={state.isDark}className='strike' to='/terms'>Terms</StyledLink></li>
+                <li><StyledLink isDark={state.isDark}className='strike' to='/privacy'>Privacy</StyledLink></li>
+                <li><StyledLink isDark={state.isDark}className='strike' to='/about'>About</StyledLink></li>
+                <li><StyledLink isDark={state.isDark}className='strike' to='/contact'>Contact</StyledLink></li>
             </TermsBox>
         </LogoHolder>
         </LogoHolderResponsive>
@@ -76,7 +79,7 @@ const FooterNew = () => {
             <img style={imageStyle} src={paypal} alt='paypal' />
             <img style={imageStyle} src={amex} alt='amex' />
         </FooterMobile>
-        <Flex id='content-desktop' style={{padding: '40px', color: `${state.isDark ? 'white' : 'black'}`}}justifyCenter alignCenter width='33%'>
+        <Flex id='content-desktop' style={{padding: '10px', color: `${state.isDark ? 'white' : 'black'}`}}justifyCenter alignCenter width='33%'>
             <p>Copyright © 2021 Butterknife Ltd | All rights reserved | Butterknife Ltd is a company registered in England and Wales with registration number 13373396.</p>
         </Flex>
     </Footer>

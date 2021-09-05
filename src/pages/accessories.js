@@ -56,7 +56,7 @@ const filteredItems = getItems()
 return(
   <>
     <Flex justifyBetween width='100%'>
-      <div width='170px'></div>
+    <div id='content-desktop' style={{width: '190px'}}></div>
     <PageHeading isDark={state.isDark}>Accessories</PageHeading>
     <DropDown priceSort={priceSort} setPriceSort={setPriceSort}/> 
     </Flex>

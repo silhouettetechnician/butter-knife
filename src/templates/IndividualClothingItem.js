@@ -32,6 +32,7 @@ const ImageFlex = styled(Flex)`
 `
 const WrapperResponsive = styled(Flex)`
     flex-direction: row;
+    margin-bottom: 50px;
 @media (max-width: 800px){
   flex-direction: column;
   margin: 10px;
@@ -128,7 +129,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
           ))}
         </Carousel>
       </ImageFlex>
-      <DescriptionFlex column alignCenter width='35%' height='100%' padding='1rem'>
+      <DescriptionFlex column alignCenter width='35%' height='100%'>
         <h2 style={{ fontFamily: 'bangers', marginTop: '1rem', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '3rem',/*textDecorationLine: 'line-through', textDecorationColor: 'rgb(254, 205, 47)'*/ }}>{title}</h2><br />
         <hr style={{
           border: !state.isDark ? '0.1px solid rgba(254, 205, 47, 0.4)' : '0.1px solid rgb(1, 49, 210)', width: '75%', marginTop: '1rem',
@@ -145,6 +146,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
           }))
           return (
             <VariantSelector
+              isDark={state.isDark}
               key={options.id.toString()}
               onChange={(e) => handleOptionChange(index, e)}
               options={options}
@@ -153,7 +155,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
           )
         })}
         <button
-          style={{ border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }}
+          style={{ fontSize: '25px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }}
           type="submit"
           onClick={handleAddToCart}
         >+ Add to trolley</button>

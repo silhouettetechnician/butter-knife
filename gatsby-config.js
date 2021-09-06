@@ -77,6 +77,14 @@ plugins: [
       accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
     },
   },
+  {
+    resolve: `gatsby-plugin-google-analytics`,
+    options: {
+      // The property ID; the tracking code won't be generated without it
+      trackingId: process.env.GA_TRACKING_ID,
+      head: true,
+    },
+  },
   // {
   //   resolve: `gatsby-plugin-apollo-shopify`,
   //   options: {
@@ -84,14 +92,7 @@ plugins: [
   //     accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
   //   },
   // },
-  {
-    resolve: 'gatsby-plugin-snipcart',
-    options: {
-        //replace with own Snipcart API key
-        apiKey: process.env.GATSBY_SNIPCART_TEST_KEY,
-        autopop: true,
-    }
-},
+
 // {
 //   resolve: 'gatsby-plugin-apollo',
 //   options: {

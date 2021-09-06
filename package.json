@@ -46,6 +46,7 @@
     "gatsby-plugin-env-variables": "^2.0.0",
     "gatsby-plugin-firebase": "^0.2.0-beta.4",
     "gatsby-plugin-fontawesome-css": "^1.1.0",
+    "gatsby-plugin-google-analytics": "^3.13.0",
     "gatsby-plugin-image": "^1.2.1",
     "gatsby-plugin-layout": "^2.0.0",
     "gatsby-plugin-mailchimp": "^5.2.2",

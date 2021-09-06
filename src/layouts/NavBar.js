@@ -83,7 +83,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
             <Header isDark={state.isDark}>
                 <AudioPlayerProvider>
                     <Flex justifyBetween>
-                        <button id='content-desktop' style={{ padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
+                        <button id='content-desktop' style={{ padding: '15px', border: 'unset', fontWeight: 1000, color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
                         <Player isDark={state.isDark} file={realog} />
                         <ButtonHolder id='content-desktop'>
                             {isAuthenticated ?
@@ -92,7 +92,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                                 </div>
                                 :
                                 <Link to='/account/login' className='strike'>
-                                    <div style={{ padding: '15px', color: `${state.isDark ? 'white' : 'black'}` }}>
+                                    <div style={{ padding: '15px', color: `${state.isDark ? 'white' : 'black'}`, fontWeight: 1000 }}>
                                         LOGIN/REGISTER
                                     </div>
                                 </Link>
@@ -125,7 +125,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                                 </div>
                                 :
                                 <Link to='/account/login' className='strike'>
-                                    <div onClick={() => closeMobileNav()}  style={{ padding: '15px', color: `${state.isDark ? 'white' : 'black'}` }}>
+                                    <div onClick={() => closeMobileNav()}  style={{ padding: '15px', color: `${state.isDark ? 'white' : 'black'}`, fontWeight: 1000 }}>
                                         LOGIN/REGISTER
                                     </div>
                                 </Link>

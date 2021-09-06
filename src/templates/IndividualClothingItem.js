@@ -136,7 +136,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
           marginBottom: '3rem'
         }} />
         <div><p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'CODE', fontSize: '2.4rem' }}>{`£${Math.round(minVariantPrice.amount)}`}</p></div>
-        <div><p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'CODE', fontSize: '1rem' }}>{description}</p></div>
+        <div style={{marginBottom: '15px'}}>{description}</div>
         {/* <DropDownSort data={options} val={val} variant={variant} handleOptionChange={handleOptionChange} setVal={setVal} /> */}
 
         {options.map((options, index) => {

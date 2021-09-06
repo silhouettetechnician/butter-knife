@@ -1,15 +1,15 @@
 import React, { useContext } from 'react'
 import Flex from '../styles/Flex'
 import StoreContext from '../contexts/StoreContext'
-import aboutImage from '../assets/aboutBackground.jpg'
+import Aboutimg from '../assets/About4.jpg'
 import editedLegoMan from '../assets/editedLegoMan.png'
 import styled from '@emotion/styled'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
 const ArrowDown = styled.div`
-    background: ${props => props.isDark ? 'white' : 'black'};
+    background: white;
     &:after{
-        background: ${props => props.isDark ? 'white' : 'black'};
+        background: white;
     }
 `
 const AboutUsParagraph = styled.p`
@@ -17,7 +17,9 @@ const AboutUsParagraph = styled.p`
     font-family: CODE;
     text-transform: uppercase;
     margin: 0 auto;
-    color: ${props => props.isDark ? 'white' : 'black'};
+    color: white;
+    font-weight: 1000;
+    // color: ${props => props.isDark ? 'white' : 'black'};
     width: 80%;
     margin-bottom: 20px;
     text-align: center;
@@ -37,7 +39,7 @@ const About = () => {
     return (
         // <Flex justifyCenter height='auto' width='100%'>
         <div style={{ position: 'relative', height: '100vh', width: '100%' }}>
-            <Parallax pages={4} style={{ position: 'absolute', top: '0', left: '0', /*backgroundImage: `url(${editedLegoMan})`, backgroundSize: 'cover'*/ }}>
+            <Parallax pages={4} style={{ position: 'absolute', top: '0', left: '0', backgroundImage: `url(${Aboutimg})`, backgroundSize: 'cover' }}>
 
                 <ParallaxLayer
                     offset={0}

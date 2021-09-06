@@ -40,7 +40,7 @@ code {
     monospace;
 }
 .MuiTypography-root {
-  font-family: BerlinBold !important;
+  font-family: CODE !important;
   /* text-transform: uppercase; */
   /* text-decoration: underline; */
 }
@@ -155,7 +155,13 @@ a:hover {
 }
 @font-face {
   font-family: CODE;
-  src: url("../fonts/CODE Bold.otf");
+  /* src: url("../fonts/CODE Bold.otf"); */
+  src: url("../fonts/PantonLight.otf");
+}
+@font-face {
+  font-family: CODE1;
+  /* src: url("../fonts/CODE Bold.otf"); */
+  src: url("../fonts/Panton.otf");
 }
 @font-face {
   font-family: Berlin;

@@ -6,11 +6,18 @@ import editedLegoMan from '../assets/editedLegoMan.png'
 import styled from '@emotion/styled'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
+const ArrowDown = styled.div`
+    background: ${props => props.isDark ? 'white' : 'black'};
+    &:after{
+        background: ${props => props.isDark ? 'white' : 'black'};
+    }
+`
 const AboutUsParagraph = styled.p`
     font-size: 2em;
     font-family: CODE;
     text-transform: uppercase;
     margin: 0 auto;
+    color: ${props => props.isDark ? 'white' : 'black'};
     width: 80%;
     margin-bottom: 20px;
     text-align: center;
@@ -30,16 +37,16 @@ const About = () => {
     return (
         // <Flex justifyCenter height='auto' width='100%'>
         <div style={{ position: 'relative', height: '100vh', width: '100%' }}>
-            <Parallax pages={3} style={{ position: 'absolute', top: '0', left: '0', /*backgroundImage: `url(${editedLegoMan})`, backgroundSize: 'cover'*/ }}>
+            <Parallax pages={4} style={{ position: 'absolute', top: '0', left: '0', /*backgroundImage: `url(${editedLegoMan})`, backgroundSize: 'cover'*/ }}>
 
                 <ParallaxLayer
                     offset={0}
                     speed={0.5}
                     style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
 
-                    <AboutUsParagraph>Butterknife brings you all the latest brands and designers.</AboutUsParagraph>
-                    <div class="arrow-container">
-                        <div class="arrow-down"></div>
+                    <AboutUsParagraph isDark={state.isDark}>Butterknife brings you all the latest brands and designers.</AboutUsParagraph>
+                    <div className="arrow-container">
+                        <ArrowDown isDark={state.isDark} className="arrow-down"></ArrowDown>
                     </div>
                 </ParallaxLayer>
 
@@ -55,7 +62,7 @@ const About = () => {
                         color: 'black',
                     }}>
 
-                    <AboutUsParagraph>Butterknife inspires men and women to express their unique individual style... </AboutUsParagraph>
+                    <AboutUsParagraph isDark={state.isDark}>Butterknife inspires men and women to express their unique individual style... </AboutUsParagraph>
                 </ParallaxLayer>
                 <ParallaxLayer
                     offset={2}
@@ -67,7 +74,19 @@ const About = () => {
                         color: 'black',
                     }}>
 
-                    <AboutUsParagraph>through a wide selection of affordable, well made designs and pieces.</AboutUsParagraph>
+                    <AboutUsParagraph isDark={state.isDark}>through a wide selection of new, quality made designs.</AboutUsParagraph>
+                </ParallaxLayer>
+                <ParallaxLayer
+                    offset={3}
+                    speed={0.5}
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        color: 'black',
+                    }}>
+
+                    <AboutUsParagraph isDark={state.isDark}>don't hesitate to get in contact for any queries via our contact page</AboutUsParagraph>
                 </ParallaxLayer>
 
                 {/* <p>We hope you enjoy your shopping experience with us and please do not hesitate to reach out to our Customer Service should there be questions, concerns, observations or even styling tips.</p> */}

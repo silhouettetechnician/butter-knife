@@ -54,7 +54,7 @@ const RegisterForm = () => {
   return (
     <Flex justifyCenter>
       <img src={loginImg} style={{ width: '100%', filter: 'blur(45px)' }} />
-      <Flex style={{ height: 'calc(100vh - 359px)', position: 'absolute' }}>
+      <Flex justifyCenter style={{  position: 'absolute', width: '100%' }}>
         <Formik
           initialValues={{
             email: '',
@@ -67,11 +67,9 @@ const RegisterForm = () => {
             }
           }>
           {props => (
-            <Form>
-              <AuthFormBox>
+            // <Form>
+              <AuthFormBox onSubmit={props.handleSubmit}>
                 <PageHeading>Create Account</PageHeading>
-                <div className="field">
-                  <div className="control">
                     <LoginInput value={props.values.email} name='email' placeholder="email" type="email" id="loginEmail" onChange={props.handleChange} />
                     {props.touched.email && props.errors.email && (
                         <p
@@ -81,8 +79,6 @@ const RegisterForm = () => {
                           {props.errors.email}
                         </p>
                       )}
-                  </div>
-                </div>
                 <div className="field">
                   <div className="control">
                     <LoginInput value={props.values.password} name='password' placeholder="password" type="password" id="loginPassword" onChange={props.handleChange} />
@@ -107,7 +103,7 @@ const RegisterForm = () => {
                 </div>
                 <Link to={`/account/login`}>Already registered? Login</Link>
               </AuthFormBox>
-            </Form>
+            // </Form>
           )}
         </Formik>
       </Flex>

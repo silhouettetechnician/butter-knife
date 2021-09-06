@@ -1,6 +1,6 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react'
 import isEqual from "lodash/isEqual";
-import ReactSlick from 'react-slick';
+import Select from "react-select";
 import DropDown from '../components/DropDownSort'
 import Zoom from 'react-medium-image-zoom'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
@@ -135,20 +135,18 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
           border: !state.isDark ? '0.1px solid rgba(254, 205, 47, 0.4)' : '0.1px solid rgb(1, 49, 210)', width: '75%', marginTop: '1rem',
           marginBottom: '3rem'
         }} />
-        <div><p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'graphikMed', fontSize: '2.4rem' }}>{`£${Math.round(minVariantPrice.amount)}`}</p></div>
-        <div><p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'graphikReg', fontSize: '1rem' }}>{description}</p></div>
+        <div><p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'CODE', fontSize: '2.4rem' }}>{`£${Math.round(minVariantPrice.amount)}`}</p></div>
+        <div><p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'CODE', fontSize: '1rem' }}>{description}</p></div>
         {/* <DropDownSort data={options} val={val} variant={variant} handleOptionChange={handleOptionChange} setVal={setVal} /> */}
 
         {options.map((options, index) => {
-          const dataOptions = options.values.map(i => ({
-            value: i,
-            label: i
-          }))
+          
           return (
             <VariantSelector
               isDark={state.isDark}
               key={options.id.toString()}
               onChange={(e) => handleOptionChange(index, e)}
+              index={index}
               options={options}
               fullWidth={options.length > 1}
             />

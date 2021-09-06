@@ -69,7 +69,7 @@ const FooterNew = () => {
                 <li><StyledLink isDark={state.isDark}className='strike' to='/terms'>Terms</StyledLink></li>
                 <li><StyledLink isDark={state.isDark}className='strike' to='/privacy'>Privacy</StyledLink></li>
                 <li><StyledLink isDark={state.isDark}className='strike' to='/about'>About</StyledLink></li>
-                <li><StyledLink isDark={state.isDark}className='strike' to='/contact'>Contact</StyledLink></li>
+                <li><a style={{fontFamily: 'CODE', color: `${state.isDark ? 'white' : 'black'}`}} className='strike' href="mailto:timothy.millward@butter-knife.co.uk">Contact</a></li>
             </TermsBox>
         </LogoHolder>
         </LogoHolderResponsive>

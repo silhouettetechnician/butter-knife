@@ -68,7 +68,7 @@ const Layout = ({ data, children }) => {
                 } = data.allShopifyCollection
                 return open ? <DropDownBrands onMouseLeave={() => setOpen(!open)} open={open} setOpen={setOpen}><Cross><FontAwesomeIcon onClick={() => setOpen(!open)} color="black" size="lg" icon={faTimes} /></Cross>
                     {_.uniqBy(nodes, 'title').filter(i => i.handle !== 'frontpage' && i.handle !== 'clothing' && i.handle !== 'accessories').map((brand, i) => {
-                        return <ListItem key={i} to={`/designers/${brand.handle}`} className='strike'>{brand.title}</ListItem>
+                        return <ListItem key={i} to={`/designers/${brand.handle}`} onClick={() => setOpen(!open)}className='strike'>{brand.title}</ListItem>
                     })
                     }
                 </DropDownBrands> : <></>

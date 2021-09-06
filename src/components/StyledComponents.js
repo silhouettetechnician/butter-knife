@@ -67,7 +67,7 @@ export const Navigation = styled.nav`
 export const NavMenuItem = styled.span`
         // font-size: 14px;
         line-height: 1;
-        font-family: BerlinBold !important;
+        font-family: CODE !important;
         // font-weight: bold;
         // letter-spacing: 0.35px;
         margin: 0px;

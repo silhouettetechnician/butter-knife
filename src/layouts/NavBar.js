@@ -112,9 +112,10 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                 <PageHeading width='2.6rem'style={{textDecorationLine: 'line-through', textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}`, margin: '40px 0'}} isDark={state.isDark}>Menu</PageHeading>
                 <>
                 <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link to='/whats-new'>What's new</Link></MobileNavMenuItem>
-                    <MobileNavMenuItem isDark={state.isDark} className='strike' onClick={() => setOpen(!open)}><span>Designers</span></MobileNavMenuItem>
+                    <MobileNavMenuItem isDark={state.isDark} className='strike' onClick={() => {setOpen(!open); closeMobileNav()}}><span>Designers</span></MobileNavMenuItem>
                     <MobileNavMenuItem isDark={state.isDark} className='strike' ><Link onClick={() => closeMobileNav()} to='/mens'>Mens</Link></MobileNavMenuItem>
                     <MobileNavMenuItem isDark={state.isDark} className='strike' ><Link onClick={() => closeMobileNav()} to='/womens'>Womens</Link></MobileNavMenuItem>
+                    <MobileNavMenuItem isDark={state.isDark} className='strike'><Link to='/souvenirs'>Souvenirs</Link></MobileNavMenuItem>
                     <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/footwear'>Footwear</Link></MobileNavMenuItem>
                     </>
                     <ButtonHolder style={{position: 'absolute', bottom: '10px'}}>
@@ -139,7 +140,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                     <NavMenuItem isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/footwear'>Footwear</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/accessories'>Accessories</Link></NavMenuItem><Divider />
                     {/* <NavMenuItem className='strike'><Link style={{fontFamily: 'BerlinBold'}}to='/vintage'>Vintage</Link></NavMenuItem><Divider /> */}
-                    <NavMenuItem isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/vintage'>Souvenirs</Link></NavMenuItem><Divider />
+                    <NavMenuItem isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/souvenirs'>Souvenirs</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike' onClick={() => setIsOpen(!open)}>{hasItems && <CartCounter>{quantity}</CartCounter>}
                         Trolley <img src={Trolley} alt='cart' style={{ color: `${state.isDark ? 'white' : 'black'}`, width: '15px', paddingBottom: '5px' }} />
                     </NavMenuItem>

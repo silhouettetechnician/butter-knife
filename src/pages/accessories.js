@@ -3,7 +3,7 @@ import { graphql, Link } from 'gatsby'
 import Flex from '../styles/Flex'
 import ClothingItem from '../templates/ClothingItem'
 import FilterBar from '../components/FilterBar'
-import { PageHeading, ContainerFlex, ContainerFlexHide } from '../components/StyledComponents'
+import { PageHeading, ContainerFlex, ContainerFlexHide, TitleAndFilter } from '../components/StyledComponents'
 import DropDown from '../components/DropDownSort'
 import StoreContext from '../contexts/StoreContext'
 import _ from 'lodash'
@@ -55,11 +55,11 @@ const Product = (i) => {
 const filteredItems = getItems()
 return(
   <>
-    <Flex justifyBetween width='100%'>
+    <TitleAndFilter justifyBetween width='100%'>
     <div id='content-desktop' style={{width: '190px'}}></div>
     <PageHeading isDark={state.isDark}>Accessories</PageHeading>
     <DropDown priceSort={priceSort} setPriceSort={setPriceSort}/> 
-    </Flex>
+    </TitleAndFilter>
     <Flex width='100%' margin='20px 0 0 0' justifyAround>
       <ContainerFlexHide width='20%' justifyCenter>
         <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />

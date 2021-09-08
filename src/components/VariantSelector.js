@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import Flex from '../styles/Flex'
 // import Select from "react-select";
 
-const Select = styled.select`
+export const Select = styled.select`
   width: 100%;
   height: 35px;
   font-family: CODE;
@@ -22,9 +22,6 @@ const VariantSelector = ({ key, onChange, options, disabled, placeholder ,isDark
   if (options.name === 'Title') return null
 
   const [value, setValue] = useState(options.values[0])
-
-console.log(options, 'options')
-console.log(value, 'value')
 
 const optionsMapped = Object.entries(options).map(([key, value]) => ({
   value: value,

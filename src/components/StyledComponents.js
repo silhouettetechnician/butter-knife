@@ -215,7 +215,7 @@ export const LoginInput = styled(Field)`
         width: ${props => props.width || '70%'};
         height: 50px;
         background: transparent;
-        border: 5px solid white;
+        border: ${props => props.border || '5px solid white'};
         margin: 3%;
         // font-family: CODE;
         color: black;

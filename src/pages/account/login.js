@@ -85,7 +85,7 @@ const LoginForm = () => {
         "email": values.email,
       }
     }).then(() => {
-      setMessageInfo("We've sent you an email with a link to update your password.")
+      toast.success(`We've sent you an email with a link to update your password.`)
       setPasswordForgot(false)
     })
   }
@@ -97,108 +97,108 @@ const LoginForm = () => {
   // margin: 0 auto -100px;
   // position: relative;
   // `
-  return  <Flex justifyCenter >
-      <Toaster position='top-right' />
-      <img src={loginImg} style={{ width: '100%', filter: 'blur(45px)' }} />
-      {passwordForgot ?
-        <Flex justifyCenter style={{position: 'absolute', width: '100%' }}>
+  return <Flex justifyCenter >
+    <Toaster position='top-right' />
+    <img src={loginImg} style={{ width: '100%', filter: 'blur(45px)' }} />
+    {passwordForgot ?
+      <Flex justifyCenter style={{ position: 'absolute', width: '100%' }}>
         <Formik
           initialValues={{
             email: '',
           }}
-          validationSchema={FormSchema}
+          // validationSchema={FormSchema}
           onSubmit={
             (actions) => {
               handleResetPassword(actions)
             }
           }>
           {props => (
-            <Form onSubmit={props.handleSubmit}>
-              <AuthFormBox>
-                  <PageHeading>RESET YOUR PASSWORD</PageHeading>
-                  <p style={{ fontFamily: 'CODE', marginTop: '1rem' }}>We will send you an email to reset your password.</p>
-                  <LoginInput value={props.values.email} placeholder="email" name="email" type="email" id="loginEmail" onChange={props.handleChange} />
-                  <button
-                    style={{ marginBottom: '1rem' }}
-                    className="button"
-                    type='submit'
-                  >SUBMIT</button>
-                  <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => () => setPasswordForgot(!passwordForgot)}>
-                    <p style={{ fontFamily: 'CODE' }}>Cancel</p>
-                  </div>
-              </AuthFormBox>
-            </Form>
+
+            <AuthFormBox onSubmit={props.handleSubmit}>
+              <PageHeading>RESET YOUR PASSWORD</PageHeading>
+              <p style={{ fontFamily: 'CODE', marginTop: '1rem' }}>We will send you an email to reset your password.</p>
+              <LoginInput value={props.values.email} placeholder="email" name="email" type="email" id="loginEmail" onChange={props.handleChange} />
+              <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => () => setPasswordForgot(!passwordForgot)}>
+                <p style={{ fontFamily: 'CODE' }}>Cancel</p>
+              </div>
+              <button
+                style={{ marginBottom: '1rem' }}
+                className="button"
+                type='submit'
+              >SUBMIT</button>
+            </AuthFormBox>
+
           )}
         </Formik>
-          </Flex>
-        :
-        <Flex justifyCenter style={{position: 'absolute', width: '100%' }}>
-          <Formik
-            initialValues={{
-              email: '',
-              password: '',
-            }}
-            validationSchema={FormSchema}
-            onSubmit={(values) => {
-              handleLogin(values)
-            }
-            }>
-            {props => (
-              // <Form onSubmit={props.handleSubmit}>
-                <AuthFormBox onSubmit={props.handleSubmit}>
-                  {messsageInfo &&
-                    <div class="notification is-success">
-                      {messsageInfo}
-                    </div>
-                  }
-                  <PageHeading>Login</PageHeading>
-                  <div className="field">
-                    <div className="control">
-                      <LoginInput value={props.values.email} name='email' placeholder='EMAIL' type="email" id="loginEmail" onChange={props.handleChange} {...props}/>
-                      {props.touched.email && props.errors.email && (
-                        <p
-                          className='error'
-                          style={{ color: 'red', fontSize: '0.75rem' }}
-                        >
-                          {props.errors.email}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className="field">
-                    <div className="control">
-                      {/* <LoginInput htmlFor='loginPassword' value={props.values.password} name='password' placeholder='PASSWORD' type="password" id="loginPassword" onChange={props.handleChange} /> */}
-                      <PasswordInput id="loginPassword" placeholder='password' name="password" value={props.values.password} onChange={props.handleChange} {...props}/>
-                    </div>
-                  </div>
-                  <div className="field">
-                  </div>
-                  <div className="field">
-                    <div className="control has-text-centered">
-                      <button
-                        type='submit'
-                        style={{ marginBottom: '1rem' }}
-                        className="button"
-                      // onClick={handleLogin}
-                      >SIGN IN</button>
-                    </div>
-                  </div>
-                    <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
-                      <p style={{ fontFamily: 'CODE' }}>Forgot your password? </p>
-                    </div>
-                  <div className="field">
-                    <div className="control has-text-centered">
-                      <a href="/../account/register">
-                        <p className="has-text-white">Create account</p>
-                      </a>
-                    </div>
-                  </div>
-                </AuthFormBox>
-            )}
-          </Formik>
-        </Flex>
-      }
-    </Flex>
+      </Flex>
+      :
+      <Flex justifyCenter style={{ position: 'absolute', width: '100%' }}>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+          }}
+          validationSchema={FormSchema}
+          onSubmit={(values) => {
+            handleLogin(values)
+          }
+          }>
+          {props => (
+            // <Form onSubmit={props.handleSubmit}>
+            <AuthFormBox onSubmit={props.handleSubmit}>
+              {messsageInfo &&
+                <div class="notification is-success">
+                  {messsageInfo}
+                </div>
+              }
+              <PageHeading>Login</PageHeading>
+              <div className="field">
+                <div className="control">
+                  <LoginInput value={props.values.email} name='email' placeholder='EMAIL' type="email" id="loginEmail" onChange={props.handleChange} {...props} />
+                  {props.touched.email && props.errors.email && (
+                    <p
+                      className='error'
+                      style={{ color: 'red', fontSize: '0.75rem' }}
+                    >
+                      {props.errors.email}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className="field">
+                <div className="control">
+                  {/* <LoginInput htmlFor='loginPassword' value={props.values.password} name='password' placeholder='PASSWORD' type="password" id="loginPassword" onChange={props.handleChange} /> */}
+                  <PasswordInput id="loginPassword" placeholder='password' name="password" value={props.values.password} onChange={props.handleChange} {...props} />
+                </div>
+              </div>
+              <div className="field">
+              </div>
+              <div className="field">
+                <div className="control has-text-centered">
+                  <button
+                    type='submit'
+                    style={{ marginBottom: '1rem' }}
+                    className="button"
+                  // onClick={handleLogin}
+                  >SIGN IN</button>
+                </div>
+              </div>
+              <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
+                <p style={{ fontFamily: 'CODE' }}>Forgot your password? </p>
+              </div>
+              <div className="field">
+                <div className="control has-text-centered">
+                  <a href="/../account/register">
+                    <p className="has-text-white">Create account</p>
+                  </a>
+                </div>
+              </div>
+            </AuthFormBox>
+          )}
+        </Formik>
+      </Flex>
+    }
+  </Flex>
 };
 
 

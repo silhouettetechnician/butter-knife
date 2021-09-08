@@ -8,7 +8,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import 'react-dropdown/style.css';
 import 'react-medium-image-zoom/dist/styles.css'
 import 'react-sticky-header/styles.css';
-import { navigate } from 'gatsby';
+import "react-responsive-modal/styles.css";
 // const onRedirectCallback = (appState) => {
 //   navigate(appState?.returnTo || '/', { replace: true });
 // };

@@ -1,5 +1,5 @@
 
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { AudioPlayerProvider } from "react-use-audio-player"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
@@ -14,18 +14,17 @@ import realog from '../assets/realog.mp3'
 import StoreContext from '../contexts/Context'
 import Context from '../contexts/StoreContext'
 import Trolley from '../assets/shopping-cart.svg'
-import { useTheme, ThemeProvider, withTheme } from '@emotion/react'
 
 const ResponsiveLogoHolder = styled.div`
-cursor: pointer;
-font-family: bangers;
-font-size: 5rem;
-color: ${props => props.isDark ? 'white' : 'black'};
-text-decoration-line: line-through;
-text-decoration-color: ${props => props.isDark ? '#0131D2' : 'rgb(254, 205, 47)'};
-@media (max-width: 800px) {
-    font-size: 4rem;
-}
+    cursor: pointer;
+    font-family: bangers;
+    font-size: 5rem;
+    color: ${props => props.isDark ? 'white' : 'black'};
+    text-decoration-line: line-through;
+    text-decoration-color: ${props => props.isDark ? '#0131D2' : 'rgb(254, 205, 47)'};
+    @media (max-width: 800px) {
+        font-size: 4rem;
+    }
 `
 const CartCounter = styled.span`
     color: #663399;
@@ -48,17 +47,14 @@ const ButtonHolder = styled.div`
 const BurgerButton = styled.button`
     display: none;
     & > span > span {
-        background-color: ${props => props.isDark ? 'white !important' : 'black !important' };
+        background-color: ${props => props.isDark ? 'white !important' : 'black !important'};
         &:before{
-            background-color: ${props => props.isDark ? 'white !important' : 'black !important' };
+            background-color: ${props => props.isDark ? 'white !important' : 'black !important'};
         }
         &:after{
-            background-color: ${props => props.isDark ? 'white !important' : 'black !important' };
+            background-color: ${props => props.isDark ? 'white !important' : 'black !important'};
         }
     }
-`
-const Anchor = styled(Link)`
-    ...NavMenuItem;
 `
 const useQuantity = () => {
     const context = useContext(StoreContext)
@@ -67,17 +63,15 @@ const useQuantity = () => {
     const total = reduce(items, (acc, item) => acc + item.quantity, 0)
     return [total !== 0, total]
 }
-export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, closeMobileNav, setIsOpen, catOpen, setCatOpen }) => {
+export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, closeMobileNav, setIsOpen }) => {
     const Divider = () => "|"
     const [hasItems, quantity] = useQuantity()
     const context = useContext(StoreContext)
     const { state, dispatch } = useContext(Context)
-    const theme = useTheme()
     const { customerAccessToken } = context
     let isAuthenticated = false
     customerAccessToken != null &&
         (isAuthenticated = customerAccessToken && customerAccessToken.expiresAt && customerAccessToken.expiresAt > new Date().toISOString() && true)
-        console.log(openBurger, 'openBurger')
     return (
         <div style={{ position: 'relative' }}>
             <Header isDark={state.isDark}>
@@ -100,37 +94,38 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                         </ButtonHolder>
                         <BurgerButton isDark={state.isDark} onClick={() => setOpenBurger(!openBurger)} id='content-mobile' className={`hamburger hamburger--slider ${openBurger && 'is-active'}`} type="button">
                             <span className="hamburger-box">
-                                <span style={{backgroundColor: `${state.isDark ? 'white !important' : 'black !important'}`}} className="hamburger-inner"></span>
+                                <span style={{ backgroundColor: `${state.isDark ? 'white !important' : 'black !important'}` }} className="hamburger-inner"></span>
                             </span>
                         </BurgerButton>
+                        {/* {hasItems && <CartCounter>{quantity}</CartCounter>} */}
                         <FontAwesomeIcon style={{ cursor: 'pointer', fontSize: '40px', margin: '12px' }} onClick={() => setIsOpen(!isOpen)} id='content-mobile' icon={faShoppingCart}></FontAwesomeIcon>
                     </Flex>
                 </AudioPlayerProvider>
                 <LogoHolder isDark={state.isDark}><ResponsiveLogoHolder isDark={state.isDark} onClick={() => navigate('/')}> BUTTER KNIFE <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></ResponsiveLogoHolder></LogoHolder>
-               {openBurger && <MobileNavigation isDark={state.isDark} openBurger={openBurger}>
-               <button style={{ padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
-                <PageHeading width='2.6rem'style={{textDecorationLine: 'line-through', textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}`, margin: '40px 0'}} isDark={state.isDark}>Menu</PageHeading>
-                <>
-                <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link to='/whats-new'>What's new</Link></MobileNavMenuItem>
-                    <MobileNavMenuItem isDark={state.isDark} className='strike' onClick={() => {setOpen(!open); closeMobileNav()}}><span>Designers</span></MobileNavMenuItem>
-                    <MobileNavMenuItem isDark={state.isDark} className='strike' ><Link onClick={() => closeMobileNav()} to='/mens'>Mens</Link></MobileNavMenuItem>
-                    <MobileNavMenuItem isDark={state.isDark} className='strike' ><Link onClick={() => closeMobileNav()} to='/womens'>Womens</Link></MobileNavMenuItem>
-                    <MobileNavMenuItem isDark={state.isDark} className='strike'><Link to='/souvenirs'>Souvenirs</Link></MobileNavMenuItem>
-                    <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/footwear'>Footwear</Link></MobileNavMenuItem>
+                {openBurger && <MobileNavigation isDark={state.isDark} openBurger={openBurger}>
+                    <button style={{ padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
+                    <PageHeading width='2.6rem' style={{ textDecorationLine: 'line-through', textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}`, margin: '40px 0' }} isDark={state.isDark}>Menu</PageHeading>
+                    <>
+                        <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link to='/whats-new'>What's new</Link></MobileNavMenuItem>
+                        <MobileNavMenuItem isDark={state.isDark} className='strike' onClick={() => { setOpen(!open); closeMobileNav() }}><span>Designers</span></MobileNavMenuItem>
+                        <MobileNavMenuItem isDark={state.isDark} className='strike' ><Link onClick={() => closeMobileNav()} to='/mens'>Mens</Link></MobileNavMenuItem>
+                        <MobileNavMenuItem isDark={state.isDark} className='strike' ><Link onClick={() => closeMobileNav()} to='/womens'>Womens</Link></MobileNavMenuItem>
+                        <MobileNavMenuItem isDark={state.isDark} className='strike'><Link to='/souvenirs'>Souvenirs</Link></MobileNavMenuItem>
+                        <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/footwear'>Footwear</Link></MobileNavMenuItem>
                     </>
-                    <ButtonHolder style={{position: 'absolute', bottom: '10px'}}>
-                            {isAuthenticated ?
-                                <div style={{ padding: '15px' }}>
-                                    <Logout isDark={state.isDark} />
+                    <ButtonHolder style={{ position: 'absolute', bottom: '10px' }}>
+                        {isAuthenticated ?
+                            <div style={{ padding: '15px' }}>
+                                <Logout isDark={state.isDark} />
+                            </div>
+                            :
+                            <Link to='/account/login' className='strike'>
+                                <div onClick={() => closeMobileNav()} style={{ padding: '15px', color: `${state.isDark ? 'white' : 'black'}`, fontWeight: 1000 }}>
+                                    LOGIN/REGISTER
                                 </div>
-                                :
-                                <Link to='/account/login' className='strike'>
-                                    <div onClick={() => closeMobileNav()}  style={{ padding: '15px', color: `${state.isDark ? 'white' : 'black'}`, fontWeight: 1000 }}>
-                                        LOGIN/REGISTER
-                                    </div>
-                                </Link>
-                            }
-                        </ButtonHolder>
+                            </Link>
+                        }
+                    </ButtonHolder>
                 </MobileNavigation>}
                 <Navigation>
                     <NavMenuItem isDark={state.isDark} className='strike'><Link to='/whats-new'>What's new</Link></NavMenuItem><Divider />
@@ -139,7 +134,6 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                     <NavMenuItem isDark={state.isDark} className='strike'><Link to='/womens'>Womens</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/footwear'>Footwear</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/accessories'>Accessories</Link></NavMenuItem><Divider />
-                    {/* <NavMenuItem className='strike'><Link style={{fontFamily: 'BerlinBold'}}to='/vintage'>Vintage</Link></NavMenuItem><Divider /> */}
                     <NavMenuItem isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/souvenirs'>Souvenirs</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike' onClick={() => setIsOpen(!open)}>{hasItems && <CartCounter>{quantity}</CartCounter>}
                         Trolley <img src={Trolley} alt='cart' style={{ color: `${state.isDark ? 'white' : 'black'}`, width: '15px', paddingBottom: '5px' }} />

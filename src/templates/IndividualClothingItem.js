@@ -58,6 +58,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
   const context = useContext(StoreContext)
   const { state } = useContext(Context)
   const [quantity, setQuantity] = useState(1)
+  // const [vendor, setVendor] = useState('')
   const { store, addVariantToCart } = context
   const productVariant =
     store.client.product.helpers.variantForOptions(product, variant) ||
@@ -109,6 +110,8 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
 
   const handleAddToCart = () => {
     addVariantToCart(productVariant.shopifyId, quantity)
+    console.log(productVariant, 'productVariant')
+    console.log(vendor, 'vendor')
   }
 
 

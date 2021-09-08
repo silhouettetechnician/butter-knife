@@ -30,7 +30,6 @@ const handleInputChange = (e, key) => {
   }
   return setCheckedInputs({ ...checkedInputs, [key]: checkedInputs[key].filter(item => item !== e.target.value) })
 }
-
 const getItems = () => {
   return accessories.filter((product, i) => {
     const type = product && product.productType
@@ -65,9 +64,6 @@ return(
         <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
       </ContainerFlexHide>
       <ContainerFlex justifyAround>
-        {/* {accessories && accessories.edges.map((i, id) => {
-          return <Link key={id} to={`/clothing/${i.node.handle}`}><ClothingItem data={accessories} key={id} title={i.node.title} description={i.node.description} src={i.node.images[0].originalSrc} price={Math.round(i.node.priceRange.maxVariantPrice.amount)} /></Link>
-        })} */}
         {filteredItems && filteredItems.sort((a,b) => priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
       </ContainerFlex>
     </Flex>
@@ -117,25 +113,3 @@ export const query = graphql`
     }
   }
 `
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Card } from 'react-bootstrap';
-// import { graphql } from "gatsby"
-// import { Link } from "gatsby"
-// import ClothingItem from '../templates/ClothingItem'
-// import { navigate, A, useRouteMatch } from 'hookrouter';
-// import Flex from '../styles/Flex';
-// import ProductHitsWithFilter from '../templates/ProductHitsWithFilter'
-
-// const Accessories = ({ data }) => {
-
-//     return (
-//         <>
-//          <ProductHitsWithFilter indexName='PRODUCTS_accessories' pageHeading='Accessories' />
-//         </>
-//     )
-// }
-
-// export default Accessories

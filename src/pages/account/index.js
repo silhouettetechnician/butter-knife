@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import styled from '@emotion/styled'
 import { Query } from '@apollo/react-components'
 import gql from 'graphql-tag'
 import { PageHeading } from '../../components/StyledComponents'
@@ -8,12 +9,17 @@ import AuthWrapper from "../../layouts/AuthWrapper"
 import OrdersList from "../../components/account/orders-list"
 import DefaultAddress from "../../components/account/default-address"
 
+const NameTag = styled.p`
+    font-family: CODE;
+    margin: 1rempx 0;
+`
 
 const CUSTOMER_INFO = gql`
 query($customerAccessToken: String!) {
     customer(customerAccessToken: $customerAccessToken) {
         email
         firstName
+        lastName
         phone
         defaultAddress {
             firstName
@@ -82,26 +88,32 @@ const Account = () => {
                 {({ loading, error, data }) => {
                     if (loading) return <div style={{ fontFamily: 'bangers' }}>Fetching</div>
                     if (error) return <div style={{ fontFamily: 'bangers' }}>Error</div>
-                    const { defaultAddress, orders, addresses } = data.customer
+                    const { defaultAddress, orders, email, firstName, addresses, lastName } = data.customer
+                    console.log(data, 'data')
                     return (
                         <>
                             <PageHeading isDark={state.isDark}>My Account</PageHeading>
-                            <section className="hero is-medium">
-                                <div className="hero-body">
-                                    <div className="container">
-                                        <div className="container">
-                                            <div style={{ color: `${state.isDark ? 'white' : 'black'}` }} className="columns is-centered">
+                            {/* <section className="hero is-medium"> */}
+                                {/* <div className="hero-body"> */}
+                                    {/* <div className="container"> */}
+                                        {/* <div className="container"> */}
+                                            <div style={{ color: `${state.isDark ? 'white' : 'black'}`, width: '80%' }} className="columns is-centered">
                                                 <OrdersList isDark={state.isDark} orders={orders} />
+                                                <hr/>
+                                                <h3 style={{ fontFamily: 'bangers' }}>Your Details</h3>
+                                                <NameTag>{firstName + ' ' + lastName}</NameTag>
+                                                <NameTag>{email}</NameTag>
+                                                <hr/>
                                                 <DefaultAddress
                                                     isDark={state.isDark}
                                                     defaultAddress={defaultAddress}
                                                     addressesSize={addresses.edges.length}
                                                 />
-                                            </div>
-                                        </div>
-                                    </div>
+                                            {/* </div> */}
+                                        {/* </div> */}
+                                    {/* </div> */}
                                 </div>
-                            </section>
+                            {/* </section> */}
                         </>
                     )
                 }}

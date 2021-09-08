@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { Link } from "gatsby"
-import { Query } from 'react-apollo'
+import styled from '@emotion/styled'
+import Flex from '../../styles/Flex'
+import { Query } from '@apollo/react-components'
 import gql from 'graphql-tag'
 import StoreContext from '../../contexts/Context'
 import AuthWrapper from "../../layouts/AuthWrapper"
-// import AddAddressForm from "../../components/account/adresses/addAddressForm"
-// import DeleteAddress from "../../components/account/adresses/deleteAddress"
+import AddAddressForm from "../../components/account/adresses/addAddressForm"
+import DeleteAddress from "../../components/account/adresses/deleteAddress"
 // import EditAddressForm from "../../components/account/adresses/editAddressForm"
 
 const CUSTOMER_ADDRESS = gql`
@@ -33,10 +35,17 @@ query($customerAccessToken: String!) {
     }
 }
 `
-
+const Box = styled.div`
+    position: relative;
+    max-width: 600px;
+    width: 50%;
+    height: 250px;
+    background: #fff;
+    margin: 2%;
+    box-shadow: 0 0 15px rgb(0 0 0 / 10%);
+`
 const Addresses = () => {
     const { customerAccessToken } = useContext(StoreContext);
-
     return (
         <AuthWrapper>
             <Query
@@ -46,40 +55,40 @@ const Addresses = () => {
                 }}
             >
                 {({ loading, error, data }) => {
-                    if (loading) return <div>Fetching</div>
-                    if (error) return <div>Error</div>
+                    if (loading) return <div style={{fontFamily: 'bangers'}}>Fetching</div>
+                    if (error) return <div style={{fontFamily: 'bangers'}}>Error</div>
                     const { defaultAddress, addresses } = data.customer
                     return (
-                        <div className="has-text-centered">
-                            <h2 className="title is-uppercase">Your Addresses</h2>
+                        <Flex column alignCenter width='80%'>
+                            <Flex alignCenter justifyCenter column>
+                            <h2 style={{fontFamily: 'bangers'}}>Your Addresses</h2>
                             <Link to={"/account"}><p className="has-text-black" style={{ textDecoration: "underline" }}>Return to Account Details</p></Link>
+                            <AddAddressForm />
                             <br />
-                            {/* <AddAddressForm /> */}
-                                <div>
+                            </Flex>
+                            <Flex justifyCenter alignCenter width='100%'>
                                     {
                                     addresses != null && (
                                         addresses.edges.map((address => (
-                                            <div key={address.node.id} className="columns is-centered">
-                                                <div className="column">
+                                            <Box key={address.node.id} >
                                                     <br/>
                                                     {
                                                         defaultAddress.id === address.node.id && 
-                                                            <h1 className="subtitle">DEFAULT</h1>                                                
+                                                        <div className="ribbon ribbon-top-right"><span>default</span></div>                                                
                                                     }
                                                     <p className="has-text-grey">{address.node.firstName} {address.node.lastName}</p>
                                                     <p className="has-text-grey">{address.node.address1}</p>
                                                     <p className="has-text-grey">{address.node.zip}, {address.node.city}</p>
                                                     <p className="has-text-grey">{address.node.country}</p>
                                                     {/* <EditAddressForm address={address.node} /> */}
-                                                    {/* <DeleteAddress id={address.node.id}/> */}
-                                                </div>
-                                            </div>
+                                                    <DeleteAddress id={address.node.id}/>
+                                            </Box>
                                         )))
                                     )
                                 }
-                            </div>
+                            </Flex>
                             <br/>
-                        </div>
+                        </Flex>
                     )
                 }}
             </Query>

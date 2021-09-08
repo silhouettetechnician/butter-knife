@@ -26,7 +26,6 @@ const Mens = ({ data }) => {
   } = context
   const {state} = useContext(Context)
   const [priceSort, setPriceSort] = useState('')
-  const [search, setSearch] = useState('')
   const [productList, setProductList] = useState(productNodes)
   const productCheckboxes = _.uniqBy(productList, 'productType').map(node => node.productType)
   const coloursCheckboxes = _.uniq(productList.map(i => i.variants.map(variant => variant.selectedOptions[1].value)).map(color => _.uniq(color)).flat())
@@ -123,32 +122,5 @@ export const query = graphql`
     }
   }
 }`
-
-
-
-// import React, { useState, useEffect, useCallback } from 'react';
-// /* global instantsearch */
-// import { graphql } from "gatsby"
-// import ProductHitsWithFilter from '../templates/ProductHitsWithFilter'
-// import _ from 'lodash'
-
-
-// const Clothing = ({ data }) => {
-//   return (
-//     <>
-//       <ProductHitsWithFilter indexName='PRODUCTS' pageHeading='Clothing' />
-//     </>
-//   )
-// }
-
-// export default Clothing
-
-// if(priceSort.value === 'price low') {
-//   return productList.sort((a,b) => b.priceRange.maxVariantPrice.amount - a.priceRange.maxVariantPrice.amount).map((i, id) => <Link key={id} to={`/clothing/${i.handle}`}><ClothingItem data={productList} key={id} title={i.title} description={i.description} src={i.images[0].originalSrc} price={Math.round(i.priceRange.maxVariantPrice.amount)} /></Link>)
-// }
-// if(priceSort.value === 'price high') {
-//   return productList.sort((a,b) => a.priceRange.maxVariantPrice.amount - b.priceRange.maxVariantPrice.amount).map((i, id) => <Link key={id} to={`/clothing/${i.handle}`}><ClothingItem data={productList} key={id} title={i.title} description={i.description} src={i.images[0].originalSrc} price={Math.round(i.priceRange.maxVariantPrice.amount)} /></Link>)
-// }
-
 
 

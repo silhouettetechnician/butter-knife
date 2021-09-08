@@ -30,7 +30,6 @@ const Footwear = ({ data }) => {
     }
     return setCheckedInputs({ ...checkedInputs, [key]: checkedInputs[key].filter(item => item !== e.target.value) })
   }
-
   const getItems = () => {
     return footwear.filter((product, i) => {
       const type = product && product.productType

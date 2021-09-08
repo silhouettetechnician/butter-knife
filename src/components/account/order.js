@@ -2,8 +2,9 @@ import React from 'react';
 
 
 const Order = ({ order }) => {
+    console.log(order, 'order')
     return (
-        <div style={{fontFamily: 'bangers'}} className="columns">
+        <div className="columns">
             <div className="column">
                 <table style={{fontFamily: 'CODE'}} className="table" style={{ margin: "auto" }}>
                     <thead>
@@ -47,7 +48,7 @@ const Order = ({ order }) => {
 
             </div>
             <div className="column">
-                <h3 className="subtitle has-text-centered has-text-weight-semibold">Shipping Address</h3>
+                <h3 style={{fontFamily: 'bangers'}}>Shipping Address</h3>
                 <div style={{fontFamily: 'CODE !important'}} className="has-text-left">
                 {order.node.shippingAddress &&
                 <>

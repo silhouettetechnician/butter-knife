@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FilterBar = ({  checkboxesToFilter, handleInputChange}) => {
-    console.log(checkboxesToFilter, 'checkboxesToFilter')
     const classes = useStyles();
     const {state} = useContext(StoreContext)
     return (

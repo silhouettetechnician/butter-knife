@@ -3,8 +3,8 @@ import { Link } from "gatsby"
 
 const DefaultAddress = ({ defaultAddress, addressesSize, isDark }) => {
     return (
-        <div className="column has-text-centered">
-            <h3 style={{ fontFamily: 'bangers' }}>ACCOUNT DETAILS</h3>
+        <div style={{margin: '25px 0'}}className="column has-text-centered">
+            <h3 style={{ fontFamily: 'bangers' }}>Address DETAILS</h3>
             {
                 defaultAddress != null && (
                     <div style={{ fontFamily: 'CODE' }} className="has-text-left">
@@ -17,12 +17,11 @@ const DefaultAddress = ({ defaultAddress, addressesSize, isDark }) => {
             }
             <br />
             <Link to="/account/addresses">
-                <button
-                    style={{ border: 'unset', color: `${isDark ? 'white' : 'black'}` }}
-                    className="button is-dark"
+                <h3
+                    style={{ border: 'unset', fontFamily: 'bangers', color: `${isDark ? 'white' : 'black'}` }}
                 >
                     View Addresses ({addressesSize})
-                </button>
+                </h3>
             </Link>
         </div>
     );

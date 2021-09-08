@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Order from './order';
-import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 
 const OrdersList = ({ orders, isDark }) => {
@@ -10,7 +9,7 @@ const OrdersList = ({ orders, isDark }) => {
     })
     return (
         <>
-            <div className="column has-text-centered is-9">
+            <div style={{margin: '25px 0'}}className="column has-text-centered is-9">
                 <h3 style={{ fontFamily: 'bangers' }}>ORDER HISTORY</h3>
                 {
                     orders.edges.length === 0 ? (
@@ -18,7 +17,7 @@ const OrdersList = ({ orders, isDark }) => {
                     )
                         :
                         (
-                            <table className="table is-bordered" style={{ margin: "auto", color: `${isDark ? 'white' : 'black'}` }}>
+                            <table className="table is-bordered" style={{ margin: "auto", fontFamily: 'CODE', color: `${isDark ? 'white' : 'black'}` }}>
                                 <thead>
                                     <tr>
                                         <th>Order</th>

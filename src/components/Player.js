@@ -8,7 +8,7 @@ const Player = ({ file, isDark }) => {
         src: file,
         format: "mp3",
         autoplay: false,
-        onend: () => console.log("sound has ended!")
+        // onend: () => console.log("sound has ended!")
     })
 
     if (!ready && !loading) return <div>PLAY</div>

@@ -5,9 +5,9 @@ import styled from '@emotion/styled'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
 const ArrowDown = styled.div`
-    background: white;
+    background: white !important;
     &:after{
-        background: white;
+        background: white !important;
     }
 `
 const AboutUsParagraph = styled.p`

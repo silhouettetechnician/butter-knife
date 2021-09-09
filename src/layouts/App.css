@@ -25,7 +25,7 @@ button {
   margin: 0.5em;
   text-transform: uppercase !important;
   font-size: 1.5rem;
-  font-family: CODE !important;
+  font-family: CODE1 !important;
   /* z-index: 9999; */
   padding: 0.6rem 2rem;
 }
@@ -50,7 +50,7 @@ code {
 }
 a {
   text-decoration: none;
-  font-family: CODE !important;
+  font-family: CODE1 !important;
   color: black !important;
   text-decoration: none !important;
 }
@@ -164,7 +164,7 @@ p{
 @font-face {
   font-family: CODE1;
   /* src: url("../fonts/CODE Bold.otf"); */
-  src: url("../fonts/Panton.otf");
+  src: url("../fonts/PantonRegular.otf");
 }
 @font-face {
   font-family: Berlin;

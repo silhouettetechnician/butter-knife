@@ -77,7 +77,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
             <Header isDark={state.isDark}>
                 <AudioPlayerProvider>
                     <Flex justifyBetween>
-                        <button id='content-desktop' style={{ padding: '15px', border: 'unset', fontWeight: 1000, color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
+                        <button id='content-desktop' style={{ fontSize: '15px', padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
                         <Player isDark={state.isDark} file={realog} />
                         <ButtonHolder id='content-desktop'>
                             {isAuthenticated ?
@@ -86,7 +86,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                                 </div>
                                 :
                                 <Link to='/account/login' className='strike'>
-                                    <div style={{ padding: '15px', color: `${state.isDark ? 'white' : 'black'}`, fontWeight: 1000 }}>
+                                    <div style={{ padding: '15px', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '15px', fontFamily: 'CODE1 !important'}}>
                                         LOGIN/REGISTER
                                     </div>
                                 </Link>
@@ -132,9 +132,9 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                     <NavMenuItem isDark={state.isDark} className='strike' onClick={() => setOpen(!open)}><span>Designers</span></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike'><Link to='/mens'>Mens</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike'><Link to='/womens'>Womens</Link></NavMenuItem><Divider />
-                    <NavMenuItem isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/footwear'>Footwear</Link></NavMenuItem><Divider />
-                    <NavMenuItem isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/accessories'>Accessories</Link></NavMenuItem><Divider />
-                    <NavMenuItem isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/souvenirs'>Souvenirs</Link></NavMenuItem><Divider />
+                    <NavMenuItem isDark={state.isDark} className='strike'><Link to='/footwear'>Footwear</Link></NavMenuItem><Divider />
+                    <NavMenuItem isDark={state.isDark} className='strike'><Link to='/accessories'>Accessories</Link></NavMenuItem><Divider />
+                    <NavMenuItem isDark={state.isDark} className='strike'><Link to='/souvenirs'>Souvenirs</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike' onClick={() => setIsOpen(!open)}>{hasItems && <CartCounter>{quantity}</CartCounter>}
                         Trolley <img src={Trolley} alt='cart' style={{ color: `${state.isDark ? 'white' : 'black'}`, width: '15px', paddingBottom: '5px' }} />
                     </NavMenuItem>

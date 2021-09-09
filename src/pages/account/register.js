@@ -4,6 +4,7 @@ import { Formik, ErrorMessage, Form } from 'formik'
 import { AuthFormBox, PageHeading, LoginInput } from '../../components/StyledComponents'
 import { useMutation, gql } from '@apollo/client';
 import Flex from '../../styles/Flex'
+import toast, { Toaster } from 'react-hot-toast';
 import StoreContext from '../../contexts/StoreContext'
 import AccountAuthWrapper from '../../layouts/AccountAuthWrapper'
 import { Link, navigate } from "gatsby";
@@ -47,7 +48,10 @@ const RegisterForm = () => {
         }
       }
     }).then((result) => {
+      toast.success(`Successfully created account.`)
       navigate(`/account/login`)
+    }).catch((err) => {
+      toast.error(err)
     })
   }
 

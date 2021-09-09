@@ -11,7 +11,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const Wrapper = styled(Flex)`
   max-width: 600px;
-  // width: 100%;
+  width: 40%;
   height: 600px;
   position: fixed;
   border-radius: 6px;

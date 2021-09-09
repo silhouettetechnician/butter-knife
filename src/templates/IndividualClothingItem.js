@@ -60,6 +60,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
   const [quantity, setQuantity] = useState(1)
   // const [vendor, setVendor] = useState('')
   const { store, addVariantToCart } = context
+  console.log(store,'store')
   const productVariant =
     store.client.product.helpers.variantForOptions(product, variant) ||
     variant
@@ -138,7 +139,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
           border: !state.isDark ? '0.1px solid rgba(254, 205, 47, 0.4)' : '0.1px solid rgb(1, 49, 210)', width: '75%', marginTop: '1rem',
           marginBottom: '3rem'
         }} />
-        <div><p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'CODE', fontSize: '2.4rem' }}>{`£${Math.round(minVariantPrice.amount)}`}</p></div>
+        <div><p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'CODE', fontSize: '2.4rem' }}>{`£${Math.trunc(minVariantPrice.amount)}`}</p></div>
         <div style={{marginBottom: '15px'}}>{description}</div>
         {/* <DropDownSort data={options} val={val} variant={variant} handleOptionChange={handleOptionChange} setVal={setVal} /> */}
 
@@ -156,7 +157,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
           )
         })}
         <button
-          style={{ fontSize: '25px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }}
+          style={{ marginTop: '10%', fontSize: '25px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }}
           type="submit"
           onClick={handleAddToCart}
         >+ Add to trolley</button>

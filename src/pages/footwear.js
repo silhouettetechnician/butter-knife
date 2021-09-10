@@ -47,7 +47,7 @@ const Footwear = ({ data }) => {
 
   const Product = (i) => {
     const { product } = i
-    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={footwear} vendor={product.vendor}  title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRange && Math.round(product.priceRange.maxVariantPrice.amount)} />
+    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={footwear} vendor={product.vendor} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRange && Math.round(product.priceRange.maxVariantPrice.amount)} />
     </Link>
   }
 
@@ -56,7 +56,7 @@ const Footwear = ({ data }) => {
   return (
     <>
       <TitleAndFilter justifyBetween width='100%'>
-      <div id='content-desktop' style={{width: '190px'}}></div>
+        <div id='content-desktop' style={{ width: '190px' }}></div>
         <PageHeading isDark={state.isDark}>Footwear</PageHeading>
         <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
       </TitleAndFilter>
@@ -65,7 +65,12 @@ const Footwear = ({ data }) => {
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
         </ContainerFlexHide>
         <ContainerFlex justifyAround>
-          {filteredItems && filteredItems.sort((a, b) => priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
+          {!filteredItems || filteredItems.length < 1
+            ?
+            filteredItems && filteredItems.sort((a, b) => priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)
+            :
+            <PageHeading fontSize='4rem' isDark={state.isDark}>Coming Soon</PageHeading>
+          }
         </ContainerFlex>
       </Flex>
     </>

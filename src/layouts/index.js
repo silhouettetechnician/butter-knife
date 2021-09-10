@@ -93,7 +93,7 @@ const Layout = ({ data, children }) => {
                 <Sticky style={{ zIndex: '99 !important' }} enabled={true} bottomBoundary={1000}>
                     <NavBar closeMobileNav={closeMobileNav} openBurger={openBurger} setOpenBurger={setOpenBurger} isOpen={isOpen} setIsOpen={setIsOpen} open={open} setOpen={setOpen} catOpen={catOpen} setCatOpen={setCatOpen} />
                 </Sticky>
-                <Flex width='100%' justifyCenter column alignCenter >
+                <Flex style={{backgroundColor: state.isDark ? '#1D1D1D' : 'white'}} width='100%' justifyCenter column alignCenter >
                     {brandRender}
                     {children}
                 </Flex>

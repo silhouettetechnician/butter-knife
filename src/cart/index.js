@@ -11,7 +11,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const Wrapper = styled(Flex)`
   max-width: 600px;
-  width: 40%;
+  width: 70%;
   height: 600px;
   position: fixed;
   border-radius: 6px;
@@ -52,7 +52,7 @@ const Cart = ({ isOpen, setIsOpen }) => {
         <CartHeading>Total: <p>£ {checkout.totalPrice}</p></CartHeading>
       </div>
       <button
-        style={{ border: 'unset', color: `${state.isDark ? 'white' : '#000'} ` }}
+        style={{ fontSize: '25px', border: 'unset', color: `${state.isDark ? 'white' : '#000'} ` }}
         onClick={handleCheckout}
         disabled={checkout.lineItems.length === 0}
       >

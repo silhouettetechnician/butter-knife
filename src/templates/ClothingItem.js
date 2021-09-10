@@ -10,11 +10,8 @@ const ClothingItem = ({ src, title, price, vendor, onClick, edge }) => {
             <Card.Body>
                 <Card.Text style={{ color: `${state.isDark ? 'white' : 'black'}`, textAlign: 'center', fontStyle:'italic'}}>{vendor}</Card.Text>
                 <Card.Title style={{ color: `${state.isDark ? 'white' : 'black'}`, textTransform: 'uppercase', textAlign: 'center', fontSize: '20px' }}>{title}</Card.Title>
-                <Card.Text style={{ color: `${state.isDark ? 'white' : 'black'}`, fontSize: '25px', fontWeight: 'bold', textAlign: 'center' }}>£{price}</Card.Text>
+                <Card.Text style={{ color: `${state.isDark ? 'white' : 'black'}`, fontSize: '25px', fontWeight: 'bold', textAlign: 'center' }}> {`£${Math.trunc(price)}`}</Card.Text>
                 <hr />
-                {/* <Card.Text style={{ color: 'grey', fontSize: '12px' }}>
-               {description}
-        </Card.Text> */}
             </Card.Body>
         </Card>
     )

@@ -48,7 +48,7 @@ const optionsMapped = Object.entries(options).map(([key, value]) => ({
             )}
             {options.values.map((value, index) => (
               <option
-                key={`${options.name}-${value}`}
+                index={`${options.name}-${value}`}
                 value={value}
                 className="is-medium"
               >

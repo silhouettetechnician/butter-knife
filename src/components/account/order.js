@@ -23,7 +23,7 @@ const Order = ({ order }) => {
                                 <tr key={lineItem.node.title}>
                                     <td><p style={{width: "200px"}}>{lineItem.node.title}</p></td>
                                     <td>Soon</td>
-                                    <td>Soon</td>
+                                    <td>{lineItem.node.totalPrice}</td>
                                     <td>{lineItem.node.quantity}</td>
                                     <td>Soon</td>
                                 </tr>

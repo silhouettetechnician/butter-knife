@@ -10,7 +10,7 @@ const App = () => {
     <>
       <SEO title='Butterknife' description='Fashion. Footwear. Luxury' metaImage='/mainlogo.png' />
       <Flex justifyCenter width='100vw'>
-        <div style={{position: 'absolute', top: '30%', textAlign: 'center', zIndex: '99999'}}>
+        <div style={{position: 'absolute', top: '30%', textAlign: 'center', zIndex: '999'}}>
           <h1 style={{ position: 'relative', color: 'white', fontSize: '3em', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>INTRODUCING NOM</h1>
           <button onClick={() => navigate('/designers/nom')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
         </div>

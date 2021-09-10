@@ -3,7 +3,7 @@ import isEqual from "lodash/isEqual";
 import Select from "react-select";
 import DropDown from '../components/DropDownSort'
 import Zoom from 'react-medium-image-zoom'
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { faAngleLeft, faAngleRight, faTruck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { graphql } from "gatsby"
 import find from 'lodash/find'
@@ -44,7 +44,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
   const {
     options,
     title,
-    description,
+    descriptionHtml,
     vendor,
     variants,
     images,
@@ -111,8 +111,6 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
 
   const handleAddToCart = () => {
     addVariantToCart(productVariant.shopifyId, quantity)
-    console.log(productVariant, 'productVariant')
-    console.log(vendor, 'vendor')
   }
 
 
@@ -140,9 +138,8 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
           marginBottom: '3rem'
         }} />
         <div><p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'CODE', fontSize: '2.4rem' }}>{`£${Math.trunc(minVariantPrice.amount)}`}</p></div>
-        <div style={{marginBottom: '15px'}}>{description}</div>
+        <div style={{color: `${state.isDark ? 'white !important' : 'black !important'}`, width: '80% !important', marginBottom: '15px !important', marginLeft: '15px !important'}} dangerouslySetInnerHTML={{__html: descriptionHtml}} ></div>
         {/* <DropDownSort data={options} val={val} variant={variant} handleOptionChange={handleOptionChange} setVal={setVal} /> */}
-
         {options.map((options, index) => {
           
           return (
@@ -173,7 +170,7 @@ query ClothinItemQuery($handle: String!){
     shopifyProduct (handle:{eq: $handle }) {
     id
     handle
-    description
+    descriptionHtml
     shopifyId
     title
     vendor

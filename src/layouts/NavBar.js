@@ -108,15 +108,16 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                     <>
                         <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link to='/whats-new'>What's new</Link></MobileNavMenuItem>
                         <MobileNavMenuItem isDark={state.isDark} className='strike' onClick={() => { setOpen(!open); closeMobileNav() }}><span>Designers</span></MobileNavMenuItem>
-                        <MobileNavMenuItem isDark={state.isDark} className='strike' ><Link onClick={() => closeMobileNav()} to='/mens'>Mens</Link></MobileNavMenuItem>
-                        <MobileNavMenuItem isDark={state.isDark} className='strike' ><Link onClick={() => closeMobileNav()} to='/womens'>Womens</Link></MobileNavMenuItem>
-                        <MobileNavMenuItem isDark={state.isDark} className='strike'><Link to='/souvenirs'>Souvenirs</Link></MobileNavMenuItem>
+                        <MobileNavMenuItem onClick={() => closeMobileNav()}isDark={state.isDark} className='strike' ><Link  to='/mens'>Mens</Link></MobileNavMenuItem>
+                        <MobileNavMenuItem onClick={() => closeMobileNav()}isDark={state.isDark} className='strike' ><Link  to='/womens'>Womens</Link></MobileNavMenuItem>
+                        <MobileNavMenuItem onClick={() => closeMobileNav()}isDark={state.isDark} className='strike'><Link  to='/souvenirs'>Souvenirs</Link></MobileNavMenuItem>
                         <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/footwear'>Footwear</Link></MobileNavMenuItem>
                     </>
-                    <ButtonHolder style={{ position: 'absolute', bottom: '10px' }}>
+                    <ButtonHolder style={{ position: 'absolute', textAlign: 'center',bottom: '10px', width: '100%' }}>
                         {isAuthenticated ?
-                            <div style={{ padding: '15px' }}>
+                            <div style={{ padding: '15px', display: 'flex', width: '100%', justifyContent: 'space-evenly'}}>
                                 <Logout isDark={state.isDark} />
+                             <Link onClick={() => closeMobileNav()} isDark={state.isDark} className="has-text-centered has-text-underlined has-text-black" to='/account'>My Account</Link>
                             </div>
                             :
                             <Link to='/account/login' className='strike'>

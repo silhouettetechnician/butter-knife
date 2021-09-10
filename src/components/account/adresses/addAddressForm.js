@@ -73,7 +73,7 @@ const AddAddressForm = () => {
 
     return (
         <>
-            <button className="button is-dark" onClick={() => setAddAdressForm(!addAdressForm)}>Add a new address</button>
+            <button onClick={() => setAddAdressForm(!addAdressForm)}>Add a new address</button>
             {
                 addAdressForm && (
                     <Modal open={addAdressForm} onClose={() => setAddAdressForm(!addAdressForm)}><div className="columns is-centered">

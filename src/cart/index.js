@@ -22,7 +22,10 @@ const Wrapper = styled(Flex)`
   color: ${props => props.isDark ? 'white' : 'black'};
   background-color: ${props => props.isDark ? '#1D1D1D' : 'white'};
   transform: ${({ isOpen }) => isOpen ? 'translateX(-10px)' : 'translateX(100%)'};
-  transition: transform 0.6s ease-in-out !important;  
+  transition: transform 0.6s ease-in-out !important; 
+  @media (max-width: 800px) {
+    max-width: 400px;
+  } 
 `
 const CartHeading = styled.h2`
   font-family: BerlinXBold;
@@ -41,7 +44,6 @@ const Cart = ({ isOpen, setIsOpen }) => {
     window.open(checkout.webUrl)
   }
   const lineItems = checkout.lineItems.map(item => {
-    console.log(item, 'item line item')
    return <LineItem isDark={state.isDark} key={item.id.toString()} item={item} />
   })
   return (

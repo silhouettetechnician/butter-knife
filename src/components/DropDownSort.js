@@ -1,10 +1,17 @@
 import React from 'react'
 import Select from "react-select";
-import Flex from '../styles/Flex';
 
 export const Dropdown = ({ priceSort, setPriceSort }) => {
 
     const options = [
+        {
+          value: 'featured',
+          label: 'Featured'
+        },
+        {
+          value: 'new',
+          label: "What's new"
+        },
         {
           value: 'featured',
           label: 'Featured'

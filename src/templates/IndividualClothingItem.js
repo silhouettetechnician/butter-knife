@@ -39,7 +39,12 @@ const WrapperResponsive = styled(Flex)`
   width: 100%;
 }
 `
-
+const DescriptionStyle = styled.div `
+  color: ${props => props.isDark ? 'white' : 'black'};
+  width: 80%;
+  margin-bottom: 15px !important;
+  margin-left: 15px !important;
+  `
 const IndividualClothingItem = ({ data, hit, ...props }) => {
   const {
     options,
@@ -51,8 +56,6 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
     variants: [initialVariant],
     priceRange: { minVariantPrice },
   } = data.shopifyProduct
-  const [val, setVal] = useState('')
-  const [selectedOptions, setSelectedOptions] = useState({})
   const [variant, setVariant] = useState({ ...initialVariant })
   const product = data.shopifyProduct
   const context = useContext(StoreContext)
@@ -60,7 +63,6 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
   const [quantity, setQuantity] = useState(1)
   // const [vendor, setVendor] = useState('')
   const { store, addVariantToCart } = context
-  console.log(store,'store')
   const productVariant =
     store.client.product.helpers.variantForOptions(product, variant) ||
     variant
@@ -138,7 +140,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
           marginBottom: '3rem'
         }} />
         <div><p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'CODE', fontSize: '2.4rem' }}>{`£${Math.trunc(minVariantPrice.amount)}`}</p></div>
-        <div style={{color: `${state.isDark ? 'white !important' : 'black !important'}`, width: '80% !important', marginBottom: '15px !important', marginLeft: '15px !important'}} dangerouslySetInnerHTML={{__html: descriptionHtml}} ></div>
+        <DescriptionStyle isDark={state.isDark} dangerouslySetInnerHTML={{__html: descriptionHtml}} ></DescriptionStyle>
         {/* <DropDownSort data={options} val={val} variant={variant} handleOptionChange={handleOptionChange} setVal={setVal} /> */}
         {options.map((options, index) => {
           

@@ -89,7 +89,6 @@ const Account = () => {
                     if (loading) return <div style={{ fontFamily: 'bangers' }}>Fetching</div>
                     if (error) return <div style={{ fontFamily: 'bangers' }}>Error</div>
                     const { defaultAddress, orders, email, firstName, addresses, lastName } = data.customer
-                    console.log(data, 'data')
                     return (
                         <>
                             <PageHeading isDark={state.isDark}>My Account</PageHeading>
@@ -97,7 +96,7 @@ const Account = () => {
                                 {/* <div className="hero-body"> */}
                                     {/* <div className="container"> */}
                                         {/* <div className="container"> */}
-                                            <div style={{ color: `${state.isDark ? 'white' : 'black'}`, width: '80%' }} className="columns is-centered">
+                                            <div style={{ color: `${state.isDark ? 'white' : 'black'}`, width: '100%', margin: '2%' }} className="columns is-centered">
                                                 <OrdersList isDark={state.isDark} orders={orders} />
                                                 <hr/>
                                                 <h3 style={{ fontFamily: 'bangers' }}>Your Details</h3>

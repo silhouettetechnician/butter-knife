@@ -30,7 +30,7 @@ const CartCounter = styled.span`
     color: #663399;
     border-radius: 20px;
     padding: 0 10px;
-    font-size: 1.2rem;
+    font-size: ${props => props.fontSize || '1.3rem'};
     float: right;
     margin: -10px;
     z-index: 20;
@@ -97,8 +97,10 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                                 <span style={{ backgroundColor: `${state.isDark ? 'white !important' : 'black !important'}` }} className="hamburger-inner"></span>
                             </span>
                         </BurgerButton>
-                        {/* {hasItems && <CartCounter>{quantity}</CartCounter>} */}
+                        <Flex id='content-mobile'>
+                        {hasItems && <div id='content-mobile' style={{width: '100%', display: 'flex'}} ><CartCounter id='content-mobile' fontSize='1.6rem'>{quantity}</CartCounter></div>}
                         <FontAwesomeIcon style={{ cursor: 'pointer', fontSize: '40px', margin: '12px' }} onClick={() => setIsOpen(!isOpen)} id='content-mobile' icon={faShoppingCart}></FontAwesomeIcon>
+                        </Flex>
                     </Flex>
                 </AudioPlayerProvider>
                 <LogoHolder isDark={state.isDark}><ResponsiveLogoHolder isDark={state.isDark} onClick={() => navigate('/')}> BUTTER KNIFE <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></ResponsiveLogoHolder></LogoHolder>

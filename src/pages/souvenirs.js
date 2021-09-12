@@ -66,7 +66,7 @@ const Souvenirs = ({data}) => {
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
         </ContainerFlexHide>
         <ContainerFlex justifyAround>
-          {filteredItems && filteredItems.sort((a, b) => priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
+        {filteredItems && filteredItems.sort((a, b) => priceSort.value === 'new' ? new Date(b.createdAt) - new Date(a.createdAt) : priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
         </ContainerFlex>
       </Flex>
     </>
@@ -84,6 +84,7 @@ export const query = graphql`
           handle
           title
           vendor
+          createdAt
           variants {
             id
             price

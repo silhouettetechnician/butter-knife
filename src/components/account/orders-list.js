@@ -9,7 +9,7 @@ const OrdersList = ({ orders, isDark }) => {
     })
     return (
         <>
-            <div style={{margin: '25px 0'}}className="column has-text-centered is-9">
+            <div className="column has-text-centered is-9">
                 <h3 style={{ fontFamily: 'bangers' }}>ORDER HISTORY</h3>
                 {
                     orders.edges.length === 0 ? (

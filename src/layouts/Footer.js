@@ -49,7 +49,7 @@ const LogoHolderResponsive = styled.div`
 const StyledLink = styled(Link)`
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 1em;
+    font-size: 0.9em;
     color: ${props => props.isDark ? 'white !important' : 'black !important'};
 `
 

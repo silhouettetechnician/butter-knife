@@ -2,20 +2,9 @@ import React, { useEffect } from 'react';
 import SEO from '../components/Seo';
 import { Link, navigate } from "gatsby";
 import Flex from '../styles/Flex'
-// import ReactPlayer from 'react-player'
 import video from '../assets/MASKSANDSWEATSSAM.mp4';
 
 const App = () => {
-
-  // useEffect(() => {
-  //   const initialValue = document.body.style.zoom;
-  //   document.body.style.zoom = "90%";
-  
-  //   return () => {
-  //     document.body.style.zoom = initialValue;
-  //   };
-  // },[])
-
   return (
     <>
       <SEO title='Butterknife' description='Fashion. Footwear. Luxury' metaImage='/mainlogo.png' />

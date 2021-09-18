@@ -11,8 +11,8 @@ const Player = ({ file, isDark }) => {
         // onend: () => console.log("sound has ended!")
     })
 
-    if (!ready && !loading) return <div>PLAY</div>
-    if (loading) return <div>LOADING...</div>
+    if (!ready && !loading) return <div id='content-desktop'>PLAY</div>
+    if (loading) return <div id='content-desktop'>LOADING...</div>
 
     return (
         <div id='content-desktop' style={{marginTop: '5px', fontFamily: 'CODE1 !important'}}>

@@ -78,7 +78,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                 <AudioPlayerProvider>
                     <Flex justifyBetween>
                         <button id='content-desktop' style={{ fontSize: '15px', padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
-                        <Player id='content-desktop' isDark={state.isDark} file='https://soundcloud.com/bobbylocks/realog' />
+                        <Player id='content-desktop' isDark={state.isDark} file={realog} />
                         <ButtonHolder id='content-desktop'>
                             {isAuthenticated ?
                                 <div style={{ padding: '15px' }}>

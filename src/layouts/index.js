@@ -85,11 +85,6 @@ const Layout = ({ data, children }) => {
             } />
             <div style={{ position: 'relative', minHeight: '100vh' }}>
                 <Notifications />
-                <Helmet>
-                    <html lang='en' />
-                    <title>{title}</title>
-                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css" />
-                </Helmet>
                 <Sticky style={{ zIndex: '99 !important' }} enabled={true} bottomBoundary={1000}>
                     <NavBar closeMobileNav={closeMobileNav} openBurger={openBurger} setOpenBurger={setOpenBurger} isOpen={isOpen} setIsOpen={setIsOpen} open={open} setOpen={setOpen} catOpen={catOpen} setCatOpen={setCatOpen} />
                 </Sticky>

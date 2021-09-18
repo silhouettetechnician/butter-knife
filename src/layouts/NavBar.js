@@ -48,13 +48,13 @@ const BurgerButton = styled.button`
     display: none;
     & > span > span {
         background-color: ${props => props.isDark ? 'white !important' : 'black !important'};
+    }
         &:before{
             background-color: ${props => props.isDark ? 'white !important' : 'black !important'};
         }
         &:after{
             background-color: ${props => props.isDark ? 'white !important' : 'black !important'};
         }
-    }
 `
 const useQuantity = () => {
     const context = useContext(StoreContext)
@@ -78,7 +78,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                 <AudioPlayerProvider>
                     <Flex justifyBetween>
                         <button id='content-desktop' style={{ fontSize: '15px', padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
-                        <Player id='content-desktop' isDark={state.isDark} file={realog} />
+                        <Player id='content-desktop' isDark={state.isDark} file='https://soundcloud.com/bobbylocks/realog' />
                         <ButtonHolder id='content-desktop'>
                             {isAuthenticated ?
                                 <div style={{ padding: '15px' }}>

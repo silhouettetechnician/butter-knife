@@ -13,10 +13,6 @@ export const Dropdown = ({ priceSort, setPriceSort }) => {
           label: "What's new"
         },
         {
-          value: 'featured',
-          label: 'Featured'
-        },
-        {
           value: 'price low',
           label: 'Price low'
         },

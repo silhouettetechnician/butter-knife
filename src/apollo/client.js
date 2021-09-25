@@ -19,7 +19,7 @@ import { ApolloClient, InMemoryCache, createHttpLink, HttpLink} from '@apollo/cl
 // });
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: `https://${process.env.GATSBY_SHOP_NAME}.myshopify.com/api/graphql`,
+    uri: `https://${process.env.SHOPIFY_STORE_URL}.myshopify.com/api/graphql`,
     credentials: "same-origin",
   //   fetchOptions: {
   //     'mode': 'no-cors',

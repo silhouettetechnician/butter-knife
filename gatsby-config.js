@@ -33,7 +33,7 @@ module.exports = {
     title: "Butterknife",
     description: "Fashion. Footwear. Luxury",
     author: "Timothy Millward",
-    keywords: ['clothing', 'concession', 'menswear', 'butter', 'knife', 'butterknife'],
+    keywords: ['clothing', 'concession', 'brands', 'designer', 'new', 'menswear', 'butter', 'knife', 'butterknife', 'Butter knife', 'Butterknife', 'womenswear'],
     siteUrl: "https://butterknife.co.uk",
     // defaultImage: "",
     // twitterUsername: "",
@@ -52,9 +52,9 @@ module.exports = {
     `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-plugin-sitemap`,
-      options: {
-        output: '/sitemap.xml',
-      },
+      // options: {
+      //   output: '/sitemap.xml',
+      // },
     },
     {
       resolve: `gatsby-source-contentful`,

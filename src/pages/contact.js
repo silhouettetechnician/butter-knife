@@ -22,6 +22,7 @@ const Contact = () => {
             <p style ={pStyles}>General Enquiries & Returns: <br/> <a href='mailto:contact@butter-knife.co.uk'>contact@butter-knife.co.uk</a></p>
             <p style ={pStyles}>Sales & Press: <br/> <a href='mailto:sales@butter-knife.co.uk'>sales@butter-knife.co.uk</a></p>
             <p style ={pStyles}>Other Enquiries: <br/> <a href='mailto:timothy.millward@butter-knife.co.uk'>timothy.millward@butter-knife.co.uk</a></p>
+            <p style ={pStyles}>Instagram: <br/> <a target='_blank' href='https://www.instagram.com/butterknifeclothing/'>@butterknifeclothing</a></p>
             </div>
         </Container>
     )

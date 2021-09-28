@@ -1,10 +1,6 @@
-
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-
-console.log("Shopfiy shop name: " + process.env.SHOPIFY_STORE_URL)
-console.log("Shopfiy token: " + process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN)
 
 const myQuery = `{
   pages: {
@@ -79,7 +75,7 @@ module.exports = {
       resolve: `gatsby-source-shopify`,
       options: {
         // The domain name of your Shopify shop.
-        shopName: process.env.SHOPIFY_STORE_URL,
+        shopName: process.env.GATSBY_SHOP_NAME,
         // The storefront access token
         accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
       },
@@ -121,7 +117,7 @@ module.exports = {
       options: {
         typeName: 'Shopify',
         fieldName: 'shopify',
-        url: `https://${process.env.SHOPIFY_STORE_URL}.myshopify.com/api/graphql`,
+        url: `https://${process.env.GATSBY_SHOP_NAME}.myshopify.com/api/graphql`,
         headers: {
           'X-Shopify-Storefront-Access-Token': process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
           // 'Accept' : 'application/graphql'

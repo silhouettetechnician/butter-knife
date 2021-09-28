@@ -40,6 +40,7 @@ const WrapperResponsive = styled(Flex)`
 }
 `
 const DescriptionStyle = styled.div `
+  font-family: CODE;
   color: ${props => props.isDark ? 'white' : 'black'};
   width: 80%;
   margin-bottom: 15px !important;

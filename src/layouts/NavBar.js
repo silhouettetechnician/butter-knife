@@ -10,7 +10,6 @@ import Player from '../components/Player'
 import Logout from '../pages/account/logout'
 import { Navigation, Header, LogoHolder, MobileNavigation, NavMenuItem, MobileNavMenuItem, PageHeading } from '../components/StyledComponents';
 import { Link, navigate } from "gatsby";
-import realog from '../assets/realog.mp3'
 import StoreContext from '../contexts/Context'
 import Context from '../contexts/StoreContext'
 import Trolley from '../assets/shopping-cart.svg'
@@ -78,7 +77,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                 <AudioPlayerProvider>
                     <Flex justifyBetween>
                         <button id='content-desktop' style={{ fontSize: '15px', padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
-                        <Player id='content-desktop' isDark={state.isDark} file={realog} />
+                        <Player id='content-desktop' isDark={state.isDark} file='/realog.mp3' />
                         <ButtonHolder id='content-desktop'>
                             {isAuthenticated ?
                                 <div style={{ padding: '15px' }}>

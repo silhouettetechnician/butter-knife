@@ -2,7 +2,6 @@ import React from 'react';
 import SEO from '../components/Seo';
 import { navigate } from "gatsby";
 import Flex from '../styles/Flex'
-import video from '../assets/MASKSANDSWEATSSAM.mp4';
 
 const App = () => {
   return (

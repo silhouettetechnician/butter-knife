@@ -2,28 +2,6 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const myQuery = `{
-  pages: {
-  allShopifyProduct {
-    edges {
-      node {
-        objectID: id
-        id
-        handle
-        vendor
-      }
-    }
-  }
-}
-}`;
-
-const queries = [
-  {
-    query: myQuery,
-    transformer: ({ data }) => data.pages.edges, // optional, // overrides main index name, optional
-    /*matchFields: ['slug', 'modified', 'Vendor', 'Tags', 'Option2 Value'],*/ // Array<String> overrides main match fields, optional
-  },
-];
 module.exports = {
   siteMetadata: {
     title: "Butterknife",
@@ -40,7 +18,7 @@ module.exports = {
     `gatsby-plugin-layout`,
     'gatsby-plugin-dark-mode',
     `gatsby-plugin-fontawesome-css`,
-    `gatsby-plugin-image`,
+    // `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     'gatsby-plugin-react-helmet',
@@ -52,13 +30,13 @@ module.exports = {
       //   output: '/sitemap.xml',
       // },
     },
-    {
-      resolve: `gatsby-source-contentful`,
-      options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-contentful`,
+    //   options: {
+    //     spaceId: process.env.CONTENTFUL_SPACE_ID,
+    //     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -71,12 +49,19 @@ module.exports = {
         icon: `src/images/favicon-32x32.png`, // This path is relative to the root of the site.
       }
     },
+    // {
+    //   resolve: `gatsby-source-shopify`,
+    //   options: {
+    //     // The domain name of your Shopify shop.
+    //     shopName: process.env.GATSBY_SHOP_NAME,
+    //     // The storefront access token
+    //     accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
+    //   },
+    // },
     {
-      resolve: `gatsby-source-shopify`,
+      resolve: 'gatsby-plugin-apollo-shopify',
       options: {
-        // The domain name of your Shopify shop.
         shopName: process.env.GATSBY_SHOP_NAME,
-        // The storefront access token
         accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
       },
     },
@@ -134,39 +119,36 @@ module.exports = {
     //     name: `src`,
     //   }
     // },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/layouts/`,
-        name: 'layouts',
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/pages/`,
-        name: 'pages',
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/templates/`,
-        name: 'templates',
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     path: `${__dirname}/src/layouts/`,
+    //     name: 'layouts',
+    //   },
+    // },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     path: `${__dirname}/src/pages/`,
+    //     name: 'pages',
+    //   },
+    // },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     path: `${__dirname}/src/templates/`,
+    //     name: 'templates',
+    //   },
+    // },
 
-    {
-      resolve: `gatsby-plugin-env-variables`,
-      options: {
-        allowList: ["FIREBASE_API_KEY",
-          "CONTENTFUL_ACCESS_TOKEN",
-          "CONTENTFUL_SPACE_ID",
-          "CONTENTFUL_ENVIRONMENT",
-          "GATSBY_STRIPE_PUBLISHABLE_KEY",
-        ]
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-env-variables`,
+    //   options: {
+    //     allowList: [
+    //       "CONTENTFUL_ACCESS_TOKEN",
+    //     ]
+    //   },
+    // },
     //   {
     //     resolve: 'gatsby-plugin-snipcart',
     //     options: {
@@ -182,43 +164,5 @@ module.exports = {
       },
     },
 
-    // {
-    //   resolve: `gatsby-source-contentful`,
-    //   options: {
-    //     spaceId: process.env.CONTENTFUL_SPACE_ID,
-    //     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-    //     host: `preview.contentful.com`,
-    //   },
-    // },
-    //     {
-    //       resolve: `gatsby-source-contentful`,
-    //       options: {
-    //         spaceId: process.env.CONTENTFUL_SPACE_ID,
-    //         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-    //         downloadLocal: true,
-    //       },
-    //     },
-
   ]
 }
-/*{
-   // This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
-   resolve: `gatsby-plugin-algolia`,
-   options: {
-     appId: process.env.GATSBY_ALGOLIA_APP_ID,
-     // Use Admin API key without GATSBY_ prefix, so that the key isn't exposed in the application
-     // Tip: use Search API key with GATSBY_ prefix to access the service from within components
-     apiKey: process.env.ALGOLIA_ADMIN_KEY,
-     indexName: process.env.ALGOLIA_INDEX_NAME, // for all queries
-     queries,
-     chunkSize: 10000, // default: 1000
-     settings: {
-       // optional, any index settings
-       // Note: by supplying settings, you will overwrite all existing settings on the index
-     },
-     enablePartialUpdates: true, // default: false
-     concurrentQueries: false, // default: true
-     skipIndexing: true, // default: false, useful for e.g. preview deploys or local development
-     continueOnFailure: false // default: false, don't fail the build if algolia indexing fails
-   },
- },*/

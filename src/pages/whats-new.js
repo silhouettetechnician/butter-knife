@@ -47,7 +47,7 @@ const WhatsNew = ({ data }) => {
 
   const Product = (i) => {
     const { product } = i
-    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={product} title={product.title} vendor={product.vendor} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRange && Math.round(product.priceRange.maxVariantPrice.amount)} />
+    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={product} title={product.title} vendor={product.vendor} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} />
     </Link>
   }
   const { state } = useContext(StoreContext)
@@ -98,7 +98,7 @@ export const query = graphql`
           tags
           vendor
           productType
-          priceRange {
+          priceRangeV2 {
             maxVariantPrice {
               amount
               currencyCode

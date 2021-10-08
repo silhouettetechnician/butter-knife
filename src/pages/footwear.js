@@ -47,7 +47,7 @@ const Footwear = ({ data }) => {
 
   const Product = (i) => {
     const { product } = i
-    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={footwear} vendor={product.vendor} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRange && Math.round(product.priceRange.maxVariantPrice.amount)} />
+    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={footwear} vendor={product.vendor} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} />
     </Link>
   }
 
@@ -60,6 +60,7 @@ const Footwear = ({ data }) => {
         <PageHeading isDark={state.isDark}>Footwear</PageHeading>
         <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
       </TitleAndFilter>
+        {/* <h1 style={{ margin: '50pxw auto', color: 'black', fontSize: '3em', fontFamily: 'bangers', textAlign: 'center', textTransform: 'uppercase' }}>COMING SOON</h1> */}
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
         <ContainerFlexHide width='20%' justifyCenter>
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
@@ -102,7 +103,7 @@ export const query = graphql`
           tags
           description
           createdAt
-          priceRange {
+          priceRangeV2 {
             maxVariantPrice {
               amount
               currencyCode

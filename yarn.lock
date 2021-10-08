@@ -728,7 +728,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
 
-"@babel/plugin-syntax-flow@^7.12.1", "@babel/plugin-syntax-flow@^7.14.5":
+"@babel/plugin-syntax-flow@^7.12.1":
   version "7.14.5"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-flow/-/plugin-syntax-flow-7.14.5.tgz#2ff654999497d7d7d142493260005263731da180"
   integrity sha512-9WK5ZwKCdWHxVuU13XNT6X73FGmutAXeor5lGFq6qhOFtMFUF4jkbijuyUdZZlpYq6E2hZeZf/u3959X9wsv0Q==
@@ -913,14 +913,6 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.10.4"
     "@babel/plugin-syntax-flow" "^7.12.1"
-
-"@babel/plugin-transform-flow-strip-types@^7.14.5":
-  version "7.14.5"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-flow-strip-types/-/plugin-transform-flow-strip-types-7.14.5.tgz#0dc9c1d11dcdc873417903d6df4bed019ef0f85e"
-  integrity sha512-KhcolBKfXbvjwI3TV7r7TkYm8oNXHNBqGOy6JDVwtecFaRoKYsUUqJdS10q0YDKW1c6aZQgO+Ys3LfGkox8pXA==
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.14.5"
-    "@babel/plugin-syntax-flow" "^7.14.5"
 
 "@babel/plugin-transform-for-of@^7.12.1", "@babel/plugin-transform-for-of@^7.15.4":
   version "7.15.4"
@@ -1158,7 +1150,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
 
-"@babel/plugin-transform-typescript@^7.12.1", "@babel/plugin-transform-typescript@^7.15.0", "@babel/plugin-transform-typescript@^7.15.4":
+"@babel/plugin-transform-typescript@^7.12.1", "@babel/plugin-transform-typescript@^7.15.0":
   version "7.15.8"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.15.8.tgz#ff0e6a47de9b2d58652123ab5a879b2ff20665d8"
   integrity sha512-ZXIkJpbaf6/EsmjeTbiJN/yMxWPFWvlr7sEG1P95Xb4S4IBcrf2n7s/fItIhsAmOf8oSh3VJPDppO6ExfAfKRQ==
@@ -1332,15 +1324,6 @@
     babel-plugin-polyfill-regenerator "^0.2.2"
     core-js-compat "^3.16.0"
     semver "^6.3.0"
-
-"@babel/preset-flow@^7.14.0":
-  version "7.14.5"
-  resolved "https://registry.yarnpkg.com/@babel/preset-flow/-/preset-flow-7.14.5.tgz#a1810b0780c8b48ab0bece8e7ab8d0d37712751c"
-  integrity sha512-pP5QEb4qRUSVGzzKx9xqRuHUrM/jEzMqdrZpdMA+oUCRgd5zM1qGr5y5+ZgAL/1tVv1H0dyk5t4SKJntqyiVtg==
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.14.5"
-    "@babel/helper-validator-option" "^7.14.5"
-    "@babel/plugin-transform-flow-strip-types" "^7.14.5"
 
 "@babel/preset-modules@^0.1.3", "@babel/preset-modules@^0.1.4":
   version "0.1.4"
@@ -4839,6 +4822,11 @@ babel-jest@^26.6.0, babel-jest@^26.6.3:
     graceful-fs "^4.2.4"
     slash "^3.0.0"
 
+babel-jsx-utils@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/babel-jsx-utils/-/babel-jsx-utils-1.1.0.tgz#304ce4fce0c86cbeee849551a45eb4ed1036381a"
+  integrity sha512-Mh1j/rw4xM9T3YICkw22aBQ78FhsHdsmlb9NEk4uVAFBOg+Ez9ZgXXHugoBPCZui3XLomk/7/JBBH4daJqTkQQ==
+
 babel-loader@8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.1.0.tgz#c611d5112bd5209abe8b9fa84c3e4da25275f1c3"
@@ -5074,23 +5062,6 @@ babel-preset-flow@^6.23.0:
   integrity sha1-5xIYiHCFrpoktb5Baa/7WZgWxJ0=
   dependencies:
     babel-plugin-transform-flow-strip-types "^6.22.0"
-
-babel-preset-gatsby-package@^1.7.1:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/babel-preset-gatsby-package/-/babel-preset-gatsby-package-1.14.0.tgz#cf618427f649bce8baf581db25a6bed4241244a5"
-  integrity sha512-8GmWYPHedW/p+vGb90x0k/NRhfLevdH2dVwbydsY4jCuQz/3Y4bSkil6wTdUL3aSbah8nvnN6ANFflbLKm143A==
-  dependencies:
-    "@babel/plugin-proposal-nullish-coalescing-operator" "^7.14.5"
-    "@babel/plugin-proposal-optional-chaining" "^7.14.5"
-    "@babel/plugin-syntax-dynamic-import" "^7.8.3"
-    "@babel/plugin-transform-runtime" "^7.15.0"
-    "@babel/plugin-transform-typescript" "^7.15.4"
-    "@babel/preset-env" "^7.15.4"
-    "@babel/preset-flow" "^7.14.0"
-    "@babel/preset-react" "^7.14.0"
-    "@babel/runtime" "^7.15.4"
-    babel-plugin-dynamic-import-node "^2.3.3"
-    core-js "^3.17.2"
 
 babel-preset-gatsby@^1.14.0:
   version "1.14.0"
@@ -7925,10 +7896,15 @@ ejs@^2.6.1:
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.7.4.tgz#48661287573dcc53e366c7a1ae52c3a120eec9ba"
   integrity sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
 
-electron-to-chromium@^1.3.564, electron-to-chromium@^1.3.857:
+electron-to-chromium@^1.3.564:
   version "1.3.861"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.861.tgz#981e37a79af7a7b29bbaeed36376f4795527de13"
   integrity sha512-GZyflmpMnZRdZ1e2yAyvuFwz1MPSVQelwHX4TJZyXypB8NcxdPvPNwy5lOTxnlkrK13EiQzyTPugRSnj6cBgKg==
+
+electron-to-chromium@^1.3.857:
+  version "1.3.862"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.862.tgz#c1c5d4382449e2c9b0e67fe1652f4fc451d6d8c0"
+  integrity sha512-o+FMbCD+hAUJ9S8bfz/FaqA0gE8OpCCm58KhhGogOEqiA1BLFSoVYLi+tW+S/ZavnqBn++n0XZm7HQiBVPs8Jg==
 
 elliptic@^6.5.3:
   version "6.5.4"
@@ -9634,6 +9610,25 @@ gatsby-plugin-google-gtag@^3.13.0:
     "@babel/runtime" "^7.15.4"
     minimatch "^3.0.4"
 
+gatsby-plugin-image@^1.14.1:
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-image/-/gatsby-plugin-image-1.14.1.tgz#5d40dd35be4bab41e8dd5b9207e9b2485c734f6e"
+  integrity sha512-3ZiCFyIVjWxlpral04HlFZbeWC4Eoo7DYGA/Eh3qNMZ3tPKxySk4xXUdrnhIt967KBGATFuuYnPR9kKEHatCuQ==
+  dependencies:
+    "@babel/code-frame" "^7.14.0"
+    "@babel/parser" "^7.15.5"
+    "@babel/runtime" "^7.15.4"
+    "@babel/traverse" "^7.15.4"
+    babel-jsx-utils "^1.1.0"
+    babel-plugin-remove-graphql-queries "^3.14.0"
+    camelcase "^5.3.1"
+    chokidar "^3.5.2"
+    common-tags "^1.8.0"
+    fs-extra "^10.0.0"
+    gatsby-core-utils "^2.14.0"
+    objectFitPolyfill "^2.3.5"
+    prop-types "^15.7.2"
+
 gatsby-plugin-layout@^2.0.0:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-layout/-/gatsby-plugin-layout-2.14.0.tgz#09bdc6a3dc309cd7de06b50ce05ae519ca50ec44"
@@ -9701,7 +9696,7 @@ gatsby-plugin-sass@^4.12.0:
     resolve-url-loader "^3.1.2"
     sass-loader "^10.1.1"
 
-gatsby-plugin-sharp@^3.14.0:
+gatsby-plugin-sharp@^3.14.1:
   version "3.14.1"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-3.14.1.tgz#4521d1ca7fe643eae743cae71621a8bb170a57dd"
   integrity sha512-eLRoxLTrn5QCerIl/zaUTzJCBfPaaOZdVPhO6QUOd1o2qni6AR9QkeAw3He2e/1mnkB9wWGwJUdPiCfvUSE/pQ==
@@ -9872,7 +9867,7 @@ gatsby-source-filesystem@^1.5.39:
     slash "^1.0.0"
     valid-url "^1.0.9"
 
-gatsby-source-filesystem@^3.14.0, gatsby-source-filesystem@^3.7.1:
+gatsby-source-filesystem@^3.14.0:
   version "3.14.0"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-3.14.0.tgz#ae2b930091a932b33270cb9cc2d9caaf0abc1742"
   integrity sha512-Gg5GGxiWXhjapWMYdXOGk7zp+ajYowS+xNmaDUkL1gH+IQLvE18XbvKh00B/HiFaHm4azJfS2QRrRI/mPTZX+w==
@@ -9920,19 +9915,18 @@ gatsby-source-shopify2@^2.0.7:
     p-iteration "^1.1.7"
     prettyjson "^1.2.1"
 
-gatsby-source-shopify@^4.5.0:
-  version "4.7.1"
-  resolved "https://registry.yarnpkg.com/gatsby-source-shopify/-/gatsby-source-shopify-4.7.1.tgz#1fe1371d603a097071103bc033a99f5b76157fb2"
-  integrity sha512-NJrMhP4HJUwMVKC5pQaifUZsf4Z/JCPaO1jfoyMqnIBPMl3M3RMR06TRkHZnnvJLsmsPIZERZqSgBrnY5g09xg==
+gatsby-source-shopify@^5.6.1:
+  version "5.6.1"
+  resolved "https://registry.yarnpkg.com/gatsby-source-shopify/-/gatsby-source-shopify-5.6.1.tgz#5eb0f2a96cbec5a923797f6fe04f18b116bcca81"
+  integrity sha512-8qwZCdKwa/pgcAoWKBNu4uLJTY9KA3vJTqxHmIDPipcEA/3kH6r+lp50iFgB1Z4mM8/r4ByNmcyVdWpDTAOQHg==
   dependencies:
-    babel-preset-gatsby-package "^1.7.1"
-    chalk "^4.1.0"
-    gatsby-node-helpers "^0.3.0"
-    gatsby-source-filesystem "^3.7.1"
-    graphql-request "^1.8.2"
-    lodash "^4.17.21"
-    p-iteration "^1.1.8"
-    prettyjson "^1.2.1"
+    "@babel/runtime" "^7.15.4"
+    gatsby-core-utils "^2.14.0"
+    gatsby-plugin-utils "^1.14.0"
+    gatsby-source-filesystem "^3.14.0"
+    node-fetch "^2.6.1"
+    sharp "^0.29.0"
+    shift-left "^0.1.5"
 
 gatsby-telemetry@^2.14.0:
   version "2.14.0"
@@ -10571,7 +10565,7 @@ graphql-playground-middleware-express@^1.7.18:
   dependencies:
     graphql-playground-html "^1.6.29"
 
-graphql-request@^1.6.0, graphql-request@^1.8.2:
+graphql-request@^1.6.0:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-1.8.2.tgz#398d10ae15c585676741bde3fc01d5ca948f8fbe"
   integrity sha512-dDX2M+VMsxXFCmUX0Vo0TopIZIX4ggzOtiCsThgtrKR4niiaagsGTDIHj3fsOMFETpa064vzovI+4YV4QnMbcg==
@@ -14810,6 +14804,11 @@ object.values@^1.1.0, object.values@^1.1.4:
     define-properties "^1.1.3"
     es-abstract "^1.19.1"
 
+objectFitPolyfill@^2.3.5:
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/objectFitPolyfill/-/objectFitPolyfill-2.3.5.tgz#be8c83064aabfa4e88780f776c2013c48ce1f745"
+  integrity sha512-8Quz071ZmGi0QWEG4xB3Bv5Lpw6K0Uca87FLoLMKMWjB6qIq9IyBegP3b/VLNxv2WYvIMGoeUQ+c6ibUkNa8TA==
+
 obuf@^1.0.0, obuf@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
@@ -14993,7 +14992,7 @@ p-is-promise@^1.1.0:
   resolved "https://registry.yarnpkg.com/p-is-promise/-/p-is-promise-1.1.0.tgz#9c9456989e9f6588017b0434d56097675c3da05e"
   integrity sha1-nJRWmJ6fZYgBewQ01WCXZ1w9oF4=
 
-p-iteration@^1.1.7, p-iteration@^1.1.8:
+p-iteration@^1.1.7:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/p-iteration/-/p-iteration-1.1.8.tgz#14df726d55af368beba81bcc92a26bb1b48e714a"
   integrity sha512-IMFBSDIYcPNnW7uWYGrBqmvTiq7W0uB0fJn6shQZs7dlF3OvrHOre+JT9ikSZ7gZS3vWqclVgoQSvToJrns7uQ==
@@ -18844,6 +18843,11 @@ shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
+
+shift-left@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/shift-left/-/shift-left-0.1.5.tgz#4a61a9d0412b1b32f9abbd97f72466c9c74a6be1"
+  integrity sha512-55d8QaP1YmuL1D52fhgq8CT1tXksM/2WPZ6980RtkMbl0Cze++kuJy50GLMnXwostk/YG9hasaJmP3r+d3yUtQ==
 
 shopify-buy@^2.11.0:
   version "2.12.0"

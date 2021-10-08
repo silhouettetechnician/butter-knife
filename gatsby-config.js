@@ -7,10 +7,14 @@ module.exports = {
     title: "Butterknife",
     description: "Fashion. Footwear. Luxury",
     author: "Timothy Millward",
-    keywords: ['clothing', 'concession', 'brands', 'designer', 'new', 'menswear', 'butter', 'knife', 'butterknife', 'Butter knife', 'Butterknife', 'womenswear'],
+    keywords: ['clothing', 'new designers', 'upcoming brands in the uk', 'butterknife clothing store', 'concession', 'brands', 'designer', 'new', 'menswear', 'butter', 'knife', 'butterknife', 'Butter knife', 'Butterknife', 'womenswear'],
     siteUrl: "https://butterknife.co.uk",
     // defaultImage: "",
     // twitterUsername: "",
+  },
+  flags: {
+    FAST_DEV: true,
+    DEV_SSR: true,
   },
   plugins: [
     // ...otherPlugins,
@@ -18,7 +22,7 @@ module.exports = {
     `gatsby-plugin-layout`,
     'gatsby-plugin-dark-mode',
     `gatsby-plugin-fontawesome-css`,
-    // `gatsby-plugin-image`,
+    `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     'gatsby-plugin-react-helmet',
@@ -49,22 +53,26 @@ module.exports = {
         icon: `src/images/favicon-32x32.png`, // This path is relative to the root of the site.
       }
     },
+    {
+      resolve: `gatsby-source-shopify`,
+      options: {
+        password: process.env.SHOPIFY_SHOP_PASSWORD,
+        storeUrl: process.env.SHOPIFY_STORE_URL,
+        shopifyConnections: ["collections"],
+        // 
+        // shopName: process.env.GATSBY_SHOP_NAME,
+
+        // accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
+        // paginationSize: 250,
+      },
+    },
     // {
-    //   resolve: `gatsby-source-shopify`,
+    //   resolve: 'gatsby-plugin-apollo-shopify',
     //   options: {
-    //     // The domain name of your Shopify shop.
     //     shopName: process.env.GATSBY_SHOP_NAME,
-    //     // The storefront access token
     //     accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
     //   },
     // },
-    {
-      resolve: 'gatsby-plugin-apollo-shopify',
-      options: {
-        shopName: process.env.GATSBY_SHOP_NAME,
-        accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_TOKEN,
-      },
-    },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {

@@ -17,7 +17,7 @@ import Trolley from '../assets/shopping-cart.svg'
 const ResponsiveLogoHolder = styled.div`
     cursor: pointer;
     font-family: bangers;
-    font-size: 5rem;
+    font-size: 5.8rem;
     color: ${props => props.isDark ? 'white' : 'black'};
     text-decoration-line: line-through;
     text-decoration-color: ${props => props.isDark ? '#0131D2' : 'rgb(254, 205, 47)'};

@@ -55,7 +55,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
     variants,
     images,
     variants: [initialVariant],
-    priceRange: { minVariantPrice },
+    priceRangeV2: { minVariantPrice },
   } = data.shopifyProduct
   const [variant, setVariant] = useState({ ...initialVariant })
   const product = data.shopifyProduct
@@ -197,7 +197,7 @@ query ClothinItemQuery($handle: String!){
     images {
         originalSrc
       }
-      priceRange {
+      priceRangeV2 {
         maxVariantPrice {
           amount
           currencyCode

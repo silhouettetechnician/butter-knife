@@ -8,7 +8,7 @@ const LogoImage = styled.img`
     object-fit: cover;
     object-position: 15% 40%;
     width:100%;
-    height: 450px;
+    height: 600px;
     background: linear-gradient(
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
@@ -58,7 +58,7 @@ const IndividualBrand = ({ pageContext, vendor }) => {
       <Flex justifyEvenly alignEnd width='80%' style={{margin: '0 auto'}}>
         {/* <div style={{background: 'rgba(0,0,0,0.4)'}}> */}
         {/* <div style={{ color: 'black', fontFamily: 'CODE' }}>{data.description}</div> */}
-        {data.products && data.products.map((i, index) => <Link key={index} to={`/clothing/${i.handle}`}><ClothingItem data={data.product} key={i.handle} title={i.title} description={i.description} src={i.images[0].originalSrc} price={i.priceRange.minVariantPrice.amount} /></Link>)}
+        {data.products && data.products.map((i, index) => <Link key={index} to={`/clothing/${i.handle}`}><ClothingItem data={data.product} key={i.handle} title={i.title} description={i.description} src={i.images[0].originalSrc} price={i.priceRangeV2.minVariantPrice.amount} /></Link>)}
         {/* </div> */}
       </Flex>
     </Flex>

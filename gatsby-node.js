@@ -94,9 +94,7 @@ exports.createPages = async ({ graphql, actions }) => {
         brandsFound.push(node)
       }
     })
-    console.log(brandsFound, 'brandsFound')
     brandsFound.length > 0 && brandsFound.forEach(({node}) => {
-      console.log(node, 'node')
       createPage({
         path: `/designers/${node.handle}`,
         component: brandTemplate,

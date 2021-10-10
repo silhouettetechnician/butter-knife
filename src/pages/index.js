@@ -52,8 +52,8 @@ const App = ({ data }) => {
           <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>NEW DROP <br /> VERYRARE™ c/o Raf Reyes (VR®®)</h1>
           <button onClick={() => navigate('/designers/very-rare')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
         </div>
-        <video style={{ objectFit: 'cover' }} width='100%' preload='auto' loop autoPlay muted>
-          <source src='https://imgur.com/6aEp0sp.mp4' type="video/mp4" />
+        <video autoPlay playsinline style={{ objectFit: 'cover' }} width='100%' loop muted>
+          <source autoPlay playsinline loop muted src='https://imgur.com/6aEp0sp.mp4' type="video/mp4" />
         </video>
       </Flex>
       <Flex width='100%' justifyCenter alignCenter>

@@ -460,7 +460,9 @@ p{
   text-transform: uppercase;
   margin-right: 20px;
 }
-
+.modalContent {
+  width: 100%;
+}
 .customModal {
   position: absolute;
   top: 30%;

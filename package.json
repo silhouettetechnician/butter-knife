@@ -92,6 +92,7 @@
     "react-img-zoom": "^0.1.0",
     "react-instantsearch-dom": "^6.11.0",
     "react-medium-image-zoom": "^4.3.5",
+    "react-multi-carousel": "^2.6.5",
     "react-notify-toast": "^0.5.1",
     "react-parallax": "^3.3.0",
     "react-player": "^2.9.0",

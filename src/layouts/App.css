@@ -463,6 +463,9 @@ p{
 .modalContent {
   width: 100%;
 }
+#mcjs{
+  width: 100%;
+}
 .customModal {
   position: absolute;
   top: 30%;

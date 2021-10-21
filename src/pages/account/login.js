@@ -123,7 +123,7 @@ const LoginForm = () => {
               </div>
               <button
                 style={{ marginBottom: '1rem' }}
-                className="button"
+                // className="button"
                 type='submit'
               >SUBMIT</button>
             </AuthFormBox>
@@ -178,7 +178,7 @@ const LoginForm = () => {
                   <button
                     type='submit'
                     style={{ marginBottom: '1rem' }}
-                    className="button"
+                    // className="button"
                   // onClick={handleLogin}
                   >SIGN IN</button>
                 </div>

@@ -6,6 +6,35 @@ exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions
     const brandTemplate = path.resolve('./src/templates/IndividualBrand.js')
     const storeTemplate = path.resolve('./src/templates/IndividualClothingItem.js')
+    const blogPostTemplate = path.resolve(`src/templates/BlogTemplate.js`)
+
+    // const resultBlog = await graphql(`
+    // {
+    //   allMarkdownRemark(
+    //     sort: { order: DESC, fields: [frontmatter___date] }
+    //     limit: 1000
+    //   ) {
+    //     edges {
+    //       node {
+    //         id
+    //         frontmatter {
+    //           path
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    // `)
+
+    // resultBlog.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    //   console.log(node, 'node')
+    //   createPage({
+    //     path: `/blog${node.frontmatter.path}`,
+    //     component: blogPostTemplate,
+    //     context: {},
+    //   })
+    // })
+
     // Query for all products in Shopify
     const result = await graphql(`
   {

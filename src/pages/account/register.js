@@ -100,7 +100,7 @@ const RegisterForm = () => {
                   <div className="control has-text-centered">
                     <button
                       style={{ marginBottom: '1rem' }}
-                      className="button"
+                      // className="button"
                       type='submit'
                     >CREATE</button>
                   </div>

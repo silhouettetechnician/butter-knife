@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import "./src/layouts/App.css"
+import "./src/styles/global.scss"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import "react-image-gallery/styles/css/image-gallery.css";

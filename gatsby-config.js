@@ -27,6 +27,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     'gatsby-plugin-react-helmet',
     `gatsby-plugin-css`,
+    `gatsby-plugin-sass`,
     `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-plugin-sitemap`,
@@ -120,6 +121,13 @@ module.exports = {
       },
     },
     { resolve: `gatsby-transformer-remark` },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `markdown-pages`,
+        path: `${__dirname}/_data`,
+      },
+    },
     // {
     //   resolve: `gatsby-source-filesystem`,
     //   options: {

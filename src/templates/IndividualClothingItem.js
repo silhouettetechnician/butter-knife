@@ -157,7 +157,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
           )
         })}
         <button
-          style={{ marginTop: '10%', fontSize: '25px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }}
+          style={{ fontFamily: 'bangers !important', marginTop: '10%', fontSize: '40px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }}
           type="submit"
           onClick={handleAddToCart}
         >+ Add to trolley</button>

@@ -6,6 +6,7 @@ import Flex from '../styles/Flex'
 import { Helmet } from 'react-helmet'
 import Carousel from 'react-multi-carousel';
 import ClothingItem from '../templates/ClothingItem';
+import PostLink from '../components/PostLink'
 
 const ArrowDown = styled.div`
     background: white !important;
@@ -31,13 +32,19 @@ const responsive = {
   }
 };
 
-const App = ({ data }) => {
-  const { allShopifyProduct } = data
+const App = ({ data: {
+  // site,
+  // allMarkdownRemark: { edges },
+  allShopifyProduct,
+}, }) => {
   const productNodes = allShopifyProduct.edges.map(edge => {
     return {
       ...edge.node
     }
   })
+  // const Posts = edges
+  // .filter(edge => !!edge.node.frontmatter.date) 
+  // .map(edge => <PostLink key={edge.node.id} post={edge.node} />)
   const [newIn, setNewIn] = useState(productNodes)
   return (
     <>
@@ -49,11 +56,11 @@ const App = ({ data }) => {
       <SEO title='Butterknife Clothing' description='Fashion. Footwear. Luxury' metaImage='/mainlogo.png' />
       <Flex justifyCenter width='100%'>
         <div style={{ position: 'absolute', top: '17%', textAlign: 'center', zIndex: '999' }}>
-          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>NEW DROP <br /> VERYRARE™ c/o Raf Reyes (VR®®)</h1>
-          <button onClick={() => navigate('/designers/very-rare')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
+          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Introducing <br /> Dhenze</h1>
+          <button onClick={() => navigate('/designers/dhenze')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
         </div>
         <video autoPlay style={{ objectFit: 'cover' }} width='100%' loop muted>
-          <source src='https://imgur.com/6aEp0sp.mp4' type="video/mp4" />
+          <source src='https://imgur.com/1nnPZaZ.mp4' type="video/mp4" />
         </video>
       </Flex>
       <Flex width='100%' justifyCenter alignCenter>
@@ -62,7 +69,13 @@ const App = ({ data }) => {
       <Carousel itemClass="carousel-item-padding-0-px" infinity={false} swipeable={true} containerClass="carousel-container" responsive={responsive}>
         {newIn ? newIn.map((product, i) => <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={newIn} vendor={product.vendor} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} /></Link>) : <div class="loader">Loading...</div>}
       </Carousel>
-
+      {/* <Flex width='100%'> */}
+      {/* <div style={{width: '100%'}}>
+      <Flex margin='10px 0 30px 0' style={{flexFlow: 'row wrap', justifyContent: 'space-around'}}>
+      {Posts}
+      </Flex>
+      </div> */}
+      {/* </Flex> */}
     </>
   );
 }
@@ -111,5 +124,27 @@ export const query = graphql`
         }
       }
     }
+
   }
 `
+    // site {
+    //   siteMetadata {
+    //     title
+    //     description
+    //   }
+    // }
+    // allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+    //   edges {
+    //     node {
+    //       id
+    //       excerpt(pruneLength: 250)
+    //       frontmatter {
+    //         date(formatString: "MMMM DD, YYYY")
+    //         title
+    //         path
+    //         thumbnail
+    //         description 
+    //       }
+    //     }
+    //   }
+    // }

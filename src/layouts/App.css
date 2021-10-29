@@ -155,6 +155,10 @@ p{
   font-family: graphikMed;
   src: url("../fonts/Graphik-Medium.ttf");
 }
+@font-face {
+  font-family: caesar;
+  src: url("../fonts/CaesarDressing-Regular.ttf");
+}
 /* DELETE TOO TECHY */
 @font-face {
   font-family: HeadingBold;

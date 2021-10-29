@@ -15,7 +15,8 @@ const LogoImage = styled.img`
     );
 `
 const BrandHeading = styled.p`
-    font-family: BerlinBold;
+    font-family: bangers;
+    // font-family: BerlinBold;
     font-size: 3rem;
     text-transform: uppercase;
     text-decoration: underline;
@@ -24,8 +25,7 @@ const BrandHeading = styled.p`
     color: ${props => props.color ? props.color : 'black'};
     `
 const BrandCaption = styled.p`
-    font-family: BerlinBold;
-    font-size: 1rem;
+    font-size: 1.3rem;
     letter-spacing: 1px;
     text-transform: uppercase;
     text-align: center;
@@ -44,13 +44,13 @@ const IndividualBrand = ({ pageContext, vendor }) => {
     brandImage
   } = pageContext;
   const [data, setData] = useState(pageContext)
-  
+  console.log(title)
   return (
     <Flex width='100%'>
       <Flex style={{ width: '100%' }}>
         <div style={{ margin: '15px', padding: '15px', maxWidth:'600px', position: 'absolute', background: 'rgba(0,0,0,0.75)', top: '200px', }}>
-          <BrandHeading color='white'>{data.title}</BrandHeading>
-          <BrandCaption>{data.description}</BrandCaption>
+          <BrandHeading style={{fontFamily: title === 'Hucci' ? 'caesar' : 'bangers'}} color='white'>{data.title}</BrandHeading>
+          <BrandCaption style={{fontFamily: title === 'Hucci' ? 'caesar' : 'BerlinBold'}}>{data.description}</BrandCaption>
         </div>
         <LogoImage src={data.brandImage} />
       </Flex>

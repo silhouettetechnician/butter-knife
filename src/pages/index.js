@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import SEO from '../components/Seo';
 import styled from '@emotion/styled'
 import { graphql, navigate, Link } from "gatsby";
@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet'
 import Carousel from 'react-multi-carousel';
 import ClothingItem from '../templates/ClothingItem';
 import PostLink from '../components/PostLink'
-
+import Context from '../contexts/StoreContext'
 const ArrowDown = styled.div`
     background: white !important;
     &:after{
@@ -33,10 +33,11 @@ const responsive = {
 };
 
 const App = ({ data: {
-  // site,
-  // allMarkdownRemark: { edges },
+  site,
+  allMarkdownRemark: { edges },
   allShopifyProduct,
 }, }) => {
+  const { state } = useContext(Context)
   const productNodes = allShopifyProduct.edges.map(edge => {
     return {
       ...edge.node
@@ -64,18 +65,18 @@ const App = ({ data: {
         </video>
       </Flex>
       <Flex width='100%' justifyCenter alignCenter>
-        <h1 style={{ margin: '3%', position: 'relative', color: 'black', fontSize: '2.4em', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Latest products</h1>
+        <h1 style={{ margin: '3%', position: 'relative', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '2.4em', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Latest products</h1>
       </Flex>
       <Carousel itemClass="carousel-item-padding-0-px" infinity={false} swipeable={true} containerClass="carousel-container" responsive={responsive}>
         {newIn ? newIn.map((product, i) => <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={newIn} vendor={product.vendor} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} /></Link>) : <div class="loader">Loading...</div>}
       </Carousel>
-      {/* <Flex width='100%'> */}
-      {/* <div style={{width: '100%'}}>
-      <Flex margin='10px 0 30px 0' style={{flexFlow: 'row wrap', justifyContent: 'space-around'}}>
-      {Posts}
-      </Flex>
-      </div> */}
-      {/* </Flex> */}
+      {/* <Flex width='100%'> 
+        <div style={{ width: '100%' }}>
+          <Flex margin='10px 0 30px 0' style={{ flexFlow: 'row wrap', justifyContent: 'space-around' }}>
+            {Posts}
+          </Flex>
+        </div>
+      </Flex> */}
     </>
   );
 }
@@ -124,27 +125,26 @@ export const query = graphql`
         }
       }
     }
-
+    site {
+      siteMetadata {
+        title
+        description
+      }
+    }
+    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+      edges {
+        node {
+          id
+          excerpt(pruneLength: 250)
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+            path
+            thumbnail
+            description 
+          }
+        }
+      }
+    }
   }
 `
-    // site {
-    //   siteMetadata {
-    //     title
-    //     description
-    //   }
-    // }
-    // allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
-    //   edges {
-    //     node {
-    //       id
-    //       excerpt(pruneLength: 250)
-    //       frontmatter {
-    //         date(formatString: "MMMM DD, YYYY")
-    //         title
-    //         path
-    //         thumbnail
-    //         description 
-    //       }
-    //     }
-    //   }
-    // }

@@ -7,13 +7,12 @@ export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
   console.log(data,'data')
-  const { site, markdownRemark } = data // data.markdownRemark holds your post data
-  const { siteMetadata } = site
+  const {  markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html } = markdownRemark
   return (
     <>
       <Helmet>
-        <title>{frontmatter.title} | {siteMetadata.title}</title>
+        <title>{frontmatter.title}</title>
         <meta name="description" content={frontmatter.description} />
       </Helmet>
       <div className="blog-post-container">
@@ -43,11 +42,6 @@ export default function Template({
 
 export const pageQuery = graphql`
   query($path: String!) {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
       frontmatter {

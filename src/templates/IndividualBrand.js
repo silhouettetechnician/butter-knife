@@ -44,7 +44,6 @@ const IndividualBrand = ({ pageContext, vendor }) => {
     brandImage
   } = pageContext;
   const [data, setData] = useState(pageContext)
-  console.log(title)
   return (
     <Flex width='100%'>
       <Flex style={{ width: '100%' }}>

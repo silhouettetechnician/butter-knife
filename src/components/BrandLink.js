@@ -34,7 +34,6 @@ height: 100%;
 `
 
 const BrandLink = ({ brand }) => {
-    console.log(brand, 'brand')
     return (
         <Link to={`/designers/${brand.handle}`}>
             <figure className="snip1104 red">

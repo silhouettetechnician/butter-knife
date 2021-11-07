@@ -494,7 +494,7 @@ p{
 }
 .MuiAccordionDetails-root{
   padding: unset !important;
-}
+}nt
 
 #content-desktop {display: block;}
 #content-mobile {display: none;}
@@ -504,6 +504,12 @@ p{
 #content-desktop {display: none;}
 #content-mobile {display: block;}
 
+}
+#content-mobile-nav {display: none;}
+#content-desktop-nav {display: block;}
+@media screen and (max-width: 1000px) {
+#content-mobile-nav {display: block;}
+#content-desktop-nav {display: none;}
 }
 
 /* BURGER */

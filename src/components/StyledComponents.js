@@ -60,7 +60,7 @@ export const Navigation = styled.nav`
         justify-content: center;
         align-items: baseline;
         height: 20px;
-        @media (max-width: 800px) {
+        @media (max-width: 1000px) {
                 display: none;
               }
 `
@@ -242,7 +242,7 @@ export const AuthFormBox = styled.form`
 export const MobileNavigation = styled.nav`
         max-width: 300px;
         width: 100%;
-        height: 600px;
+        height: 650px;
         position: fixed;
         border-radius: 6px;
         box-shadow: 0 0 5px 0 rgba(102, 102, 102, 0.5);
@@ -258,7 +258,7 @@ export const MobileNavigation = styled.nav`
         justify-content: space
         transform: ${({ openBurger }) => openBurger ? 'translateX(-40px)' : 'translateX(-100%)'};
         transition: transform 0.6s ease-in-out !important;  
-        @media (min-width: 800px) {
+        @media (min-width: 1000px) {
                 display: none;
               }
 

@@ -21,7 +21,7 @@ const ResponsiveLogoHolder = styled.div`
     color: ${props => props.isDark ? 'white' : 'black'};
     text-decoration-line: line-through;
     text-decoration-color: ${props => props.isDark ? '#0131D2' : 'rgb(254, 205, 47)'};
-    @media (max-width: 800px) {
+    @media (max-width: 1000px) {
         font-size: 4rem;
     }
 `
@@ -76,9 +76,9 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
             <Header isDark={state.isDark}>
                 <AudioPlayerProvider>
                     <Flex justifyBetween>
-                        <button id='content-desktop' style={{ fontSize: '15px', padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
-                        <Player id='content-desktop' isDark={state.isDark} file='/realog.mp3' />
-                        <ButtonHolder id='content-desktop'>
+                        <button id='content-desktop-nav' style={{ fontSize: '15px', padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
+                        <Player id='content-desktop-nav' isDark={state.isDark} file='/realog.mp3' />
+                        <ButtonHolder id='content-desktop-nav'>
                             {isAuthenticated ?
                                 <div style={{ padding: '15px' }}>
                                     <Logout isDark={state.isDark} />
@@ -91,14 +91,14 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                                 </Link>
                             }
                         </ButtonHolder>
-                        <BurgerButton isDark={state.isDark} onClick={() => setOpenBurger(!openBurger)} id='content-mobile' className={`hamburger hamburger--slider ${openBurger && 'is-active'}`} type="button">
+                        <BurgerButton isDark={state.isDark} onClick={() => setOpenBurger(!openBurger)} id='content-mobile-nav' className={`hamburger hamburger--slider ${openBurger && 'is-active'}`} type="button">
                             <span className="hamburger-box">
                                 <span style={{ backgroundColor: `${state.isDark ? 'white !important' : 'black !important'}` }} className="hamburger-inner"></span>
                             </span>
                         </BurgerButton>
-                        <Flex id='content-mobile'>
-                        {hasItems && <div id='content-mobile' style={{width: '100%', display: 'flex'}} ><CartCounter id='content-mobile' fontSize='1.6rem'>{quantity}</CartCounter></div>}
-                        <FontAwesomeIcon style={{ cursor: 'pointer', fontSize: '40px', margin: '12px' }} onClick={() => setIsOpen(!isOpen)} id='content-mobile' icon={faShoppingCart}></FontAwesomeIcon>
+                        <Flex id='content-mobile-nav'>
+                        {hasItems && <div id='content-mobile-nav' style={{width: '100%', display: 'flex'}} ><CartCounter id='content-mobile-nav' fontSize='1.6rem'>{quantity}</CartCounter></div>}
+                        <FontAwesomeIcon style={{ cursor: 'pointer', fontSize: '40px', margin: '12px' }} onClick={() => setIsOpen(!isOpen)} id='content-mobile-nav' icon={faShoppingCart}></FontAwesomeIcon>
                         </Flex>
                     </Flex>
                 </AudioPlayerProvider>
@@ -111,7 +111,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                         <MobileNavMenuItem isDark={state.isDark} className='strike' onClick={() => { setOpen(!open); closeMobileNav() }}><span>Designers</span></MobileNavMenuItem>
                         <MobileNavMenuItem onClick={() => closeMobileNav()}isDark={state.isDark} className='strike' ><Link  to='/mens'>Mens</Link></MobileNavMenuItem>
                         <MobileNavMenuItem onClick={() => closeMobileNav()}isDark={state.isDark} className='strike' ><Link  to='/womens'>Womens</Link></MobileNavMenuItem>
-                        <MobileNavMenuItem onClick={() => closeMobileNav()}isDark={state.isDark} className='strike' ><Link  to='/unisex'>Genderlessr</Link></MobileNavMenuItem>
+                        <MobileNavMenuItem onClick={() => closeMobileNav()}isDark={state.isDark} className='strike' ><Link  to='/unisex'>Genderless</Link></MobileNavMenuItem>
                         <MobileNavMenuItem onClick={() => closeMobileNav()}isDark={state.isDark} className='strike'><Link  to='/souvenirs'>Souvenirs</Link></MobileNavMenuItem>
                         <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/footwear'>Footwear</Link></MobileNavMenuItem>
                     </>

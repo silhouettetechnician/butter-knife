@@ -72,7 +72,7 @@ const App = ({ data: {
       </Helmet>
       <SEO title='Butterknife Clothing' description='Fashion. Footwear. Luxury' metaImage='/mainlogo.png' />
       <Flex justifyCenter width='100%'>
-      <div style={{ position: 'absolute', top: '17%', textAlign: 'center', zIndex: '999' }}>
+      <div style={{ position: 'absolute', top: '10%', textAlign: 'center', zIndex: '999' }}>
           <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Introducing <br /> Dhenze</h1>
           <button onClick={() => navigate('/designers/dhenze')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
         </div>

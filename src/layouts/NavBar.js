@@ -111,6 +111,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                         <MobileNavMenuItem isDark={state.isDark} className='strike' onClick={() => { setOpen(!open); closeMobileNav() }}><span>Designers</span></MobileNavMenuItem>
                         <MobileNavMenuItem onClick={() => closeMobileNav()}isDark={state.isDark} className='strike' ><Link  to='/mens'>Mens</Link></MobileNavMenuItem>
                         <MobileNavMenuItem onClick={() => closeMobileNav()}isDark={state.isDark} className='strike' ><Link  to='/womens'>Womens</Link></MobileNavMenuItem>
+                        <MobileNavMenuItem onClick={() => closeMobileNav()}isDark={state.isDark} className='strike' ><Link  to='/unisex'>Genderlessr</Link></MobileNavMenuItem>
                         <MobileNavMenuItem onClick={() => closeMobileNav()}isDark={state.isDark} className='strike'><Link  to='/souvenirs'>Souvenirs</Link></MobileNavMenuItem>
                         <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link style={{ fontFamily: 'BerlinBold' }} to='/footwear'>Footwear</Link></MobileNavMenuItem>
                     </>
@@ -134,6 +135,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                     <NavMenuItem isDark={state.isDark} className='strike' onClick={() => setOpen(!open)}><span>Designers</span></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike'><Link to='/mens'>Mens</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike'><Link to='/womens'>Womens</Link></NavMenuItem><Divider />
+                    <NavMenuItem isDark={state.isDark} className='strike'><Link to='/unisex'>Genderless</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike'><Link to='/footwear'>Footwear</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike'><Link to='/accessories'>Accessories</Link></NavMenuItem><Divider />
                     <NavMenuItem isDark={state.isDark} className='strike'><Link to='/souvenirs'>Souvenirs</Link></NavMenuItem><Divider />

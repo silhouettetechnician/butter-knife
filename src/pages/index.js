@@ -73,11 +73,11 @@ const App = ({ data: {
       <SEO title='Butterknife Clothing' description='Fashion. Footwear. Luxury' metaImage='/mainlogo.png' />
       <Flex justifyCenter width='100%'>
       <div style={{ position: 'absolute', top: '10%', textAlign: 'center', zIndex: '999' }}>
-          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Introducing <br /> Dhenze</h1>
-          <button onClick={() => navigate('/designers/dhenze')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
+          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>SHOP NOM<br />CLOTHING</h1>
+          <button onClick={() => navigate('/designers/nom')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
         </div>
         <video autoPlay style={{ objectFit: 'cover' }} width='100%' loop muted>
-          <source src='https://imgur.com/1nnPZaZ.mp4' type="video/mp4" />
+          <source src='https://imgur.com/fjocuPl.mp4' type="video/mp4" />
         </video>
       </Flex>
       <Flex width='100%' justifyCenter alignCenter>

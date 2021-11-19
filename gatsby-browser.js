@@ -11,4 +11,5 @@ import 'react-dropdown/style.css';
 import 'react-medium-image-zoom/dist/styles.css'
 import 'react-sticky-header/styles.css';
 import "react-responsive-modal/styles.css";
+import "react-input-range/lib/css/index.css";
 export { wrapRootElement } from './src/apollo/provider';

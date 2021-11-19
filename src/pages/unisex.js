@@ -25,7 +25,7 @@ const Unisex = ({ data }) => {
     client, adding,
   } = context
   const {state} = useContext(Context)
-  const [priceSort, setPriceSort] = useState('')
+  const [priceSort, setPriceSort] = useState('new')
   const [productList, setProductList] = useState(productNodes)
   const productCheckboxes = _.uniqBy(productList, 'productType').map(node => node.productType)
   const coloursCheckboxes = _.uniq(productList.map(i => i.variants.map(variant => variant.selectedOptions[1].value)).map(color => _.uniq(color)).flat())
@@ -40,7 +40,7 @@ const Unisex = ({ data }) => {
     return setCheckedInputs({ ...checkedInputs, [key]: checkedInputs[key].filter(item => item !== e.target.value) })
   }
   const getItems = () => {
-    return productList.filter((product, i) => {
+    return productList.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt)).filter((product, i) => {
       const type = product && product.productType
       const colour = product && product.variants[0].selectedOptions[1].value
       const brand = product && product.vendor

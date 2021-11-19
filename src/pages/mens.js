@@ -40,7 +40,7 @@ const Mens = ({ data }) => {
     return setCheckedInputs({ ...checkedInputs, [key]: checkedInputs[key].filter(item => item !== e.target.value) })
   }
   const getItems = () => {
-    return productList.filter((product, i) => {
+    return productList.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt)).filter((product, i) => {
       const type = product && product.productType
       const colour = product && product.variants[0].selectedOptions[1].value
       const brand = product && product.vendor

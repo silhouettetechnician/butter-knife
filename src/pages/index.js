@@ -50,10 +50,10 @@ const App = ({ data: {
   return (
     <>
       <Flex justifyCenter width='100%'>
-        {/* <div style={{ position: 'absolute', top: '10%', textAlign: 'center', zIndex: '999' }}>
+        <div style={{ position: 'absolute', top: '10%', textAlign: 'center', zIndex: '999' }}>
           <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>SHOP NOM<br />CLOTHING</h1>
           <button onClick={() => navigate('/designers/nom')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
-        </div> */}
+        </div>
         <video autoPlay style={{ objectFit: 'cover', objectPosition: '10% 0 10% 0' }} width='100%' loop muted>
           <source src='https://imgur.com/fjocuPl.mp4' type="video/mp4" />
           {/* <source src='https://imgur.com/BEtntzB.mp4' type="video/mp4" /> */}

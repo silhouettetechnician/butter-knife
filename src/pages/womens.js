@@ -57,7 +57,7 @@ const Womens = ({ data }) => {
       const isColours = checkedInputs['Colour'].length >= 1 ? checkedColours : true
       const isBrands = checkedInputs['Brand'].length >= 1 ? checkedBrands : true
       // const isPrice = priceDetect && product && product.priceRangeV2.maxVariantPrice.amount > price.min ? product : product && product.priceRangeV2.maxVariantPrice.amount < price.max || product
-      return isTypes && isColours && isBrands && isPrice
+      return isTypes && isColours && isBrands 
     })
   }
 

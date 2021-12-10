@@ -74,10 +74,10 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
     return (
         <div style={{ position: 'relative' }}>
             <Header isDark={state.isDark}>
-                <AudioPlayerProvider>
+                {/* <AudioPlayerProvider> */}
                     <Flex justifyBetween>
                         <button id='content-desktop-nav' style={{ fontSize: '15px', padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
-                        <Player id='content-desktop-nav' isDark={state.isDark} file='/realog.mp3' />
+                        {/* <Player id='content-desktop-nav' isDark={state.isDark} file='/realog.mp3' /> */}
                         <ButtonHolder id='content-desktop-nav'>
                             {isAuthenticated ?
                                 <div style={{ padding: '15px' }}>
@@ -101,7 +101,7 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                         <FontAwesomeIcon style={{ cursor: 'pointer', fontSize: '40px', margin: '12px' }} onClick={() => setIsOpen(!isOpen)} id='content-mobile-nav' icon={faShoppingCart}></FontAwesomeIcon>
                         </Flex>
                     </Flex>
-                </AudioPlayerProvider>
+                {/* </AudioPlayerProvider> */}
                 <LogoHolder isDark={state.isDark}><ResponsiveLogoHolder isDark={state.isDark} onClick={() => navigate('/')}> BUTTER KNIFE <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></ResponsiveLogoHolder></LogoHolder>
                 {openBurger && <MobileNavigation isDark={state.isDark} openBurger={openBurger}>
                     <button style={{ padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>

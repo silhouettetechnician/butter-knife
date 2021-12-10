@@ -4,6 +4,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import Notifications from 'react-notify-toast';
 import useMeta from '../hooks/useMeta'
 import _ from 'lodash'
+import SEO from '../components/Seo';
 import { Link, graphql, StaticQuery } from 'gatsby'
 import styled from '@emotion/styled'
 import Sticky from 'react-stickynode';
@@ -75,6 +76,7 @@ const Layout = ({ data, children }) => {
         />
     return (
         <>
+        <SEO title='Butterknife Clothing' description='Fashion. Footwear. Luxury' metaImage='/mainlogo.png' />
             <Global styles={
                 css`
                     body {

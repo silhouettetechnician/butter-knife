@@ -7,7 +7,7 @@ module.exports = {
     title: "Butterknife",
     description: "Fashion. Footwear. Luxury",
     author: "Timothy Millward",
-    keywords: ['clothing', 'new designers', 'upcoming brands in the uk', 'butterknife clothing store', 'concession', 'brands', 'designer', 'new', 'menswear', 'butter', 'knife', 'butterknife', 'Butter knife', 'Butterknife', 'womenswear'],
+    keywords: ['clothing', 'streetwear', 'new designers', 'upcoming brands in the uk', 'butterknife clothing store', 'concession', 'brands', 'designer', 'new', 'menswear', 'butter', 'knife', 'butterknife', 'Butter knife', 'Butterknife', 'womenswear'],
     siteUrl: "https://butterknife.co.uk",
     // defaultImage: "",
     // twitterUsername: "",

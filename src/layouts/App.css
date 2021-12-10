@@ -40,11 +40,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.carousel-container{
+.carousel-container {
   width: 100%;
   margin: 2% 0;
 }
-.react-multi-carousel-item{
+.react-multi-carousel-item {
   width: unset !important;
 }
 .MuiTypography-root {
@@ -67,7 +67,7 @@ a:hover {
   /* color: black !important; */
   text-decoration: none !important;
 }
-p{
+p {
   font-family: CODE;
 }
 .nav-menu-item {
@@ -392,7 +392,15 @@ p{
 .ais-Panel {
   margin-bottom: 35px !important;
 }
-
+.player-wrapper {
+  width: 80%;
+  height: 400px;
+  margin: 1.5% 0 0 0;
+}
+.react-player {
+  max-width: 1200px;
+  width: 100%;
+}
 .dark-button {
   box-sizing: border-box;
   display: flex;
@@ -474,10 +482,10 @@ p{
 .modalContent {
   width: 100%;
 }
-#mcjs{
+#mcjs {
   width: 100%;
 }
-#SignupForm_0{
+#SignupForm_0 {
   width: 100%;
 }
 .customModal {
@@ -488,28 +496,42 @@ p{
   right: 0;
 }
 
-.carousel-root{
+.carousel-root {
   /* width: 100%; */
   background-size: cover;
 }
-.MuiAccordionDetails-root{
+.MuiAccordionDetails-root {
   padding: unset !important;
 }
 
-#content-desktop {display: block;}
-#content-mobile {display: none;}
+#content-desktop {
+  display: block;
+}
+#content-mobile {
+  display: none;
+}
 
 @media screen and (max-width: 800px) {
-
-#content-desktop {display: none;}
-#content-mobile {display: block;}
-
+  #content-desktop {
+    display: none;
+  }
+  #content-mobile {
+    display: block;
+  }
 }
-#content-mobile-nav {display: none;}
-#content-desktop-nav {display: block;}
+#content-mobile-nav {
+  display: none;
+}
+#content-desktop-nav {
+  display: block;
+}
 @media screen and (max-width: 1000px) {
-#content-mobile-nav {display: block;}
-#content-desktop-nav {display: none;}
+  #content-mobile-nav {
+    display: block;
+  }
+  #content-desktop-nav {
+    display: none;
+  }
 }
 
 /* BURGER */
@@ -520,7 +542,7 @@ p{
  * @site https://jonsuh.com/hamburgers
  * @link https://github.com/jonsuh/hamburgers
  */
- .hamburger {
+.hamburger {
   padding: 15px 15px;
   display: inline-block;
   cursor: pointer;
@@ -533,171 +555,192 @@ p{
   background-color: transparent;
   border: 0;
   margin: 0;
-  overflow: visible; }
-  .hamburger:hover {
-    opacity: 0.7; }
-  .hamburger.is-active:hover {
-    opacity: 0.7; }
-  .hamburger.is-active .hamburger-inner,
-  .hamburger.is-active .hamburger-inner::before,
-  .hamburger.is-active .hamburger-inner::after {
-    background-color: #000; }
+  overflow: visible;
+}
+.hamburger:hover {
+  opacity: 0.7;
+}
+.hamburger.is-active:hover {
+  opacity: 0.7;
+}
+.hamburger.is-active .hamburger-inner,
+.hamburger.is-active .hamburger-inner::before,
+.hamburger.is-active .hamburger-inner::after {
+  background-color: #000;
+}
 
 .hamburger-box {
   width: 40px;
   height: 24px;
   display: inline-block;
-  position: relative; }
+  position: relative;
+}
 
 .hamburger-inner {
   display: block;
   top: 50%;
-  margin-top: -2px; }
-  .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
-    width: 40px;
-    height: 4px;
-    background-color: #000;
-    border-radius: 4px;
-    position: absolute;
-    transition-property: transform;
-    transition-duration: 0.15s;
-    transition-timing-function: ease; }
-  .hamburger-inner::before, .hamburger-inner::after {
-    content: "";
-    display: block; }
-  .hamburger-inner::before {
-    top: -10px; }
-  .hamburger-inner::after {
-    bottom: -10px; }
+  margin-top: -2px;
+}
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  width: 40px;
+  height: 4px;
+  background-color: #000;
+  border-radius: 4px;
+  position: absolute;
+  transition-property: transform;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+}
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: "";
+  display: block;
+}
+.hamburger-inner::before {
+  top: -10px;
+}
+.hamburger-inner::after {
+  bottom: -10px;
+}
 
 /*
    * Slider
    */
 .hamburger--slider .hamburger-inner {
-  top: 2px; }
-  .hamburger--slider .hamburger-inner::before {
-    top: 10px;
-    transition-property: transform, opacity;
-    transition-timing-function: ease;
-    transition-duration: 0.15s; }
-  .hamburger--slider .hamburger-inner::after {
-    top: 20px; }
+  top: 2px;
+}
+.hamburger--slider .hamburger-inner::before {
+  top: 10px;
+  transition-property: transform, opacity;
+  transition-timing-function: ease;
+  transition-duration: 0.15s;
+}
+.hamburger--slider .hamburger-inner::after {
+  top: 20px;
+}
 
 .hamburger--slider.is-active .hamburger-inner {
-  transform: translate3d(0, 10px, 0) rotate(45deg); }
-  .hamburger--slider.is-active .hamburger-inner::before {
-    transform: rotate(-45deg) translate3d(-5.71429px, -6px, 0);
-    opacity: 0; }
-  .hamburger--slider.is-active .hamburger-inner::after {
-    transform: translate3d(0, -20px, 0) rotate(-90deg); }
+  transform: translate3d(0, 10px, 0) rotate(45deg);
+}
+.hamburger--slider.is-active .hamburger-inner::before {
+  transform: rotate(-45deg) translate3d(-5.71429px, -6px, 0);
+  opacity: 0;
+}
+.hamburger--slider.is-active .hamburger-inner::after {
+  transform: translate3d(0, -20px, 0) rotate(-90deg);
+}
 
 /*Knife.css (v2) | MIT LICENSE | © Shadow Scientist (https://github.com/Shadow-Scientist)*/
 
 /* Now the fun begins! */
 
-.knife{
-	display:inline-block;
-	position:relative; /*position should be absolute or relative*/
-	/* transform:translate(-50%,-50%); placing @ center of the page*/
-	white-space:nowrap;
-	font-size:0px;
-	overflow:visible;
-	text-decoration:none;
+.knife {
+  display: inline-block;
+  position: relative; /*position should be absolute or relative*/
+  /* transform:translate(-50%,-50%); placing @ center of the page*/
+  white-space: nowrap;
+  font-size: 0px;
+  overflow: visible;
+  text-decoration: none;
 }
-.knife:hover{
-    cursor: pointer;
-}
-
-.knife::before, .knife::after{
-	content:attr(text); /*grab the text to cut*/
-	left:0px;
-	font-family: BerlinXBold;
-	font-size:2rem;
-	font-weight:600;
-	color:white;
-	display:block;
-	width:100%;
-	text-decoration:none;
-	transition:all ease 0.2s;
-	transition-delay:0.125s;
-	line-height:2rem;
-	box-shadow:0 0 0 1px rgba(0,0,0,0); /*Firefox antialiasing hack*/
+.knife:hover {
+  cursor: pointer;
 }
 
-.knife::before{
-	position:relative;
-	top:0px;
-	clip-path:inset(0% -1% calc(50% - 0.5px) -1%);
-	/*-1% because skew doesn't affects the box-size and clipped edges are sharp!*/
+.knife::before,
+.knife::after {
+  content: attr(text); /*grab the text to cut*/
+  left: 0px;
+  font-family: BerlinXBold;
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  transition: all ease 0.2s;
+  transition-delay: 0.125s;
+  line-height: 2rem;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0); /*Firefox antialiasing hack*/
 }
 
-.knife::after{
-	position:absolute;
-	bottom:0px;
-	clip-path:inset(50% -1% 0% -1%);
-	/*Same as above*/
+.knife::before {
+  position: relative;
+  top: 0px;
+  clip-path: inset(0% -1% calc(50% - 0.5px) -1%);
+  /*-1% because skew doesn't affects the box-size and clipped edges are sharp!*/
 }
 
-.knife > div{
-	position:absolute;
-	left:50%;
-	top:50%;
-	width:0%;
-	height:6px;
-	background:#FECE2E;
-	display:block;
-	transform:translate(-50%,-50%);
-	z-index:10;
-	border-radius:10px;
-	transition:all cubic-bezier(1,0,0,1) 0.4s;
-	box-shadow:0 0 0 1px rgba(0,0,0,0); /*Firefox antialiasing hack, again!*/
+.knife::after {
+  position: absolute;
+  bottom: 0px;
+  clip-path: inset(50% -1% 0% -1%);
+  /*Same as above*/
 }
 
-.knife:hover::before{
-	color:#FECE2E;
-	transform:skew(13deg) translateX(10px); /*translateX--> 10px better*/
-	clip-path:inset(0% -1% calc(50% + 6px) -1%);
-	/*Slicing effect: clip-path handles all that*/
+.knife > div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0%;
+  height: 6px;
+  background: #fece2e;
+  display: block;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  border-radius: 10px;
+  transition: all cubic-bezier(1, 0, 0, 1) 0.4s;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0); /*Firefox antialiasing hack, again!*/
 }
 
-.knife:hover::after{
-	color:#FECE2E;
-	transform:skewX(13deg) translateX(-10px); /*same reason*/
+.knife:hover::before {
+  color: #fece2e;
+  transform: skew(13deg) translateX(10px); /*translateX--> 10px better*/
+  clip-path: inset(0% -1% calc(50% + 6px) -1%);
+  /*Slicing effect: clip-path handles all that*/
 }
 
-.knife:hover > div{
-	width:calc(100% + 60px);
-	transition-timing-function:cubic-bezier(.18,.89,.32,1.28);
-	background:white;
+.knife:hover::after {
+  color: #fece2e;
+  transform: skewX(13deg) translateX(-10px); /*same reason*/
 }
 
+.knife:hover > div {
+  width: calc(100% + 60px);
+  transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  background: white;
+}
 
 /* -knife-float class 
    added June 3rd, 2020
  */
 
-.knife.-knife-float{
-	transition-timing-function:cubic-bezier(0.16, 1.08, 0.38, 0.98);
-	/* --expansion:0px; */
+.knife.-knife-float {
+  transition-timing-function: cubic-bezier(0.16, 1.08, 0.38, 0.98);
+  /* --expansion:0px; */
 }
 
-.knife.-knife-float > div{
-	transform:translateY(-50%);
-	left:0px;
+.knife.-knife-float > div {
+  transform: translateY(-50%);
+  left: 0px;
 }
 
-.knife.-knife-float::before, .knife.-knife-float::after{
-	transform:none;
+.knife.-knife-float::before,
+.knife.-knife-float::after {
+  transform: none;
 }
 
-.knife.-knife-float:hover::before{
-	top:calc(6px * -3);
-	clip-path:inset(0% -1% 50% -1%);
-	opacity:0.7;
+.knife.-knife-float:hover::before {
+  top: calc(6px * -3);
+  clip-path: inset(0% -1% 50% -1%);
+  opacity: 0.7;
 }
 
-.carousel .control-arrow, .carousel.carousel-slider .control-arrow{
-  color:#fece2e;
+.carousel .control-arrow,
+.carousel.carousel-slider .control-arrow {
+  color: #fece2e;
   opacity: 1;
 }
 
@@ -720,7 +763,7 @@ p{
   border-radius: 5px;
 }
 .arrow-down:after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
@@ -733,21 +776,20 @@ p{
 }
 
 @keyframes bounce {
-50% {
+  50% {
     transform: translateY(-15px);
   }
 }
-.react-responsive-modal-root{
+.react-responsive-modal-root {
   top: calc(0px + 180px) !important;
 }
-.react-responsive-modal{
+.react-responsive-modal {
   margin: 1rem;
   padding: 1rem;
 }
-.react-responsive-modal-container{
+.react-responsive-modal-container {
   height: auto !important;
 }
-
 
 .ribbon {
   width: 150px;
@@ -759,7 +801,7 @@ p{
 .ribbon::after {
   position: absolute;
   z-index: -1;
-  content: '';
+  content: "";
   display: block;
   border: 5px solid #2980b9;
 }
@@ -769,10 +811,10 @@ p{
   width: 225px;
   padding: 15px 0;
   background-color: #3498db;
-  box-shadow: 0 5px 10px rgba(0,0,0,.1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   color: #fff;
-  font: 700 18px/1 'Lato', sans-serif;
-  text-shadow: 0 1px 1px rgba(0,0,0,.2);
+  font: 700 18px/1 "Lato", sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
   text-align: center;
 }
@@ -814,7 +856,7 @@ p{
   animation: load7 1.8s infinite ease-in-out;
 }
 .loader {
-  color:rgb(254, 205, 47);
+  color: rgb(254, 205, 47);
   font-size: 10px;
   margin: 80px auto;
   position: relative;
@@ -827,7 +869,7 @@ p{
 }
 .loader:before,
 .loader:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
 }
@@ -923,7 +965,7 @@ figure.snip1104:before {
   width: 100%;
   top: 0;
   left: 0;
-  content: '';
+  content: "";
   background: #ffffff;
   position: absolute;
   -webkit-transition: all 0.3s ease-in-out;
@@ -950,7 +992,7 @@ figure.snip1104.blue h2 {
 }
 
 figure.snip1104.red {
-  background:#123851;
+  background: #123851;
 }
 
 figure.snip1104.red h2 {

@@ -2,7 +2,7 @@ import React from 'react'
 import Select from "react-select";
 
 export const Dropdown = ({ priceSort, setPriceSort }) => {
-
+  
     const options = [
         {
           value: 'featured',

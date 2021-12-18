@@ -4,7 +4,7 @@ import { graphql, navigate, Link } from "gatsby";
 import Flex from '../styles/Flex'
 import Carousel from 'react-multi-carousel';
 import ReactPlayer from 'react-player'
-
+import Video from '../assets/boneidle.mp4'
 import ClothingItem from '../templates/ClothingItem';
 import PostLink from '../components/PostLink'
 import Context from '../contexts/StoreContext'
@@ -64,7 +64,7 @@ const App = ({ data: {
         /> */}
       <video autoPlay width='100%' loop muted>
         {/* <source src='https://videopress.com/embed/Q0VvEnUo/autoPlay=1%22' type="video/mp4" /> */}
-        <source src='/boneidle.mp4' type="video/mp4" />
+        <source src={Video} type="video/mp4" />
         </video>  
       </Flex>
       <Flex width='100%' justifyCenter alignCenter>

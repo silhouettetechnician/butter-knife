@@ -35,8 +35,8 @@ height: 100%;
 
 const BrandLink = ({ brand }) => {
     return (
-        <Link to={`/designers/${brand.handle}`}>
-            <figure className="snip1104 red">
+        <Link style={{margin: '2% !important'}} to={`/designers/${brand.handle}`}>
+            <figure  className="snip1104 red">
                 <img /*style={{ height: '100% !important', objectFit: 'cover' }}*/ src={brand.image.originalSrc} />
                 <figcaption>
                     <h2>{brand.title}</h2>

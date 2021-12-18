@@ -4,6 +4,7 @@ import { graphql, navigate, Link } from "gatsby";
 import Flex from '../styles/Flex'
 import Carousel from 'react-multi-carousel';
 import ReactPlayer from 'react-player'
+
 import ClothingItem from '../templates/ClothingItem';
 import PostLink from '../components/PostLink'
 import Context from '../contexts/StoreContext'
@@ -42,6 +43,7 @@ const App = ({ data: {
       ...edge.node
     }
   })
+  console.log(brandNodes, 'brand nodes')
   const Brands = brandNodes && brandNodes.map(brand => <BrandLink key={brand.id} brand={brand} />)
   const Posts = edges
     .filter(edge => !!edge.node.frontmatter.date)
@@ -51,16 +53,22 @@ const App = ({ data: {
     <>
       <Flex justifyCenter width='100%'>
         <div style={{ position: 'absolute', top: '10%', textAlign: 'center', zIndex: '999' }}>
-          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>SHOP NOM<br />CLOTHING</h1>
-          <button onClick={() => navigate('/designers/nom')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
+          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>SHOP NOM<br />BONE IDLE</h1>
+          <button onClick={() => navigate('/designers/bone-idle')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
         </div>
-        <video autoPlay style={{ objectFit: 'cover', objectPosition: '10% 0 10% 0' }} width='100%' loop muted>
-          <source src='https://imgur.com/fjocuPl.mp4' type="video/mp4" />
-          {/* <source src='https://imgur.com/BEtntzB.mp4' type="video/mp4" /> */}
-        </video>
+        {/* <iframe src='https://imgur.com/a/m0FfFP7'
+          frameborder='0'
+          allow='autoplay; encrypted-media'
+          allowfullscreen
+          title='video'
+        /> */}
+      <video autoPlay width='100%' loop muted>
+        {/* <source src='https://videopress.com/embed/Q0VvEnUo/autoPlay=1%22' type="video/mp4" /> */}
+        <source src='/boneidle.mp4' type="video/mp4" />
+        </video>  
       </Flex>
       <Flex width='100%' justifyCenter alignCenter>
-        <h1 style={{ margin: '3%', position: 'relative', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '2.4em', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Latest products</h1>
+        <h2 style={{ margin: '3%', position: 'relative', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '2.4em', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Latest products</h2>
       </Flex>
       <Carousel itemClass="carousel-item-padding-0-px" infinity={false} swipeable={true} containerClass="carousel-container" responsive={responsive}>
         {newIn ? newIn.map((product, i) => <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={newIn} vendor={product.vendor} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} /></Link>) : <div class="loader">Loading...</div>}
@@ -68,7 +76,7 @@ const App = ({ data: {
       {/* BLOG */}
       {/* <Flex width='100%'>
         <div style={{ width: '100%' }}>
-          <h1 style={{ margin: '1% 0 3% 0', position: 'relative', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '2.4em', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Features</h1>
+          <h2 style={{ margin: '1% 0 3% 0', position: 'relative', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '2.4em', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Features</h2>
           <Flex margin='10px 0 30px 0' style={{ flexFlow: 'row wrap', justifyContent: 'space-around' }}>
             {Posts}
           </Flex>
@@ -77,9 +85,11 @@ const App = ({ data: {
       {/* BRANDS */}
       <Flex width='100%'>
         <div style={{ width: '100%' }}>
-          <h1 style={{ margin: '1% 0 3% 0', position: 'relative', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '2.4em', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Brands</h1>
+          <h2 style={{ margin: '1% 0 3% 0', position: 'relative', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '2.4em', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Brands</h2>
           <Flex margin='10px 0 30px 0' style={{ flexFlow: 'row wrap', justifyContent: 'space-around' }}>
+          <Carousel itemClass="carousel-item-padding-0-px" infinity={false} swipeable={true} containerClass="carousel-container" responsive={responsive}>
             {Brands}
+          </Carousel>
           </Flex>
         </div>
       </Flex>
@@ -131,7 +141,7 @@ export const query = graphql`
         }
       }
     }
-    allShopifyCollection(limit: 5) {
+    allShopifyCollection {
       edges {
         node {
           description

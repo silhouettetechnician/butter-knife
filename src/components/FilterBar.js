@@ -68,7 +68,7 @@ const FilterBar = ({  checkboxesToFilter, price, setPrice, getItems, handleInput
                         })}
                     </AccordionDetails>
                 </Accordion>)}
-            {/* <Typography style={{ color: `${state.isDark ? 'white' : 'black'}`, textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}` }} className='filterLabel'>Price</Typography> */}
+            <Typography style={{ color: `${state.isDark ? 'white' : 'black'}`, textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}` }} className='filterLabel'>Size</Typography>
             {/* <InputRange
                 formatLabel={value => `£${value}`}
                 maxValue={parseInt(priceMax)}

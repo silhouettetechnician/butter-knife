@@ -2,7 +2,7 @@ import React from 'react'
 import Select from "react-select";
 
 export const Dropdown = ({ priceSort, setPriceSort }) => {
-  
+
     const options = [
         {
           value: 'featured',
@@ -23,7 +23,7 @@ export const Dropdown = ({ priceSort, setPriceSort }) => {
       ]
 
     return (
-        <><Select width='200px' options={options} onChange={(values) => setPriceSort(values)} value={priceSort} /></>
+        <><Select width='200px' options={options} onChange={(values) => setPriceSort(values.value)} value={priceSort} /></>
     )
 }
 

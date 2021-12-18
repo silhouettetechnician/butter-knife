@@ -44,8 +44,9 @@ code {
   width: 100%;
   margin: 2% 0;
 }
-.react-multi-carousel-item {
-  width: unset !important;
+.react-multi-carousel-item{
+  margin: 0.5% !important;
+  /* width: unset !important; */
 }
 .MuiTypography-root {
   font-family: CODE !important;
@@ -201,6 +202,10 @@ p {
 @font-face {
   font-family: BW;
   src: url("../fonts/BwGlennSansDEMO-ExtraBoldItalic.otf");
+}
+@font-face {
+  font-family: Playfair;
+  src: url("../fonts/PlayfairDisplay-MediumItalic.ttf");
 }
 
 @keyframes strike {
@@ -907,7 +912,7 @@ figure.snip1104 {
   position: relative;
   overflow: hidden;
   margin: 10px;
-  min-width: 220px;
+  min-width: 300px;
   max-width: 310px;
   max-height: 220px;
   width: 100%;

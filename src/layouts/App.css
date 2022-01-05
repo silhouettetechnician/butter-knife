@@ -207,6 +207,10 @@ p {
   font-family: Playfair;
   src: url("../fonts/PlayfairDisplay-MediumItalic.ttf");
 }
+@font-face {
+  font-family: Fondamento;
+  src: url("../fonts/Fondamento-Regular.ttf");
+}
 
 @keyframes strike {
   0% {

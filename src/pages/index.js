@@ -53,7 +53,7 @@ const App = ({ data: {
     <>
       <Flex justifyCenter width='100%'>
         <div style={{ position: 'absolute', top: '10%', textAlign: 'center', zIndex: '999' }}>
-          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>SHOP NOM<br />BONE IDLE</h1>
+          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>SHOP NOW<br />BONE IDLE</h1>
           <button onClick={() => navigate('/designers/bone-idle')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
         </div>
         {/* <iframe src='https://imgur.com/a/m0FfFP7'

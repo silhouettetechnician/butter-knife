@@ -27,7 +27,7 @@ const BrandHeading = styled.p`
 const BrandCaption = styled.p`
     font-size: ${props => props.dhenze ? '1rem' : '1.3rem'};
     letter-spacing: 1px;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     text-align: center;
     color: white;
     `
@@ -49,7 +49,7 @@ const IndividualBrand = ({ pageContext, vendor }) => {
       <Flex style={{ width: '100%' }}>
         <div style={{ margin: '15px', padding: '15px', maxWidth:'600px', position: 'absolute', background: 'rgba(0,0,0,0.75)', top: '200px', }}>
           <BrandHeading style={{fontFamily: title === 'Hucci' ? 'caesar' : 'bangers'}} color='white'>{data.title}</BrandHeading>
-          <BrandCaption dhenze={title === 'Dhenze'}style={{fontFamily: title === 'Hucci' ? 'caesar' : 'BerlinBold'}}>{data.description}</BrandCaption>
+          <BrandCaption dhenze={title === 'Dhenze'} style={{fontFamily: title === 'Hucci' ? 'caesar' : title === '1683 ATELIER' ? 'Fondamento' : 'BerlinBold'}}>{data.description}</BrandCaption>
         </div>
         <LogoImage src={data.brandImage} />
       </Flex>

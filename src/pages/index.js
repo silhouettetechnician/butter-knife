@@ -4,7 +4,7 @@ import { graphql, navigate, Link } from "gatsby";
 import Flex from '../styles/Flex'
 import Carousel from 'react-multi-carousel';
 import ReactPlayer from 'react-player'
-import Video from '../assets/boneidle.mp4'
+import Video from '../assets/home.mp4'
 import ClothingItem from '../templates/ClothingItem';
 import PostLink from '../components/PostLink'
 import Context from '../contexts/StoreContext'
@@ -43,7 +43,6 @@ const App = ({ data: {
       ...edge.node
     }
   })
-  console.log(brandNodes, 'brand nodes')
   const Brands = brandNodes && brandNodes.map(brand => <BrandLink key={brand.id} brand={brand} />)
   const Posts = edges
     .filter(edge => !!edge.node.frontmatter.date)
@@ -53,8 +52,8 @@ const App = ({ data: {
     <>
       <Flex justifyCenter width='100%'>
         <div style={{ position: 'absolute', top: '10%', textAlign: 'center', zIndex: '999' }}>
-          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>SHOP NOW<br />BONE IDLE</h1>
-          <button onClick={() => navigate('/designers/bone-idle')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
+          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase', textShadow:"1px 0 0 black,0 1px 0 black,-1px 0 0 black,0 -1px 0 black" }}>BRAND NEW<br />VERY RARE</h1>
+          <button style={{textShadow:"1px 0 0 black,0 1px 0 black,-1px 0 0 black,0 -1px 0 black"}} onClick={() => navigate('/designers/very-rare')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
         </div>
         {/* <iframe src='https://imgur.com/a/m0FfFP7'
           frameborder='0'

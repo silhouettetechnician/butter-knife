@@ -74,9 +74,9 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
     return (
         <div style={{ position: 'relative' }}>
             <Header isDark={state.isDark}>
-                {/* <AudioPlayerProvider> */}
+                <AudioPlayerProvider>
                     <Flex justifyBetween>
-                        <button id='content-desktop-nav' style={{ fontSize: '15px', padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
+                        {/* <button id='content-desktop-nav' style={{ fontSize: '15px', padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button> */}
                         {/* <Player id='content-desktop-nav' isDark={state.isDark} file='/realog.mp3' /> */}
                         <ButtonHolder id='content-desktop-nav'>
                             {isAuthenticated ?
@@ -101,10 +101,10 @@ export const NavBar = ({ open, setOpen, isOpen, openBurger, setOpenBurger, close
                         <FontAwesomeIcon style={{ cursor: 'pointer', fontSize: '40px', margin: '12px' }} onClick={() => setIsOpen(!isOpen)} id='content-mobile-nav' icon={faShoppingCart}></FontAwesomeIcon>
                         </Flex>
                     </Flex>
-                {/* </AudioPlayerProvider> */}
-                <LogoHolder isDark={state.isDark}><ResponsiveLogoHolder isDark={state.isDark} onClick={() => navigate('/')}> BUTTER KNIFE <span style={{ fontFamily: 'Arial', fontSize: '0.7rem' }}>&trade;</span></ResponsiveLogoHolder></LogoHolder>
+                </AudioPlayerProvider>
+                <LogoHolder isDark={state.isDark}><ResponsiveLogoHolder isDark={state.isDark} onClick={() => navigate('/')}> BUTTER KNIFE </ResponsiveLogoHolder></LogoHolder>
                 {openBurger && <MobileNavigation isDark={state.isDark} openBurger={openBurger}>
-                    <button style={{ padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button>
+                    {/* <button style={{ padding: '15px', border: 'unset', color: `${state.isDark ? 'white' : 'black'}` }} onClick={() => dispatch({ type: 'TOGGLE_DARK_MODE' })}>{state.isDark ? 'lights on' : 'lights off'}</button> */}
                     <PageHeading width='2.6rem' style={{ textDecorationLine: 'line-through', textDecorationColor: `${state.isDark ? '#0131D2' : 'rgb(254, 205, 47)'}`, margin: '40px 0' }} isDark={state.isDark}>Menu</PageHeading>
                     <>
                         <MobileNavMenuItem onClick={() => closeMobileNav()} isDark={state.isDark} className='strike'><Link to='/whats-new'>What's new</Link></MobileNavMenuItem>

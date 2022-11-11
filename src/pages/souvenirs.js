@@ -8,8 +8,8 @@ import DropDown from '../components/DropDownSort'
 import StoreContext from '../contexts/StoreContext'
 import _ from 'lodash'
 
-const Souvenirs = ({data}) => {
-  
+const Souvenirs = ({ data }) => {
+
   const { allShopifyProduct } = data
   const productNodes = allShopifyProduct.edges.map(edge => {
     return {
@@ -46,18 +46,12 @@ const Souvenirs = ({data}) => {
     })
   }
 
-  const Product = (i) => {
-    const { product } = i
-    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={footwear} vendor={product.vendor}  title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} />
-    </Link>
-  }
-
   const filteredItems = getItems()
 
   return (
     <>
       <TitleAndFilter justifyBetween width='100%'>
-      <div id='content-desktop' style={{width: '190px'}}></div>
+        <div id='content-desktop' style={{ width: '190px' }}></div>
         <PageHeading isDark={state.isDark}>Souvenirs</PageHeading>
         <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
       </TitleAndFilter>
@@ -66,7 +60,20 @@ const Souvenirs = ({data}) => {
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
         </ContainerFlexHide>
         <ContainerFlex justifyAround>
-        {filteredItems && filteredItems.sort((a, b) => priceSort.value === 'new' ? new Date(b.createdAt) - new Date(a.createdAt) : priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
+          {filteredItems && filteredItems.sort((a, b) => priceSort === 'new' ? new Date(b.createdAt) - new Date(a.createdAt) : priceSort === 'featured' ? a : priceSort === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort === 'price high' ? b.variants[0].price - a.variants[0].price : null).map((product, index) => (
+            <ClothingItem
+              key={index}
+              product={product}
+              href={product.handle}
+              vendor={product.vendor}
+              data={footwear}
+              title={product.title}
+              description={product.description}
+              src={product.images && product.images[0].originalSrc}
+              compareAtPrice={product.variants[0].compareAtPrice && Math.round(product.variants[0].compareAtPrice)}
+              price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} />
+          )
+          )}
         </ContainerFlex>
       </Flex>
     </>
@@ -89,6 +96,7 @@ export const query = graphql`
             id
             price
             title
+            compareAtPrice
             product {
               id
               title

@@ -88,7 +88,7 @@ export const NavMenuItem = styled.span`
         z-index: 100;
         cursor: pointer;
         & > a{
-        color: ${props => props.isDark ? 'white !important' : 'black !important'};
+        color: ${props => props.isSale ? 'rgb(174, 0, 0)' : 'black'};
         }
 `
 export const MobileNavMenuItem = styled.div`
@@ -116,7 +116,7 @@ export const MobileNavMenuItem = styled.div`
         z-index: 100;
         cursor: pointer;
         & > a{
-        color: ${props => props.isDark ? 'white !important' : 'black !important'};
+                color: ${props => props.isSale ? 'rgb(174, 0, 0)' : 'black'};
         }
 `
 export const CartContainer = styled.div`

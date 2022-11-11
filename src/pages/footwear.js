@@ -45,11 +45,6 @@ const Footwear = ({ data }) => {
     })
   }
 
-  const Product = (i) => {
-    const { product } = i
-    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={footwear} vendor={product.vendor} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} />
-    </Link>
-  }
 
   const filteredItems = getItems()
 
@@ -60,14 +55,26 @@ const Footwear = ({ data }) => {
         <PageHeading isDark={state.isDark}>Footwear</PageHeading>
         <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
       </TitleAndFilter>
-        {/* <h1 style={{ margin: '50pxw auto', color: 'black', fontSize: '3em', fontFamily: 'bangers', textAlign: 'center', textTransform: 'uppercase' }}>COMING SOON</h1> */}
+      {/* <h1 style={{ margin: '50pxw auto', color: 'black', fontSize: '3em', fontFamily: 'bangers', textAlign: 'center', textTransform: 'uppercase' }}>COMING SOON</h1> */}
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
         <ContainerFlexHide width='20%' justifyCenter>
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
         </ContainerFlexHide>
         <ContainerFlex justifyAround>
-        {/* <PageHeading width ='3rem' style ={{margin: '0 auto', textAlign: 'center'}} isDark={state.isDark}>Coming soon</PageHeading> */}
-        {filteredItems && filteredItems.sort((a, b) => priceSort.value === 'new' ? new Date(b.createdAt) - new Date(a.createdAt) : priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
+          {/* <PageHeading width ='3rem' style ={{margin: '0 auto', textAlign: 'center'}} isDark={state.isDark}>Coming soon</PageHeading> */}
+          {filteredItems && filteredItems.sort((a, b) => priceSort.value === 'new' ? new Date(b.createdAt) - new Date(a.createdAt) : priceSort.value === 'featured' ? a : priceSort.value === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort.value === 'price high' ? b.variants[0].price - a.variants[0].price : null).map((product, index) => {
+            <Link key={product.id} to={`/clothing/${product.handle}`}>
+              <ClothingItem
+                data={footwear}
+                vendor={product.vendor}
+                title={product.title}
+                description={product.description}
+                src={product.images && product.images[0].originalSrc}
+                price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} />
+            </Link>
+          }
+          )}
+
         </ContainerFlex>
       </Flex>
     </>
@@ -90,6 +97,7 @@ export const query = graphql`
           variants {
             id
             price
+            compareAtPrice
             title
             product {
               id

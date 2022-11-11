@@ -55,16 +55,29 @@ const WhatsNew = ({ data }) => {
   return (
     <>
       <TitleAndFilter justifyBetween width='100%'>
-      <div id='content-desktop' style={{width: '190px'}}></div>
-          <PageHeading isDark={state.isDark}>What's new</PageHeading>
-          <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
+        <div id='content-desktop' style={{ width: '190px' }}></div>
+        <PageHeading isDark={state.isDark}>What's new</PageHeading>
+        <DropDown priceSort={priceSort} setPriceSort={setPriceSort} />
       </TitleAndFilter>
       <Flex width='100%' margin='20px 0 0 0' justifyAround>
         <ContainerFlexHide width='20%' justifyCenter>
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
         </ContainerFlexHide>
         <ContainerFlex justifyAround>
-        {filteredItems && filteredItems.sort((a, b) => priceSort === 'new' ? new Date(b.createdAt) - new Date(a.createdAt) : priceSort === 'featured' ? a : priceSort === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
+          {filteredItems && filteredItems.sort((a, b) => priceSort === 'new' ? new Date(b.createdAt) - new Date(a.createdAt) : priceSort === 'featured' ? a : priceSort === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort === 'price high' ? b.variants[0].price - a.variants[0].price : null).map((product, index) => (
+            <ClothingItem
+              key={index}
+              product={product}
+              href={product.handle}
+              vendor={product.vendor}
+              data={newIn}
+              title={product.title}
+              description={product.description}
+              src={product.images && product.images[0].originalSrc}
+              compareAtPrice={product.variants[0].compareAtPrice && Math.round(product.variants[0].compareAtPrice)}
+              price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} />
+          )
+          )}
         </ContainerFlex>
       </Flex>
     </>
@@ -83,6 +96,7 @@ export const query = graphql`
           variants {
             id
             price
+            compareAtPrice
             title
             product {
               id

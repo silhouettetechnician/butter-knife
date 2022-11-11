@@ -57,15 +57,8 @@ const Womens = ({ data }) => {
       const isColours = checkedInputs['Colour'].length >= 1 ? checkedColours : true
       const isBrands = checkedInputs['Brand'].length >= 1 ? checkedBrands : true
       // const isPrice = priceDetect && product && product.priceRangeV2.maxVariantPrice.amount > price.min ? product : product && product.priceRangeV2.maxVariantPrice.amount < price.max || product
-      return isTypes && isColours && isBrands 
+      return isTypes && isColours && isBrands
     })
-  }
-
-
-  const Product = (i) => {
-    const { product } = i
-    return <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem vendor={product.vendor} data={productList} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} />
-    </Link>
   }
 
   const filteredItems = getItems()
@@ -84,7 +77,20 @@ const Womens = ({ data }) => {
           <FilterBar checkboxesToFilter={checkboxesToFilter} handleInputChange={handleInputChange} />
         </ContainerFlexHide>
         <ContainerFlex justifyAround>
-          {filteredItems && filteredItems.sort((a, b) => priceSort === 'new' ? new Date(b.createdAt) - new Date(a.createdAt) : priceSort === 'featured' ? a : priceSort === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort === 'price high' ? b.variants[0].price - a.variants[0].price : null).map(product => <Product product={product} />)}
+          {filteredItems && filteredItems.sort((a, b) => priceSort === 'new' ? new Date(b.createdAt) - new Date(a.createdAt) : priceSort === 'featured' ? a : priceSort === 'price low' ? a.variants[0].price - b.variants[0].price : priceSort === 'price high' ? b.variants[0].price - a.variants[0].price : null).map((product, index) => (
+            <ClothingItem
+              key={index}
+              product={product}
+              href={product.handle}
+              vendor={product.vendor}
+              data={productList}
+              title={product.title}
+              description={product.description}
+              src={product.images && product.images[0].originalSrc}
+              compareAtPrice={product.variants[0].compareAtPrice && Math.round(product.variants[0].compareAtPrice)}
+              price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} />
+          )
+          )}
         </ContainerFlex>
       </Flex>
     </>
@@ -106,6 +112,7 @@ export const query = graphql`
         variants {
           id
           price
+          compareAtPrice
           title
           product {
             id

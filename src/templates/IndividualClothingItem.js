@@ -39,7 +39,7 @@ const WrapperResponsive = styled(Flex)`
   width: 100%;
 }
 `
-const DescriptionStyle = styled.div `
+const DescriptionStyle = styled.div`
   font-family: CODE;
   color: ${props => props.isDark ? 'white' : 'black'};
   width: 80%;
@@ -53,6 +53,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
     descriptionHtml,
     vendor,
     variants,
+    compareAtPrice,
     images,
     variants: [initialVariant],
     priceRangeV2: { minVariantPrice },
@@ -62,6 +63,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
   const context = useContext(StoreContext)
   const { state } = useContext(Context)
   const [quantity, setQuantity] = useState(1)
+  const isSaleItem = variant.compareAtPrice !== null
   // const [vendor, setVendor] = useState('')
   const { store, addVariantToCart } = context
   const productVariant =
@@ -120,14 +122,31 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
   const imagesMap = images.map((i, index) => ({ image: i.originalSrc, text: i.originalSrc }))
   const imageRender = imagesMap.map((item, index) => <ImageGallery key={index} data-src={item} alt={index} />)
   const sizes = variants.map(variant => ({ title: variant.title, id: variant.shopifyId, }))
+  console.log(isSaleItem, "isSaleItem")
+  const salePriceRender =
+    isSaleItem ?
+      <Flex justifyCenter alignCenter>
+        <p style={{ margin: "0 15px 0 0", color: `${state.isDark ? 'white' : 'grey'}`, fontFamily: 'CODE', fontSize: '2.4rem', textDecorationLine: "line-through" }}>
+          {`£${Math.trunc(variant.compareAtPrice)}`}
+        </p>
+        <br />
+        <p
+          style={{ margin: "unset", color: `${state.isDark ? 'white' : 'rgb(174, 0, 0)'}`, fontFamily: 'CODE', fontSize: "2.4rem" }}>
+          {`Now £${Math.trunc(minVariantPrice.amount)}`}
+        </p>
+      </Flex>
+      :
+      <p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'CODE', fontSize: '2.4rem' }}>
+        {`£${Math.trunc(minVariantPrice.amount)}`}
+      </p>
 
   return (
     <WrapperResponsive width='100%' justifyEvenly>
       <Toaster position='top-right' />
       <ImageFlex justifyCenter width='55%'>
         <Carousel
-        renderArrowPrev={(onClickHandler, hasPrev, label) => hasPrev && <FontAwesomeIcon style={{...ArrowStyles, left: 15, color: 'rgb(254, 205, 47)'}} onClick={onClickHandler} icon={faAngleLeft}/>}
-        renderArrowNext={(onClickHandler, hasNext, label) => hasNext && <FontAwesomeIcon style={{...ArrowStyles, right: 15, color: 'rgb(254, 205, 47)'}} onClick={onClickHandler} icon={faAngleRight}/>} 
+          renderArrowPrev={(onClickHandler, hasPrev, label) => hasPrev && <FontAwesomeIcon style={{ ...ArrowStyles, left: 15, color: 'rgb(254, 205, 47)' }} onClick={onClickHandler} icon={faAngleLeft} />}
+          renderArrowNext={(onClickHandler, hasNext, label) => hasNext && <FontAwesomeIcon style={{ ...ArrowStyles, right: 15, color: 'rgb(254, 205, 47)' }} onClick={onClickHandler} icon={faAngleRight} />}
         >
           {imagesMap.map(image => (
             <img src={image.image} />
@@ -140,11 +159,11 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
           border: !state.isDark ? '0.1px solid rgba(254, 205, 47, 0.4)' : '0.1px solid rgb(1, 49, 210)', width: '75%', marginTop: '1rem',
           marginBottom: '3rem'
         }} />
-        <div><p style={{ color: `${state.isDark ? 'white' : 'black'}`, fontFamily: 'CODE', fontSize: '2.4rem' }}>{`£${Math.trunc(minVariantPrice.amount)}`}</p></div>
-        <DescriptionStyle isDark={state.isDark} dangerouslySetInnerHTML={{__html: descriptionHtml}} ></DescriptionStyle>
+        {salePriceRender}
+        <DescriptionStyle isDark={state.isDark} dangerouslySetInnerHTML={{ __html: descriptionHtml }} ></DescriptionStyle>
         {/* <DropDownSort data={options} val={val} variant={variant} handleOptionChange={handleOptionChange} setVal={setVal} /> */}
         {options.map((options, index) => {
-          
+
           return (
             <VariantSelector
               isDark={state.isDark}
@@ -162,7 +181,7 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
           onClick={handleAddToCart}
         >+ Add to trolley</button>
       </DescriptionFlex>
-    </WrapperResponsive>
+    </WrapperResponsive >
   )
 }
 
@@ -187,6 +206,7 @@ query ClothinItemQuery($handle: String!){
       id
       title
       price
+      compareAtPrice
       availableForSale
       shopifyId
       selectedOptions {

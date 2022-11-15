@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ClothingItem from './ClothingItem'
 import styled from '@emotion/styled'
 import Flex from '../styles/Flex'
-import { Link } from "gatsby"
 
 const BrandHeading = styled.p`
     font-family: bangers;
@@ -48,14 +47,13 @@ const BrandContentWrapper = styled.div`
     margin: 5%;
 `
 
-const IndividualBrand = ({ pageContext, vendor }) => {
+const IndividualBrand = ({ pageContext }) => {
   const {
     title,
     description,
     products,
     brandImage
   } = pageContext;
-
   return (
     <Flex width='100%'>
       <BrandWrapper brandImage={brandImage}>
@@ -66,7 +64,19 @@ const IndividualBrand = ({ pageContext, vendor }) => {
       </BrandWrapper>
       <Flex justifyEvenly alignEnd width='80%' style={{ margin: '0 auto' }}>
         {/* <div style={{ color: 'black', fontFamily: 'CODE' }}>{data.description}</div> */}
-        {products && products.map((i, index) => <Link key={index} to={`/clothing/${i.handle}`}><ClothingItem data={i} key={i.handle} title={i.title} description={i.description} src={i.images[0].originalSrc} price={i.priceRangeV2.minVariantPrice.amount} /></Link>)}
+        {products && products.map((product, index) =>
+          <ClothingItem
+            key={index}
+            product={product}
+            href={product.handle}
+            vendor={product.vendor}
+            data={products}
+            title={product.title}
+            description={product.description}
+            src={product.images && product.images[0].originalSrc}
+            compareAtPrice={product.variants && Math.round(product.variants[0].compareAtPrice)}
+            price={product && product.priceRangeV2.maxVariantPrice.amount} />
+        )}
         {/* </div> */}
       </Flex>
     </Flex>

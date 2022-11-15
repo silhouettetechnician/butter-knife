@@ -18,7 +18,6 @@ const Mens = ({ data }) => {
       ...edge.node
     }
   })
-  console.log(productNodes, "men nodes")
   const context = useContext(StoreContext)
   const {
     addVariantToCart,

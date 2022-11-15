@@ -29,11 +29,21 @@ const searchClient = algoliasearch(
 );
 
 const Hit = ({ hit, newIn }) => {
-    if(newIn) return 
-    return <Link to={`/clothing/${hit.handle}`}><ClothingItem hit={hit} src={hit.image1 || hit.image2} title={hit.title} description={hit.body_html_safe} price={hit.price} /></Link>
+    if (newIn) return
+    return <ClothingItem
+        key={i}
+        product={product}
+        href={product.handle}
+        vendor={product.vendor}
+        data={productList}
+        compareAtPrice={product.variants[0].compareAtPrice && Math.round(product.variants[0].compareAtPrice)}
+        hit={hit}
+        src={hit.image1 || hit.image2}
+        title={hit.title}
+        description={hit.body_html_safe} price={hit.price} />
 }
 
-const ProductHitsWithFilter = ({pageHeading, newIn, indexName }) => (
+const ProductHitsWithFilter = ({ pageHeading, newIn, indexName }) => (
     <InstantSearch indexName={indexName} searchClient={searchClient}>
         <Flex width='52%' justifyBetween style={{ alignSelf: 'flex-end' }}>
             <Heading1>{pageHeading}</Heading1>

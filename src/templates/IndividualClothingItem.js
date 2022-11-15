@@ -122,7 +122,6 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
   const imagesMap = images.map((i, index) => ({ image: i.originalSrc, text: i.originalSrc }))
   const imageRender = imagesMap.map((item, index) => <ImageGallery key={index} data-src={item} alt={index} />)
   const sizes = variants.map(variant => ({ title: variant.title, id: variant.shopifyId, }))
-  console.log(isSaleItem, "isSaleItem")
   const salePriceRender =
     isSaleItem ?
       <Flex justifyCenter alignCenter>

@@ -1,11 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { PageHeading, LoginInput, AuthFormBox } from '../../components/StyledComponents'
 import Flex from '../../styles/Flex'
-import { Formik, ErrorMessage, Form } from 'formik'
+import { Formik } from 'formik'
 import toast, { Toaster } from 'react-hot-toast';
 import PasswordInput from '../../components/PasswordInput'
-// import SEO from "../../components/seo"
-import { parseErrors } from '../../utils/formErrors'
 import loginImg from '../../assets/loginImg.jpg'
 import * as Yup from 'yup'
 import { useMutation, gql } from '@apollo/client';
@@ -55,7 +53,6 @@ const LoginForm = () => {
   // const [email, setEmail] = useState("");
   // const [emailReset, setEmailReset] = useState("");
   const [messsageInfo, setMessageInfo] = useState("");
-  const [password, setPassword] = useState(null);
   const handleCustomerAccessToken = (value) => {
     setValue(value)
   }
@@ -178,7 +175,7 @@ const LoginForm = () => {
                   <button
                     type='submit'
                     style={{ marginBottom: '1rem' }}
-                    // className="button"
+                  // className="button"
                   // onClick={handleLogin}
                   >SIGN IN</button>
                 </div>

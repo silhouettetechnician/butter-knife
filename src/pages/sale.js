@@ -18,7 +18,6 @@ const Sale = ({ data }) => {
       ...edge.node
     }
   })
-  console.log(productNodes, "sale nodes")
   const context = useContext(StoreContext)
   const {
     addVariantToCart,
@@ -57,7 +56,6 @@ const Sale = ({ data }) => {
   }
 
   const filteredItems = getItems()
-  console.log(filteredItems)
 
   return (
     <>

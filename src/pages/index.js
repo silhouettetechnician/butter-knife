@@ -52,8 +52,8 @@ const App = ({ data: {
     <>
       <Flex justifyCenter width='100%'>
         <div style={{ position: 'absolute', top: '10%', textAlign: 'center', zIndex: '999' }}>
-          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase', textShadow:"1px 0 0 black,0 1px 0 black,-1px 0 0 black,0 -1px 0 black" }}>BRAND NEW<br />VERY RARE</h1>
-          <button style={{textShadow:"1px 0 0 black,0 1px 0 black,-1px 0 0 black,0 -1px 0 black"}} onClick={() => navigate('/designers/very-rare')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
+          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase', textShadow: "1px 0 0 black,0 1px 0 black,-1px 0 0 black,0 -1px 0 black" }}>BRAND NEW<br />VERY RARE</h1>
+          <button style={{ textShadow: "1px 0 0 black,0 1px 0 black,-1px 0 0 black,0 -1px 0 black" }} onClick={() => navigate('/designers/very-rare')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
         </div>
         {/* <iframe src='https://imgur.com/a/m0FfFP7'
           frameborder='0'
@@ -61,16 +61,26 @@ const App = ({ data: {
           allowfullscreen
           title='video'
         /> */}
-      <video autoPlay width='100%' loop muted>
-        {/* <source src='https://videopress.com/embed/Q0VvEnUo/autoPlay=1%22' type="video/mp4" /> */}
-        <source src={Video} type="video/mp4" />
-        </video>  
+        <video autoPlay width='100%' loop muted>
+          {/* <source src='https://videopress.com/embed/Q0VvEnUo/autoPlay=1%22' type="video/mp4" /> */}
+          <source src={Video} type="video/mp4" />
+        </video>
       </Flex>
       <Flex width='100%' justifyCenter alignCenter>
         <h2 style={{ margin: '3%', position: 'relative', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '2.4em', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Latest products</h2>
       </Flex>
       <Carousel itemClass="carousel-item-padding-0-px" infinity={false} swipeable={true} containerClass="carousel-container" responsive={responsive}>
-        {newIn ? newIn.map((product, i) => <Link key={product.id} to={`/clothing/${product.handle}`}><ClothingItem data={newIn} vendor={product.vendor} title={product.title} description={product.description} src={product.images && product.images[0].originalSrc} price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} /></Link>) : <div class="loader">Loading...</div>}
+        {newIn ? newIn.map((product, i) => <ClothingItem
+          key={i}
+          product={product}
+          href={product.handle}
+          vendor={product.vendor}
+          data={newIn}
+          title={product.title}
+          description={product.description}
+          src={product.images && product.images[0].originalSrc}
+          compareAtPrice={product.variants[0].compareAtPrice && Math.round(product.variants[0].compareAtPrice)}
+          price={product.priceRangeV2 && Math.round(product.priceRangeV2.maxVariantPrice.amount)} />) : <div class="loader">Loading...</div>}
       </Carousel>
       {/* BLOG */}
       {/* <Flex width='100%'>
@@ -86,9 +96,9 @@ const App = ({ data: {
         <div style={{ width: '100%' }}>
           <h2 style={{ margin: '1% 0 3% 0', position: 'relative', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '2.4em', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Brands</h2>
           <Flex margin='10px 0 30px 0' style={{ flexFlow: 'row wrap', justifyContent: 'space-around' }}>
-          <Carousel itemClass="carousel-item-padding-0-px" infinity={false} swipeable={true} containerClass="carousel-container" responsive={responsive}>
-            {Brands}
-          </Carousel>
+            <Carousel itemClass="carousel-item-padding-0-px" infinity={false} swipeable={true} containerClass="carousel-container" responsive={responsive}>
+              {Brands}
+            </Carousel>
           </Flex>
         </div>
       </Flex>
@@ -114,6 +124,7 @@ export const query = graphql`
           variants {
             id
             price
+            compareAtPrice
             title
             product {
               id

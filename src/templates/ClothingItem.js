@@ -5,8 +5,7 @@ import { Link } from "gatsby"
 import StoreContext from '../contexts/StoreContext'
 
 const SaleOrNot = ({ salePrice, state, price }) => {
-    console.log(salePrice, "salePrice")
-    return salePrice !== null ?
+    return salePrice ?
         <Flex alignCenter justifyCenter>
             <Card.Text style={{ margin: "0 15px 0 0", color: `${state.isDark ? 'white' : 'grey'}`, fontFamily: 'CODE', fontSize: '2rem', textDecorationLine: "line-through" }}> {`£${Math.trunc(salePrice)}`}</Card.Text>
             <Card.Text style={{ color: `${state.isDark ? 'white' : 'rgb(174, 0, 0)'}`, fontSize: '2rem', fontWeight: 'bold', textAlign: 'center' }}> {`£${Math.trunc(price)}`}</Card.Text>

@@ -1,6 +1,5 @@
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState } from 'react';
 import { graphql } from "gatsby"
-import { Link } from "gatsby"
 import { PageHeading, ContainerFlex, TitleAndFilter, ContainerFlexHide } from '../components/StyledComponents'
 import ClothingItem from '../templates/ClothingItem'
 import StoreContext from '../contexts/Context'
@@ -20,20 +19,11 @@ const Womens = ({ data }) => {
     }
   })
   const context = useContext(StoreContext)
-  const {
-    addVariantToCart,
-    client, adding,
-  } = context
   const { state } = useContext(Context)
   const [priceSort, setPriceSort] = useState('new')
   const [productList, setProductList] = useState(productNodes)
-  // const [priceDetect, setPriceDetect] = useState(false)
   const productCheckboxes = _.uniqBy(productList, 'productType').map(node => node.productType)
   const coloursCheckboxes = _.uniq(productList.map(i => i.variants.map(variant => variant.selectedOptions[1].value)).map(color => _.uniq(color)).flat())
-  // const priceRange = productList.sort((a, b) => a.priceRangeV2.maxVariantPrice.amount - b.priceRangeV2.maxVariantPrice.amount)
-  // const priceMin = priceRange[0].priceRangeV2.maxVariantPrice.amount
-  // const priceMax = priceRange[priceRange.length - 1].priceRangeV2.maxVariantPrice.amount
-  // const [price, setPrice] = useState({min: parseInt(priceMin), max: parseInt(priceMax)})
   const vendorCheckboxes = _.uniqBy(productList, 'vendor').map(node => node.vendor)
   const checkboxesToFilter = { 'Type': productCheckboxes, 'Colour': coloursCheckboxes, 'Brand': vendorCheckboxes, }
   const [checkedInputs, setCheckedInputs] = useState({ 'Type': [], 'Colour': [], 'Brand': [] })
@@ -49,14 +39,12 @@ const Womens = ({ data }) => {
       const type = product && product.productType
       const colour = product && product.variants[0].selectedOptions[1].value
       const brand = product && product.vendor
-      // const price = product && product.priceRangeV2.maxVariantPrice.amount
       const checkedTypes = checkedInputs['Type'].find(t => t === type)
       const checkedColours = checkedInputs['Colour'].find(t => t === colour)
       const checkedBrands = checkedInputs['Brand'].find(t => t === brand)
       const isTypes = checkedInputs['Type'].length >= 1 ? checkedTypes : true
       const isColours = checkedInputs['Colour'].length >= 1 ? checkedColours : true
       const isBrands = checkedInputs['Brand'].length >= 1 ? checkedBrands : true
-      // const isPrice = priceDetect && product && product.priceRangeV2.maxVariantPrice.amount > price.min ? product : product && product.priceRangeV2.maxVariantPrice.amount < price.max || product
       return isTypes && isColours && isBrands
     })
   }

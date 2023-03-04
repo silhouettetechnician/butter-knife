@@ -74,10 +74,10 @@ const IndividualClothingItem = ({ data, hit, ...props }) => {
     productId => {
       store.client && store.client.product.fetch(productId).then(fetchedProduct => {
         // this checks the currently selected variant for availability
-        const result = fetchedProduct.variants.filter(
+        const result = fetchedProduct?.variants.filter(
           variant => variant.id === productVariant.shopifyId
         )
-        if (result.length > 0) {
+        if (result && result.length > 0) {
           setAvailable(result[0].available)
         }
       })

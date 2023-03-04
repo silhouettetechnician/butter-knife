@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
-import styled from '@emotion/styled'
+import cnew from '../assets/6cnew.png'
 import { graphql, navigate, Link } from "gatsby";
 import Flex from '../styles/Flex'
 import Carousel from 'react-multi-carousel';
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player';
 import Video from '../assets/home.mp4'
 import ClothingItem from '../templates/ClothingItem';
 import PostLink from '../components/PostLink'
@@ -52,8 +52,10 @@ const App = ({ data: {
     <>
       <Flex justifyCenter width='100%'>
         <div style={{ position: 'absolute', top: '10%', textAlign: 'center', zIndex: '999' }}>
-          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase', textShadow: "1px 0 0 black,0 1px 0 black,-1px 0 0 black,0 -1px 0 black" }}>BRAND NEW<br />VERY RARE</h1>
-          <button style={{ textShadow: "1px 0 0 black,0 1px 0 black,-1px 0 0 black,0 -1px 0 black" }} onClick={() => navigate('/designers/very-rare')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
+          <h1 style={{ position: 'relative', color: 'white', fontSize: '4vw', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase', textShadow: "1px 0 0 black,0 1px 0 black,-1px 0 0 black,0 -1px 0 black" }}>NEW BRAND</h1>
+          <button style={{ textShadow: "1px 0 0 black,0 1px 0 black,-1px 0 0 black,0 -1px 0 black" }} onClick={() => navigate('/designers/6c-studios')}><div className="knife -knife-float" text="SHOP NOW" temptext="Slice here"><div></div></div></button>
+        </div>
+        <div className='glitch'>
         </div>
         {/* <iframe src='https://imgur.com/a/m0FfFP7'
           frameborder='0'
@@ -61,10 +63,11 @@ const App = ({ data: {
           allowfullscreen
           title='video'
         /> */}
-        <video autoPlay width='100%' loop muted>
-          {/* <source src='https://videopress.com/embed/Q0VvEnUo/autoPlay=1%22' type="video/mp4" /> */}
-          <source src={Video} type="video/mp4" />
-        </video>
+        {/* <video autoPlay width='100%' loop muted> */}
+        {/* <source src='https://videopress.com/embed/Q0VvEnUo/autoPlay=1%22' type="video/mp4" /> */}
+        {/* <source src={Video} type="video/mp4" /> */}
+        {/* </video> */}
+
       </Flex>
       <Flex width='100%' justifyCenter alignCenter>
         <h2 style={{ margin: '3%', position: 'relative', color: `${state.isDark ? 'white' : 'black'}`, fontSize: '2.4em', fontFamily: 'BerlinXBold', textAlign: 'center', textTransform: 'uppercase' }}>Latest products</h2>
